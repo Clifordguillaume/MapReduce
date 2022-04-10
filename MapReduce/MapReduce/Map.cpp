@@ -10,10 +10,10 @@
 // 
 // FileHistory:
 // 4/9/22 - Elizabeth - Initial map, splitString, removeSpecialChars, lowerString method implementations
+// 4/10/22 - Remove FileManagement references from Map
 // ===============================================================================
 
 #include "Map.h"
-#include "FileManagement.h"
 #include <boost/algorithm/string/classification.hpp>
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string.hpp>
@@ -39,10 +39,10 @@ Map::~Map()
 /**
  * Reads an input file and writes words and frequencies to an output file
  * @param inputFileName - name of input file
- * @param outputFileName - name of output file
- * @param data - data to write
+ * @param data - data to tokenize
+ * @return map of words and counts
  */
-void Map::map(string inputFileName, string outputFileName, string data) 
+std::map<string, int> Map::map(string inputFileName, string data) 
 {
 	// tokenize the string represenation of the contents of the file
 	string loweredStr = lowerString(data);
@@ -50,39 +50,20 @@ void Map::map(string inputFileName, string outputFileName, string data)
 	vector<string> splitStr = splitString(strippedLowerStr);
 
 	// populate map with words and their frequencies
-	std::map<string, int> wordCount;
+	std::map<string, int> wordCounts;
 	for (string s : splitStr) 
 	{
-		if (wordCount.count(s) < 1)
+		if (wordCounts.count(s) < 1)
 		{
-			wordCount.insert({ s, 1 });
+			wordCounts.insert({ s, 1 });
 		}
 		else 
 		{
-			wordCount[s] = wordCount[s] + 1;
+			wordCounts[s] = wordCounts[s] + 1;
 		}
 	}
 
-	// write entries in map to file
-	std::map<string, int>::iterator it;
-	for (it = wordCount.begin(); it != wordCount.end(); it++)
-	{
-		string word = it->first;
-		int wordFreq = it->second;
-		writeKeyValueToFile(outputFileName, word, wordFreq);
-	}
-}
-
-/**
- * Calls file manager to write a key value pair to a specified output file
- * @param outputFileName - name of file to write to
- * @param key - key
- * @param value - value
- */
-void Map::writeKeyValueToFile(string outputFileName, string key, int value) 
-{
-	FileManagement fileManager;
-	fileManager.writeKeyValueToFile(outputFileName, key, value);
+	return wordCounts;
 }
 
 /**

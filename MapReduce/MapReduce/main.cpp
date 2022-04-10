@@ -12,12 +12,11 @@
 // 
 // File History:
 // 4/8/22 - Elizabeth - Initial main
+// 4/10/22 - Elizabeth - Move main functions to Executive
 // ===============================================================================
 
 // Local headers 
-#include "Map.h"
-#include "Reduce.h"
-#include "FileManagement.h"
+#include "Executive.h"
 
 // Standard Library headers
 #include <iostream>
@@ -29,17 +28,13 @@ int main(int argc, char** argv)
     string inputFileName = "C:\\Users\\dwuli\\OneDrive\\egrad\\EDwulit Projects\\MapReduce\\x64\\Debug\\testinput.txt";
     string outputFileName = "C:\\Users\\dwuli\\OneDrive\\egrad\\EDwulit Projects\\MapReduce\\x64\\Debug\\testoutput.txt";
     // TODO: Make input and output file paths configurable via command line
+    // TODO: Make inputFileName inputFileDirectory
     /*if (argc > 2) 
     {
         inputFileName = argv[1];
         outputFileName = argv[2];
     }*/
 
-    // read the input file contents
-    FileManagement fileManager;
-    string fileContents = fileManager.parseFile(inputFileName);
-
-    // count the frequencies of the words in input file and write to output file
-    Map map;
-    map.map(inputFileName, outputFileName, fileContents);
+    Executive executor;
+    executor.run(inputFileName, outputFileName);
 }

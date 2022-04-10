@@ -16,6 +16,7 @@
 
 #include <fstream>
 #include <vector>
+#include <map>
 
 using namespace std;
 
@@ -24,8 +25,7 @@ class Map
 	public:
 		Map();
 		~Map();
-		void map(string inputFileName, string outputFileName, string data);
-		void writeKeyValueToFile(string outputFileName, string key, int value);
+		std::map<string, int> map(string inputFileName, string data);
 
 	private:
 		vector<string> splitString(string str);

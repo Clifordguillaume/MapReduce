@@ -10,9 +10,8 @@
 // 
 // Notes:
 // 
-// FileHistory:
+// File History:
 // 4/8/22 - Elizabeth - Added parseFile, writeKeyValueToFile
-// 4/9/22 - Elizabeth - Added writeKeyValueToFile
 // 4/9/22 - Elizabeth - Change format of output file strings
 // ===============================================================================
 
