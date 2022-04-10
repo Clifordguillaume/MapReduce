@@ -13,6 +13,7 @@
 // FileHistory:
 // 4/8/22 - Elizabeth - Added parseFile, writeKeyValueToFile
 // 4/9/22 - Elizabeth - Added writeKeyValueToFile
+// 4/9/22 - Elizabeth - Change format of output file strings
 // ===============================================================================
 
 // Local Headers
@@ -92,7 +93,7 @@ void FileManagement::writeKeyValueToFile(string outputFileName, string key, int 
 			// log error
 			return;
 		}
-		outputFile << key << ":" << value << endl;
+		outputFile << "(\"" << key << "\"," << value << ")" << endl;
 	} 
 	catch (exception e) 
 	{
