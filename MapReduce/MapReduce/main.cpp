@@ -10,6 +10,8 @@
 // 
 // Notes:
 // 
+// File History:
+// 4/8/22 - Elizabeth - Initial main
 // ===============================================================================
 
 // Local headers 
@@ -22,10 +24,22 @@
 
 using namespace std;
 
-int main()
+int main(int argc, char** argv)
 {
-    string name = "";
-    cout << "To get started please enter your name: ";
-    cin >> name;
-    cout << "\nHello " << name << " How are you this morning? \n\n";
+    string inputFileName = "C:\\Users\\dwuli\\OneDrive\\egrad\\EDwulit Projects\\MapReduce\\x64\\Debug\\testinput.txt";
+    string outputFileName = "C:\\Users\\dwuli\\OneDrive\\egrad\\EDwulit Projects\\MapReduce\\x64\\Debug\\testoutput.txt";
+    // TODO: Make input and output file paths configurable via command line
+    /*if (argc > 2) 
+    {
+        inputFileName = argv[1];
+        outputFileName = argv[2];
+    }*/
+
+    // read the input file contents
+    FileManagement fileManager;
+    string fileContents = fileManager.parseFile(inputFileName);
+
+    // count the frequencies of the words in input file and write to output file
+    Map map;
+    map.map(inputFileName, outputFileName, fileContents);
 }

@@ -27,6 +27,12 @@
     <ClCompile Include="FileManagement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Executive.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Workflow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Map.h">
@@ -36,6 +42,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="FileManagement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Executive.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Workflow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
