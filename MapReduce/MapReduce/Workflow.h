@@ -1,7 +1,7 @@
 // ===============================================================================
 // CSE 687 MapReduce Project
 // 
-// Reduce.h
+// Workflow.h
 // 
 // Author: Elizabeth and Cliford
 // 
@@ -11,22 +11,16 @@
 // Notes:
 // 
 // ===============================================================================
-#ifndef REDUCE_H
-#define REDUCE_H
+#ifndef WORKFLOW_H
+#define WORKFLOW_H
 
-// Standard Lirary Headers
-#include <iostream>
-using namespace std;
-
-class Reduce
+class Workflow
 {
 public:
-	Reduce();
-	~Reduce();
+	Workflow();
+	~Workflow();
 
-	//int reduceFunc(string sKey, );
-	//int export(string sKey, );
 private:
 
 };
-#endif /* REDUCE_H */
+#endif /* WORKFLOW_H */

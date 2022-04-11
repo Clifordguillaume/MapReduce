@@ -1,0 +1,14 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+*.ipch
+*.db-wal
+*.db-shm
+*.db
+*.opendb
+*.bin
+/MapReduce/MapReduce/x64/Debug/MapReduce.tlog
+/MapReduce/x64/Debug
+*.obj
+/MapReduce/MapReduce/x64/Debug
