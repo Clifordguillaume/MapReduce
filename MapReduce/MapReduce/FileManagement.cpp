@@ -24,25 +24,23 @@
 
 using namespace std;
 
-// -----------------------------------------------
+// -------------------------------------------------------------------------------
 // Constructor
-// -----------------------------------------------
+// -------------------------------------------------------------------------------
 FileManagement::FileManagement()
 {
 }
 
-// -----------------------------------------------
+// -------------------------------------------------------------------------------
 // Destructor
-// -----------------------------------------------
+// -------------------------------------------------------------------------------
 FileManagement::~FileManagement()
 {
 }
 
-/**
- * Opens a file from the file system
- * @param filePath - path to the file to be opened
- * @return string representing contents of the file
- */
+// -------------------------------------------------------------------------------
+// parseFile
+// -------------------------------------------------------------------------------
 string FileManagement::parseFile(string inputFileName)
 {
 	string outputStr;
@@ -74,12 +72,9 @@ string FileManagement::parseFile(string inputFileName)
 	return outputStr;
 }
 
-/**
- * Writes a key:value to a text file
- * @param outputFileName - name of the file to write to
- * @param key - key
- * @param value - value
- */
+// -------------------------------------------------------------------------------
+// writeKeyValueToFile
+// -------------------------------------------------------------------------------
 void FileManagement::writeKeyValueToFile(string outputFileName, string key, int value)
 {
 	try 

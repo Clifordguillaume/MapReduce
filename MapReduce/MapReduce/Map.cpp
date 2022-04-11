@@ -9,7 +9,8 @@
 //              
 // 
 // FileHistory:
-// 4/9/22 - Elizabeth - Initial map, splitString, removeSpecialChars, lowerString method implementations
+// 4/9/22 - Elizabeth - Initial map, splitString, removeSpecialChars, lowerString 
+//			method implementations
 // 4/10/22 - Remove FileManagement references from Map
 // ===============================================================================
 
@@ -22,26 +23,23 @@
 
 using namespace std;
 
-// -----------------------------------------------
+// -------------------------------------------------------------------------------
 // Constructor
-// -----------------------------------------------
+// -------------------------------------------------------------------------------
 Map::Map() 
 {
 }
 
-// -----------------------------------------------
+// -------------------------------------------------------------------------------
 // Destructor
-// -----------------------------------------------
+// -------------------------------------------------------------------------------
 Map::~Map() 
 {
 }
 
-/**
- * Reads an input file and writes words and frequencies to an output file
- * @param inputFileName - name of input file
- * @param data - data to tokenize
- * @return map of words and counts
- */
+// -------------------------------------------------------------------------------
+// map
+// -------------------------------------------------------------------------------
 std::map<string, int> Map::map(string inputFileName, string data) 
 {
 	// tokenize the string represenation of the contents of the file
@@ -66,11 +64,9 @@ std::map<string, int> Map::map(string inputFileName, string data)
 	return wordCounts;
 }
 
-/**
- * Splits a string into a vector of strings, split by whitespace
- * @input str - string to split
- * @return vector of strings that were separated by whitespace
- */
+// -------------------------------------------------------------------------------
+// splitString
+// -------------------------------------------------------------------------------
 vector<string> Map::splitString(string str) 
 {
 	vector<string> splitStr;
@@ -80,11 +76,9 @@ vector<string> Map::splitString(string str)
 	return splitStr;
 }
 
-/**
- * Removes all special characters from a string
- * @param str - string to remove special characters from
- * @return string with special characters removed
- */
+// -------------------------------------------------------------------------------
+// removeSpecialChars
+// -------------------------------------------------------------------------------
 string Map::removeSpecialChars(string str)
 {
 	for (int i = 0; i < str.length(); i++)
@@ -100,11 +94,9 @@ string Map::removeSpecialChars(string str)
 	return str;
 }
 
-/**
- * Converts a string to all lowercase letters
- * @input istr - input string
- * @return str with all characters coverted to lowercase letters
- */
+// -------------------------------------------------------------------------------
+// lowerString
+// -------------------------------------------------------------------------------
 string Map::lowerString(string str) 
 {
 	boost::algorithm::to_lower(str); // use boost to_lower
