@@ -25,8 +25,13 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
-    string inputFileName = "C:\\Users\\dwuli\\OneDrive\\egrad\\EDwulit Projects\\MapReduce\\x64\\Debug\\testinput.txt";
-    string outputFileName = "C:\\Users\\dwuli\\OneDrive\\egrad\\EDwulit Projects\\MapReduce\\x64\\Debug\\testoutput.txt";
+    //string inputFileName = "C:\\Users\\dwuli\\OneDrive\\egrad\\EDwulit Projects\\MapReduce\\x64\\Debug\\testinput.txt";
+    //string outputFileName = "C:\\Users\\dwuli\\OneDrive\\egrad\\EDwulit Projects\\MapReduce\\x64\\Debug\\testoutput.txt";
+    //string inputFileName = "testoutput.txt";
+
+    string inputFileName = "C:\\Users\\clifguillaume\\Documents\\TestData\\testInput.txt";
+    string outputFileName = "C:\\Users\\clifguillaume\\Documents\\TestData\\testoutput.txt";
+
     // TODO: Make input and output file paths configurable via command line
     // TODO: Make inputFileName inputFileDirectory
     /*if (argc > 2) 

@@ -9,8 +9,8 @@
 //              
 // 
 // File History:
-// 4/10/22 - Elizabeth - Moved main functions into new run method and decouple map and file manager
-// 
+// 4/10/22 - Elizabeth - Moved main functions into new run method and decouple 
+//			 map and file manager
 // ===============================================================================
 
 // Local Headers
@@ -20,25 +20,23 @@
 
 using namespace std;
 
-// -----------------------------------------------
+// -------------------------------------------------------------------------------
 // Constructor
-// -----------------------------------------------
+// -------------------------------------------------------------------------------
 Executive::Executive()
 {
 }
 
-// -----------------------------------------------
+// -------------------------------------------------------------------------------
 // Destructor
-// -----------------------------------------------
+// -------------------------------------------------------------------------------
 Executive::~Executive() 
 {
 }
 
-/**
- * Run
- * @input inputFileName - name of input file to read from
- * @input outputFileName - name of file to write results to
- */
+// -------------------------------------------------------------------------------
+// run
+// -------------------------------------------------------------------------------
 void Executive::run(string inputFileName, string outputFileName)
 {
     // read the input file contents
@@ -51,11 +49,9 @@ void Executive::run(string inputFileName, string outputFileName)
 	writeMapOutput(outputFileName, wordFreqs);
 }
 
-/**
- * Writes a map contents to a specified file
- * @param outputFileName - name of file to write to
- * @param mapToWrite - the map of data to write
- */
+// -------------------------------------------------------------------------------
+// writeMapOutput
+// -------------------------------------------------------------------------------
 void Executive::writeMapOutput(string outputFileName, std::map<string, int> mapToWrite) 
 {
 	// write entries in map to file

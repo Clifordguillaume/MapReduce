@@ -25,11 +25,25 @@ class Executive
 	public:
 		Executive();
 		~Executive();
+
+	 /**
+	 * Run
+	 * @input inputFileName - name of input file to read from
+	 * @input outputFileName - name of file to write results to
+	 */
 		void run(string inputFileName, string outputFileName);
 
 	private:
+
+	/**
+	 * Writes a map contents to a specified file
+	 * @param outputFileName - name of file to write to
+	 * @param mapToWrite - the map of data to write
+	 */
+		void writeMapOutput(string outputFileName, std::map<string, int> mapToWrite);
+
+
 		FileManagement fileManager;
 		Map map;
-		void writeMapOutput(string outputFileName, std::map<string, int> mapToWrite);
 };
 #endif /* EXECUTIVE_H */

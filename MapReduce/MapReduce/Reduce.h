@@ -14,12 +14,18 @@
 #ifndef REDUCE_H
 #define REDUCE_H
 
+// Standard Lirary Headers
+#include <iostream>
+using namespace std;
+
 class Reduce
 {
 public:
 	Reduce();
 	~Reduce();
 
+	//int reduceFunc(string sKey, );
+	//int export(string sKey, );
 private:
 
 };
