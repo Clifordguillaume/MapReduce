@@ -17,6 +17,7 @@
 #include <fstream>
 #include <vector>
 #include <map>
+#include <list>
 
 using namespace std;
 
@@ -33,6 +34,9 @@ class Map
 	 * @return map of words and counts
 	 */
 		std::map<string, int> map(string inputFileName, string data);
+
+		string getKey(string str);
+		list<int> getKeyValue(string iSKey, list<string> lstOfData);
 
 	private:
 	/**

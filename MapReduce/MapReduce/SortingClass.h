@@ -18,6 +18,8 @@
 #define SORTING_CLASS_H
 
 #include <iostream>
+#include <list>
+
 using namespace std;
 
 class SortingClass 
@@ -26,7 +28,7 @@ public:
 	SortingClass();
 	~SortingClass();
 
-	int Sort(string& iFilePath);
+	list<string> Sort(string& iFilePath);
 private:
 
 };

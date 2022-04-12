@@ -18,8 +18,11 @@
 // Local headers 
 #include "Executive.h"
 #include "SortingClass.h"
+#include "Reduce.h"
+#include "Map.h"
 
 // Standard Library headers
+#include <list>
 #include <iostream>
 
 using namespace std;
@@ -45,6 +48,24 @@ int main(int argc, char** argv)
     executor.run(inputFileName, outputFileName);
 
     SortingClass sortingclass;
-    sortingclass.Sort(outputFileName);
+    list<string> lstOfData = sortingclass.Sort(outputFileName);
+ 
+    // preview what's in the file
+    int lstSize = lstOfData.size();
+    for (auto it = lstOfData.begin(); it != lstOfData.end(); it++)
+    {
+        cout << *it << endl;
+
+        // Get key from the list value
+        Map map;
+        string sKey = map.getKey(*it);
+
+        list<int> itr = map.getKeyValue(sKey, lstOfData);
+
+        Reduce reduce;
+        reduce.reduceFunc(sKey, itr);
+
+    }
+
 
 }

@@ -30,11 +30,12 @@ public:
 	~Reduce();
 
 	/**
-	 * 
-	 * @param sKey- 
+	 * reduceFunc is used to simplified the data
+	 * @param iKey - single key to retrieve the number of occurence for
+	 * @param iLstOfData- input list to compare the key to to get the key value
 	 * @return int
 	 */
-	int reduceFunc(string& sKey, vector<int> iIteratorVal);
+	int reduceFunc(string& iKey, list<int> iLstOfData);
 
 	/**
 	 *

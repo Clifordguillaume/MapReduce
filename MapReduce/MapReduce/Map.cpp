@@ -20,6 +20,7 @@
 #include <boost/algorithm/string.hpp>
 #include <vector>
 #include <map>
+#include <iostream>
 
 using namespace std;
 
@@ -101,4 +102,65 @@ string Map::lowerString(string str)
 {
 	boost::algorithm::to_lower(str); // use boost to_lower
 	return str;
+}
+
+// -------------------------------------------------------------------------------
+// getKey
+// -------------------------------------------------------------------------------
+string Map::getKey(string iStr)
+{
+	int length = 0;
+
+	// remove the quoations around the 
+	// string to find the key.
+	string str = iStr;
+	length = str.size();
+
+	string str2 = str.substr(2, length);
+
+	length = str2.size();
+	string str3 = str2.substr(0, length - 3);
+
+	// Get key and return
+	string sKey = str3;
+	return sKey;
+}
+
+
+// -------------------------------------------------------------------------------
+// getKeyValue
+// -------------------------------------------------------------------------------
+list<int> Map::getKeyValue(string iSKey, list<string> lstOfData)
+{
+	list<int> iKeyValue;
+	for (auto it = lstOfData.begin(); it != lstOfData.end(); ++it)
+	{
+		cout << "map lstOfData: " << *it << endl;
+
+		string sFullString = *it;
+		string stringToFind = iSKey;
+		int pos = 0;
+		int index;
+		while ((index = sFullString.find(stringToFind, pos)) != string::npos) {
+
+			// found a match
+			cout << "Match found at position: " << index << endl;
+			//pos = index + 1; //new position is from next element of index
+
+			int length = 0;
+			// remove the front part of the string
+			string str = *it;
+			string str2 = str.substr(2, length);
+
+			length = str2.size();
+			string str3 = str2.substr((length - 1), length); //("cliford", 1)
+
+			// Get key and return
+			string sKey = str3;
+
+			int sKeyValue = stoi(sKey);
+			iKeyValue.push_back(sKeyValue);
+		}
+	}
+	return iKeyValue;
 }

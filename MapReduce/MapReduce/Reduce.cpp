@@ -16,12 +16,13 @@
 //				with any File IO. 
 // 
 // File History:
-// 4/10/22 - Cliford - Added reduceFunc(), export()
+// 4/10/22 - Cliford - Added reduceFunc(), exportFunc()
 // ===============================================================================
 
 // Local Headers
 #include "Reduce.h"
 
+#include <list>
 #include <iostream>
 #include <string>
 
@@ -41,14 +42,14 @@ Reduce::~Reduce() {}
 // -------------------------------------------------------------------------------
 // reduceFunc
 // -------------------------------------------------------------------------------
-int Reduce::reduceFunc(string& sKey, vector<int>iIteratorVal)
+int Reduce::reduceFunc(string& iKey, list<int> oLstOfData)
 {
-	string sKeyVal = sKey;
+	string sKeyVal = iKey;
 	int iSum = 0;
 
-	vector<int>::iterator itr;
+	list<int>::iterator itr;
 
-	for (itr = iIteratorVal.begin(); itr <= iIteratorVal.end(); itr++) 
+	for (itr = oLstOfData.begin(); itr != oLstOfData.end(); itr++)
 	{
 		iSum = iSum + 1;
 	}

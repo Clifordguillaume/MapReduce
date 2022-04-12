@@ -35,7 +35,7 @@ SortingClass::~SortingClass() {}
 // -------------------------------------------------------------------------------
 // Sort
 // -------------------------------------------------------------------------------
-int SortingClass::Sort(string& iFilePath)
+list<string> SortingClass::Sort(string& iFilePath)
 {
 	// Local Variables
 	string FileName = iFilePath;
@@ -49,9 +49,9 @@ int SortingClass::Sort(string& iFilePath)
 	lstFileValue.sort();
 
 	// preview what's in the file
-	for (auto it = lstFileValue.begin(); it != lstFileValue.end(); ++it) 
+	for (auto it = lstFileValue.begin(); it != lstFileValue.end(); it++) 
 	{
 		cout << *it << endl;
 	}
-	return 0;
+	return lstFileValue;
 }
