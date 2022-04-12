@@ -14,6 +14,7 @@
 #define FILE_MANAGEMENT_H
 
 #include <fstream>
+#include <list>
 
 using namespace std;
 
@@ -39,10 +40,17 @@ class FileManagement
 		void writeKeyValueToFile(string outputFileName, string key, int value);
 
 	/**
-		* Writes to a text file
-		* @param sFileName - File name to write to
-		* @param sValue - value to write to file
-		*/
+	* read data from the file
+	* @param sFileName - File name to read from
+	* @preturn the list containing the file data
+	*/
+		list<string> readFile(string& iFileName);
+
+	/**s
+	* Writes to a text file
+	* @param sFileName - File name to write to
+	* @param sValue - value to write to file
+	*/
 		void writeToFile(string& sFileName, string& sValue);
 
 	private:

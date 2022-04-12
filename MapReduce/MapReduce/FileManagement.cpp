@@ -13,6 +13,7 @@
 // File History:
 // 4/8/22 - Elizabeth - Added parseFile, writeKeyValueToFile
 // 4/9/22 - Elizabeth - Change format of output file strings
+// 4/12/22 - Cliford - Added two extra functions readFile() and writeToFIle()
 // ===============================================================================
 
 // Local Headers
@@ -96,9 +97,37 @@ void FileManagement::writeKeyValueToFile(string outputFileName, string key, int 
 }
 
 // -------------------------------------------------------------------------------
+// readFile
+// -------------------------------------------------------------------------------
+list<string> FileManagement::readFile(string& iFileName)
+{
+	// Local variables
+	list<string> oFileValue;
+	string sFileName = iFileName;
+	string sLine;
+
+	// read from file and append to list
+	ifstream mFile(sFileName);
+	if (mFile.is_open())
+	{
+		while (!mFile.eof())
+		{
+			getline(mFile, sLine);
+			oFileValue.push_back(sLine);
+		}
+		mFile.close();
+	}
+	else 
+	{
+		cout << "Problem opening the file" << endl;
+	}
+	return oFileValue;
+}
+
+// -------------------------------------------------------------------------------
 // writeToFile
 // -------------------------------------------------------------------------------
-void writeToFile(string& sFileName, string& sValue) 
+void FileManagement::writeToFile(string& sFileName, string& sValue)
 {
 	string fileName = sFileName;
 

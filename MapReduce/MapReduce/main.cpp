@@ -17,6 +17,7 @@
 
 // Local headers 
 #include "Executive.h"
+#include "SortingClass.h"
 
 // Standard Library headers
 #include <iostream>
@@ -42,4 +43,8 @@ int main(int argc, char** argv)
 
     Executive executor;
     executor.run(inputFileName, outputFileName);
+
+    SortingClass sortingclass;
+    sortingclass.Sort(outputFileName);
+
 }

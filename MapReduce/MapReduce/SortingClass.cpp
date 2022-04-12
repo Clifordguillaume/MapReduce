@@ -12,6 +12,7 @@
 //				(“is”, [1, …]), …
 //
 // File History:
+// 04/12/22 Cliford - created the SortingClass and added the sort function
 // ===============================================================================
 
 // Local Headers
@@ -39,11 +40,18 @@ int SortingClass::Sort(string& iFilePath)
 	// Local Variables
 	string FileName = iFilePath;
 	string FileData = "";
+	list<string> lstFileValue;
 
 	FileManagement ManageFile;
+	lstFileValue = ManageFile.readFile(FileName);
 
-	FileData = ManageFile.parseFile(FileName);
+	// Sort the data in the list
+	lstFileValue.sort();
 
-	// the file data
-	Sort(FileData.begin(), FileData.end());
+	// preview what's in the file
+	for (auto it = lstFileValue.begin(); it != lstFileValue.end(); ++it) 
+	{
+		cout << *it << endl;
+	}
+	return 0;
 }
