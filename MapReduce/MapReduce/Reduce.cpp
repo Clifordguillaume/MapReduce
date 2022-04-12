@@ -21,7 +21,6 @@
 
 // Local Headers
 #include "Reduce.h"
-#include "FileManagement.h"
 
 #include <iostream>
 #include <string>
@@ -31,7 +30,7 @@
 // -------------------------------------------------------------------------------
 Reduce::Reduce() 
 {
-	fileManagement = NULL;
+	_pFileManagement = NULL;
 }
 
 // -------------------------------------------------------------------------------
@@ -65,14 +64,14 @@ int Reduce::reduceFunc(string& sKey, vector<int>iIteratorVal)
 // -------------------------------------------------------------------------------
 int Reduce::exportFunc(string& sKey, int iResult)
 {
-	fileManagement = new FileManagement();
+	_pFileManagement = new FileManagement();
 	// Write info to the file
 	string fileName = "SUCCESS.txt";
 	string sResult = to_string(iResult);
 
 	string sFiledata = sKey + sResult; //("Skey", 1)
 
-	fileManagement->writeToFile(fileName, sFiledata);
-
+	_pFileManagement->writeToFile(fileName, sFiledata);
+	
 	return 0;
 }

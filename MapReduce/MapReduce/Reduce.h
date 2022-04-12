@@ -45,7 +45,7 @@ public:
 
 private:
 
-	FileManagement* fileManagement;
+	FileManagement* _pFileManagement;
 
 };
 #endif /* REDUCE_H */
