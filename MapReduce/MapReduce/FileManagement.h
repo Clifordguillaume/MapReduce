@@ -37,6 +37,14 @@ class FileManagement
 	 * @param value - value
 	 */
 		void writeKeyValueToFile(string outputFileName, string key, int value);
+
+	/**
+		* Writes to a text file
+		* @param sFileName - File name to write to
+		* @param sValue - value to write to file
+		*/
+		void writeToFile(string& sFileName, string& sValue);
+
 	private:
 };
 #endif /* FILE_MANAGEMENT_H */

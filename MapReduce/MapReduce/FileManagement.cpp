@@ -95,3 +95,20 @@ void FileManagement::writeKeyValueToFile(string outputFileName, string key, int 
 	}
 }
 
+// -------------------------------------------------------------------------------
+// writeToFile
+// -------------------------------------------------------------------------------
+void writeToFile(string& sFileName, string& sValue) 
+{
+	string fileName = sFileName;
+
+	// create or open the file
+	ofstream File(fileName);
+
+	// write the value to the file
+	File << sValue;
+
+	// close the file
+	File.close();
+
+}

@@ -21,12 +21,17 @@
 
 // Local Headers
 #include "Reduce.h"
+#include "FileManagement.h"
+
+#include <iostream>
+#include <string>
 
 // -------------------------------------------------------------------------------
 // Constructor
 // -------------------------------------------------------------------------------
 Reduce::Reduce() 
 {
+	fileManagement = NULL;
 }
 
 // -------------------------------------------------------------------------------
@@ -34,18 +39,40 @@ Reduce::Reduce()
 // -------------------------------------------------------------------------------
 Reduce::~Reduce() {}
 
-//// -------------------------------------------------------------------------------
-//// reduceFunc
-//// -------------------------------------------------------------------------------
-//int Reduce::reduceFunc(string sKey, ) 
-//{
-//	return 0;
-//}
-//
-//// -------------------------------------------------------------------------------
-//// export
-//// -------------------------------------------------------------------------------
-//int Reduce::export(string sKey, ) 
-//{
-//	return 0;
-//}
+// -------------------------------------------------------------------------------
+// reduceFunc
+// -------------------------------------------------------------------------------
+int Reduce::reduceFunc(string& sKey, vector<int>iIteratorVal)
+{
+	string sKeyVal = sKey;
+	int iSum = 0;
+
+	vector<int>::iterator itr;
+
+	for (itr = iIteratorVal.begin(); itr <= iIteratorVal.end(); itr++) 
+	{
+		iSum = iSum + 1;
+	}
+
+	// write to file
+	exportFunc(sKeyVal, iSum);
+
+	return 0;
+}
+
+// -------------------------------------------------------------------------------
+// export
+// -------------------------------------------------------------------------------
+int Reduce::exportFunc(string& sKey, int iResult)
+{
+	fileManagement = new FileManagement();
+	// Write info to the file
+	string fileName = "SUCCESS.txt";
+	string sResult = to_string(iResult);
+
+	string sFiledata = sKey + sResult; //("Skey", 1)
+
+	fileManagement->writeToFile(fileName, sFiledata);
+
+	return 0;
+}
