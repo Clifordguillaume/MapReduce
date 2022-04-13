@@ -48,24 +48,26 @@ int main(int argc, char** argv)
     executor.run(inputFileName, outputFileName);
 
     SortingClass sortingclass;
-    list<string> lstOfData = sortingclass.Sort(outputFileName);
+    list<string> lstOfData = sortingclass.sort(outputFileName);
  
+    Reduce reduce;
+    list<string> DataToWriteToFile;
+
     // preview what's in the file
-    int lstSize = lstOfData.size();
-    for (auto it = lstOfData.begin(); it != lstOfData.end(); it++)
+    for (string lst : lstOfData)
     {
-        cout << *it << endl;
+        //cout << "lstOfdata: " << lst << endl;
 
         // Get key from the list value
         Map map;
-        string sKey = map.getKey(*it);
+        string sKey = map.getKey(lst);
 
+        // Get the key value
         list<int> itr = map.getKeyValue(sKey, lstOfData);
-
-        Reduce reduce;
         reduce.reduceFunc(sKey, itr);
-
     }
 
-
+    // other functions to process and export data
+    DataToWriteToFile = reduce.GetData();
+    reduce.exportFunc(DataToWriteToFile);
 }

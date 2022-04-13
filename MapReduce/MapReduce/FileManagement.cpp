@@ -13,7 +13,7 @@
 // File History:
 // 4/8/22 - Elizabeth - Added parseFile, writeKeyValueToFile
 // 4/9/22 - Elizabeth - Change format of output file strings
-// 4/12/22 - Cliford - Added two extra functions readFile() and writeToFIle()
+// 4/12/22 - Cliford - Added readFile() and writeToFIle()
 // ===============================================================================
 
 // Local Headers
@@ -113,12 +113,18 @@ list<string> FileManagement::readFile(string& iFileName)
 		while (!mFile.eof())
 		{
 			getline(mFile, sLine);
-			oFileValue.push_back(sLine);
+			// Check to prevent adding empty space at the end of the file.
+			if (sLine != "") 
+			{
+				//cout << "File Info: " << sLine << endl;
+				oFileValue.push_back(sLine);
+			}
 		}
+		// Close the file
 		mFile.close();
 	}
 	else 
-	{
+	{	// Ran into an issue opening the file
 		cout << "Problem opening the file" << endl;
 	}
 	return oFileValue;
@@ -127,17 +133,20 @@ list<string> FileManagement::readFile(string& iFileName)
 // -------------------------------------------------------------------------------
 // writeToFile
 // -------------------------------------------------------------------------------
-void FileManagement::writeToFile(string& sFileName, string& sValue)
+void FileManagement::writeToFile(string& sFileName, list<string> sDataToWrite)
 {
+	// Local Variables
 	string fileName = sFileName;
 
 	// create or open the file
 	ofstream File(fileName);
 
-	// write the value to the file
-	File << sValue;
+	for (string lst : sDataToWrite)
+	{
+		// write the value to the file
+		File << lst << endl;
+	}
 
 	// close the file
 	File.close();
-
 }

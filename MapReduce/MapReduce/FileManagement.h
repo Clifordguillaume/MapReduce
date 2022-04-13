@@ -46,12 +46,12 @@ class FileManagement
 	*/
 		list<string> readFile(string& iFileName);
 
-	/**s
+	/**
 	* Writes to a text file
 	* @param sFileName - File name to write to
-	* @param sValue - value to write to file
+	* @param sDataToWrite - value to write to file
 	*/
-		void writeToFile(string& sFileName, string& sValue);
+		void writeToFile(string& sFileName, list<string> sDataToWrite);
 
 	private:
 };

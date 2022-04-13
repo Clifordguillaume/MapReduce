@@ -28,7 +28,12 @@ public:
 	SortingClass();
 	~SortingClass();
 
-	list<string> Sort(string& iFilePath);
+	/**
+	 * sort is used to read and sort the data in the file passed in as the input
+	 * @param iFilePath - the file that need to be sorted
+	 * @return list<string> - list of sorted items
+	 */
+	list<string> sort(string& iFilePath);
 private:
 
 };

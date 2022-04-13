@@ -38,15 +38,24 @@ public:
 	int reduceFunc(string& iKey, list<int> iLstOfData);
 
 	/**
-	 *
-	 * @param sKey-
+	 * exportFun is used to write the finalize data to a new file
+	 * @param sDataToWrite - the list of data that needs to be written to the file
 	 * @return int
 	 */
-	int exportFunc(string& sKey, int iResult);
+	int exportFunc(list<string> sDataToWrite);
+
+	/**
+	 * GetData is used to retrieve the data that needs to be passed to 
+	 *		  the next calling function
+	 * @param None
+	 * @return list<string>
+	 */
+	list<string> GetData();
 
 private:
 
 	FileManagement* _pFileManagement;
+	list<string> _lstReducedData;
 
 };
 #endif /* REDUCE_H */

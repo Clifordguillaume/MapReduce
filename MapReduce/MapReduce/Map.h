@@ -35,7 +35,19 @@ class Map
 	 */
 		std::map<string, int> map(string inputFileName, string data);
 
+	/**
+	* gets the key from a full string
+	* @param str - whole string to retrieve the key from
+	* @return the key found
+	*/
 		string getKey(string str);
+
+	/**
+	* getKeyValue - gets the value for the key passed in as an input
+	* @param iSKey - Key to find the value for
+	* @param lstOfData - list of original data
+	* @return list of key value found
+	*/
 		list<int> getKeyValue(string iSKey, list<string> lstOfData);
 
 	private:

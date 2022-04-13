@@ -17,11 +17,13 @@
 // 
 // File History:
 // 4/10/22 - Cliford - Added reduceFunc(), exportFunc()
+// 4/12/22 - Cliford - Added GetData()
 // ===============================================================================
 
 // Local Headers
 #include "Reduce.h"
 
+// STL Heades 
 #include <list>
 #include <iostream>
 #include <string>
@@ -31,7 +33,7 @@
 // -------------------------------------------------------------------------------
 Reduce::Reduce() 
 {
-	_pFileManagement = NULL;
+	_pFileManagement = new FileManagement();
 }
 
 // -------------------------------------------------------------------------------
@@ -44,18 +46,25 @@ Reduce::~Reduce() {}
 // -------------------------------------------------------------------------------
 int Reduce::reduceFunc(string& iKey, list<int> oLstOfData)
 {
+	list<string> lstReducedData;
 	string sKeyVal = iKey;
-	int iSum = 0;
+	int ikeyVal = 0;
 
 	list<int>::iterator itr;
-
-	for (itr = oLstOfData.begin(); itr != oLstOfData.end(); itr++)
+	for (int lst : oLstOfData)
 	{
-		iSum = iSum + 1;
+		ikeyVal = ikeyVal + 1;
+		//ikeyVal = lst;
 	}
 
-	// write to file
-	exportFunc(sKeyVal, iSum);
+	string str1 = "(\"";
+	string s1 = "\",";
+	string str2 = str1 + sKeyVal + s1;   // TODO: I(Cliford) need to fix this//("cliford"",47)
+	string s = to_string(ikeyVal);
+	string finalString = str2 + s + ")";
+
+	// Add data to the global lst
+	_lstReducedData.push_back(finalString);
 
 	return 0;
 }
@@ -63,16 +72,22 @@ int Reduce::reduceFunc(string& iKey, list<int> oLstOfData)
 // -------------------------------------------------------------------------------
 // export
 // -------------------------------------------------------------------------------
-int Reduce::exportFunc(string& sKey, int iResult)
+int Reduce::exportFunc(list<string> sDataToWrite)
 {
-	_pFileManagement = new FileManagement();
 	// Write info to the file
 	string fileName = "SUCCESS.txt";
-	string sResult = to_string(iResult);
 
-	string sFiledata = sKey + sResult; //("Skey", 1)
-
-	_pFileManagement->writeToFile(fileName, sFiledata);
+	// remove duplicates
+	sDataToWrite.unique();
+	_pFileManagement->writeToFile(fileName, sDataToWrite);
 	
 	return 0;
+}
+
+// -------------------------------------------------------------------------------
+// GetData
+// -------------------------------------------------------------------------------
+list<string>  Reduce::GetData() 
+{
+	return _lstReducedData;
 }

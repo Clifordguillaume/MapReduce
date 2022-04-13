@@ -12,6 +12,7 @@
 // 4/9/22 - Elizabeth - Initial map, splitString, removeSpecialChars, lowerString 
 //			method implementations
 // 4/10/22 - Remove FileManagement references from Map
+// 4/12/22 - Cliford - Added getkey() and getkeyValue()
 // ===============================================================================
 
 #include "Map.h"
@@ -119,7 +120,7 @@ string Map::getKey(string iStr)
 	string str2 = str.substr(2, length);
 
 	length = str2.size();
-	string str3 = str2.substr(0, length - 3);
+	string str3 = str2.substr(0, length - 4);
 
 	// Get key and return
 	string sKey = str3;
@@ -133,33 +134,35 @@ string Map::getKey(string iStr)
 list<int> Map::getKeyValue(string iSKey, list<string> lstOfData)
 {
 	list<int> iKeyValue;
-	for (auto it = lstOfData.begin(); it != lstOfData.end(); ++it)
+	for (string lst : lstOfData)
 	{
-		cout << "map lstOfData: " << *it << endl;
+		//cout << "map lstOfData: " << lst << endl;
 
-		string sFullString = *it;
+		string sFullString = lst;
 		string stringToFind = iSKey;
 		int pos = 0;
 		int index;
 		while ((index = sFullString.find(stringToFind, pos)) != string::npos) {
 
 			// found a match
-			cout << "Match found at position: " << index << endl;
+			//cout << "Match found at position: " << index << endl;
 			//pos = index + 1; //new position is from next element of index
 
 			int length = 0;
 			// remove the front part of the string
-			string str = *it;
+			string str = lst;
+			length = str.size();
 			string str2 = str.substr(2, length);
 
 			length = str2.size();
-			string str3 = str2.substr((length - 1), length); //("cliford", 1)
+			string str3 = str2.substr((length - 2), 1); //("cliford", 1)
 
 			// Get key and return
 			string sKey = str3;
 
 			int sKeyValue = stoi(sKey);
 			iKeyValue.push_back(sKeyValue);
+			break;
 		}
 	}
 	return iKeyValue;
