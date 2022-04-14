@@ -18,6 +18,7 @@
 // File History:
 // 4/10/22 - Cliford - Added reduceFunc(), exportFunc()
 // 4/12/22 - Cliford - Added GetData()
+// 4/13/22 - Elizabeth - Added try-catch
 // ===============================================================================
 
 // Local Headers
@@ -46,25 +47,32 @@ Reduce::~Reduce() {}
 // -------------------------------------------------------------------------------
 int Reduce::reduceFunc(string& iKey, list<int> oLstOfData)
 {
-	list<string> lstReducedData;
-	string sKeyVal = iKey;
-	int ikeyVal = 0;
-
-	list<int>::iterator itr;
-	for (int lst : oLstOfData)
+	try 
 	{
-		ikeyVal = ikeyVal + 1;
-		//ikeyVal = lst;
+		list<string> lstReducedData;
+		string sKeyVal = iKey;
+		int ikeyVal = 0;
+
+		list<int>::iterator itr;
+		for (int lst : oLstOfData)
+		{
+			ikeyVal = ikeyVal + 1;
+			//ikeyVal = lst;
+		}
+
+		string str1 = "(\"";
+		string s1 = "\",";
+		string str2 = str1 + sKeyVal + s1;   // TODO: I(Cliford) need to fix this//("cliford"",47)
+		string s = to_string(ikeyVal);
+		string finalString = str2 + s + ")";
+
+		// Add data to the global lst
+		_lstReducedData.push_back(finalString);
 	}
-
-	string str1 = "(\"";
-	string s1 = "\",";
-	string str2 = str1 + sKeyVal + s1;   // TODO: I(Cliford) need to fix this//("cliford"",47)
-	string s = to_string(ikeyVal);
-	string finalString = str2 + s + ")";
-
-	// Add data to the global lst
-	_lstReducedData.push_back(finalString);
+	catch (exception e) 
+	{
+		cout << "Exception reducing" << endl;
+	}
 
 	return 0;
 }

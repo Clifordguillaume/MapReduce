@@ -1,7 +1,7 @@
 // ===============================================================================
 // CSE 687 MapReduce Project
 // 
-// SortingClass.cpp
+// Sorter.cpp
 // 
 // Author: Elizabeth and Cliford
 // 
@@ -16,7 +16,7 @@
 // ===============================================================================
 
 // Local Headers
-#include "SortingClass.h"
+#include "Sorter.h"
 #include "Map.h"
 #include "FileManagement.h"
 
@@ -25,17 +25,17 @@
 // -------------------------------------------------------------------------------
 // Constructor
 // -------------------------------------------------------------------------------
-SortingClass::SortingClass() {}
+Sorter::Sorter() {}
 
 // -------------------------------------------------------------------------------
 // Destructor
 // -------------------------------------------------------------------------------
-SortingClass::~SortingClass() {}
+Sorter::~Sorter() {}
 
 // -------------------------------------------------------------------------------
 // Sort
 // -------------------------------------------------------------------------------
-list<string> SortingClass::sort(string& iFilePath)
+list<string> Sorter::sort(string& iFilePath)
 {
 	// Local Variables
 	string FileName = iFilePath;

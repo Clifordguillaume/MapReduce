@@ -10,9 +10,10 @@
 // 
 // FileHistory:
 // 4/9/22 - Elizabeth - Initial map, splitString, removeSpecialChars, lowerString 
-//			method implementations
-// 4/10/22 - Remove FileManagement references from Map
+//						method implementations
+// 4/10/22 - Elizabeth - Remove FileManagement references from Map
 // 4/12/22 - Cliford - Added getkey() and getkeyValue()
+// 4/13/22 - Elizabeth - Clean up string parsing methods. Add exportMap()
 // ===============================================================================
 
 #include "Map.h"
@@ -67,14 +68,36 @@ std::map<string, int> Map::map(string inputFileName, string data)
 }
 
 // -------------------------------------------------------------------------------
+// exportMap
+// -------------------------------------------------------------------------------
+void Map::exportMap(string outputFileName, std::map<string, int> keyValMap)
+{
+	// write entries in map to file
+	std::map<string, int>::iterator it;
+	for (it = keyValMap.begin(); it != keyValMap.end(); it++)
+	{
+		// get key and value
+		string key = it->first;
+		int value = it->second;
+
+		// write key and value to file
+		fileManager.writeKeyValueToFile(outputFileName, key, value);
+	}
+}
+
+// -------------------------------------------------------------------------------
 // splitString
 // -------------------------------------------------------------------------------
 vector<string> Map::splitString(string str) 
 {
 	vector<string> splitStr;
+
+	// remove whitespace from string start and end
 	boost::trim(str);
+
+	// split the string based on tabs and spaces
 	boost::split(splitStr, str, boost::is_any_of("\t "), boost::token_compress_on); // token_compress_on used for adjacent separators
-	// TODO: Remove empty strings from vector
+	
 	return splitStr;
 }
 
@@ -85,7 +108,7 @@ string Map::removeSpecialChars(string str)
 {
 	for (int i = 0; i < str.length(); i++)
 	{
-		// remove all characters that are not letters of english alphabet
+		// remove all characters that are not letters of english alphabet or spaces
 		char c = str[i];
 		if ((c < 'A' || c > 'Z') && (c < 'a' || c > 'z') && !isspace(c))
 		{
@@ -134,36 +157,44 @@ string Map::getKey(string iStr)
 list<int> Map::getKeyValue(string iSKey, list<string> lstOfData)
 {
 	list<int> iKeyValue;
-	for (string lst : lstOfData)
+	try 
 	{
-		//cout << "map lstOfData: " << lst << endl;
+		for (string lst : lstOfData)
+		{
+			//cout << "map lstOfData: " << lst << endl;
 
-		string sFullString = lst;
-		string stringToFind = iSKey;
-		int pos = 0;
-		int index;
-		while ((index = sFullString.find(stringToFind, pos)) != string::npos) {
+			string sFullString = lst;
+			string stringToFind = iSKey;
+			int pos = 0;
+			int index;
+			while ((index = sFullString.find(stringToFind, pos)) != string::npos) {
 
-			// found a match
-			//cout << "Match found at position: " << index << endl;
-			//pos = index + 1; //new position is from next element of index
+				// found a match
+				//cout << "Match found at position: " << index << endl;
+				//pos = index + 1; //new position is from next element of index
 
-			int length = 0;
-			// remove the front part of the string
-			string str = lst;
-			length = str.size();
-			string str2 = str.substr(2, length);
+				int length = 0;
+				// remove the front part of the string
+				string str = lst;
+				length = str.size();
+				string str2 = str.substr(2, length);
 
-			length = str2.size();
-			string str3 = str2.substr((length - 2), 1); //("cliford", 1)
+				length = str2.size();
+				string str3 = str2.substr((length - 2), 1); //("cliford", 1)
 
-			// Get key and return
-			string sKey = str3;
+				// Get key and return
+				string sKey = str3;
 
-			int sKeyValue = stoi(sKey);
-			iKeyValue.push_back(sKeyValue);
-			break;
+				int sKeyValue = stoi(sKey);
+				iKeyValue.push_back(sKeyValue);
+				break;
+			}
 		}
 	}
+	catch (exception e) 
+	{
+		cout << "Exception getting value of key: " + iSKey << endl;
+	}
+	
 	return iKeyValue;
 }
