@@ -13,13 +13,12 @@
 // File History:
 // 4/8/22 - Elizabeth - Initial main
 // 4/10/22 - Elizabeth - Move main functions to Executive
+// 4/12/22 - Cliford - Add sort and reduce calls
+// 4/13/22 - Elizabeth - Move sort and reduce calls to Executive
 // ===============================================================================
 
 // Local headers 
 #include "Executive.h"
-#include "SortingClass.h"
-#include "Reduce.h"
-#include "Map.h"
 
 // Standard Library headers
 #include <list>
@@ -29,12 +28,12 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
-    //string inputFileName = "C:\\Users\\dwuli\\OneDrive\\egrad\\EDwulit Projects\\MapReduce\\x64\\Debug\\testinput.txt";
-    //string outputFileName = "C:\\Users\\dwuli\\OneDrive\\egrad\\EDwulit Projects\\MapReduce\\x64\\Debug\\testoutput.txt";
+    string inputFileName = "C:\\Users\\dwuli\\OneDrive\\egrad\\EDwulit Projects\\MapReduce\\MapReduce\\testinput.txt";
+    string outputFileName = "C:\\Users\\dwuli\\OneDrive\\egrad\\EDwulit Projects\\MapReduce\\MapReduce\\testoutput.txt";
     //string inputFileName = "testoutput.txt";
 
-    string inputFileName = "C:\\Users\\clifguillaume\\Documents\\TestData\\testInput.txt";
-    string outputFileName = "C:\\Users\\clifguillaume\\Documents\\TestData\\testoutput.txt";
+    //string inputFileName = "C:\\Users\\clifguillaume\\Documents\\TestData\\testInput.txt";
+    //string outputFileName = "C:\\Users\\clifguillaume\\Documents\\TestData\\testoutput.txt";
 
     // TODO: Make input and output file paths configurable via command line
     // TODO: Make inputFileName inputFileDirectory
@@ -46,28 +45,4 @@ int main(int argc, char** argv)
 
     Executive executor;
     executor.run(inputFileName, outputFileName);
-
-    SortingClass sortingclass;
-    list<string> lstOfData = sortingclass.sort(outputFileName);
- 
-    Reduce reduce;
-    list<string> DataToWriteToFile;
-
-    // preview what's in the file
-    for (string lst : lstOfData)
-    {
-        //cout << "lstOfdata: " << lst << endl;
-
-        // Get key from the list value
-        Map map;
-        string sKey = map.getKey(lst);
-
-        // Get the key value
-        list<int> itr = map.getKeyValue(sKey, lstOfData);
-        reduce.reduceFunc(sKey, itr);
-    }
-
-    // other functions to process and export data
-    DataToWriteToFile = reduce.GetData();
-    reduce.exportFunc(DataToWriteToFile);
 }

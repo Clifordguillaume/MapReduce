@@ -5,8 +5,8 @@
 // 
 // Author: Elizabeth and Cliford
 // 
-// Description: 
-//              
+// Description: This Executive class handles all primary steps in the Map-Reduce 
+//				program based on user input via command line.
 // 
 // Notes:
 // 
@@ -26,24 +26,36 @@ class Executive
 		Executive();
 		~Executive();
 
-	 /**
-	 * Run
-	 * @input inputFileName - name of input file to read from
-	 * @input outputFileName - name of file to write results to
-	 */
+		/**
+		 * Run
+		 * @input inputFileName - name of input file to read from
+		 * @input outputFileName - name of file to write results to
+		 */
 		void run(string inputFileName, string outputFileName);
 
 	private:
-
-	/**
-	 * Writes a map contents to a specified file
-	 * @param outputFileName - name of file to write to
-	 * @param mapToWrite - the map of data to write
-	 */
-		void writeMapOutput(string outputFileName, std::map<string, int> mapToWrite);
-
-
+		// variables
 		FileManagement fileManager;
-		Map map;
+		Map mapper;
+
+		/**
+		 * Maps input file contents to output file
+		 * @param inputFileName - name of input file
+		 * @param outputFileName - name of output file
+		 */
+		void map(string inputFileName, string outputFileName);
+
+		/**
+		 * Sorts contents of a file
+		 * @param fileName - name of file whose contents is to be sorted
+		 * @return list of sorted items
+		 */
+		list<string> sort(string fileName);
+
+		/**
+		 * Reduce a list of data to a single output file
+		 * @param lstOfData - list of data to reduce
+		 */
+		void reduce(list<string> lstOfData);
 };
 #endif /* EXECUTIVE_H */
