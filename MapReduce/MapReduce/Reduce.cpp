@@ -16,17 +16,25 @@
 //				with any File IO. 
 // 
 // File History:
-// 4/10/22 - Cliford - Added reduceFunc(), export()
+// 4/10/22 - Cliford - Added reduceFunc(), exportFunc()
+// 4/12/22 - Cliford - Added GetData()
+// 4/13/22 - Elizabeth - Added try-catch
 // ===============================================================================
 
 // Local Headers
 #include "Reduce.h"
+
+// STL Heades 
+#include <list>
+#include <iostream>
+#include <string>
 
 // -------------------------------------------------------------------------------
 // Constructor
 // -------------------------------------------------------------------------------
 Reduce::Reduce() 
 {
+	_pFileManagement = new FileManagement();
 }
 
 // -------------------------------------------------------------------------------
@@ -34,18 +42,60 @@ Reduce::Reduce()
 // -------------------------------------------------------------------------------
 Reduce::~Reduce() {}
 
-//// -------------------------------------------------------------------------------
-//// reduceFunc
-//// -------------------------------------------------------------------------------
-//int Reduce::reduceFunc(string sKey, ) 
-//{
-//	return 0;
-//}
-//
-//// -------------------------------------------------------------------------------
-//// export
-//// -------------------------------------------------------------------------------
-//int Reduce::export(string sKey, ) 
-//{
-//	return 0;
-//}
+// -------------------------------------------------------------------------------
+// reduceFunc
+// -------------------------------------------------------------------------------
+int Reduce::reduceFunc(string& iKey, list<int> oLstOfData)
+{
+	try 
+	{
+		list<string> lstReducedData;
+		string sKeyVal = iKey;
+		int ikeyVal = 0;
+
+		list<int>::iterator itr;
+		for (int lst : oLstOfData)
+		{
+			ikeyVal = ikeyVal + 1;
+			//ikeyVal = lst;
+		}
+
+		string str1 = "(\"";
+		string s1 = "\",";
+		string str2 = str1 + sKeyVal + s1;   // TODO: I(Cliford) need to fix this//("cliford"",47)
+		string s = to_string(ikeyVal);
+		string finalString = str2 + s + ")";
+
+		// Add data to the global lst
+		_lstReducedData.push_back(finalString);
+	}
+	catch (exception e) 
+	{
+		cout << "Exception reducing" << endl;
+	}
+
+	return 0;
+}
+
+// -------------------------------------------------------------------------------
+// export
+// -------------------------------------------------------------------------------
+int Reduce::exportFunc(list<string> sDataToWrite)
+{
+	// Write info to the file
+	string fileName = "SUCCESS.txt";
+
+	// remove duplicates
+	sDataToWrite.unique();
+	_pFileManagement->writeToFile(fileName, sDataToWrite);
+	
+	return 0;
+}
+
+// -------------------------------------------------------------------------------
+// GetData
+// -------------------------------------------------------------------------------
+list<string>  Reduce::GetData() 
+{
+	return _lstReducedData;
+}

@@ -5,14 +5,16 @@
 // 
 // Author: Elizabeth and Cliford
 // 
-// Description: 
-// 
+// Description: The FileManagement class handles interaction with the file system,
+//				including reading and writing to files.
 // 
 // Notes:
 // 
 // File History:
-// 4/8/22 - Elizabeth - Added parseFile, writeKeyValueToFile
+// 4/8/22 - Elizabeth - Added parseFile(), writeKeyValueToFile()
 // 4/9/22 - Elizabeth - Change format of output file strings
+// 4/12/22 - Cliford - Added readFile() and writeToFIle()
+// 4/13/22 - Elizabeth - Combine parseFile() and readFile() into single readFile()
 // ===============================================================================
 
 // Local Headers
@@ -39,37 +41,75 @@ FileManagement::~FileManagement()
 }
 
 // -------------------------------------------------------------------------------
-// parseFile
+// readFile
 // -------------------------------------------------------------------------------
-string FileManagement::parseFile(string inputFileName)
+list<string> FileManagement::readFile(string& iFileName)
 {
-	string outputStr;
+	// store contents of file in list of each line value
+	list<string> oFileValue;
+
 	try 
 	{
-		ifstream inputFile;
-		inputFile.open(inputFileName);
-		if (inputFile.rdbuf()->is_open())
+		// Local variables
+		string sFileName = iFileName;
+		string sLine;
+
+		// read from file and append to list
+		ifstream mFile(sFileName);
+		if (mFile.is_open())
 		{
-			string line;
-			while (!inputFile.eof())
+			while (!mFile.eof())
 			{
-				getline(inputFile, line);
-				//if (inputFile.eof()) continue;
-				outputStr.append(line).append(" ");
+				getline(mFile, sLine);
+				// Check to prevent adding empty space at the end of the file.
+				if (sLine != "")
+				{
+					//cout << "File Info: " << sLine << endl;
+					oFileValue.push_back(sLine);
+				}
 			}
-			inputFile.close();
+			// Close the file
+			mFile.close();
 		}
 		else
-		{
-			cout << " Cannot open file " << inputFileName << endl;
-			// log error
+		{	// Ran into an issue opening the file
+			cout << "Problem opening " + iFileName << endl;
 		}
 	}
-	catch (exception e)
+	catch (exception e) 
 	{
-		// log exception
+		cout << "Exception while reading file " + iFileName << endl;
 	}
-	return outputStr;
+	
+	return oFileValue;
+}
+
+// -------------------------------------------------------------------------------
+// writeToFile
+// -------------------------------------------------------------------------------
+void FileManagement::writeToFile(string& sFileName, list<string> sDataToWrite)
+{
+	try {
+		// Local Variables
+		string fileName = sFileName;
+
+		// create or open the file
+		ofstream File(fileName);
+
+		for (string lst : sDataToWrite)
+		{
+			// write the value to the file
+			File << lst << endl;
+		}
+
+		// close the file
+		File.close();
+	}
+	catch (exception e) 
+	{
+		cout << "Exception writing to file" << endl;
+	}
+	
 }
 
 // -------------------------------------------------------------------------------
@@ -80,18 +120,23 @@ void FileManagement::writeKeyValueToFile(string outputFileName, string key, int 
 	try 
 	{
 		ofstream outputFile;
+
+		// open the output file
 		outputFile.open(outputFileName, ios::app);
 		if (!outputFile.rdbuf()->is_open())
 		{
 			cout << " Cannot open output file" << endl;
-			// log error
 			return;
 		}
+
+		// write key-value pair to output file
 		outputFile << "(\"" << key << "\"," << value << ")" << endl;
+
+		// close the file
+		outputFile.close();
 	} 
 	catch (exception e) 
 	{
-		// log exception
+		cout << "Exception writing key-value to file" << endl;
 	}
 }
-

@@ -6,16 +6,21 @@
 // Author: Elizabeth and Cliford
 // 
 // Description: 
-//              
+//
 // 
-// Notes:
-// 
+// File History:
+// 4/10/22 - Cliford - Added reduceFunc(), export()
 // ===============================================================================
 #ifndef REDUCE_H
 #define REDUCE_H
 
+// Local Headers
+#include "FileManagement.h"
+
 // Standard Lirary Headers
 #include <iostream>
+#include <Vector>
+
 using namespace std;
 
 class Reduce
@@ -24,9 +29,33 @@ public:
 	Reduce();
 	~Reduce();
 
-	//int reduceFunc(string sKey, );
-	//int export(string sKey, );
+	/**
+	 * reduceFunc is used to simplified the data
+	 * @param iKey - single key to retrieve the number of occurence for
+	 * @param iLstOfData- input list to compare the key to to get the key value
+	 * @return int
+	 */
+	int reduceFunc(string& iKey, list<int> iLstOfData);
+
+	/**
+	 * exportFun is used to write the finalize data to a new file
+	 * @param sDataToWrite - the list of data that needs to be written to the file
+	 * @return int
+	 */
+	int exportFunc(list<string> sDataToWrite);
+
+	/**
+	 * GetData is used to retrieve the data that needs to be passed to 
+	 *		  the next calling function
+	 * @param None
+	 * @return list<string>
+	 */
+	list<string> GetData();
+
 private:
+
+	FileManagement* _pFileManagement;
+	list<string> _lstReducedData;
 
 };
 #endif /* REDUCE_H */
