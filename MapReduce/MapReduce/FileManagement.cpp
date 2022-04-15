@@ -15,6 +15,8 @@
 // 4/9/22 - Elizabeth - Change format of output file strings
 // 4/12/22 - Cliford - Added readFile() and writeToFIle()
 // 4/13/22 - Elizabeth - Combine parseFile() and readFile() into single readFile()
+// 4/14/22 - Elizabeth - Added getFilesInDirectory(), fileExists(), getFileName(). 
+//						 Added exception logging.
 // ===============================================================================
 
 // Local Headers
@@ -23,6 +25,7 @@
 #include <boost/algorithm/string/classification.hpp>
 #include <boost/algorithm/string/split.hpp>
 #include <iostream>
+#include <filesystem>
 
 using namespace std;
 
@@ -38,6 +41,44 @@ FileManagement::FileManagement()
 // -------------------------------------------------------------------------------
 FileManagement::~FileManagement()
 {
+}
+
+// -------------------------------------------------------------------------------
+// fileExists
+// -------------------------------------------------------------------------------
+bool FileManagement::fileExists(string fullFilePath)
+{
+	return std::filesystem::exists(fullFilePath);
+}
+
+// -------------------------------------------------------------------------------
+// getFileName
+// -------------------------------------------------------------------------------
+string FileManagement::getFileName(string fullFilePath)
+{
+	return std::filesystem::path(fullFilePath).filename().stem().string();
+}
+
+// -------------------------------------------------------------------------------
+// getFilesInDirectory
+// -------------------------------------------------------------------------------
+list<string> FileManagement::getFilesInDirectory(string fileDirName)
+{
+	list<string> filePaths;
+	try {
+		for (const auto& entry : std::filesystem::directory_iterator(fileDirName))
+		{
+			string filePath = entry.path().string();
+			filePaths.push_back(filePath);
+		}
+	}
+	catch (exception e) 
+	{
+		cout << "FileManagement.getFilesInDirectory -- Exception getting files in dir: " + fileDirName << endl;
+		cout << e.what() << endl;
+	}
+		
+	return filePaths;
 }
 
 // -------------------------------------------------------------------------------
@@ -73,12 +114,13 @@ list<string> FileManagement::readFile(string& iFileName)
 		}
 		else
 		{	// Ran into an issue opening the file
-			cout << "Problem opening " + iFileName << endl;
+			cout << "FileManagement.readFile -- Could not open " + iFileName << endl;
 		}
 	}
 	catch (exception e) 
 	{
-		cout << "Exception while reading file " + iFileName << endl;
+		cout << "FileManagement.readFile -- Exception while reading file:" + iFileName << endl;
+		cout << e.what() << endl;
 	}
 	
 	return oFileValue;
@@ -107,7 +149,8 @@ void FileManagement::writeToFile(string& sFileName, list<string> sDataToWrite)
 	}
 	catch (exception e) 
 	{
-		cout << "Exception writing to file" << endl;
+		cout << "FileManagement.writeToFile -- Exception writing to file:" << endl;
+		cout << e.what() << endl;
 	}
 	
 }
@@ -137,6 +180,7 @@ void FileManagement::writeKeyValueToFile(string outputFileName, string key, int 
 	} 
 	catch (exception e) 
 	{
-		cout << "Exception writing key-value to file" << endl;
+		cout << "FileManagement.writeKeyValueToFile -- Exception writing key-value to file:" << endl;
+		cout << e.what() << endl;
 	}
 }
