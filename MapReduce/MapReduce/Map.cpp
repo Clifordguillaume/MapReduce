@@ -5,7 +5,8 @@
 // 
 // Author: Elizabeth and Cliford
 // 
-// Description: 
+// Description: Provides utilities to read an input file's contents and store its
+//				words in a map that can be exported to another file.
 //              
 // 
 // FileHistory:
