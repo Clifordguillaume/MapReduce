@@ -33,12 +33,12 @@ class Map
 		 * @param data - data to tokenize
 		 * @return map of words and counts
 		 */
-		std::map<string, int> map(string inputFileName, string data);
+		std::multimap<string, int> map(string inputFileName, string data);
 
 		/**
 		 * 
 		 */
-		void exportMap(string outputFileName, std::map<string, int> keyValMap);
+		void exportMap(string outputFileName, std::multimap<string, int> keyValMap);
 
 		/**
 		 * Gets the key from a full string

@@ -15,6 +15,8 @@
 // 4/10/22 - Elizabeth - Remove FileManagement references from Map
 // 4/12/22 - Cliford - Added getkey() and getkeyValue()
 // 4/13/22 - Elizabeth - Clean up string parsing methods. Add exportMap()
+// 4/14/22 - Elizabeth - Change map() and exportMap() to use multimap to allow 
+//						 duplicate keys (words) with each having frequency = 1
 // ===============================================================================
 
 #include "Map.h"
@@ -44,7 +46,7 @@ Map::~Map()
 // -------------------------------------------------------------------------------
 // map
 // -------------------------------------------------------------------------------
-std::map<string, int> Map::map(string inputFileName, string data) 
+std::multimap<string, int> Map::map(string inputFileName, string data) 
 {
 	// tokenize the string represenation of the contents of the file
 	string loweredStr = lowerString(data);
@@ -52,17 +54,10 @@ std::map<string, int> Map::map(string inputFileName, string data)
 	vector<string> splitStr = splitString(strippedLowerStr);
 
 	// populate map with words and their frequencies
-	std::map<string, int> wordCounts;
+	std::multimap<string, int> wordCounts;
 	for (string s : splitStr) 
 	{
-		if (wordCounts.count(s) < 1)
-		{
-			wordCounts.insert({ s, 1 });
-		}
-		else 
-		{
-			wordCounts[s] = wordCounts[s] + 1;
-		}
+		wordCounts.insert({ s, 1 });
 	}
 
 	return wordCounts;
@@ -71,7 +66,7 @@ std::map<string, int> Map::map(string inputFileName, string data)
 // -------------------------------------------------------------------------------
 // exportMap
 // -------------------------------------------------------------------------------
-void Map::exportMap(string outputFileName, std::map<string, int> keyValMap)
+void Map::exportMap(string outputFileName, std::multimap<string, int> keyValMap)
 {
 	// write entries in map to file
 	std::map<string, int>::iterator it;
@@ -194,7 +189,8 @@ list<int> Map::getKeyValue(string iSKey, list<string> lstOfData)
 	}
 	catch (exception e) 
 	{
-		cout << "Exception getting value of key: " + iSKey << endl;
+		cout << "Map.getKeyValue -- Exception getting value of key: " + iSKey << endl;
+		cout << e.what() << endl;
 	}
 	
 	return iKeyValue;

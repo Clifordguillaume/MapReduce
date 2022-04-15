@@ -68,7 +68,7 @@ void Workflow::map(string inputFileDir, string tempOutputFileDir)
         }
 
         // count the frequencies of the words in input file
-        std::map<string, int> wordFreqs = mapper.map(inputFileName, fileContentsStr);
+        std::multimap<string, int> wordFreqs = mapper.map(inputFileName, fileContentsStr);
 
         // if the output dir does not end in backslash, add one and use to generate full path of temp output file
         boost::trim_right(tempOutputFileDir);

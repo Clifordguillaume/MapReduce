@@ -1,5 +1,6 @@
 ("hello",1)
 ("hi",1)
 ("one",1)
-("testing",2)
+("testing",1)
+("testing",1)
 ("testingagain",1)
