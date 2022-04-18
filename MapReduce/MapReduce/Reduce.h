@@ -7,9 +7,6 @@
 // 
 // Description: 
 //
-// 
-// File History:
-// 4/10/22 - Cliford - Added reduceFunc(), export()
 // ===============================================================================
 #ifndef REDUCE_H
 #define REDUCE_H

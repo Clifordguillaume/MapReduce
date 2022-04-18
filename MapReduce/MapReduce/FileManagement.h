@@ -7,9 +7,6 @@
 // 
 // Description: The FileManagement class handles interaction with the file system,
 //				including reading and writing to files.
-// 
-// Notes:
-// 
 // ===============================================================================
 #ifndef FILE_MANAGEMENT_H
 #define FILE_MANAGEMENT_H
@@ -24,6 +21,27 @@ class FileManagement
 	public:
 		FileManagement();
 		~FileManagement();
+
+		/**
+		 * Checks if a file exists
+		 * @param fullFilePath - full path of file including file name
+		 * @return true if file exists, else false
+		 */
+		bool fileExists(string fullFilePath);
+
+		/**
+		 * Gets the name of the file without full path or file extension
+		 * @param fullFilePath - full path of the file including file name
+		 * @return name of file
+		 */
+		string getFileName(string fullFilePath);
+
+		/**
+		 * Traverses a given directory and returns list of files it contains
+		 * @param fileDirName - Name of the directory to traverse
+		 * @return list of the paths to all files in the directory
+		 */
+		list<string> getFilesInDirectory(string fileDirName);
 		
 		/**
 		 * Reads data from the file

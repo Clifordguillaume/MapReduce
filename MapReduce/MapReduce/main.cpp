@@ -18,7 +18,7 @@
 // ===============================================================================
 
 // Local headers 
-#include "Executive.h"
+#include "Workflow.h"
 
 // Standard Library headers
 #include <list>
@@ -28,9 +28,11 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
-    string inputFileName = "C:\\Users\\dwuli\\OneDrive\\egrad\\EDwulit Projects\\MapReduce\\MapReduce\\testinput.txt";
-    string outputFileName = "C:\\Users\\dwuli\\OneDrive\\egrad\\EDwulit Projects\\MapReduce\\MapReduce\\testoutput.txt";
-    //string inputFileName = "testoutput.txt";
+    string inputFileDir = "C:\\Users\\dwuli\\OneDrive\\egrad\\EDwulit Projects\\MapReduce\\MapReduce\\TestInputFileDir";
+    string outputFileDir = "C:\\Users\\dwuli\\OneDrive\\egrad\\EDwulit Projects\\MapReduce\\MapReduce\\TestOutputFileDir";
+    string tempOutputFileDir = "C:\\Users\\dwuli\\OneDrive\\egrad\\EDwulit Projects\\MapReduce\\MapReduce\\TestTempOutputFileDir";
+    //string inputFileName = "C:\\Users\\dwuli\\OneDrive\\egrad\\EDwulit Projects\\MapReduce\\MapReduce\\testinput.txt";
+    //string outputFileName = "C:\\Users\\dwuli\\OneDrive\\egrad\\EDwulit Projects\\MapReduce\\MapReduce\\testoutput.txt";
 
     //string inputFileName = "C:\\Users\\clifguillaume\\Documents\\TestData\\testInput.txt";
     //string outputFileName = "C:\\Users\\clifguillaume\\Documents\\TestData\\testoutput.txt";
@@ -42,13 +44,13 @@ int main(int argc, char** argv)
     string tempOutputFileDir = "C:\\Users\\clifguillaume\\Documents\\Object Oriented Projects\\TestData\\TempDir";
 
     // TODO: Make input and output file paths configurable via command line
-    // TODO: Make inputFileName inputFileDirectory
     /*if (argc > 2) 
     {
-        inputFileName = argv[1];
-        outputFileName = argv[2];
+        inputFileDir = argv[1];
+        outputFileDir = argv[2];
+        tempOutputFileDir = argv[3];
     }*/
 
-    Executive executor;
-    executor.run(inputFileName, outputFileName);
+    Workflow workflow;
+    workflow.run(inputFileDir, outputFileDir, tempOutputFileDir);
 }
