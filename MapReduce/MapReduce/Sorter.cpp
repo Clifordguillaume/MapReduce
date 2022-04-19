@@ -35,7 +35,7 @@ Sorter::~Sorter() {}
 // -------------------------------------------------------------------------------
 // Sort
 // -------------------------------------------------------------------------------
-list<string> Sorter::sort(string& iFilePath)
+int Sorter::sort(string& iFilePath)
 {
 	// Local Variables
 	string FileName = iFilePath;
@@ -47,10 +47,16 @@ list<string> Sorter::sort(string& iFilePath)
 	// Sort the data in the list
 	lstFileValue.sort();
 
+	// write the sorted data to the file
+	FileManagement fileManager;
+	fileManager.writeToFile(FileName, lstFileValue);
+
 	// preview what's in the file
 	//for (string lst : lstFileValue) 
 	//{
 	//	cout << lst << endl;
 	//}
-	return lstFileValue;
+
+	// return
+	return 0;
 }

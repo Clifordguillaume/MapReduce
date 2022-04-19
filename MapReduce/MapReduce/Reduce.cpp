@@ -49,20 +49,21 @@ int Reduce::reduceFunc(string& iKey, list<int> oLstOfData)
 {
 	try 
 	{
+		// Local varibales
 		list<string> lstReducedData;
 		string sKeyVal = iKey;
 		int ikeyVal = 0;
 
+		// get the key frequency
 		list<int>::iterator itr;
 		for (int lst : oLstOfData)
 		{
 			ikeyVal = ikeyVal + 1;
-			//ikeyVal = lst;
 		}
 
 		string str1 = "(\"";
 		string s1 = "\",";
-		string str2 = str1 + sKeyVal + s1;   // TODO: I(Cliford) need to fix this//("cliford"",47)
+		string str2 = str1 + sKeyVal + s1;
 		string s = to_string(ikeyVal);
 		string finalString = str2 + s + ")";
 

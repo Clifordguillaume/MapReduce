@@ -43,15 +43,15 @@ class Workflow
 
 		/**
 		 * Sorts contents of a file
-		 * @param fileName - name of file whose contents is to be sorted
-		 * @return list of sorted items
+		 * @param tempDirectory -directory that contains all the temp files to be sorted
+		 * @return int returns 0 to comple function task
 		 */
-		list<string> sort(string fileName);
+		int sort(string tempDirectory);
 
 		/**
 		 * Reduce a list of data to a single output file
 		 * @param lstOfData - list of data to reduce
 		 */
-		void reduce(list<string> lstOfData);
+		void reduce(string tempDirectory);
 };
 #endif /* WORKFLOW_H */

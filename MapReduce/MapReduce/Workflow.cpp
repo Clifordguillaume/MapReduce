@@ -43,8 +43,10 @@ Workflow::~Workflow() {}
 void Workflow::run(string inputFileDir, string outputFileDir, string tempOutputFileDir)
 {
     map(inputFileDir, tempOutputFileDir);
-    //list<string> sortResults = sort(outputFileName);
-    //reduce(sortResults);
+
+    sort(tempOutputFileDir);
+
+    reduce(tempOutputFileDir);
 }
 
 // -------------------------------------------------------------------------------
@@ -86,36 +88,66 @@ void Workflow::map(string inputFileDir, string tempOutputFileDir)
 // -------------------------------------------------------------------------------
 // sort
 // -------------------------------------------------------------------------------
-list<string> Workflow::sort(string fileName)
+int Workflow::sort(string tempDirectory)
 {
+    // Local variables
+    string fileName = "";
+    list<string> lstOfData;
+
+    // class instantiation
     Sorter sortingclass;
-    list<string> lstOfData = sortingclass.sort(fileName);
-    return lstOfData;
+
+    // get the list of all the files in the temp folder
+    list<string> tempFiles = fileManager.getFilesInDirectory(tempDirectory);
+
+    // Loop through each files 
+    for (string file : tempFiles) 
+    {
+        fileName = file;
+        sortingclass.sort(fileName);
+    }
+
+    // return
+    return 0;
 }
 
 // -------------------------------------------------------------------------------
 // reduce
 // -------------------------------------------------------------------------------
-void Workflow::reduce(list<string> lstOfData)
+void Workflow::reduce(string tempDirectory)
 {
-    Reduce reduce;
+    // Local Varibles
+    string fileName = "";
     list<string> DataToWriteToFile;
+    list<string> fileData;
 
-    // preview what's in the file
-    for (string lst : lstOfData)
+    // class instantiation
+    Reduce reduce;
+
+    // get list of all files in input file directory
+    list<string> tempFiles = fileManager.getFilesInDirectory(tempDirectory);
+
+    for (string file : tempFiles) 
     {
-        //cout << "lstOfdata: " << lst << endl;
+        fileName = file;
+        fileData = fileManager.readFile(fileName);
 
-        // Get key from the list value
-        Map map;
-        string sKey = map.getKey(lst);
+        // preview what's in the file
+        for (string lstString : fileData)
+        {
+            //cout << "lstOfdata: " << lst << endl;
 
-        // Get the key value
-        list<int> itr = map.getKeyValue(sKey, lstOfData);
-        reduce.reduceFunc(sKey, itr);
+            // Get key from the list value
+            Map map;
+            string sKey = map.getKey(lstString);
+
+            // Get the key value
+            list<int> itr = map.getKeyValue(sKey, fileData);
+            reduce.reduceFunc(sKey, itr);
+
+            // other functions to process and export data
+            DataToWriteToFile = reduce.GetData();
+            reduce.exportFunc(DataToWriteToFile);
+        }
     }
-
-    // other functions to process and export data
-    DataToWriteToFile = reduce.GetData();
-    reduce.exportFunc(DataToWriteToFile);
 }

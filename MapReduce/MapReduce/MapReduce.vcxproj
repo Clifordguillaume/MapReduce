@@ -159,6 +159,15 @@
     <ClInclude Include="Sorter.h" />
     <ClInclude Include="Workflow.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="TestInputFileDir\test1.txt" />
+    <Text Include="TestInputFileDir\test2.txt" />
+    <Text Include="TestInputFileDir\test3.txt" />
+    <Text Include="TestOutputFileDir\test.txt" />
+    <Text Include="TestTempOutputFileDir\test1-tempOutput.txt" />
+    <Text Include="TestTempOutputFileDir\test2-tempOutput.txt" />
+    <Text Include="TestTempOutputFileDir\test3-tempOutput.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
