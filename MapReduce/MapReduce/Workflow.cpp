@@ -12,7 +12,8 @@
 // File History:
 // 4/14/22 - Elizabeth - Move run(), map(), sort(), reduce() from Executive to 
 //                       Workflow. Modify map() to traverse input directory and
-//                       write to temp output directory. 
+//                       write to temp output directory.
+// 4/19/22 - Elizabeth - Change FileManagement, Map, Sorter, Reduce to pointers
 // ===============================================================================
 
 // Local Headers
@@ -30,6 +31,9 @@ using namespace std;
 // -----------------------------------------------
 Workflow::Workflow()
 {
+    _pMap = std::make_unique<Map>();
+    _pSorter = std::make_unique<Sorter>();
+    _pReduce = std::make_unique<Reduce>();
 }
 
 // -----------------------------------------------
@@ -53,12 +57,12 @@ void Workflow::run(string inputFileDir, string outputFileDir, string tempOutputF
 void Workflow::map(string inputFileDir, string tempOutputFileDir)
 {
     // get list of all files in input file directory
-    list<string> inputFiles = fileManager.getFilesInDirectory(inputFileDir);
+    list<string> inputFiles = _pFileManagement->getFilesInDirectory(inputFileDir);
 
     for (string inputFileName : inputFiles) 
     {
         // read the input file contents
-        list<string> fileContents = fileManager.readFile(inputFileName);
+        list<string> fileContents = _pFileManagement->readFile(inputFileName);
 
         // get contents of file as one string
         string fileContentsStr;
@@ -68,7 +72,7 @@ void Workflow::map(string inputFileDir, string tempOutputFileDir)
         }
 
         // count the frequencies of the words in input file
-        std::multimap<string, int> wordFreqs = mapper.map(inputFileName, fileContentsStr);
+        std::multimap<string, int> wordFreqs = _pMap->map(inputFileName, fileContentsStr);
 
         // if the output dir does not end in backslash, add one and use to generate full path of temp output file
         boost::trim_right(tempOutputFileDir);
@@ -76,10 +80,10 @@ void Workflow::map(string inputFileDir, string tempOutputFileDir)
         {
             tempOutputFileDir += "\\";
         }
-        string outputFileName = tempOutputFileDir + fileManager.getFileName(inputFileName) + "-tempOutput.txt";
+        string outputFileName = tempOutputFileDir + _pFileManagement->getFileName(inputFileName) + "-tempOutput.txt";
 
         // write the words and frequencies to output file in the temp directory
-        mapper.exportMap(outputFileName, wordFreqs);
+        _pMap->exportMap(outputFileName, wordFreqs);
     }
 }
 
@@ -88,8 +92,7 @@ void Workflow::map(string inputFileDir, string tempOutputFileDir)
 // -------------------------------------------------------------------------------
 list<string> Workflow::sort(string fileName)
 {
-    Sorter sortingclass;
-    list<string> lstOfData = sortingclass.sort(fileName);
+    list<string> lstOfData = _pSorter->sort(fileName);
     return lstOfData;
 }
 
@@ -98,7 +101,6 @@ list<string> Workflow::sort(string fileName)
 // -------------------------------------------------------------------------------
 void Workflow::reduce(list<string> lstOfData)
 {
-    Reduce reduce;
     list<string> DataToWriteToFile;
 
     // preview what's in the file
@@ -112,10 +114,10 @@ void Workflow::reduce(list<string> lstOfData)
 
         // Get the key value
         list<int> itr = map.getKeyValue(sKey, lstOfData);
-        reduce.reduceFunc(sKey, itr);
+        _pReduce->reduceFunc(sKey, itr);
     }
 
     // other functions to process and export data
-    DataToWriteToFile = reduce.GetData();
-    reduce.exportFunc(DataToWriteToFile);
+    DataToWriteToFile = _pReduce->GetData();
+    _pReduce->exportFunc(DataToWriteToFile);
 }

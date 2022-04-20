@@ -12,7 +12,7 @@
 #define REDUCE_H
 
 // Local Headers
-#include "FileManagement.h"
+#include "BaseClass.h"
 
 // Standard Lirary Headers
 #include <iostream>
@@ -20,11 +20,11 @@
 
 using namespace std;
 
-class Reduce
+class Reduce : public BaseClass
 {
 public:
 	Reduce();
-	~Reduce();
+	virtual ~Reduce();
 
 	/**
 	 * reduceFunc is used to simplified the data
@@ -50,8 +50,6 @@ public:
 	list<string> GetData();
 
 private:
-
-	FileManagement* _pFileManagement;
 	list<string> _lstReducedData;
 
 };

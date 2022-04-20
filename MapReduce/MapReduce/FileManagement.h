@@ -20,7 +20,7 @@ class FileManagement
 {
 	public:
 		FileManagement();
-		~FileManagement();
+		virtual ~FileManagement();
 
 		/**
 		 * Checks if a file exists

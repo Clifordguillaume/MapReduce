@@ -12,7 +12,7 @@
 #ifndef MAP_H
 #define MAP_H
 
-#include "FileManagement.h"
+#include "BaseClass.h"
 
 #include <fstream>
 #include <vector>
@@ -21,11 +21,13 @@
 
 using namespace std;
 
-class Map
+class Map : public BaseClass
 {
 	public:
 		Map();
-		~Map();
+		virtual ~Map();
+
+		std::unique_ptr<FileManagement> _pFileManagement;
 
 		/**
 		 * Reads an input file and writes words and frequencies to an output file
@@ -56,9 +58,6 @@ class Map
 		list<int> getKeyValue(string iSKey, list<string> lstOfData);
 
 	private:
-		// variables
-		FileManagement fileManager;
-
 		/**
 		 * Splits a string into a vector of strings, split by whitespace
 		 * @input str - string to split
