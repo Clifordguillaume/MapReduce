@@ -1,7 +1,7 @@
 // ===============================================================================
 // CSE 687 MapReduce Project
 // 
-// maim.cpp
+// main.cpp
 // 
 // Author: Elizabeth and Cliford
 // 

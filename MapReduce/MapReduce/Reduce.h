@@ -12,7 +12,7 @@
 #define REDUCE_H
 
 // Local Headers
-#include "BaseClass.h"
+#include "FileManagement.h"
 
 // Standard Lirary Headers
 #include <iostream>
@@ -20,37 +20,43 @@
 
 using namespace std;
 
-class Reduce : public BaseClass
+namespace MapReduce
 {
-public:
-	Reduce();
-	virtual ~Reduce();
+	class Reduce
+	{
+		public:
+			FileManagement* _pFileManagement;
 
-	/**
-	 * reduceFunc is used to simplified the data
-	 * @param iKey - single key to retrieve the number of occurence for
-	 * @param iLstOfData- input list to compare the key to to get the key value
-	 * @return int
-	 */
-	int reduceFunc(string& iKey, list<int> iLstOfData);
+			Reduce();
+			Reduce(FileManagement* _pFM) : _pFileManagement(_pFM) {}
+			virtual ~Reduce();
 
-	/**
-	 * exportFun is used to write the finalize data to a new file
-	 * @param sDataToWrite - the list of data that needs to be written to the file
-	 * @return int
-	 */
-	int exportFunc(list<string> sDataToWrite);
+			/**
+			 * reduceFunc is used to simplified the data
+			 * @param iKey - single key to retrieve the number of occurence for
+			 * @param iLstOfData- input list to compare the key to to get the key value
+			 * @return int
+			 */
+			virtual int reduceFunc(string& iKey, list<int> iLstOfData);
 
-	/**
-	 * GetData is used to retrieve the data that needs to be passed to 
-	 *		  the next calling function
-	 * @param None
-	 * @return list<string>
-	 */
-	list<string> GetData();
+			/**
+			 * exportFun is used to write the finalize data to a new file
+			 * @param sDataToWrite - the list of data that needs to be written to the file
+			 * @return int
+			 */
+			virtual int exportFunc(list<string> sDataToWrite);
 
-private:
-	list<string> _lstReducedData;
+			/**
+			 * GetData is used to retrieve the data that needs to be passed to
+			 *		  the next calling function
+			 * @param None
+			 * @return list<string>
+			 */
+			virtual list<string> GetData();
 
-};
+		private:
+			list<string> _lstReducedData;
+
+	};
+}
 #endif /* REDUCE_H */

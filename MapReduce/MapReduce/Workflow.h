@@ -11,37 +11,41 @@
 #ifndef WORKFLOW_H
 #define WORKFLOW_H
 
-#include "BaseClass.h"
+#include "FileManagement.h"
 #include "Map.h"
 #include "Reduce.h"
 #include "Sorter.h"
 #include <map>
 #include <memory>
 
-class Workflow : public BaseClass
+namespace MapReduce
 {
-	public:
-		std::unique_ptr<Map> _pMap;
-		std::unique_ptr<Reduce> _pReduce;
-		std::unique_ptr<Sorter> _pSorter;
+	class Workflow
+	{
+		public:
+			Map* _pMap;
+			Reduce* _pReduce;
+			Sorter* _pSorter;
+			FileManagement* _pFileManagement;
 
-		Workflow();
-		virtual ~Workflow();
+			Workflow();
+			Workflow(FileManagement* _pFM, Map* _pM, Sorter* _pS, Reduce* _pR);
+			virtual ~Workflow();
 
-		/**
-		 * Run map, sort, and reduce
-		 * @param inputFileDir - name of directory to read input files from
-		 * @param outputFileDir - name of directory to write final output files to
-		 * @param tempOutputFileDir - name of directory to write temp output files to
-		 */
-		void run(string inputFileDir, string outputFileDir, string tempOutputFileDir);
+			/**
+			 * Run map, sort, and reduce
+			 * @param inputFileDir - name of directory to read input files from
+			 * @param outputFileDir - name of directory to write final output files to
+			 * @param tempOutputFileDir - name of directory to write temp output files to
+			 */
+			void run(string inputFileDir, string outputFileDir, string tempOutputFileDir);
 
-		/**
-		 * Maps input file contents to output file
-		 * @param inputFileDir - name of directory to read input files from
-		 * @param outputFileName - name of output file
-		 */
-		void map(string inputFileDir, string outputFileName);
+			/**
+			 * Maps input file contents to output file
+			 * @param inputFileDir - name of directory to read input files from
+			 * @param outputFileName - name of output file
+			 */
+			void map(string inputFileDir, string outputFileName);
 
 		/**
 		 * Sorts contents of a file
@@ -56,6 +60,7 @@ class Workflow : public BaseClass
 		 */
 		void reduce(string tempDirectory);
 
-	private:
-};
+		private:
+	};
+}
 #endif /* WORKFLOW_H */

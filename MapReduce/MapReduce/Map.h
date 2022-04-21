@@ -12,7 +12,7 @@
 #ifndef MAP_H
 #define MAP_H
 
-#include "BaseClass.h"
+#include "FileManagement.h"
 
 #include <fstream>
 #include <vector>
@@ -21,62 +21,67 @@
 
 using namespace std;
 
-class Map : public BaseClass
+namespace MapReduce 
 {
-	public:
-		Map();
-		virtual ~Map();
+	class Map
+	{
+		public:
+			FileManagement* _pFileManagement;
 
-		std::unique_ptr<FileManagement> _pFileManagement;
+			Map();
+			Map(FileManagement* _pFM) : _pFileManagement(_pFM) {}
+			virtual ~Map();
 
-		/**
-		 * Reads an input file and writes words and frequencies to an output file
-		 * @param inputFileName - name of input file
-		 * @param data - data to tokenize
-		 * @return map of words and counts
-		 */
-		std::multimap<string, int> map(string inputFileName, string data);
+			/**
+			 * Reads an input file and writes words and frequencies to an output file
+			 * @param inputFileName - name of input file
+			 * @param data - data to tokenize
+			 * @return map of words and counts
+			 */
+			virtual std::multimap<string, int> map(string inputFileName, string data);
 
-		/**
-		 * 
-		 */
-		void exportMap(string outputFileName, std::multimap<string, int> keyValMap);
+			/**
+			 *
+			 */
+			virtual void exportMap(string outputFileName, std::multimap<string, int> keyValMap);
 
-		/**
-		 * Gets the key from a full string
-		 * @param str - whole string to retrieve the key from
-		 * @return the key found
-		 */
-		string getKey(string str);
+			/**
+			 * Gets the key from a full string
+			 * @param str - whole string to retrieve the key from
+			 * @return the key found
+			 */
+			virtual string getKey(string str);
 
-		/**
-		 * Gets the value for the key passed in as an input
-		 * @param iSKey - Key to find the value for
-		 * @param lstOfData - list of original data
-		 * @return list of key value found
-		 */
-		list<int> getKeyValue(string iSKey, list<string> lstOfData);
+			/**
+			 * Gets the value for the key passed in as an input
+			 * @param iSKey - Key to find the value for
+			 * @param lstOfData - list of original data
+			 * @return list of key value found
+			 */
+			virtual list<int> getKeyValue(string iSKey, list<string> lstOfData);
 
-	private:
-		/**
-		 * Splits a string into a vector of strings, split by whitespace
-		 * @input str - string to split
-		 * @return vector of strings that were separated by whitespace
-		 */
-		vector<string> splitString(string str);
+			/**
+			 * Splits a string into a vector of strings, split by whitespace
+			 * @input str - string to split
+			 * @return vector of strings that were separated by whitespace
+			 */
+			virtual vector<string> splitString(string str);
 
-		 /**
-		  * Removes all special characters from a string
-		  * @param str - string to remove special characters from
-		  * @return string with special characters removed
-		  */
-		string removeSpecialChars(string str);
+			/**
+			 * Removes all special characters from a string
+			 * @param str - string to remove special characters from
+			 * @return string with special characters removed
+			 */
+			virtual string removeSpecialChars(string str);
 
-		/**
-		 * Converts a string to all lowercase letters
-		 * @input istr - input string
-		 * @return str with all characters coverted to lowercase letters
-		 */
-		string lowerString(string str);
-};
+			/**
+			 * Converts a string to all lowercase letters
+			 * @input istr - input string
+			 * @return str with all characters coverted to lowercase letters
+			 */
+			virtual string lowerString(string str);
+		private:
+			
+	};
+}
 #endif /* MAP_H */
