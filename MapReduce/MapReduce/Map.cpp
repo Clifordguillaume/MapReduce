@@ -17,6 +17,7 @@
 // 4/13/22 - Elizabeth - Clean up string parsing methods. Add exportMap()
 // 4/14/22 - Elizabeth - Change map() and exportMap() to use multimap to allow 
 //						 duplicate keys (words) with each having frequency = 1
+// 4/19/22 - Elizabeth - Change FileManagement to pointer
 // ===============================================================================
 
 #include "Map.h"
@@ -77,7 +78,7 @@ void Map::exportMap(string outputFileName, std::multimap<string, int> keyValMap)
 		int value = it->second;
 
 		// write key and value to file
-		fileManager.writeKeyValueToFile(outputFileName, key, value);
+		_pFileManagement->writeKeyValueToFile(outputFileName, key, value);
 	}
 }
 

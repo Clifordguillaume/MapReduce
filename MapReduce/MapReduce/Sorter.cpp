@@ -17,8 +17,6 @@
 
 // Local Headers
 #include "Sorter.h"
-#include "Map.h"
-#include "FileManagement.h"
 
 #include <algorithm>
 
@@ -41,8 +39,7 @@ int Sorter::sort(string& iFilePath)
 	string FileName = iFilePath;
 	list<string> lstFileValue;
 
-	FileManagement ManageFile;
-	lstFileValue = ManageFile.readFile(FileName);
+	lstFileValue = _pFileManagement->readFile(FileName);
 
 	// Sort the data in the list
 	lstFileValue.sort();

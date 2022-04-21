@@ -16,16 +16,19 @@
 #ifndef SORTER_H
 #define SORTER_H
 
+// Local Headers
+#include "BaseClass.h"
+
 #include <iostream>
 #include <list>
 
 using namespace std;
 
-class Sorter
+class Sorter : public BaseClass
 {
 	public:
 		Sorter();
-		~Sorter();
+		virtual ~Sorter();
 
 		/**
 		 * sort is used to read and sort the data in the file passed in as the input

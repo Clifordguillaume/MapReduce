@@ -11,15 +11,22 @@
 #ifndef WORKFLOW_H
 #define WORKFLOW_H
 
-#include "FileManagement.h"
+#include "BaseClass.h"
 #include "Map.h"
+#include "Reduce.h"
+#include "Sorter.h"
 #include <map>
+#include <memory>
 
-class Workflow
+class Workflow : public BaseClass
 {
 	public:
+		std::unique_ptr<Map> _pMap;
+		std::unique_ptr<Reduce> _pReduce;
+		std::unique_ptr<Sorter> _pSorter;
+
 		Workflow();
-		~Workflow();
+		virtual ~Workflow();
 
 		/**
 		 * Run map, sort, and reduce
@@ -28,11 +35,6 @@ class Workflow
 		 * @param tempOutputFileDir - name of directory to write temp output files to
 		 */
 		void run(string inputFileDir, string outputFileDir, string tempOutputFileDir);
-
-	private:
-		// variables
-		FileManagement fileManager;
-		Map mapper;
 
 		/**
 		 * Maps input file contents to output file
@@ -53,5 +55,7 @@ class Workflow
 		 * @param lstOfData - list of data to reduce
 		 */
 		void reduce(string tempDirectory);
+
+	private:
 };
 #endif /* WORKFLOW_H */
