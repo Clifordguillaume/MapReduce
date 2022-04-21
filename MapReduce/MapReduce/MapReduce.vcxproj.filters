@@ -69,4 +69,27 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="TestInputFileDir\test1.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="TestInputFileDir\test2.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="TestInputFileDir\test3.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="TestOutputFileDir\test.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="TestTempOutputFileDir\test1-tempOutput.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="TestTempOutputFileDir\test2-tempOutput.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="TestTempOutputFileDir\test3-tempOutput.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+  </ItemGroup>
 </Project>

@@ -33,9 +33,9 @@ class Sorter : public BaseClass
 		/**
 		 * sort is used to read and sort the data in the file passed in as the input
 		 * @param iFilePath - the file that need to be sorted
-		 * @return list<string> - list of sorted items
+		 * @return int - returns 0 to complete function task
 		 */
-		list<string> sort(string& iFilePath);
+		int sort(string& iFilePath);
 	private:
 
 };

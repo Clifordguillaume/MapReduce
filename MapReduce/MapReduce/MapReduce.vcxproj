@@ -88,6 +88,7 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="boost_x64_debug.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug UnitTests|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -227,6 +228,15 @@
     <ClInclude Include="Workflow.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="TestInputFileDir\test1.txt" />
+    <Text Include="TestInputFileDir\test2.txt" />
+    <Text Include="TestInputFileDir\test3.txt" />
+    <Text Include="TestOutputFileDir\test.txt" />
+    <Text Include="TestTempOutputFileDir\test1-tempOutput.txt" />
+    <Text Include="TestTempOutputFileDir\test2-tempOutput.txt" />
+    <Text Include="TestTempOutputFileDir\test3-tempOutput.txt" />
+   </ItemGroup>
+   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
