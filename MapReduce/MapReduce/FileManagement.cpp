@@ -17,6 +17,7 @@
 // 4/13/22 - Elizabeth - Combine parseFile() and readFile() into single readFile()
 // 4/14/22 - Elizabeth - Added getFilesInDirectory(), fileExists(), getFileName(). 
 //						 Added exception logging.
+// 4/20/22 - Elizabeth - Add namespace
 // ===============================================================================
 
 // Local Headers
@@ -29,158 +30,161 @@
 
 using namespace std;
 
-// -------------------------------------------------------------------------------
+namespace MapReduce
+{
+	// -------------------------------------------------------------------------------
 // Constructor
 // -------------------------------------------------------------------------------
-FileManagement::FileManagement()
-{
-}
-
-// -------------------------------------------------------------------------------
-// Destructor
-// -------------------------------------------------------------------------------
-FileManagement::~FileManagement()
-{
-}
-
-// -------------------------------------------------------------------------------
-// fileExists
-// -------------------------------------------------------------------------------
-bool FileManagement::fileExists(string fullFilePath)
-{
-	return std::filesystem::exists(fullFilePath);
-}
-
-// -------------------------------------------------------------------------------
-// getFileName
-// -------------------------------------------------------------------------------
-string FileManagement::getFileName(string fullFilePath)
-{
-	return std::filesystem::path(fullFilePath).filename().stem().string();
-}
-
-// -------------------------------------------------------------------------------
-// getFilesInDirectory
-// -------------------------------------------------------------------------------
-list<string> FileManagement::getFilesInDirectory(string fileDirName)
-{
-	list<string> filePaths;
-	try {
-		for (const auto& entry : std::filesystem::directory_iterator(fileDirName))
-		{
-			string filePath = entry.path().string();
-			filePaths.push_back(filePath);
-		}
-	}
-	catch (exception e) 
+	FileManagement::FileManagement()
 	{
-		cout << "FileManagement.getFilesInDirectory -- Exception getting files in dir: " + fileDirName << endl;
-		cout << e.what() << endl;
 	}
-		
-	return filePaths;
-}
 
-// -------------------------------------------------------------------------------
-// readFile
-// -------------------------------------------------------------------------------
-list<string> FileManagement::readFile(string& iFileName)
-{
-	// store contents of file in list of each line value
-	list<string> oFileValue;
-
-	try 
+	// -------------------------------------------------------------------------------
+	// Destructor
+	// -------------------------------------------------------------------------------
+	FileManagement::~FileManagement()
 	{
-		// Local variables
-		string sFileName = iFileName;
-		string sLine;
+	}
 
-		// read from file and append to list
-		ifstream mFile(sFileName);
-		if (mFile.is_open())
-		{
-			while (!mFile.eof())
+	// -------------------------------------------------------------------------------
+	// fileExists
+	// -------------------------------------------------------------------------------
+	bool FileManagement::fileExists(string fullFilePath)
+	{
+		return std::filesystem::exists(fullFilePath);
+	}
+
+	// -------------------------------------------------------------------------------
+	// getFileName
+	// -------------------------------------------------------------------------------
+	string FileManagement::getFileName(string fullFilePath)
+	{
+		return std::filesystem::path(fullFilePath).filename().stem().string();
+	}
+
+	// -------------------------------------------------------------------------------
+	// getFilesInDirectory
+	// -------------------------------------------------------------------------------
+	list<string> FileManagement::getFilesInDirectory(string fileDirName)
+	{
+		list<string> filePaths;
+		try {
+			for (const auto& entry : std::filesystem::directory_iterator(fileDirName))
 			{
-				getline(mFile, sLine);
-				// Check to prevent adding empty space at the end of the file.
-				if (sLine != "")
-				{
-					//cout << "File Info: " << sLine << endl;
-					oFileValue.push_back(sLine);
-				}
+				string filePath = entry.path().string();
+				filePaths.push_back(filePath);
 			}
-			// Close the file
-			mFile.close();
 		}
-		else
-		{	// Ran into an issue opening the file
-			cout << "FileManagement.readFile -- Could not open " + iFileName << endl;
-		}
-	}
-	catch (exception e) 
-	{
-		cout << "FileManagement.readFile -- Exception while reading file:" + iFileName << endl;
-		cout << e.what() << endl;
-	}
-	
-	return oFileValue;
-}
-
-// -------------------------------------------------------------------------------
-// writeToFile
-// -------------------------------------------------------------------------------
-void FileManagement::writeToFile(string& sFileName, list<string> sDataToWrite)
-{
-	try {
-		// Local Variables
-		string fileName = sFileName;
-
-		// create or open the file
-		ofstream File(fileName);
-
-		for (string lst : sDataToWrite)
+		catch (exception e)
 		{
-			// write the value to the file
-			File << lst << endl;
+			cout << "FileManagement.getFilesInDirectory -- Exception getting files in dir: " + fileDirName << endl;
+			cout << e.what() << endl;
 		}
 
-		// close the file
-		File.close();
+		return filePaths;
 	}
-	catch (exception e) 
-	{
-		cout << "FileManagement.writeToFile -- Exception writing to file:" << endl;
-		cout << e.what() << endl;
-	}
-	
-}
 
-// -------------------------------------------------------------------------------
-// writeKeyValueToFile
-// -------------------------------------------------------------------------------
-void FileManagement::writeKeyValueToFile(string outputFileName, string key, int value)
-{
-	try 
+	// -------------------------------------------------------------------------------
+	// readFile
+	// -------------------------------------------------------------------------------
+	list<string> FileManagement::readFile(string& iFileName)
 	{
-		ofstream outputFile;
+		// store contents of file in list of each line value
+		list<string> oFileValue;
 
-		// open the output file
-		outputFile.open(outputFileName, ios::app);
-		if (!outputFile.rdbuf()->is_open())
+		try
 		{
-			cout << " Cannot open output file" << endl;
-			return;
+			// Local variables
+			string sFileName = iFileName;
+			string sLine;
+
+			// read from file and append to list
+			ifstream mFile(sFileName);
+			if (mFile.is_open())
+			{
+				while (!mFile.eof())
+				{
+					getline(mFile, sLine);
+					// Check to prevent adding empty space at the end of the file.
+					if (sLine != "")
+					{
+						//cout << "File Info: " << sLine << endl;
+						oFileValue.push_back(sLine);
+					}
+				}
+				// Close the file
+				mFile.close();
+			}
+			else
+			{	// Ran into an issue opening the file
+				cout << "FileManagement.readFile -- Could not open " + iFileName << endl;
+			}
+		}
+		catch (exception e)
+		{
+			cout << "FileManagement.readFile -- Exception while reading file:" + iFileName << endl;
+			cout << e.what() << endl;
 		}
 
-		// write key-value pair to output file
-		outputFile << "(\"" << key << "\"," << value << ")" << endl;
+		return oFileValue;
+	}
 
-		// close the file
-		outputFile.close();
-	} 
-	catch (exception e) 
+	// -------------------------------------------------------------------------------
+	// writeToFile
+	// -------------------------------------------------------------------------------
+	void FileManagement::writeToFile(string& sFileName, list<string> sDataToWrite)
 	{
-		cout << "FileManagement.writeKeyValueToFile -- Exception writing key-value to file:" << endl;
-		cout << e.what() << endl;
+		try {
+			// Local Variables
+			string fileName = sFileName;
+
+			// create or open the file
+			ofstream File(fileName);
+
+			for (string lst : sDataToWrite)
+			{
+				// write the value to the file
+				File << lst << endl;
+			}
+
+			// close the file
+			File.close();
+		}
+		catch (exception e)
+		{
+			cout << "FileManagement.writeToFile -- Exception writing to file:" << endl;
+			cout << e.what() << endl;
+		}
+
+	}
+
+	// -------------------------------------------------------------------------------
+	// writeKeyValueToFile
+	// -------------------------------------------------------------------------------
+	void FileManagement::writeKeyValueToFile(string outputFileName, string key, int value)
+	{
+		try
+		{
+			ofstream outputFile;
+
+			// open the output file
+			outputFile.open(outputFileName, ios::app);
+			if (!outputFile.rdbuf()->is_open())
+			{
+				cout << " Cannot open output file" << endl;
+				return;
+			}
+
+			// write key-value pair to output file
+			outputFile << "(\"" << key << "\"," << value << ")" << endl;
+
+			// close the file
+			outputFile.close();
+		}
+		catch (exception e)
+		{
+			cout << "FileManagement.writeKeyValueToFile -- Exception writing key-value to file:" << endl;
+			cout << e.what() << endl;
+		}
 	}
 }

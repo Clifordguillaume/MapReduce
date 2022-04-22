@@ -17,18 +17,23 @@
 #define SORTER_H
 
 // Local Headers
-#include "BaseClass.h"
+#include "FileManagement.h"
 
 #include <iostream>
 #include <list>
 
 using namespace std;
 
-class Sorter : public BaseClass
+namespace MapReduce
 {
-	public:
-		Sorter();
-		virtual ~Sorter();
+	class Sorter
+	{
+		public:
+			FileManagement* _pFileManagement;
+
+			Sorter();
+			Sorter(FileManagement* _pFM) : _pFileManagement(_pFM) {}
+			virtual ~Sorter();
 
 		/**
 		 * sort is used to read and sort the data in the file passed in as the input
@@ -38,7 +43,6 @@ class Sorter : public BaseClass
 		int sort(string& iFilePath);
 	private:
 
-};
-
-
+	};
+}
 #endif /* SORTER_H */
