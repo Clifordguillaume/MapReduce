@@ -13,3 +13,4 @@
 *.obj
 /MapReduce/MapReduce/packages
 /MapReduce/MapReduce/x64/Debug
+/MapReduce/MapReduce/MapReduceUnitTests/x64
