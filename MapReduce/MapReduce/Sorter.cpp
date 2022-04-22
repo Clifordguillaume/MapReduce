@@ -12,48 +12,59 @@
 //				(“is”, [1, …]), …
 //
 // File History:
-// 04/12/22 Cliford - created the SortingClass and added the sort ()
+// 04/12/22 - Cliford - created the SortingClass and added the sort ()
+// 4/20/22 - Elizabeth - Add filemanagement pointer, Constructor, Destructor
 // ===============================================================================
 
 // Local Headers
 #include "Sorter.h"
+#include "FileManagement.h"
 
 #include <algorithm>
 
-// -------------------------------------------------------------------------------
-// Constructor
-// -------------------------------------------------------------------------------
-Sorter::Sorter() {}
-
-// -------------------------------------------------------------------------------
-// Destructor
-// -------------------------------------------------------------------------------
-Sorter::~Sorter() {}
-
-// -------------------------------------------------------------------------------
-// Sort
-// -------------------------------------------------------------------------------
-int Sorter::sort(string& iFilePath)
+namespace MapReduce
 {
-	// Local Variables
-	string FileName = iFilePath;
-	list<string> lstFileValue;
+	// -------------------------------------------------------------------------------
+	// Constructor
+	// -------------------------------------------------------------------------------
+	Sorter::Sorter()
+	{
+		_pFileManagement = new FileManagement();
+	}
 
-	lstFileValue = _pFileManagement->readFile(FileName);
+	// -------------------------------------------------------------------------------
+	// Destructor
+	// -------------------------------------------------------------------------------
+	Sorter::~Sorter()
+	{
+		delete _pFileManagement;
+	}
 
-	// Sort the data in the list
-	lstFileValue.sort();
+	// -------------------------------------------------------------------------------
+	// Sort
+	// -------------------------------------------------------------------------------
+	int Sorter::sort(string& iFilePath)
+	{
+		// Local Variables
+		string FileName = iFilePath;
+		list<string> lstFileValue;
 
-	// write the sorted data to the file
-	FileManagement fileManager;
-	fileManager.writeToFile(FileName, lstFileValue);
+		lstFileValue = _pFileManagement->readFile(FileName);
 
-	// preview what's in the file
-	//for (string lst : lstFileValue) 
-	//{
-	//	cout << lst << endl;
-	//}
+		// Sort the data in the list
+		lstFileValue.sort();
 
-	// return
-	return 0;
+		// write the sorted data to the file
+		FileManagement fileManager;
+		fileManager.writeToFile(FileName, lstFileValue);
+
+		// preview what's in the file
+		//for (string lst : lstFileValue) 
+		//{
+		//	cout << lst << endl;
+		//}
+
+		// return
+		return 0;
+	}
 }

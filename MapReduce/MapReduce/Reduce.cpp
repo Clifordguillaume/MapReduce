@@ -18,7 +18,7 @@
 // File History:
 // 4/10/22 - Cliford - Added reduceFunc(), exportFunc()
 // 4/12/22 - Cliford - Added GetData()
-// 4/13/22 - Elizabeth - Added try-catch
+// 4/20/22 - Elizabeth - Add filemanagement pointer, namespace
 // ===============================================================================
 
 // Local Headers
@@ -29,17 +29,23 @@
 #include <iostream>
 #include <string>
 
-// -------------------------------------------------------------------------------
-// Constructor
-// -------------------------------------------------------------------------------
-Reduce::Reduce() 
+namespace MapReduce
 {
-}
+	// -------------------------------------------------------------------------------
+	// Constructor
+	// -------------------------------------------------------------------------------
+	Reduce::Reduce()
+	{
+		_pFileManagement = new FileManagement();
+	}
 
-// -------------------------------------------------------------------------------
-// Destructor
-// -------------------------------------------------------------------------------
-Reduce::~Reduce() {}
+	// -------------------------------------------------------------------------------
+	// Destructor
+	// -------------------------------------------------------------------------------
+	Reduce::~Reduce()
+	{
+		delete _pFileManagement;
+	}
 
 // -------------------------------------------------------------------------------
 // reduceFunc
@@ -66,36 +72,37 @@ int Reduce::reduceFunc(string& iKey, list<int> oLstOfData)
 		string s = to_string(ikeyVal);
 		string finalString = str2 + s + ")";
 
-		// Add data to the global lst
-		_lstReducedData.push_back(finalString);
+			// Add data to the global lst
+			_lstReducedData.push_back(finalString);
+		}
+		catch (exception e)
+		{
+			cout << "Exception reducing" << endl;
+		}
+
+		return 0;
 	}
-	catch (exception e) 
+
+	// -------------------------------------------------------------------------------
+	// export
+	// -------------------------------------------------------------------------------
+	int Reduce::exportFunc(list<string> sDataToWrite)
 	{
-		cout << "Exception reducing" << endl;
+		// Write info to the file
+		string fileName = "SUCCESS.txt";
+
+		// remove duplicates
+		sDataToWrite.unique();
+		_pFileManagement->writeToFile(fileName, sDataToWrite);
+
+		return 0;
 	}
 
-	return 0;
-}
-
-// -------------------------------------------------------------------------------
-// export
-// -------------------------------------------------------------------------------
-int Reduce::exportFunc(list<string> sDataToWrite)
-{
-	// Write info to the file
-	string fileName = "SUCCESS.txt";
-
-	// remove duplicates
-	sDataToWrite.unique();
-	_pFileManagement->writeToFile(fileName, sDataToWrite);
-	
-	return 0;
-}
-
-// -------------------------------------------------------------------------------
-// GetData
-// -------------------------------------------------------------------------------
-list<string>  Reduce::GetData() 
-{
-	return _lstReducedData;
+	// -------------------------------------------------------------------------------
+	// GetData
+	// -------------------------------------------------------------------------------
+	list<string>  Reduce::GetData()
+	{
+		return _lstReducedData;
+	}
 }
