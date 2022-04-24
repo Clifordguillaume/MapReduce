@@ -16,6 +16,8 @@
 // 4/19/22 - Elizabeth - Change FileManagement, Map, Sorter, Reduce to pointers
 // 4/20/22 - Elizabeth - Make map, sorter, reduce, filemanagement pointers.
 //                       Constructor. Desctructor. Add namespace
+// 4/24/23 - Cliford - Fixed the reduce function to show the correct reduced data
+//                    added the debug macro for debugging purposes
 // ===============================================================================
 
 // Local Headers
@@ -27,6 +29,10 @@
 #include <boost/algorithm/string.hpp>
 
 using namespace std;
+
+// for debugging purposes change to 0 to 
+// not show cout messages in the cmd line
+#define debug 0
 
 namespace MapReduce
 {
@@ -68,11 +74,19 @@ namespace MapReduce
     // -------------------------------------------------------------------------------
     void Workflow::run(string inputFileDir, string outputFileDir, string tempOutputFileDir)
     {
+        if (debug)
+            cout << "About to run map function" << endl;
         map(inputFileDir, tempOutputFileDir);
 
+        if (debug)
+            cout << "About to run sort function" << endl;
         sort(tempOutputFileDir);
 
+        if (debug)
+            cout << "About to run reduce function" << endl;
         reduce(tempOutputFileDir);
+
+       // _pFileManagement->clearDirectory(tempOutputFileDir);
     }
 
     // -------------------------------------------------------------------------------
@@ -80,6 +94,9 @@ namespace MapReduce
     // -------------------------------------------------------------------------------
     void Workflow::map(string inputFileDir, string tempOutputFileDir)
     {
+        if (debug)
+            cout << "inside the map function" << endl;
+
         // get list of all files in input file directory
         list<string> inputFiles = _pFileManagement->getFilesInDirectory(inputFileDir);
 
@@ -149,26 +166,40 @@ namespace MapReduce
 
         for (string file : tempFiles)
         {
+            // adding all the data from every single file into just one list
             fileName = file;
-            fileData = _pFileManagement->readFile(fileName);
+            list<string> sData;
+            sData = _pFileManagement->readFile(fileName);
+            fileData.insert(fileData.end(), sData.begin(), sData.end());
 
-            // preview what's in the file
-            for (string lstString : fileData)
-            {
-                //cout << "lstOfdata: " << lst << endl;
-
-                // Get key from the list value
-                Map map;
-                string sKey = map.getKey(lstString);
-
-                // Get the key value
-                list<int> itr = map.getKeyValue(sKey, fileData);
-                _pReduce->reduceFunc(sKey, itr);
-
-                // other functions to process and export data
-                DataToWriteToFile = _pReduce->GetData();
-                _pReduce->exportFunc(DataToWriteToFile);
-            }
+            if(debug)
+                cout << "File Data size: " << fileData.size() << endl;
         }
+
+        // preview what's in the file
+        for (string lstString : fileData)
+        {
+            //cout << "lstOfdata: " << lst << endl;
+
+            // Get key from the list value
+            Map map;
+            string sKey = map.getKey(lstString);
+
+            // Get the key value
+            list<int> itr = map.getKeyValue(sKey, fileData);
+            _pReduce->reduceFunc(sKey, itr);
+        }
+
+        // get the data to write to a new file
+        DataToWriteToFile = _pReduce->GetData();
+
+        // sort it
+        DataToWriteToFile.sort();
+
+        // remove duplicates
+        DataToWriteToFile.unique();
+
+        // passed into exportFunc for processing
+        _pReduce->exportFunc(DataToWriteToFile);
     }
 }

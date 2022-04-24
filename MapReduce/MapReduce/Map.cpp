@@ -31,6 +31,10 @@
 
 using namespace std;
 
+// for debugging purposes change to 0 to 
+// not show cout messages in the cmd line
+#define debug 0
+
 namespace MapReduce 
 {
 	// -------------------------------------------------------------------------------
@@ -54,8 +58,13 @@ namespace MapReduce
 	// -------------------------------------------------------------------------------
 	std::multimap<string, int> Map::map(string inputFileName, string data)
 	{
+		if (debug)
+			cout << "Inside the map function " << endl;
+
 		// tokenize the string represenation of the contents of the file
 		string loweredStr = lowerString(data);
+
+		cout << "InputFileName is: " << inputFileName << " word that is causing trouble is: " << loweredStr << endl;
 		string strippedLowerStr = removeSpecialChars(loweredStr);
 		vector<string> splitStr = splitString(strippedLowerStr);
 
@@ -74,6 +83,9 @@ namespace MapReduce
 	// -------------------------------------------------------------------------------
 	void Map::exportMap(string outputFileName, std::multimap<string, int> keyValMap)
 	{
+		if (debug)
+			cout << "Inside the exportMap function " << endl;
+
 		// write entries in map to file
 		std::map<string, int>::iterator it;
 		for (it = keyValMap.begin(); it != keyValMap.end(); it++)
@@ -92,6 +104,9 @@ namespace MapReduce
 	// -------------------------------------------------------------------------------
 	vector<string> Map::splitString(string str)
 	{
+		if (debug)
+			cout << "Inside the splitString function " << endl;
+
 		vector<string> splitStr;
 
 		// remove whitespace from string start and end
@@ -135,6 +150,9 @@ namespace MapReduce
 	// -------------------------------------------------------------------------------
 	string Map::getKey(string iStr)
 	{
+		if (debug)
+			cout << "Inside the getKey function " << endl;
+
 		int length = 0;
 
 		// remove the quoations around the 
@@ -158,6 +176,9 @@ namespace MapReduce
 	// -------------------------------------------------------------------------------
 	list<int> Map::getKeyValue(string iSKey, list<string> lstOfData)
 	{
+		if (debug)
+			cout << "Inside the getKeyValue function " << endl;
+
 		list<int> iKeyValue;
 		try
 		{
@@ -169,7 +190,7 @@ namespace MapReduce
 				string stringToFind = iSKey;
 				int pos = 0;
 				int index;
-				while ((index = sFullString.find(stringToFind, pos)) != string::npos) {
+				while (index = sFullString.find(stringToFind, pos) != string::npos) {
 
 					// found a match
 					//cout << "Match found at position: " << index << endl;

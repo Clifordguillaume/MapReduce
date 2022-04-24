@@ -27,6 +27,10 @@
 //#include <list>
 //#include <iostream>
 
+// for debugging purposes change to 0 to 
+// not show cout messages in the cmd line
+#define debug 0
+
 using namespace std;
 using namespace MapReduce;
 
@@ -47,9 +51,9 @@ Executive::~Executive()
 
 int main(int argc, char** argv)
 {
-    string inputFileDir = "C:\\Users\\dwuli\\OneDrive\\egrad\\EDwulit Projects\\MapReduce\\MapReduce\\TestInputFileDir";
-    string outputFileDir = "C:\\Users\\dwuli\\OneDrive\\egrad\\EDwulit Projects\\MapReduce\\MapReduce\\TestOutputFileDir";
-    string tempOutputFileDir = "C:\\Users\\dwuli\\OneDrive\\egrad\\EDwulit Projects\\MapReduce\\MapReduce\\TestTempOutputFileDir";
+    //string inputFileDir = "C:\\Users\\dwuli\\OneDrive\\egrad\\EDwulit Projects\\MapReduce\\MapReduce\\TestInputFileDir";
+    //string outputFileDir = "C:\\Users\\dwuli\\OneDrive\\egrad\\EDwulit Projects\\MapReduce\\MapReduce\\TestOutputFileDir";
+    //string tempOutputFileDir = "C:\\Users\\dwuli\\OneDrive\\egrad\\EDwulit Projects\\MapReduce\\MapReduce\\TestTempOutputFileDir";
     //string inputFileName = "C:\\Users\\dwuli\\OneDrive\\egrad\\EDwulit Projects\\MapReduce\\MapReduce\\testinput.txt";
     //string outputFileName = "C:\\Users\\dwuli\\OneDrive\\egrad\\EDwulit Projects\\MapReduce\\MapReduce\\testoutput.txt";
 
@@ -63,6 +67,10 @@ int main(int argc, char** argv)
     //string outputFileDir = "C:\\Users\\clifguillaume\\Documents\\Object Oriented Projects\\MapReduce\\MapReduce\\MapReduce\\TestOutputFileDir";
     //string tempOutputFileDir = "C:\\Users\\clifguillaume\\Documents\\Object Oriented Projects\\MapReduce\\MapReduce\\MapReduce\\TestTempOutputFileDir";
 
+    string inputFileDir = "C:\\Users\\clifguillaume\\Documents\\Object Oriented Projects\\TestData\\shakespeare";
+    string outputFileDir = "C:\\Users\\clifguillaume\\Documents\\Object Oriented Projects\\MapReduce\\MapReduce\\MapReduce\\TestOutputFileDir";
+    string tempOutputFileDir = "C:\\Users\\clifguillaume\\Documents\\Object Oriented Projects\\MapReduce\\MapReduce\\MapReduce\\TestTempOutputFileDir";
+
 
     // TODO: Make input and output file paths configurable via command line
     /*if (argc > 2)
@@ -71,6 +79,9 @@ int main(int argc, char** argv)
         outputFileDir = argv[2];
         tempOutputFileDir = argv[3];
     }*/
+
+    if (debug)
+        cout << "about to run the run function from the workflow class" << endl;
 
     Workflow workflow;
     workflow.run(inputFileDir, outputFileDir, tempOutputFileDir);
