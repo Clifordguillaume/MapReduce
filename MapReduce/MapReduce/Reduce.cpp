@@ -29,6 +29,10 @@
 #include <iostream>
 #include <string>
 
+// for debugging purposes change to 0 to 
+// not show cout messages in the cmd line
+#define debug 0
+
 namespace MapReduce
 {
 	// -------------------------------------------------------------------------------
@@ -52,6 +56,8 @@ namespace MapReduce
 // -------------------------------------------------------------------------------
 int Reduce::reduceFunc(string& iKey, list<int> oLstOfData)
 {
+	if (debug)
+		cout << "Inside the reduceFunc function " << endl;
 	try 
 	{
 		// Local varibales
@@ -72,28 +78,32 @@ int Reduce::reduceFunc(string& iKey, list<int> oLstOfData)
 		string s = to_string(ikeyVal);
 		string finalString = str2 + s + ")";
 
-			// Add data to the global lst
-			_lstReducedData.push_back(finalString);
-		}
-		catch (exception e)
-		{
-			cout << "Exception reducing" << endl;
-		}
+		// Add data to the global lst
+		_lstReducedData.push_back(finalString);
 
-		return 0;
 	}
+	catch (exception e)
+	{
+		cout << "Exception reducing" << endl;
+	}
+
+	return 0;
+}
 
 	// -------------------------------------------------------------------------------
 	// export
 	// -------------------------------------------------------------------------------
 	int Reduce::exportFunc(list<string> sDataToWrite)
 	{
+		if (debug)
+			cout << "Inside the exportFunc function " << endl;
+
 		// Write info to the file
-		string fileName = "SUCCESS.txt";
+		string fileName = "FinalReducedData.txt";
 
 		// remove duplicates
 		sDataToWrite.unique();
-		_pFileManagement->writeToFile(fileName, sDataToWrite);
+		_pFileManagement->writeToFile(fileName, sDataToWrite, true);
 
 		return 0;
 	}

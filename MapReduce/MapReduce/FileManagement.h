@@ -13,6 +13,7 @@
 
 #include <fstream>
 #include <list>
+#include <string>
 
 using namespace std;
 
@@ -23,6 +24,13 @@ namespace MapReduce
 		public:
 			FileManagement();
 			virtual ~FileManagement();
+
+			 /**
+			 * remove the files from the directore
+			 * @param iDirPath - full path of of directory
+			 * @return None
+			 */
+			virtual void clearDirectory(string& iDirPath);
 
 			/**
 			 * Checks if a file exists
@@ -37,6 +45,13 @@ namespace MapReduce
 			 * @return name of file
 			 */
 			virtual string getFileName(string fullFilePath);
+
+			/**
+			 * Delete the specified file
+			 * @param iFileName - file name or path that needs to be deleted
+			 * @return an integer value (0) success (1) fail
+			 */
+			virtual int removeFile(string iFileName);
 
 			/**
 			 * Traverses a given directory and returns list of files it contains
@@ -56,8 +71,11 @@ namespace MapReduce
 			 * Writes to a text file
 			 * @param sFileName - File name to write to
 			 * @param sDataToWrite - value to write to file
+			 * @param iReduceFile - is set to false initial, will set to true if processing
+			 *						the reduce file for more functionallity dedicated only 
+									to the reduce file.
 			 */
-			virtual void writeToFile(string& sFileName, list<string> sDataToWrite);
+			virtual void writeToFile(string& sFileName, list<string> sDataToWrite, bool iReduceFIle = false);
 
 			/**
 			 * Writes a key:value to a text file

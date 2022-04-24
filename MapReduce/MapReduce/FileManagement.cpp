@@ -18,6 +18,9 @@
 // 4/14/22 - Elizabeth - Added getFilesInDirectory(), fileExists(), getFileName(). 
 //						 Added exception logging.
 // 4/20/22 - Elizabeth - Add namespace
+// 4/21/22 - Cliford - Added clearDirectory()
+// 4/24/22 - Cliford - Update the writeTofile() to take a third parameter for when
+//					   writing the reduce data to add a few more capability
 // ===============================================================================
 
 // Local Headers
@@ -27,14 +30,20 @@
 #include <boost/algorithm/string/split.hpp>
 #include <iostream>
 #include <filesystem>
+#include <stdio.h>
+#include <cstring>
 
 using namespace std;
+
+// for debugging purposes change to 0 to 
+// not show cout messages in the cmd line
+#define debug 0
 
 namespace MapReduce
 {
 	// -------------------------------------------------------------------------------
-// Constructor
-// -------------------------------------------------------------------------------
+	// Constructor
+	// -------------------------------------------------------------------------------
 	FileManagement::FileManagement()
 	{
 	}
@@ -44,6 +53,38 @@ namespace MapReduce
 	// -------------------------------------------------------------------------------
 	FileManagement::~FileManagement()
 	{
+	}
+
+	// -------------------------------------------------------------------------------
+	// clearDirectory
+	// -------------------------------------------------------------------------------
+	void FileManagement::clearDirectory(string& iDirPath)
+	{
+		if (debug)
+			cout << "Entering clearDirectory()" << endl;
+
+		// get list of all files in input file directory
+		list<string> tempFiles = getFilesInDirectory(iDirPath);
+
+		// Loop though and remove each file
+		for (string file : tempFiles)
+		{
+			// delete the file
+			int status = removeFile(file);
+			if (status == 0) 
+			{
+				if (debug)
+					cout << "File: " << file << " was deleted successfully!" << endl;
+			}
+			else 
+			{
+				if (debug)
+					cout << "File: " << file << " (NOT) deleted successfully!" << endl;
+			}
+		}
+
+		if (debug)
+			cout << "Exiting clearDirectory()" << endl;
 	}
 
 	// -------------------------------------------------------------------------------
@@ -60,6 +101,20 @@ namespace MapReduce
 	string FileManagement::getFileName(string fullFilePath)
 	{
 		return std::filesystem::path(fullFilePath).filename().stem().string();
+	}
+
+	// -------------------------------------------------------------------------------
+	// removeFile
+	// -------------------------------------------------------------------------------
+	int FileManagement::removeFile(string iFileName)
+	{
+		// convert filename to a cstring to be able
+		// to use the remove function
+		const char* fileName = iFileName.c_str();
+		int status = remove(fileName);
+		
+		// return
+		return status;
 	}
 
 	// -------------------------------------------------------------------------------
@@ -89,6 +144,9 @@ namespace MapReduce
 	// -------------------------------------------------------------------------------
 	list<string> FileManagement::readFile(string& iFileName)
 	{
+		if (debug)
+			cout << "reading file" << endl;
+
 		// store contents of file in list of each line value
 		list<string> oFileValue;
 
@@ -132,13 +190,50 @@ namespace MapReduce
 	// -------------------------------------------------------------------------------
 	// writeToFile
 	// -------------------------------------------------------------------------------
-	void FileManagement::writeToFile(string& sFileName, list<string> sDataToWrite)
+	void FileManagement::writeToFile(string& sFileName, list<string> sDataToWrite, bool iReduceFIle)
 	{
+		if (debug)
+			cout << "writing to file " << endl;
+
 		try {
 			// Local Variables
 			string fileName = sFileName;
 
-			// create or open the file
+			// only process this if processing the reduce file
+			if (iReduceFIle)
+			{
+				// Check to see if the file exist if so remove it
+				// that way we won't have data added to what's already there
+				// instead we can start brand new.
+				bool exist = fileExists(fileName);
+				if (exist)
+				{
+					// delete the file if it's exist
+					int status = removeFile(fileName);
+					if (status == 0)
+					{
+						if (debug)
+							cout << "File: " << fileName << " exist and was deleted successfully!" << endl;
+					}
+				}
+
+				// create empty SUCCESS text file if not already exist
+				string sSuccessfile = "SUCCESS.txt";
+				exist = fileExists(sSuccessfile);
+				if (!exist) 
+				{
+					ofstream successFile(sSuccessfile);
+
+					// for debugging purposes
+					if (debug)
+						cout << "SUCCESS file was created" << endl;
+
+					// close the file
+					successFile.close();
+				}
+			}
+
+			// create or write to existing file
 			ofstream File(fileName);
 
 			for (string lst : sDataToWrite)
@@ -163,6 +258,8 @@ namespace MapReduce
 	// -------------------------------------------------------------------------------
 	void FileManagement::writeKeyValueToFile(string outputFileName, string key, int value)
 	{
+		if (debug)
+			cout << "inside the writeKeyValueToFile function" << endl;
 		try
 		{
 			ofstream outputFile;

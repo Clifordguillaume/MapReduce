@@ -22,6 +22,10 @@
 
 #include <algorithm>
 
+// for debugging purposes change to 0 to 
+// not show cout messages in the cmd line
+#define debug 0
+
 namespace MapReduce
 {
 	// -------------------------------------------------------------------------------
@@ -45,6 +49,9 @@ namespace MapReduce
 	// -------------------------------------------------------------------------------
 	int Sorter::sort(string& iFilePath)
 	{
+		if (debug)
+			cout << "Inside the sort function from the sorted class " << endl;
+
 		// Local Variables
 		string FileName = iFilePath;
 		list<string> lstFileValue;

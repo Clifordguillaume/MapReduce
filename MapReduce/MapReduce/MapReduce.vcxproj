@@ -204,9 +204,6 @@
   <ItemGroup>
     <ClCompile Include="Executive.cpp" />
     <ClCompile Include="FileManagement.cpp" />
-    <ClCompile Include="main.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug UnitTests|x64'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Reduce.cpp" />
     <ClCompile Include="Sorter.cpp" />
@@ -228,8 +225,8 @@
     <Text Include="TestTempOutputFileDir\test1-tempOutput.txt" />
     <Text Include="TestTempOutputFileDir\test2-tempOutput.txt" />
     <Text Include="TestTempOutputFileDir\test3-tempOutput.txt" />
-   </ItemGroup>
-   <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
