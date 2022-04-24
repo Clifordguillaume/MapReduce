@@ -80,6 +80,13 @@ namespace MapReduce
 			 * @return str with all characters coverted to lowercase letters
 			 */
 			virtual string lowerString(string str);
+
+			/**
+			 * Get all indexes where a double quote character is found
+			 * @input str - input string
+			 * @return vector of indexes in the string where quote found
+			 */
+			virtual vector<int> getQuoteIndexes(string str);
 		private:
 			
 	};

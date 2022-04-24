@@ -21,6 +21,7 @@
 // 4/21/22 - Cliford - Added clearDirectory()
 // 4/24/22 - Cliford - Update the writeTofile() to take a third parameter for when
 //					   writing the reduce data to add a few more capability
+// 4/24/22 - Elizabeth - Added glogs
 // ===============================================================================
 
 // Local Headers
@@ -28,6 +29,7 @@
 #include <fstream>
 #include <boost/algorithm/string/classification.hpp>
 #include <boost/algorithm/string/split.hpp>
+#include <glog/logging.h>
 #include <iostream>
 #include <filesystem>
 #include <stdio.h>
@@ -60,6 +62,9 @@ namespace MapReduce
 	// -------------------------------------------------------------------------------
 	void FileManagement::clearDirectory(string& iDirPath)
 	{
+		LOG(INFO) << "FileManagement.clearDirectory -- BEGIN";
+		LOG(INFO) << "FileManagement.clearDirectory -- Clearing directory " + iDirPath;
+
 		if (debug)
 			cout << "Entering clearDirectory()" << endl;
 
@@ -69,22 +74,32 @@ namespace MapReduce
 		// Loop though and remove each file
 		for (string file : tempFiles)
 		{
-			// delete the file
-			int status = removeFile(file);
-			if (status == 0) 
+			try
 			{
-				if (debug)
-					cout << "File: " << file << " was deleted successfully!" << endl;
+				// delete the file
+				int status = removeFile(file);
+				if (status == 0)
+				{
+					if (debug)
+						cout << "FileManagement.clearDirectory -- File: " << file << " was deleted successfully!" << endl;
+				}
+				else
+				{
+					if (debug)
+						cout << "FileManagement.clearDirectory -- File: " << file << " (NOT) deleted successfully!" << endl;
+				}
 			}
-			else 
+			catch (exception e) 
 			{
-				if (debug)
-					cout << "File: " << file << " (NOT) deleted successfully!" << endl;
+				LOG(ERROR) << "FileManagement.clearDirectory -- Exception removing file " + file + ":";
+				LOG(ERROR) << e.what();
 			}
 		}
 
 		if (debug)
 			cout << "Exiting clearDirectory()" << endl;
+
+		LOG(INFO) << "FileManagement.clearDirectory -- END";
 	}
 
 	// -------------------------------------------------------------------------------
@@ -100,7 +115,18 @@ namespace MapReduce
 	// -------------------------------------------------------------------------------
 	string FileManagement::getFileName(string fullFilePath)
 	{
-		return std::filesystem::path(fullFilePath).filename().stem().string();
+		string filename;
+		try 
+		{
+			filename = std::filesystem::path(fullFilePath).filename().stem().string();
+		}
+		catch (exception e)
+		{
+			LOG(ERROR) << "FileManagement.getFileName -- Exception getting file name from string: " + fullFilePath;
+			LOG(ERROR) << e.what();
+		}
+
+		return filename;
 	}
 
 	// -------------------------------------------------------------------------------
@@ -108,11 +134,26 @@ namespace MapReduce
 	// -------------------------------------------------------------------------------
 	int FileManagement::removeFile(string iFileName)
 	{
+		LOG(INFO) << "FileManagement.removeFile -- BEGIN";
+		LOG(INFO) << "FileManagement.removeFile -- Removing file " + iFileName;
+
 		// convert filename to a cstring to be able
 		// to use the remove function
 		const char* fileName = iFileName.c_str();
-		int status = remove(fileName);
+		int status = -1;
+
+		try 
+		{
+			status = remove(fileName);
+		}
+		catch (exception e) 
+		{
+			LOG(ERROR) << "FileManagement.removeFile -- Exception removing file " + iFileName + ":";
+			LOG(ERROR) << e.what();
+		}
 		
+		LOG(INFO) << "FileManagement.removeFie -- END";
+
 		// return
 		return status;
 	}
@@ -122,6 +163,9 @@ namespace MapReduce
 	// -------------------------------------------------------------------------------
 	list<string> FileManagement::getFilesInDirectory(string fileDirName)
 	{
+		LOG(INFO) << "FileManagement.getFilesInDirectory -- BEGIN";
+		LOG(INFO) << "FileManagement.getFilesInDirectory -- Getting files in directory " + fileDirName;
+
 		list<string> filePaths;
 		try {
 			for (const auto& entry : std::filesystem::directory_iterator(fileDirName))
@@ -132,9 +176,11 @@ namespace MapReduce
 		}
 		catch (exception e)
 		{
-			cout << "FileManagement.getFilesInDirectory -- Exception getting files in dir: " + fileDirName << endl;
-			cout << e.what() << endl;
+			LOG(ERROR) << "FileManagement.getFilesInDirectory -- Exception getting files in dir " + fileDirName + ":";
+			LOG(ERROR) << e.what();
 		}
+
+		LOG(INFO) << "FileManagement.getFilesInDirectory -- END";
 
 		return filePaths;
 	}
@@ -144,6 +190,8 @@ namespace MapReduce
 	// -------------------------------------------------------------------------------
 	list<string> FileManagement::readFile(string& iFileName)
 	{
+		LOG(INFO) << "FileManagement.readFile -- BEGIN";
+		LOG(INFO) << "FileManagement.readFile -- Reading file " + iFileName;
 		if (debug)
 			cout << "reading file" << endl;
 
@@ -175,14 +223,16 @@ namespace MapReduce
 			}
 			else
 			{	// Ran into an issue opening the file
-				cout << "FileManagement.readFile -- Could not open " + iFileName << endl;
+				LOG(ERROR) << "FileManagement.readFile -- Could not open " + iFileName;
 			}
 		}
 		catch (exception e)
 		{
-			cout << "FileManagement.readFile -- Exception while reading file:" + iFileName << endl;
-			cout << e.what() << endl;
+			LOG(ERROR) << "FileManagement.readFile -- Exception while reading file" + iFileName;
+			LOG(ERROR) << e.what();
 		}
+
+		LOG(INFO) << "FileManagement.readFile -- END";
 
 		return oFileValue;
 	}
@@ -192,6 +242,7 @@ namespace MapReduce
 	// -------------------------------------------------------------------------------
 	void FileManagement::writeToFile(string& sFileName, list<string> sDataToWrite, bool iReduceFIle)
 	{
+		LOG(INFO) << "FileManagement.writeToFile -- BEGIN";
 		if (debug)
 			cout << "writing to file " << endl;
 
@@ -212,6 +263,7 @@ namespace MapReduce
 					int status = removeFile(fileName);
 					if (status == 0)
 					{
+						LOG(INFO) << "FileManagement.writeToFile -- File " + sFileName + " already existed. Deleted to re-write.";
 						if (debug)
 							cout << "File: " << fileName << " exist and was deleted successfully!" << endl;
 					}
@@ -225,6 +277,7 @@ namespace MapReduce
 					ofstream successFile(sSuccessfile);
 
 					// for debugging purposes
+					LOG(INFO) << "FileManagement.writeToFile -- File " + sSuccessfile + " successfully created";
 					if (debug)
 						cout << "SUCCESS file was created" << endl;
 
@@ -247,9 +300,11 @@ namespace MapReduce
 		}
 		catch (exception e)
 		{
-			cout << "FileManagement.writeToFile -- Exception writing to file:" << endl;
-			cout << e.what() << endl;
+			LOG(ERROR) << "FileManagement.writeToFile -- Exception writing to file";
+			LOG(ERROR) << e.what();
 		}
+
+		LOG(INFO) << "FileManagement.writeToFile -- END";
 
 	}
 
@@ -258,6 +313,9 @@ namespace MapReduce
 	// -------------------------------------------------------------------------------
 	void FileManagement::writeKeyValueToFile(string outputFileName, string key, int value)
 	{
+		LOG(INFO) << "FileManagement.writeKeyValueToFile -- BEGIN";
+		LOG(INFO) << "FileManagement.writeKeyValueToFile -- key: " + key + ", value: " + to_string(value) + ", file: " + outputFileName;
+
 		if (debug)
 			cout << "inside the writeKeyValueToFile function" << endl;
 		try
@@ -268,7 +326,7 @@ namespace MapReduce
 			outputFile.open(outputFileName, ios::app);
 			if (!outputFile.rdbuf()->is_open())
 			{
-				cout << " Cannot open output file" << endl;
+				LOG(ERROR) << "FileManagement.writeKeyValueToFile -- Cannot open output file " + outputFileName;
 				return;
 			}
 
@@ -280,8 +338,10 @@ namespace MapReduce
 		}
 		catch (exception e)
 		{
-			cout << "FileManagement.writeKeyValueToFile -- Exception writing key-value to file:" << endl;
-			cout << e.what() << endl;
+			LOG(ERROR) << "FileManagement.writeKeyValueToFile -- Exception writing key-value (" + key + ", " + to_string(value) + " to file " + outputFileName;
+			LOG(ERROR) << e.what();
 		}
+
+		LOG(INFO) << "FileManagement.writeKeyValueToFile -- END";
 	}
 }

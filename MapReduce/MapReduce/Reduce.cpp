@@ -19,10 +19,12 @@
 // 4/10/22 - Cliford - Added reduceFunc(), exportFunc()
 // 4/12/22 - Cliford - Added GetData()
 // 4/20/22 - Elizabeth - Add filemanagement pointer, namespace
+// 4/24/22 - Elizabeth - Add glogs
 // ===============================================================================
 
 // Local Headers
 #include "Reduce.h"
+#include <glog/logging.h>
 
 // STL Heades 
 #include <list>
@@ -49,6 +51,7 @@ namespace MapReduce
 	Reduce::~Reduce()
 	{
 		delete _pFileManagement;
+		LOG(INFO) << "Reduce component destroyed";
 	}
 
 // -------------------------------------------------------------------------------
@@ -56,8 +59,10 @@ namespace MapReduce
 // -------------------------------------------------------------------------------
 int Reduce::reduceFunc(string& iKey, list<int> oLstOfData)
 {
+	LOG(INFO) << "Reduce.reduceFunc -- BEGIN";
 	if (debug)
 		cout << "Inside the reduceFunc function " << endl;
+
 	try 
 	{
 		// Local varibales
@@ -84,8 +89,11 @@ int Reduce::reduceFunc(string& iKey, list<int> oLstOfData)
 	}
 	catch (exception e)
 	{
-		cout << "Exception reducing" << endl;
+		LOG(ERROR) << "Reduce.reduceFunc -- Exception reducing";
+		LOG(ERROR) << e.what();
 	}
+
+	LOG(INFO) << "Reduce.reduceFunc -- END";
 
 	return 0;
 }
@@ -95,6 +103,7 @@ int Reduce::reduceFunc(string& iKey, list<int> oLstOfData)
 	// -------------------------------------------------------------------------------
 	int Reduce::exportFunc(list<string> sDataToWrite)
 	{
+		LOG(INFO) << "Reduce.exportFunc -- BEGIN";
 		if (debug)
 			cout << "Inside the exportFunc function " << endl;
 
@@ -104,6 +113,8 @@ int Reduce::reduceFunc(string& iKey, list<int> oLstOfData)
 		// remove duplicates
 		sDataToWrite.unique();
 		_pFileManagement->writeToFile(fileName, sDataToWrite, true);
+
+		LOG(INFO) << "Reduce.exportFunc -- END";
 
 		return 0;
 	}

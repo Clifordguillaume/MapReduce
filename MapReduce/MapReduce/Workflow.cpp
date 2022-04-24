@@ -18,6 +18,7 @@
 //                       Constructor. Desctructor. Add namespace
 // 4/24/23 - Cliford - Fixed the reduce function to show the correct reduced data
 //                    added the debug macro for debugging purposes
+// 4/24/23 - Elizabeth - Add glogs
 // ===============================================================================
 
 // Local Headers
@@ -27,6 +28,7 @@
 #include "Sorter.h"
 #include "Reduce.h"
 #include <boost/algorithm/string.hpp>
+#include <glog/logging.h>
 
 using namespace std;
 
@@ -67,6 +69,7 @@ namespace MapReduce
         delete _pSorter;
         delete _pReduce;
         delete _pFileManagement;
+        LOG(INFO) << "Workflow component destroyed";
     }
 
     // -------------------------------------------------------------------------------
@@ -94,37 +97,46 @@ namespace MapReduce
     // -------------------------------------------------------------------------------
     void Workflow::map(string inputFileDir, string tempOutputFileDir)
     {
+        LOG(INFO) << "Workflow.map -- BEGIN";
         if (debug)
             cout << "inside the map function" << endl;
 
-        // get list of all files in input file directory
-        list<string> inputFiles = _pFileManagement->getFilesInDirectory(inputFileDir);
-
-        for (string inputFileName : inputFiles)
+        try 
         {
-            // read the input file contents
-            list<string> fileContents = _pFileManagement->readFile(inputFileName);
+            // get list of all files in input file directory
+            list<string> inputFiles = _pFileManagement->getFilesInDirectory(inputFileDir);
 
-            // get contents of file as one string
-            string fileContentsStr;
-            for (string s : fileContents)
+            for (string inputFileName : inputFiles)
             {
-                fileContentsStr += s + " ";
+                // read the input file contents
+                list<string> fileContents = _pFileManagement->readFile(inputFileName);
+
+                // get contents of file as one string
+                string fileContentsStr;
+                for (string s : fileContents)
+                {
+                    fileContentsStr += s + " ";
+                }
+
+                // count the frequencies of the words in input file
+                std::multimap<string, int> wordFreqs = _pMap->map(inputFileName, fileContentsStr);
+
+                // if the output dir does not end in backslash, add one and use to generate full path of temp output file
+                boost::trim_right(tempOutputFileDir);
+                if (tempOutputFileDir.back() != '\\')
+                {
+                    tempOutputFileDir += "\\";
+                }
+                string outputFileName = tempOutputFileDir + _pFileManagement->getFileName(inputFileName) + "-tempOutput.txt";
+
+                // write the words and frequencies to output file in the temp directory
+                _pMap->exportMap(outputFileName, wordFreqs);
             }
-
-            // count the frequencies of the words in input file
-            std::multimap<string, int> wordFreqs = _pMap->map(inputFileName, fileContentsStr);
-
-            // if the output dir does not end in backslash, add one and use to generate full path of temp output file
-            boost::trim_right(tempOutputFileDir);
-            if (tempOutputFileDir.back() != '\\')
-            {
-                tempOutputFileDir += "\\";
-            }
-            string outputFileName = tempOutputFileDir + _pFileManagement->getFileName(inputFileName) + "-tempOutput.txt";
-
-            // write the words and frequencies to output file in the temp directory
-            _pMap->exportMap(outputFileName, wordFreqs);
+        }
+        catch (exception e)
+        {
+            LOG(ERROR) << "Workflow.map -- Exception mapping";
+            LOG(ERROR) << e.what();
         }
     }
 
@@ -133,6 +145,7 @@ namespace MapReduce
     // -------------------------------------------------------------------------------
     int Workflow::sort(string tempDirectory)
     {
+        LOG(INFO) << "Workflow.sort -- BEGIN";
         // Local variables
         string fileName = "";
         list<string> lstOfData;
@@ -147,6 +160,8 @@ namespace MapReduce
             _pSorter->sort(fileName);
         }
 
+        LOG(INFO) << "Workflow.sort -- END";
+
         // return
         return 0;
     }
@@ -156,6 +171,8 @@ namespace MapReduce
     // -------------------------------------------------------------------------------
     void Workflow::reduce(string tempDirectory)
     {
+        LOG(INFO) << "Workflow.reduce -- BEGIN";
+
         // Local Varibles
         string fileName = "";
         list<string> DataToWriteToFile;
@@ -201,5 +218,7 @@ namespace MapReduce
 
         // passed into exportFunc for processing
         _pReduce->exportFunc(DataToWriteToFile);
+
+        LOG(INFO) << "Workflow.reduce -- END";
     }
 }
