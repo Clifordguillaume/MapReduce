@@ -21,7 +21,8 @@
 // 4/21/22 - Cliford - Added clearDirectory()
 // 4/24/22 - Cliford - Update the writeTofile() to take a third parameter for when
 //					   writing the reduce data to add a few more capability
-// 4/24/22 - Elizabeth - Added glogs
+// 4/24/22 - Elizabeth - Added glogs, Add checks for empty file directories, add
+//						 checks for text files
 // ===============================================================================
 
 // Local Headers
@@ -29,6 +30,7 @@
 #include <fstream>
 #include <boost/algorithm/string/classification.hpp>
 #include <boost/algorithm/string/split.hpp>
+#include <boost/algorithm/string.hpp>
 #include <glog/logging.h>
 #include <iostream>
 #include <filesystem>
@@ -69,7 +71,7 @@ namespace MapReduce
 			cout << "Entering clearDirectory()" << endl;
 
 		// get list of all files in input file directory
-		list<string> tempFiles = getFilesInDirectory(iDirPath);
+		list<string> tempFiles = getTextFilesInDirectory(iDirPath);
 
 		// Loop though and remove each file
 		for (string file : tempFiles)
@@ -107,7 +109,17 @@ namespace MapReduce
 	// -------------------------------------------------------------------------------
 	bool FileManagement::fileExists(string fullFilePath)
 	{
-		return std::filesystem::exists(fullFilePath);
+		bool exists = true;
+		try 
+		{
+			exists = std::filesystem::exists(fullFilePath);
+		}
+		catch (exception e)
+		{
+			LOG(ERROR) << "FileManagement.fileExists -- Exception checking if file exists. File path: " + fullFilePath;
+			LOG(ERROR) << e.what();
+		}
+		return exists;
 	}
 
 	// -------------------------------------------------------------------------------
@@ -135,6 +147,14 @@ namespace MapReduce
 	int FileManagement::removeFile(string iFileName)
 	{
 		LOG(INFO) << "FileManagement.removeFile -- BEGIN";
+
+		if (!fileExists(iFileName))
+		{
+			LOG(INFO) << "FileManagement.removeFile -- File does not exist. Nothing to remove. Filename: " + iFileName;
+			LOG(INFO) << "FileManagement.removeFie -- END1";
+			return 0;
+		}
+
 		LOG(INFO) << "FileManagement.removeFile -- Removing file " + iFileName;
 
 		// convert filename to a cstring to be able
@@ -158,10 +178,15 @@ namespace MapReduce
 		return status;
 	}
 
+	bool isTextFile(string fileName)
+	{
+		return (fileName.size() >= 3 && 0 == fileName.compare(fileName.size() - 3, 3, "txt", 3));
+	}
+
 	// -------------------------------------------------------------------------------
 	// getFilesInDirectory
 	// -------------------------------------------------------------------------------
-	list<string> FileManagement::getFilesInDirectory(string fileDirName)
+	list<string> FileManagement::getTextFilesInDirectory(string fileDirName)
 	{
 		LOG(INFO) << "FileManagement.getFilesInDirectory -- BEGIN";
 		LOG(INFO) << "FileManagement.getFilesInDirectory -- Getting files in directory " + fileDirName;
@@ -171,13 +196,21 @@ namespace MapReduce
 			for (const auto& entry : std::filesystem::directory_iterator(fileDirName))
 			{
 				string filePath = entry.path().string();
-				filePaths.push_back(filePath);
+				if (isTextFile(filePath))
+				{
+					filePaths.push_back(filePath);
+				}			
 			}
 		}
 		catch (exception e)
 		{
-			LOG(ERROR) << "FileManagement.getFilesInDirectory -- Exception getting files in dir " + fileDirName + ":";
+			LOG(ERROR) << "FileManagement.getFilesInDirectory -- Exception getting files in directory " + fileDirName + ":";
 			LOG(ERROR) << e.what();
+		}
+
+		if (filePaths.size() <= 0)
+		{
+			LOG(INFO) << "FileManagement.getFilesInDirectory -- No text files found in directory " + fileDirName;
 		}
 
 		LOG(INFO) << "FileManagement.getFilesInDirectory -- END";
@@ -200,6 +233,14 @@ namespace MapReduce
 
 		try
 		{
+			// do not attempt to read if file is not text file
+			if (!isTextFile(iFileName))
+			{
+				LOG(INFO) << "FileManagement.readFile -- File is not a text file. Not reading. File: " + iFileName;
+				LOG(INFO) << "FileManagement.readFile -- END1";
+				return oFileValue;
+			}
+
 			// Local variables
 			string sFileName = iFileName;
 			string sLine;

@@ -19,12 +19,14 @@
 // 4/10/22 - Cliford - Added reduceFunc(), exportFunc()
 // 4/12/22 - Cliford - Added GetData()
 // 4/20/22 - Elizabeth - Add filemanagement pointer, namespace
-// 4/24/22 - Elizabeth - Add glogs
+// 4/24/22 - Elizabeth - Add glogs, write final file to user defined output file
+//						 dir
 // ===============================================================================
 
 // Local Headers
 #include "Reduce.h"
 #include <glog/logging.h>
+#include <boost/algorithm/string.hpp>
 
 // STL Heades 
 #include <list>
@@ -101,17 +103,32 @@ int Reduce::reduceFunc(string& iKey, list<int> oLstOfData)
 	// -------------------------------------------------------------------------------
 	// export
 	// -------------------------------------------------------------------------------
-	int Reduce::exportFunc(list<string> sDataToWrite)
+	int Reduce::exportFunc(list<string> sDataToWrite, string outputFileDir)
 	{
 		LOG(INFO) << "Reduce.exportFunc -- BEGIN";
 		if (debug)
 			cout << "Inside the exportFunc function " << endl;
 
-		// Write info to the file
-		string fileName = "FinalReducedData.txt";
+		// if the output dir does not end in backslash, add one and use to generate full path of temp output file
+		boost::trim_right(outputFileDir);
+		if (outputFileDir.back() != '\\')
+		{
+			outputFileDir += "\\";
+		}
+
+		// find an output file name that does not yet exist
+		int i = 1;
+		string fileName = outputFileDir + "FinalReducedData-0.txt";
+		while (_pFileManagement->fileExists(fileName))
+		{
+			fileName = outputFileDir + "FinalReducedData-" + to_string(i) + ".txt";
+			i++;
+		}
 
 		// remove duplicates
 		sDataToWrite.unique();
+
+		// Write info to the file
 		_pFileManagement->writeToFile(fileName, sDataToWrite, true);
 
 		LOG(INFO) << "Reduce.exportFunc -- END";

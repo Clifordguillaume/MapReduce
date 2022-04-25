@@ -51,6 +51,7 @@ Executive::~Executive()
 
 int main(int argc, char** argv)
 {
+    //string inputFileDir = "C:\\Users\\dwuli\\Downloads\\shakespeare";
     string inputFileDir = "C:\\Users\\dwuli\\OneDrive\\egrad\\EDwulit Projects\\MapReduce\\MapReduce\\TestInputFileDir";
     string outputFileDir = "C:\\Users\\dwuli\\OneDrive\\egrad\\EDwulit Projects\\MapReduce\\MapReduce\\TestOutputFileDir";
     string tempOutputFileDir = "C:\\Users\\dwuli\\OneDrive\\egrad\\EDwulit Projects\\MapReduce\\MapReduce\\TestTempOutputFileDir";
@@ -75,6 +76,7 @@ int main(int argc, char** argv)
     google::SetLogDestination(google::WARNING, "./logs/log");
 
     LOG(INFO) << "Starting MapReduce program...";
+    cout << "Starting MapReduce program..." << endl;
 
     // TODO: Make input and output file paths configurable via command line
     if (argc > 2)
@@ -94,4 +96,5 @@ int main(int argc, char** argv)
     workflow.run(inputFileDir, outputFileDir, tempOutputFileDir);
 
     LOG(INFO) << "MapReduce program completed running.";
+    cout << "MapReduce program completed running." << endl;
 }

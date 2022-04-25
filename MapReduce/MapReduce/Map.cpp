@@ -19,7 +19,7 @@
 //						 duplicate keys (words) with each having frequency = 1
 // 4/19/22 - Elizabeth - Change FileManagement to pointer
 // 4/20/22 - Elizabeth - Add filemanagementpointer, namespace
-// 4/24/22 - Elizabeth - Add glogs
+// 4/24/22 - Elizabeth - Add glogs, add delete file before export
 // ===============================================================================
 
 #include "Map.h"
@@ -62,7 +62,7 @@ namespace MapReduce
 	std::multimap<string, int> Map::map(string inputFileName, string data)
 	{
 		LOG(INFO) << "Map.map -- BEGIN";
-		LOG(INFO) << "Map.map -- Received string " + data + " from input file " + inputFileName;
+		LOG(INFO) << "Map.map -- Received string: " + data + " ...from input file " + inputFileName;
 
 		if (debug)
 			cout << "Inside the map function " << endl;
@@ -99,6 +99,9 @@ namespace MapReduce
 		LOG(INFO) << "Map.exportMap -- BEGIN";
 		if (debug)
 			cout << "Inside the exportMap function " << endl;
+
+		// delete output file if it already exists (removeFile already checks)
+		_pFileManagement->removeFile(outputFileName);
 
 		// write entries in map to file
 		std::map<string, int>::iterator it;
@@ -160,16 +163,16 @@ namespace MapReduce
 	{
 		LOG(INFO) << "Map.removeSpecialChars -- BEGIN";
 		LOG(INFO) << "Map.removeSpecialChars -- Removing special chars from string";
+		string result;
 		try 
 		{
 			for (int i = 0; i < str.length(); i++)
 			{
 				// remove all characters that are not letters of english alphabet or spaces
 				char c = str[i];
-				if ((c < 'A' || c > 'Z') && (c < 'a' || c > 'z') && !isspace(c))
+				if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || isspace(c))
 				{
-					str.erase(i, 1);
-					i--;
+					result.push_back(c);
 				}
 			}
 		}
@@ -179,7 +182,7 @@ namespace MapReduce
 			LOG(ERROR) << e.what();
 		}
 		LOG(INFO) << "Map.removeSpecialChars -- Removed special chars from string";
-		return str;
+		return result;
 	}
 
 	// -------------------------------------------------------------------------------

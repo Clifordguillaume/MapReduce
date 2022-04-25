@@ -58,7 +58,7 @@ namespace MapReduce
 			 * @param fileDirName - Name of the directory to traverse
 			 * @return list of the paths to all files in the directory
 			 */
-			virtual list<string> getFilesInDirectory(string fileDirName);
+			virtual list<string> getTextFilesInDirectory(string fileDirName);
 
 			/**
 			 * Reads data from the file

@@ -18,7 +18,8 @@
 //                       Constructor. Desctructor. Add namespace
 // 4/24/23 - Cliford - Fixed the reduce function to show the correct reduced data
 //                    added the debug macro for debugging purposes
-// 4/24/23 - Elizabeth - Add glogs
+// 4/24/23 - Elizabeth - Add glogs, add check for empty string in map function,
+//                       clear temp output file dir before new export
 // ===============================================================================
 
 // Local Headers
@@ -79,7 +80,13 @@ namespace MapReduce
     {
         if (debug)
             cout << "About to run map function" << endl;
-        map(inputFileDir, tempOutputFileDir);
+        list<string> mappedFiles = map(inputFileDir, tempOutputFileDir);
+
+        if (mappedFiles.size() <= 0) 
+        {
+            LOG(INFO) << "No input files found. Not proceeding with sort or reduce.";
+            return;
+        }
 
         if (debug)
             cout << "About to run sort function" << endl;
@@ -87,7 +94,7 @@ namespace MapReduce
 
         if (debug)
             cout << "About to run reduce function" << endl;
-        reduce(tempOutputFileDir);
+        reduce(tempOutputFileDir, outputFileDir);
 
        // _pFileManagement->clearDirectory(tempOutputFileDir);
     }
@@ -95,42 +102,59 @@ namespace MapReduce
     // -------------------------------------------------------------------------------
     // map
     // -------------------------------------------------------------------------------
-    void Workflow::map(string inputFileDir, string tempOutputFileDir)
+    list<string> Workflow::map(string inputFileDir, string tempOutputFileDir)
     {
         LOG(INFO) << "Workflow.map -- BEGIN";
         if (debug)
             cout << "inside the map function" << endl;
 
+        list<string> inputFiles;
         try 
         {
-            // get list of all files in input file directory
-            list<string> inputFiles = _pFileManagement->getFilesInDirectory(inputFileDir);
-
-            for (string inputFileName : inputFiles)
+            // clear all files in the temp output directory before exporting new map files
+            list<string> currTempOutputFiles = _pFileManagement->getTextFilesInDirectory(tempOutputFileDir);
+            for (string tempOutputFileName : currTempOutputFiles)
             {
-                // read the input file contents
-                list<string> fileContents = _pFileManagement->readFile(inputFileName);
+                _pFileManagement->removeFile(tempOutputFileName);
+            }
 
-                // get contents of file as one string
-                string fileContentsStr;
-                for (string s : fileContents)
+            // get list of all files in input file directory
+            inputFiles = _pFileManagement->getTextFilesInDirectory(inputFileDir);
+
+            if (inputFiles.size() > 0)
+            {
+                for (string inputFileName : inputFiles)
                 {
-                    fileContentsStr += s + " ";
+                    // read the input file contents
+                    list<string> fileContents = _pFileManagement->readFile(inputFileName);
+
+                    // if no contents in file, do not proceed with mapping
+                    if (fileContents.size() <= 0)
+                    {
+                        return inputFiles;
+                    }
+
+                    // get contents of file as one string
+                    string fileContentsStr;
+                    for (string s : fileContents)
+                    {
+                        fileContentsStr += s + " ";
+                    }
+
+                    // count the frequencies of the words in input file
+                    std::multimap<string, int> wordFreqs = _pMap->map(inputFileName, fileContentsStr);
+
+                    // if the output dir does not end in backslash, add one and use to generate full path of temp output file
+                    boost::trim_right(tempOutputFileDir);
+                    if (tempOutputFileDir.back() != '\\')
+                    {
+                        tempOutputFileDir += "\\";
+                    }
+                    string outputFileName = tempOutputFileDir + _pFileManagement->getFileName(inputFileName) + "-tempOutput.txt";
+
+                    // write the words and frequencies to output file in the temp directory
+                    _pMap->exportMap(outputFileName, wordFreqs);
                 }
-
-                // count the frequencies of the words in input file
-                std::multimap<string, int> wordFreqs = _pMap->map(inputFileName, fileContentsStr);
-
-                // if the output dir does not end in backslash, add one and use to generate full path of temp output file
-                boost::trim_right(tempOutputFileDir);
-                if (tempOutputFileDir.back() != '\\')
-                {
-                    tempOutputFileDir += "\\";
-                }
-                string outputFileName = tempOutputFileDir + _pFileManagement->getFileName(inputFileName) + "-tempOutput.txt";
-
-                // write the words and frequencies to output file in the temp directory
-                _pMap->exportMap(outputFileName, wordFreqs);
             }
         }
         catch (exception e)
@@ -138,6 +162,8 @@ namespace MapReduce
             LOG(ERROR) << "Workflow.map -- Exception mapping";
             LOG(ERROR) << e.what();
         }
+
+        return inputFiles;
     }
 
     // -------------------------------------------------------------------------------
@@ -151,7 +177,7 @@ namespace MapReduce
         list<string> lstOfData;
 
         // get the list of all the files in the temp folder
-        list<string> tempFiles = _pFileManagement->getFilesInDirectory(tempDirectory);
+        list<string> tempFiles = _pFileManagement->getTextFilesInDirectory(tempDirectory);
 
         // Loop through each files 
         for (string file : tempFiles)
@@ -169,7 +195,7 @@ namespace MapReduce
     // -------------------------------------------------------------------------------
     // reduce
     // -------------------------------------------------------------------------------
-    void Workflow::reduce(string tempDirectory)
+    void Workflow::reduce(string tempDirectory, string outputFileDir)
     {
         LOG(INFO) << "Workflow.reduce -- BEGIN";
 
@@ -179,7 +205,7 @@ namespace MapReduce
         list<string> fileData;
 
         // get list of all files in input file directory
-        list<string> tempFiles = _pFileManagement->getFilesInDirectory(tempDirectory);
+        list<string> tempFiles = _pFileManagement->getTextFilesInDirectory(tempDirectory);
 
         for (string file : tempFiles)
         {
@@ -199,11 +225,10 @@ namespace MapReduce
             //cout << "lstOfdata: " << lst << endl;
 
             // Get key from the list value
-            Map map;
-            string sKey = map.getKey(lstString);
+            string sKey = _pMap->getKey(lstString);
 
             // Get the key value
-            list<int> itr = map.getKeyValue(sKey, fileData);
+            list<int> itr = _pMap->getKeyValue(sKey, fileData);
             _pReduce->reduceFunc(sKey, itr);
         }
 
@@ -217,7 +242,7 @@ namespace MapReduce
         DataToWriteToFile.unique();
 
         // passed into exportFunc for processing
-        _pReduce->exportFunc(DataToWriteToFile);
+        _pReduce->exportFunc(DataToWriteToFile, outputFileDir);
 
         LOG(INFO) << "Workflow.reduce -- END";
     }

@@ -38,27 +38,28 @@ namespace MapReduce
 			 * @param outputFileDir - name of directory to write final output files to
 			 * @param tempOutputFileDir - name of directory to write temp output files to
 			 */
-			void run(string inputFileDir, string outputFileDir, string tempOutputFileDir);
+			virtual void run(string inputFileDir, string outputFileDir, string tempOutputFileDir);
 
 			/**
 			 * Maps input file contents to output file
 			 * @param inputFileDir - name of directory to read input files from
 			 * @param outputFileName - name of output file
 			 */
-			void map(string inputFileDir, string outputFileName);
+			virtual list<string> map(string inputFileDir, string outputFileName);
 
 		/**
 		 * Sorts contents of a file
 		 * @param tempDirectory -directory that contains all the temp files to be sorted
 		 * @return int returns 0 to comple function task
 		 */
-		int sort(string tempDirectory);
+		virtual int sort(string tempDirectory);
 
 		/**
 		 * Reduce a list of data to a single output file
 		 * @param lstOfData - list of data to reduce
+		 * @param outputFileDir - directory to put final output file
 		 */
-		void reduce(string tempDirectory);
+		virtual void reduce(string tempDirectory, string outputFileDir);
 
 		private:
 	};
