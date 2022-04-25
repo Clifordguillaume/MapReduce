@@ -18,6 +18,7 @@
 //						 to relocate to Workflow
 // 4/18/22 - Cliford - Removed main from main.cpp and include it on here.
 // 4/24/22 - Elizabeth - Add glogs
+// 4/25/22 - Elizabeth - Change main to use cmd prompt args
 // ===============================================================================
 
 // Local Headers
@@ -52,16 +53,10 @@ Executive::~Executive()
 int main(int argc, char** argv)
 {
     //string inputFileDir = "C:\\Users\\dwuli\\Downloads\\shakespeare";
-    string inputFileDir = "C:\\Users\\dwuli\\OneDrive\\egrad\\EDwulit Projects\\MapReduce\\MapReduce\\TestInputFileDir";
-    string outputFileDir = "C:\\Users\\dwuli\\OneDrive\\egrad\\EDwulit Projects\\MapReduce\\MapReduce\\TestOutputFileDir";
-    string tempOutputFileDir = "C:\\Users\\dwuli\\OneDrive\\egrad\\EDwulit Projects\\MapReduce\\MapReduce\\TestTempOutputFileDir";
-
-    //string inputFileName = "C:\\Users\\clifguillaume\\Documents\\TestData\\testInput.txt";
-    //string outputFileName = "C:\\Users\\clifguillaume\\Documents\\TestData\\testoutput.txt";
-    //string inputFileDir = "C:\\Users\\clifguillaume\\Documents\\Object Oriented Projects\\TestData\\shakespeare";
-    //string outputFileDir = "C:\\Users\\clifguillaume\\Documents\\Object Oriented Projects\\TestData\\OutputFileDir";
-    //string tempOutputFileDir = "C:\\Users\\clifguillaume\\Documents\\Object Oriented Projects\\TestData\\TempDir";
-
+    //string inputFileDir = "C:\\Users\\dwuli\\OneDrive\\egrad\\EDwulit Projects\\MapReduce\\MapReduce\\TestInputFileDir";
+    //string outputFileDir = "C:\\Users\\dwuli\\OneDrive\\egrad\\EDwulit Projects\\MapReduce\\MapReduce\\TestOutputFileDir";
+    //string tempOutputFileDir = "C:\\Users\\dwuli\\OneDrive\\egrad\\EDwulit Projects\\MapReduce\\MapReduce\\TestTempOutputFileDir";
+    
     //string inputFileDir = "C:\\Users\\clifguillaume\\Documents\\Object Oriented Projects\\MapReduce\\MapReduce\\MapReduce\\TestInputFileDir";
     //string outputFileDir = "C:\\Users\\clifguillaume\\Documents\\Object Oriented Projects\\MapReduce\\MapReduce\\MapReduce\\TestOutputFileDir";
     //string tempOutputFileDir = "C:\\Users\\clifguillaume\\Documents\\Object Oriented Projects\\MapReduce\\MapReduce\\MapReduce\\TestTempOutputFileDir";
@@ -78,12 +73,20 @@ int main(int argc, char** argv)
     LOG(INFO) << "Starting MapReduce program...";
     cout << "Starting MapReduce program..." << endl;
 
+    string inputFileDir;
+    string outputFileDir;
+    string tempOutputFileDir;
+
     // TODO: Make input and output file paths configurable via command line
-    if (argc > 2)
+    if (argc == 4)
     {
-        //inputFileDir = argv[1];
-        //outputFileDir = argv[2];
-        //tempOutputFileDir = argv[3];
+        inputFileDir = argv[1];
+        outputFileDir = argv[2];
+        tempOutputFileDir = argv[3];
+    }
+    else {
+        cout << "Invalid arguments passed. Usage: MapReduce.exe <inputFileDir> <outputFileDir> <tempOutputFileDir>" << endl;
+        return 0;
     }
 
     LOG(INFO) << "User provided input file dir: " + inputFileDir;
@@ -97,4 +100,6 @@ int main(int argc, char** argv)
 
     LOG(INFO) << "MapReduce program completed running.";
     cout << "MapReduce program completed running." << endl;
+
+    return 0;
 }
