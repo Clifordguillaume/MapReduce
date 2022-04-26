@@ -56,6 +56,8 @@ namespace MapReduce
 		if (debug)
 			cout << "Inside the sort function from the sorted class " << endl;
 
+		LOG(INFO) << "Sorter.sort -- Sorting contents of file " + iFilePath;
+
 		// Local Variables
 		string FileName = iFilePath;
 		list<string> lstFileValue;

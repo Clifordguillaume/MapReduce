@@ -20,6 +20,7 @@
 // 4/19/22 - Elizabeth - Change FileManagement to pointer
 // 4/20/22 - Elizabeth - Add filemanagementpointer, namespace
 // 4/24/22 - Elizabeth - Add glogs, add delete file before export
+// 4/25/22 - Elizabeth - Rework getKey() and getKeyValue() to fix bug in reduce
 // ===============================================================================
 
 #include "Map.h"
@@ -27,6 +28,7 @@
 #include <boost/algorithm/string/classification.hpp>
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string.hpp>
+#include <string>
 #include <vector>
 #include <map>
 #include <iostream>
@@ -193,8 +195,10 @@ namespace MapReduce
 		vector<int> indexes;
 		for (int i = 0; i < str.size(); i++)
 		{
-			if (str[i] == '\"');
+			if (str[i] == '\"')
+			{
 				indexes.push_back(i);
+			}
 		}
 		return indexes;
 	}
@@ -220,27 +224,28 @@ namespace MapReduce
 
 		string key;
 		try {
-			int length = 0;
+			vector<int> quoteIndexes = getQuoteIndexes(iStr);
+			int firstQuoteIndx = quoteIndexes.front();
+			int lastQuoteIndx = quoteIndexes.back();
+			int firstCharIndx = firstQuoteIndx + 1;
+			int lastCharIndx = lastQuoteIndx - 1;
 
-			// remove the quoations around the 
-			// string to find the key.
-			string str = iStr;
-			length = str.size();
-
-			string str2 = str.substr(2, length);
-
-			length = str2.size();
-			string str3 = str2.substr(0, length - 4);
-
-			// Get key and return
-			key = str3;
+			// if key is only one letter long..
+			if (firstCharIndx == lastCharIndx) 
+			{
+				key = iStr[firstCharIndx];
+			}
+			else // otherwise extract the key
+			{
+				key = iStr.substr(firstCharIndx, lastCharIndx - 1);
+			}
 		}
 		catch (exception e)
 		{
 			LOG(ERROR) << "Map.getKey -- Exception getting key from string " + iStr;
 		}
 		
-		LOG(INFO) << "Map.getKey -- Key " + key + " extracted";
+		LOG(INFO) << "Map.getKey -- Key " + key + " extracted from string " + iStr;
 		LOG(INFO) << "Map.getKey -- END";
 
 		return key;
@@ -259,35 +264,28 @@ namespace MapReduce
 		list<int> iKeyValue;
 		try
 		{
-			for (string lst : lstOfData)
+			for (string dataEntry : lstOfData)
 			{
-				//cout << "map lstOfData: " << lst << endl;
+				// get the key value of the current row of data
+				string key = getKey(dataEntry);
 
-				string sFullString = lst;
-				string stringToFind = iSKey;
-				int pos = 0;
-				int index;
-				while (index = sFullString.find(stringToFind, pos) != string::npos) {
+				// if the key of the current row of data matches key to find values for
+				if (key == iSKey)
+				{
+					// find index of the comma 
+					int commaIndx = dataEntry.find(',');
 
-					// found a match
-					//cout << "Match found at position: " << index << endl;
-					//pos = index + 1; //new position is from next element of index
+					// find index of closing parenthesis
+					int closingParenthesisIndx = dataEntry.find(')');
 
-					int length = 0;
-					// remove the front part of the string
-					string str = lst;
-					length = str.size();
-					string str2 = str.substr(2, length);
+					// extract the string between the comma and the closing parentheis
+					string valueStr = dataEntry.substr(commaIndx + 1, closingParenthesisIndx - 2);
 
-					length = str2.size();
-					string str3 = str2.substr((length - 2), 1); //("cliford", 1)
+					// trim the string
+					boost::trim(valueStr);
 
-					// Get key and return
-					string sKey = str3;
-
-					int sKeyValue = stoi(sKey);
+					int sKeyValue = stoi(valueStr);
 					iKeyValue.push_back(sKeyValue);
-					break;
 				}
 			}
 		}
@@ -296,6 +294,10 @@ namespace MapReduce
 			LOG(ERROR) <<  "Map.getKeyValue -- Exception getting value of key: " + iSKey;
 			LOG(ERROR) << e.what();
 		}
+
+		LOG(INFO) << "Map.getKeyValue -- Extracted key value of size " + to_string(iKeyValue.size()) + " for key: " + iSKey;
+
+		LOG(INFO) << "Map.getKeyValue -- END";
 
 		return iKeyValue;
 	}
