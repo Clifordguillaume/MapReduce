@@ -16,10 +16,12 @@
 // 4/19/22 - Elizabeth - Change FileManagement, Map, Sorter, Reduce to pointers
 // 4/20/22 - Elizabeth - Make map, sorter, reduce, filemanagement pointers.
 //                       Constructor. Desctructor. Add namespace
-// 4/24/23 - Cliford - Fixed the reduce function to show the correct reduced data
+// 4/24/22 - Cliford - Fixed the reduce function to show the correct reduced data
 //                    added the debug macro for debugging purposes
-// 4/24/23 - Elizabeth - Add glogs, add check for empty string in map function,
+// 4/24/22 - Elizabeth - Add glogs, add check for empty string in map function,
 //                       clear temp output file dir before new export
+// 4/25/22 - Elizabeth - Add check for already processed words in reduce function.
+//                       Add cout logs to display progress to user
 // ===============================================================================
 
 // Local Headers
@@ -30,6 +32,7 @@
 #include "Reduce.h"
 #include <boost/algorithm/string.hpp>
 #include <glog/logging.h>
+#include <set>
 
 using namespace std;
 
@@ -105,6 +108,7 @@ namespace MapReduce
     list<string> Workflow::map(string inputFileDir, string tempOutputFileDir)
     {
         LOG(INFO) << "Workflow.map -- BEGIN";
+        cout << "Mapping..." << endl;
         if (debug)
             cout << "inside the map function" << endl;
 
@@ -162,6 +166,9 @@ namespace MapReduce
             LOG(ERROR) << "Workflow.map -- Exception mapping";
             LOG(ERROR) << e.what();
         }
+        
+        cout << "Finished mapping" << endl;
+        LOG(INFO) << "Workflow.map -- END";
 
         return inputFiles;
     }
@@ -172,6 +179,8 @@ namespace MapReduce
     int Workflow::sort(string tempDirectory)
     {
         LOG(INFO) << "Workflow.sort -- BEGIN";
+        cout << "Sorting..." << endl;
+
         // Local variables
         string fileName = "";
         list<string> lstOfData;
@@ -186,6 +195,7 @@ namespace MapReduce
             _pSorter->sort(fileName);
         }
 
+        cout << "Finished sorting" << endl;
         LOG(INFO) << "Workflow.sort -- END";
 
         // return
@@ -198,6 +208,7 @@ namespace MapReduce
     void Workflow::reduce(string tempDirectory, string outputFileDir)
     {
         LOG(INFO) << "Workflow.reduce -- BEGIN";
+        cout << "Reducing..." << endl;
 
         // Local Varibles
         string fileName = "";
@@ -218,18 +229,31 @@ namespace MapReduce
             if(debug)
                 cout << "File Data size: " << fileData.size() << endl;
         }
+        
+        // keep track of already processed data as to not process again
+        set<string> processedKeys;
+        int rowsToSkip = 0;
 
-        // preview what's in the file
+        // go through file data
         for (string lstString : fileData)
         {
-            //cout << "lstOfdata: " << lst << endl;
-
             // Get key from the list value
             string sKey = _pMap->getKey(lstString);
 
+            // if key already reduced, do not reduce again
+            if (processedKeys.count(sKey) > 0) 
+            {
+                continue;
+            }
+
             // Get the key value
-            list<int> itr = _pMap->getKeyValue(sKey, fileData);
+            list<int> itr = _pMap->getKeyValue(sKey, fileData, rowsToSkip);
+
+            // reduce
             _pReduce->reduceFunc(sKey, itr);
+
+            processedKeys.insert(sKey);
+            rowsToSkip += itr.size();
         }
 
         // get the data to write to a new file
@@ -238,12 +262,17 @@ namespace MapReduce
         // sort it
         DataToWriteToFile.sort();
 
-        // remove duplicates
-        DataToWriteToFile.unique();
-
         // passed into exportFunc for processing
+        cout << "Exporting reduced data..." << endl;
         _pReduce->exportFunc(DataToWriteToFile, outputFileDir);
 
+        // write the empty success file as per project requirements
+        _pFileManagement->createSuccessFile(outputFileDir);
+
+        // clear temp output directory now that we are done with the files
+        //_pFileManagement->clearDirectory(tempDirectory);
+
+        cout << "Finished reducing" << endl;
         LOG(INFO) << "Workflow.reduce -- END";
     }
 }

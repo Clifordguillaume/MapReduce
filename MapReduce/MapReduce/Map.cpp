@@ -20,7 +20,9 @@
 // 4/19/22 - Elizabeth - Change FileManagement to pointer
 // 4/20/22 - Elizabeth - Add filemanagementpointer, namespace
 // 4/24/22 - Elizabeth - Add glogs, add delete file before export
-// 4/25/22 - Elizabeth - Rework getKey() and getKeyValue() to fix bug in reduce
+// 4/25/22 - Elizabeth - Rework getKey() and getKeyValue() to fix bug in reduce.
+//						 Fix char comparison in removeSpecialChars to account for
+//						 characters with accent marks
 // ===============================================================================
 
 #include "Map.h"
@@ -115,6 +117,8 @@ namespace MapReduce
 				string key = it->first;
 				int value = it->second;
 
+				cout << "Map exporting key: " + key << endl;
+
 				// write key and value to file
 				_pFileManagement->writeKeyValueToFile(outputFileName, key, value);
 			}
@@ -166,16 +170,20 @@ namespace MapReduce
 		LOG(INFO) << "Map.removeSpecialChars -- BEGIN";
 		LOG(INFO) << "Map.removeSpecialChars -- Removing special chars from string";
 		string result;
+		int strSize = str.length();
 		try 
 		{
-			for (int i = 0; i < str.length(); i++)
+			for (unsigned int i = 0; i < strSize; i++)
 			{
 				// remove all characters that are not letters of english alphabet or spaces
-				char c = str[i];
+				unsigned char c = str[i];
 				if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || isspace(c))
 				{
 					result.push_back(c);
 				}
+				/*if (i % 1000 == 0) {
+					cout << "Reading characters " << i << "/" << strSize << endl;
+				}*/
 			}
 		}
 		catch (exception e)
@@ -217,8 +225,9 @@ namespace MapReduce
 	// -------------------------------------------------------------------------------
 	string Map::getKey(string iStr)
 	{
-		LOG(INFO) << "Map.getKey -- BEGIN";
-		LOG(INFO) << "Map.getKey -- Getting key from string " + iStr;
+		// ONLY UNCOMMENT IF DEBUGGING
+		//LOG(INFO) << "Map.getKey -- BEGIN";
+		//LOG(INFO) << "Map.getKey -- Getting key from string " + iStr;
 		if (debug)
 			cout << "Inside the getKey function " << endl;
 
@@ -245,8 +254,9 @@ namespace MapReduce
 			LOG(ERROR) << "Map.getKey -- Exception getting key from string " + iStr;
 		}
 		
-		LOG(INFO) << "Map.getKey -- Key " + key + " extracted from string " + iStr;
-		LOG(INFO) << "Map.getKey -- END";
+		// ONLY UNCOMMENT IF DEBUGGING
+		//LOG(INFO) << "Map.getKey -- Key " + key + " extracted from string " + iStr;
+		//LOG(INFO) << "Map.getKey -- END";
 
 		return key;
 	}
@@ -255,16 +265,21 @@ namespace MapReduce
 	// -------------------------------------------------------------------------------
 	// getKeyValue
 	// -------------------------------------------------------------------------------
-	list<int> Map::getKeyValue(string iSKey, list<string> lstOfData)
+	list<int> Map::getKeyValue(string iSKey, list<string> lstOfData, int rowsToSkip)
 	{
-		LOG(INFO) << "Map.getKeyValue -- BEGIN";
+		//LOG(INFO) << "Map.getKeyValue -- BEGIN"; // ONLY UNCOMMENT IF DEBUGGING
 		if (debug)
 			cout << "Inside the getKeyValue function " << endl;
 
 		list<int> iKeyValue;
+		list<string> trimmedListOfData;
+		list<string>::iterator it = lstOfData.begin();
+		advance(it, rowsToSkip);
+		trimmedListOfData.splice(trimmedListOfData.end(), lstOfData, it, lstOfData.end());
+
 		try
 		{
-			for (string dataEntry : lstOfData)
+			for (string dataEntry : trimmedListOfData)
 			{
 				// get the key value of the current row of data
 				string key = getKey(dataEntry);
@@ -295,9 +310,9 @@ namespace MapReduce
 			LOG(ERROR) << e.what();
 		}
 
-		LOG(INFO) << "Map.getKeyValue -- Extracted key value of size " + to_string(iKeyValue.size()) + " for key: " + iSKey;
-
-		LOG(INFO) << "Map.getKeyValue -- END";
+		// ONLY UNCOMMENT IF DEBUGGING
+		//LOG(INFO) << "Map.getKeyValue -- Extracted key value of size " + to_string(iKeyValue.size()) + " for key: " + iSKey;
+		//LOG(INFO) << "Map.getKeyValue -- END";
 
 		return iKeyValue;
 	}

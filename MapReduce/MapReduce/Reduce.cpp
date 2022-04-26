@@ -56,49 +56,51 @@ namespace MapReduce
 		LOG(INFO) << "Reduce component destroyed";
 	}
 
-// -------------------------------------------------------------------------------
-// reduceFunc
-// -------------------------------------------------------------------------------
-int Reduce::reduceFunc(string& iKey, list<int> oLstOfData)
-{
-	LOG(INFO) << "Reduce.reduceFunc -- BEGIN";
-	if (debug)
-		cout << "Inside the reduceFunc function " << endl;
-
-	try 
+	// -------------------------------------------------------------------------------
+	// reduceFunc
+	// -------------------------------------------------------------------------------
+	int Reduce::reduceFunc(string& iKey, list<int> oLstOfData)
 	{
-		// Local varibales
-		list<string> lstReducedData;
-		string sKeyVal = iKey;
-		int ikeyVal = 0;
+		LOG(INFO) << "Reduce.reduceFunc -- BEGIN";
+		if (debug)
+			cout << "Inside the reduceFunc function " << endl;
 
-		// get the key frequency
-		list<int>::iterator itr;
-		for (int lst : oLstOfData)
+		cout << "Reducing key: " + iKey << endl;
+
+		try
 		{
-			ikeyVal = ikeyVal + 1;
+			// Local varibales
+			list<string> lstReducedData;
+			string sKeyVal = iKey;
+			int ikeyVal = 0;
+
+			// get the key frequency
+			list<int>::iterator itr;
+			for (int lst : oLstOfData)
+			{
+				ikeyVal = ikeyVal + 1;
+			}
+
+			string str1 = "(\"";
+			string s1 = "\",";
+			string str2 = str1 + sKeyVal + s1;
+			string s = to_string(ikeyVal);
+			string finalString = str2 + s + ")";
+
+			// Add data to the global lst
+			_lstReducedData.push_back(finalString);
+
+		}
+		catch (exception e)
+		{
+			LOG(ERROR) << "Reduce.reduceFunc -- Exception reducing";
+			LOG(ERROR) << e.what();
 		}
 
-		string str1 = "(\"";
-		string s1 = "\",";
-		string str2 = str1 + sKeyVal + s1;
-		string s = to_string(ikeyVal);
-		string finalString = str2 + s + ")";
+		LOG(INFO) << "Reduce.reduceFunc -- END";
 
-		// Add data to the global lst
-		_lstReducedData.push_back(finalString);
-
+		return 0;
 	}
-	catch (exception e)
-	{
-		LOG(ERROR) << "Reduce.reduceFunc -- Exception reducing";
-		LOG(ERROR) << e.what();
-	}
-
-	LOG(INFO) << "Reduce.reduceFunc -- END";
-
-	return 0;
-}
 
 	// -------------------------------------------------------------------------------
 	// export

@@ -23,6 +23,7 @@
 //					   writing the reduce data to add a few more capability
 // 4/24/22 - Elizabeth - Added glogs, Add checks for empty file directories, add
 //						 checks for text files
+// 4/25/22 - Elizabeth - Add createSuccessFile()
 // ===============================================================================
 
 // Local Headers
@@ -384,5 +385,45 @@ namespace MapReduce
 		}
 
 		LOG(INFO) << "FileManagement.writeKeyValueToFile -- END";
+	}
+
+	// -------------------------------------------------------------------------------
+	// createSuccessFile
+	// -------------------------------------------------------------------------------
+	void FileManagement::createSuccessFile(string outputFileDir)
+	{
+		LOG(INFO) << "FileManagement.createSuccessFile -- BEGIN";
+
+		try
+		{
+			string successFileName;
+
+			// make the absolute path to the SUCCESS.txt file
+			boost::trim_right(outputFileDir);
+			if (outputFileDir.back() != '\\')
+			{
+				successFileName = outputFileDir + "\\SUCCESS.txt";
+			}
+			else
+			{
+				successFileName = outputFileDir + "SUCCESS.txt";
+			}
+
+			// delete the file if it already exists
+			if (fileExists(successFileName))
+			{
+				removeFile(successFileName);
+			}
+
+			// create the empty file
+			writeToFile(successFileName, {}, false);
+		}
+		catch (exception e)
+		{
+			LOG(ERROR) << "FileManagement.createSuccessFile -- Exception creating SUCCESS file. Exception:";
+			LOG(ERROR) << e.what();
+		}
+
+		LOG(INFO) << "FileManagement.createSuccessFile -- END";
 	}
 }

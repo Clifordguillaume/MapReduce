@@ -85,6 +85,12 @@ namespace MapReduce
 			 */
 			virtual void writeKeyValueToFile(string outputFileName, string key, int value);
 
+			/**
+			 * Creates an empty SUCCESS.txt file in the given output file dir
+			 * @param outputFileDir - name of directory to write SUCCESS file to
+			 */
+			virtual void createSuccessFile(string outputFileDir);
+
 		private:
 	};
 }
