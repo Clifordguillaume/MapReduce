@@ -1,0 +1,1 @@
+This is an empty log needed to commit the logs folder.
