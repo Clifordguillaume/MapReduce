@@ -56,9 +56,10 @@ namespace MapReduce
 			 * Gets the value for the key passed in as an input
 			 * @param iSKey - Key to find the value for
 			 * @param lstOfData - list of original data
+			 * @param rowsToSkip - number of entries in the lstOfData to skip over
 			 * @return list of key value found
 			 */
-			virtual list<int> getKeyValue(string iSKey, list<string> lstOfData);
+			virtual list<int> getKeyValue(string iSKey, list<string> lstOfData, int rowsToSkip);
 
 			/**
 			 * Splits a string into a vector of strings, split by whitespace
@@ -80,6 +81,13 @@ namespace MapReduce
 			 * @return str with all characters coverted to lowercase letters
 			 */
 			virtual string lowerString(string str);
+
+			/**
+			 * Get all indexes where a double quote character is found
+			 * @input str - input string
+			 * @return vector of indexes in the string where quote found
+			 */
+			virtual vector<int> getQuoteIndexes(string str);
 		private:
 			
 	};

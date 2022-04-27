@@ -44,7 +44,7 @@ namespace MapReduce
 			 * @param sDataToWrite - the list of data that needs to be written to the file
 			 * @return int
 			 */
-			virtual int exportFunc(list<string> sDataToWrite);
+			virtual int exportFunc(list<string> sDataToWrite, string outputFileDir);
 
 			/**
 			 * GetData is used to retrieve the data that needs to be passed to

@@ -14,11 +14,13 @@
 // File History:
 // 04/12/22 - Cliford - created the SortingClass and added the sort ()
 // 4/20/22 - Elizabeth - Add filemanagement pointer, Constructor, Destructor
+// 4/24/22 - Elizabeth - Add glogs
 // ===============================================================================
 
 // Local Headers
 #include "Sorter.h"
 #include "FileManagement.h"
+#include <glog/logging.h>
 
 #include <algorithm>
 
@@ -42,6 +44,7 @@ namespace MapReduce
 	Sorter::~Sorter()
 	{
 		delete _pFileManagement;
+		LOG(INFO) << "Sorter component destroyed";
 	}
 
 	// -------------------------------------------------------------------------------
@@ -49,8 +52,11 @@ namespace MapReduce
 	// -------------------------------------------------------------------------------
 	int Sorter::sort(string& iFilePath)
 	{
+		LOG(INFO) << "Sorter.sort -- BEGIN";
 		if (debug)
 			cout << "Inside the sort function from the sorted class " << endl;
+
+		LOG(INFO) << "Sorter.sort -- Sorting contents of file " + iFilePath;
 
 		// Local Variables
 		string FileName = iFilePath;
@@ -70,6 +76,8 @@ namespace MapReduce
 		//{
 		//	cout << lst << endl;
 		//}
+
+		LOG(INFO) << "Sorter.sort -- END";
 
 		// return
 		return 0;

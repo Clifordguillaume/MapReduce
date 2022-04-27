@@ -58,7 +58,7 @@ namespace MapReduce
 			 * @param fileDirName - Name of the directory to traverse
 			 * @return list of the paths to all files in the directory
 			 */
-			virtual list<string> getFilesInDirectory(string fileDirName);
+			virtual list<string> getTextFilesInDirectory(string fileDirName);
 
 			/**
 			 * Reads data from the file
@@ -84,6 +84,12 @@ namespace MapReduce
 			 * @param value - value
 			 */
 			virtual void writeKeyValueToFile(string outputFileName, string key, int value);
+
+			/**
+			 * Creates an empty SUCCESS.txt file in the given output file dir
+			 * @param outputFileDir - name of directory to write SUCCESS file to
+			 */
+			virtual void createSuccessFile(string outputFileDir);
 
 		private:
 	};

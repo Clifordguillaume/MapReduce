@@ -6,5 +6,10 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug UnitTests|x64'">
     <LocalDebuggerEnvironment>C:\Users\dwuli\OneDrive\egrad\EDwulit Projects\MapReduce\packages\boost_unit_test_framework-vc143.1.78.0\lib</LocalDebuggerEnvironment>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerCommandArguments>"C:\Users\dwuli\OneDrive\egrad\EDwulit Projects\MapReduce\MapReduce\TestInputFileDir"  "C:\Users\dwuli\OneDrive\egrad\EDwulit Projects\MapReduce\MapReduce\TestOutputFileDir"  "C:\Users\dwuli\OneDrive\egrad\EDwulit Projects\MapReduce\MapReduce\TestTempOutputFileDir"</LocalDebuggerCommandArguments>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LocalDebuggerCommandArguments>"C:\Users\dwuli\OneDrive\egrad\EDwulit Projects\MapReduce\MapReduce\TestInputFileDir"  "C:\Users\dwuli\OneDrive\egrad\EDwulit Projects\MapReduce\MapReduce\TestOutputFileDir"  "C:\Users\dwuli\OneDrive\egrad\EDwulit Projects\MapReduce\MapReduce\TestTempOutputFileDir"</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
 </Project>
