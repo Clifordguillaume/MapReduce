@@ -21,6 +21,9 @@ namespace MapReduce
 {
 	class MockSorter : public Sorter
 	{
-		//MOCK_METHOD(list<string>, sort, (string& iFilePath), (override));
+		public:
+			MOCK_METHOD1(sort, int(string& iFilePath));
+
+		private:
 	};
 }

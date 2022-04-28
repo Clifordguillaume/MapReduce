@@ -270,7 +270,7 @@ namespace MapReduce
         _pFileManagement->createSuccessFile(outputFileDir);
 
         // clear temp output directory now that we are done with the files
-        //_pFileManagement->clearDirectory(tempDirectory);
+        _pFileManagement->clearDirectory(tempDirectory);
 
         cout << "Finished reducing" << endl;
         LOG(INFO) << "Workflow.reduce -- END";

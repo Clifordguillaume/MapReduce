@@ -2,10 +2,10 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\x64\Debug\MapReduce.exe</FullPath>
+      <FullPath>C:\Users\dwuli\OneDrive\egrad\EDwulit Projects\MapReduce\x64\Debug\MapReduce.exe</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\x64\Debug\MapReduceUnitTests.exe</FullPath>
+      <FullPath>C:\Users\dwuli\OneDrive\egrad\EDwulit Projects\MapReduce\x64\Debug\MapReduceUnitTests.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

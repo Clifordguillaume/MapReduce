@@ -8,7 +8,7 @@
 // Description: Mock of Reduce class
 //	
 // File History:
-// 4/20/22 - Elizabeth - 
+// 4/20/22 - Elizabeth - Initial mock methods
 // ===============================================================================
 #pragma once
 
@@ -21,9 +21,11 @@ namespace MapReduce
 {
 	class MockReduce : public Reduce
 	{
-		MOCK_METHOD2(reduceFunc, int(string& iKey, list<int> iLstOfData));
-		MOCK_METHOD1(exportFunc, int(list<string> sDataToWrite));
-		MOCK_METHOD(list<string>, GetData, (), (override));
+		public:
+			MOCK_METHOD2(reduceFunc, int(string& iKey, list<int> iLstOfData));
+			MOCK_METHOD1(exportFunc, int(list<string> sDataToWrite));
+			MOCK_METHOD(list<string>, GetData, (), (override));
 		
+		private:
 	};
 }

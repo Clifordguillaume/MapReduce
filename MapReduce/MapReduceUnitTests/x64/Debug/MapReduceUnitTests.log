@@ -1,1 +1,7 @@
-﻿
+﻿  tests.cc
+C:\Users\dwuli\OneDrive\egrad\EDwulit Projects\MapReduce\MapReduceUnitTests\MockMap.h(18,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\dwuli\OneDrive\egrad\EDwulit Projects\MapReduce\MapReduceUnitTests\MockFileManagement.h(17,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\dwuli\OneDrive\egrad\EDwulit Projects\MapReduce\MapReduceUnitTests\MockReduce.h(16,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\dwuli\OneDrive\egrad\EDwulit Projects\MapReduce\MapReduceUnitTests\MockSorter.h(16,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\dwuli\OneDrive\egrad\EDwulit Projects\MapReduce\MapReduceUnitTests\tests.cc(20,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  MapReduceUnitTests.vcxproj -> C:\Users\dwuli\OneDrive\egrad\EDwulit Projects\MapReduce\x64\Debug\MapReduceUnitTests.exe

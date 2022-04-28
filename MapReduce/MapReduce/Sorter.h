@@ -5,11 +5,8 @@
 // 
 // Author: Elizabeth and Cliford
 // 
-// Description: The intermediary results will need to be sorted and aggregated. 
-//				The intermediate file will contain output such as: (“a”, 1), 
-//				(“the”, 1), (“is”, 1), (“the”, 1), (“a”, 1). The reducer requires 
-//				the same data in the format: (“a, [1, 1, …]), (“the”, [1, 1, …]), 
-//				(“is”, [1, …]), …
+// Description: The Sorter class is responsible for taking in inputs containing
+//				keys and one value per key, and sorting it in alphabetical order.
 // 
 // ===============================================================================
 
@@ -35,13 +32,14 @@ namespace MapReduce
 			Sorter(FileManagement* _pFM) : _pFileManagement(_pFM) {}
 			virtual ~Sorter();
 
-		/**
-		 * sort is used to read and sort the data in the file passed in as the input
-		 * @param iFilePath - the file that need to be sorted
-		 * @return int - returns 0 to complete function task
-		 */
-		int sort(string& iFilePath);
-	private:
+			/**
+			 * sort is used to read and sort the data in the file passed in as the input
+			 * @param iFilePath - the file that need to be sorted
+			 * @return int - returns 0 to complete function task
+			 */
+			int sort(string& iFilePath);
+
+		private:
 
 	};
 }
