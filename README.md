@@ -31,6 +31,7 @@ and writing the results to an output file.
 - Export the data to a new text file.
 
 # Possible issue fixes if running in Visual Studio:
+- This project must be compiled with C++17
 - If glog has issues linking, install the glog package with vcpkg https://vcpkg.io/en/getting-started.html
 	1. git clone https://github.com/Microsoft/vcpkg.git
 	2. run the bootstrap-vcpkg.bat file
