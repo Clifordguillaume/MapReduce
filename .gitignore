@@ -9,7 +9,6 @@
 *.opendb
 *.bin
 /MapReduce/MapReduce/x64/Debug/MapReduce.tlog
-/MapReduce/x64/Debug
 *.obj
 /MapReduce/MapReduce/packages
 /MapReduce/MapReduce/x64/Debug
