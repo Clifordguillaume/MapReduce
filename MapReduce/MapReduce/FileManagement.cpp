@@ -24,6 +24,7 @@
 // 4/24/22 - Elizabeth - Added glogs, Add checks for empty file directories, add
 //						 checks for text files
 // 4/25/22 - Elizabeth - Add createSuccessFile()
+// 4/28/22 - Elizabeth - Remove extra SUCCESS file creation
 // ===============================================================================
 
 // Local Headers
@@ -309,22 +310,6 @@ namespace MapReduce
 						if (debug)
 							cout << "File: " << fileName << " exist and was deleted successfully!" << endl;
 					}
-				}
-
-				// create empty SUCCESS text file if not already exist
-				string sSuccessfile = "SUCCESS.txt";
-				exist = fileExists(sSuccessfile);
-				if (!exist) 
-				{
-					ofstream successFile(sSuccessfile);
-
-					// for debugging purposes
-					LOG(INFO) << "FileManagement.writeToFile -- File " + sSuccessfile + " successfully created";
-					if (debug)
-						cout << "SUCCESS file was created" << endl;
-
-					// close the file
-					successFile.close();
 				}
 			}
 
