@@ -9,11 +9,13 @@
     <LocalDebuggerCommandArguments>"C:\Users\dwuli\OneDrive\egrad\EDwulit Projects\MapReduce\MapReduce\TestInputFileDir"  "C:\Users\dwuli\OneDrive\egrad\EDwulit Projects\MapReduce\MapReduce\TestOutputFileDir"  "C:\Users\dwuli\OneDrive\egrad\EDwulit Projects\MapReduce\MapReduce\TestTempOutputFileDir"</LocalDebuggerCommandArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LocalDebuggerCommandArguments>"C:\Users\dwuli\OneDrive\egrad\EDwulit Projects\MapReduce\MapReduce\TestInputFileDir"  "C:\Users\dwuli\OneDrive\egrad\EDwulit Projects\MapReduce\MapReduce\TestOutputFileDir"  "C:\Users\dwuli\OneDrive\egrad\EDwulit Projects\MapReduce\MapReduce\TestTempOutputFileDir"</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>
+    </LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LocalDebuggerCommandArguments>"C:\Users\catro\Downloads\ElizabethCode\MapReduce\MapReduce\MapReduce\TestInputFileDir" C:\Users\catro\Downloads\ElizabethCode\MapReduce\MapReduce\MapReduce\TestOutputFileDir C:\Users\catro\Downloads\ElizabethCode\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>
+    </LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
 </Project>
