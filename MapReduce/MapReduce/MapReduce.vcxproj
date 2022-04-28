@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\glog.0.3.3.0\build\native\glog.props" Condition="Exists('..\packages\glog.0.3.3.0\build\native\glog.props')" />
-  <Import Project="..\packages\gflags.2.0.1.0\build\native\gflags.props" Condition="Exists('..\packages\gflags.2.0.1.0\build\native\gflags.props')" />
+  <Import Project="..\packages\gflags.2.1.2.1\build\native\gflags.props" Condition="Exists('..\packages\gflags.2.1.2.1\build\native\gflags.props')" />
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug UnitTests|Win32">
       <Configuration>Debug UnitTests</Configuration>
@@ -170,6 +170,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug UnitTests|x64'">
@@ -195,12 +196,14 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>C:\Users\dwuli\Downloads\boost_1_78_0_rc1\boost_1_78_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>C:\Users\catro\Downloads\ElizabethCode\MapReduce\MapReduce\x64\Debug\glog.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -233,19 +236,19 @@
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
-    <Import Project="..\packages\boost.1.78.0\build\boost.targets" Condition="Exists('..\packages\boost.1.78.0\build\boost.targets')" />
-    <Import Project="..\packages\boost_unit_test_framework-vc143.1.78.0\build\boost_unit_test_framework-vc143.targets" Condition="Exists('..\packages\boost_unit_test_framework-vc143.1.78.0\build\boost_unit_test_framework-vc143.targets')" />
-    <Import Project="..\packages\gflags.2.0.1.0\build\native\gflags.targets" Condition="Exists('..\packages\gflags.2.0.1.0\build\native\gflags.targets')" />
+    <Import Project="..\packages\boost.1.79.0\build\boost.targets" Condition="Exists('..\packages\boost.1.79.0\build\boost.targets')" />
+    <Import Project="..\packages\boost_unit_test_framework-vc143.1.79.0\build\boost_unit_test_framework-vc143.targets" Condition="Exists('..\packages\boost_unit_test_framework-vc143.1.79.0\build\boost_unit_test_framework-vc143.targets')" />
+    <Import Project="..\packages\gflags.2.1.2.1\build\native\gflags.targets" Condition="Exists('..\packages\gflags.2.1.2.1\build\native\gflags.targets')" />
     <Import Project="..\packages\glog.0.3.3.0\build\native\glog.targets" Condition="Exists('..\packages\glog.0.3.3.0\build\native\glog.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\boost.1.78.0\build\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost.1.78.0\build\boost.targets'))" />
-    <Error Condition="!Exists('..\packages\boost_unit_test_framework-vc143.1.78.0\build\boost_unit_test_framework-vc143.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_unit_test_framework-vc143.1.78.0\build\boost_unit_test_framework-vc143.targets'))" />
-    <Error Condition="!Exists('..\packages\gflags.2.0.1.0\build\native\gflags.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\gflags.2.0.1.0\build\native\gflags.props'))" />
-    <Error Condition="!Exists('..\packages\gflags.2.0.1.0\build\native\gflags.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\gflags.2.0.1.0\build\native\gflags.targets'))" />
+    <Error Condition="!Exists('..\packages\boost.1.79.0\build\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost.1.79.0\build\boost.targets'))" />
+    <Error Condition="!Exists('..\packages\boost_unit_test_framework-vc143.1.79.0\build\boost_unit_test_framework-vc143.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_unit_test_framework-vc143.1.79.0\build\boost_unit_test_framework-vc143.targets'))" />
+    <Error Condition="!Exists('..\packages\gflags.2.1.2.1\build\native\gflags.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\gflags.2.1.2.1\build\native\gflags.props'))" />
+    <Error Condition="!Exists('..\packages\gflags.2.1.2.1\build\native\gflags.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\gflags.2.1.2.1\build\native\gflags.targets'))" />
     <Error Condition="!Exists('..\packages\glog.0.3.3.0\build\native\glog.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\glog.0.3.3.0\build\native\glog.props'))" />
     <Error Condition="!Exists('..\packages\glog.0.3.3.0\build\native\glog.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\glog.0.3.3.0\build\native\glog.targets'))" />
   </Target>
