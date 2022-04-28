@@ -25,7 +25,7 @@
 #include "Executive.h"
 #include "Workflow.h"
 
-//// Standard Library headers
+// Standard Library headers
 #include <glog/logging.h>
 
 // for debugging purposes change to 0 to 
@@ -52,19 +52,6 @@ Executive::~Executive()
 
 int main(int argc, char** argv)
 {
-    //string inputFileDir = "C:\\Users\\dwuli\\Downloads\\shakespeare";
-    //string inputFileDir = "C:\\Users\\dwuli\\OneDrive\\egrad\\EDwulit Projects\\MapReduce\\MapReduce\\TestInputFileDir";
-    //string outputFileDir = "C:\\Users\\dwuli\\OneDrive\\egrad\\EDwulit Projects\\MapReduce\\MapReduce\\TestOutputFileDir";
-    //string tempOutputFileDir = "C:\\Users\\dwuli\\OneDrive\\egrad\\EDwulit Projects\\MapReduce\\MapReduce\\TestTempOutputFileDir";
-    
-    //string inputFileDir = "C:\\Users\\clifguillaume\\Documents\\Object Oriented Projects\\MapReduce\\MapReduce\\MapReduce\\TestInputFileDir";
-    //string outputFileDir = "C:\\Users\\clifguillaume\\Documents\\Object Oriented Projects\\MapReduce\\MapReduce\\MapReduce\\TestOutputFileDir";
-    //string tempOutputFileDir = "C:\\Users\\clifguillaume\\Documents\\Object Oriented Projects\\MapReduce\\MapReduce\\MapReduce\\TestTempOutputFileDir";
-
-    //string inputFileDir = "C:\\Users\\clifguillaume\\Documents\\Object Oriented Projects\\TestData\\shakespeare";
-    //string outputFileDir = "C:\\Users\\clifguillaume\\Documents\\Object Oriented Projects\\MapReduce\\MapReduce\\MapReduce\\TestOutputFileDir";
-    //string tempOutputFileDir = "C:\\Users\\clifguillaume\\Documents\\Object Oriented Projects\\MapReduce\\MapReduce\\MapReduce\\TestTempOutputFileDir";
-
     ::google::InitGoogleLogging(argv[0]);
     google::SetLogDestination(google::INFO, "./logs/log");
     google::SetLogDestination(google::ERROR, "./logs/log");
@@ -77,7 +64,6 @@ int main(int argc, char** argv)
     string outputFileDir;
     string tempOutputFileDir;
 
-    // TODO: Make input and output file paths configurable via command line
     if (argc == 4)
     {
         inputFileDir = argv[1];

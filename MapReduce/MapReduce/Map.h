@@ -41,7 +41,9 @@ namespace MapReduce
 			virtual std::multimap<string, int> map(string inputFileName, string data);
 
 			/**
-			 *
+			 * Writes a map of words and counts to a specified output file
+			 * @param outputFileName - name of file to write to
+			 * @param keyValMap - map containing data to write to the file
 			 */
 			virtual void exportMap(string outputFileName, std::multimap<string, int> keyValMap);
 
@@ -53,11 +55,12 @@ namespace MapReduce
 			virtual string getKey(string str);
 
 			/**
-			 * Gets the value for the key passed in as an input
-			 * @param iSKey - Key to find the value for
+			 * Gets a list of values in a given list of data that correspond to the
+			 * same given key
+			 * @param iSKey - Key to find the values for
 			 * @param lstOfData - list of original data
 			 * @param rowsToSkip - number of entries in the lstOfData to skip over
-			 * @return list of key value found
+			 * @return list of values found corresponding to the key
 			 */
 			virtual list<int> getKeyValue(string iSKey, list<string> lstOfData, int rowsToSkip);
 
@@ -78,7 +81,7 @@ namespace MapReduce
 			/**
 			 * Converts a string to all lowercase letters
 			 * @input istr - input string
-			 * @return str with all characters coverted to lowercase letters
+			 * @return string with all characters coverted to lowercase letters
 			 */
 			virtual string lowerString(string str);
 
@@ -88,6 +91,7 @@ namespace MapReduce
 			 * @return vector of indexes in the string where quote found
 			 */
 			virtual vector<int> getQuoteIndexes(string str);
+
 		private:
 			
 	};

@@ -9,6 +9,7 @@
 //
 // File History:
 // 4/20/22 - Elizabeth - Initial file. Created mock methods
+// 4/27/22 - Elizabeth - Add more methods
 // ===============================================================================
 #pragma once
 
@@ -46,11 +47,14 @@ namespace MapReduce
 			//MOCK_METHOD(void, exportMap, (string outputFileName, (std::multimap<string, int>) keyValMap), (override));
 			//MOCK_METHOD(list<int>, getKeyValue, (string iSKey, list<string> lstOfData), (override));
 			MOCK_METHOD2(map, std::multimap<string, int>(string inputFileName, string data));
-			MOCK_METHOD1(getKey, string(string str));
 			MOCK_METHOD2(exportMap, void(string outputFileName, std::multimap<string, int> keyValMap));
-			MOCK_METHOD2(getKeyValue, list<int>(string iSKey, list<string> lstOfData));
+			MOCK_METHOD1(getKey, string(string str));
+			MOCK_METHOD3(getKeyValue, list<int>(string iSKey, list<string> lstOfData, int rowsToSkip));
 			MOCK_METHOD1(splitString, vector<string>(string str));
 			MOCK_METHOD1(removeSpecialChars, string(string str));
 			MOCK_METHOD1(lowerString, string(string str));
+			MOCK_METHOD1(getQuoteIndexes, vector<int>(string str));
+
+		private:
 	};
 }

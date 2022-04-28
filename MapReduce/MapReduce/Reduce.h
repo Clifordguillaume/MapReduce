@@ -5,7 +5,10 @@
 // 
 // Author: Elizabeth and Cliford
 // 
-// Description: 
+// Description: The reduce class is responsible for taking in a key and an
+//				iterator of integers, summing up the values of the iterator,
+//				and exporting the results to a file in the user-specified output
+//				directory.
 //
 // ===============================================================================
 #ifndef REDUCE_H
@@ -35,7 +38,7 @@ namespace MapReduce
 			 * reduceFunc is used to simplified the data
 			 * @param iKey - single key to retrieve the number of occurence for
 			 * @param iLstOfData- input list to compare the key to to get the key value
-			 * @return int
+			 * @return returns 0 to complete function task
 			 */
 			virtual int reduceFunc(string& iKey, list<int> iLstOfData);
 

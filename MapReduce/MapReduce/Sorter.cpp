@@ -5,11 +5,8 @@
 // 
 // Author: Elizabeth and Cliford
 // 
-// Description: The intermediary results will need to be sorted and aggregated. 
-//				The intermediate file will contain output such as: (“a”, 1), 
-//				(“the”, 1), (“is”, 1), (“the”, 1), (“a”, 1). The reducer requires 
-//				the same data in the format: (“a, [1, 1, …]), (“the”, [1, 1, …]), 
-//				(“is”, [1, …]), …
+// Description: The Sorter class is responsible for taking in inputs containing
+//				keys and one value per key, and sorting it in alphabetical order.
 //
 // File History:
 // 04/12/22 - Cliford - created the SortingClass and added the sort ()
