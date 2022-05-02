@@ -1,0 +1,582 @@
+Log file created at: 2022/05/01 21:53:39
+Running on machine: LAPTOP-HTUEDN9T
+Running duration (h:mm:ss): 0:00:00
+Log line format: [IWEF]yyyymmdd hh:mm:ss.uuuuuu threadid file:line] msg
+I20220501 21:53:39.344775  2252 Executive.cpp:60] Starting MapReduce program...
+I20220501 21:53:39.348978  2252 Executive.cpp:78] User provided input file dir: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestInputFileDir
+I20220501 21:53:39.349246  2252 Executive.cpp:79] User provided output file dir: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestOutputFileDir
+I20220501 21:53:39.349246  2252 Executive.cpp:80] User provided temp output file dir: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir
+I20220501 21:53:39.349246  2252 Workflow.cpp:110] Workflow.map -- BEGIN
+I20220501 21:53:39.349246  2252 FileManagement.cpp:193] FileManagement.getFilesInDirectory -- BEGIN
+I20220501 21:53:39.349246  2252 FileManagement.cpp:194] FileManagement.getFilesInDirectory -- Getting files in directory C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir
+I20220501 21:53:39.349246  2252 FileManagement.cpp:215] FileManagement.getFilesInDirectory -- No text files found in directory C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir
+I20220501 21:53:39.349246  2252 FileManagement.cpp:218] FileManagement.getFilesInDirectory -- END
+I20220501 21:53:39.349741  2252 FileManagement.cpp:193] FileManagement.getFilesInDirectory -- BEGIN
+I20220501 21:53:39.349741  2252 FileManagement.cpp:194] FileManagement.getFilesInDirectory -- Getting files in directory C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestInputFileDir
+I20220501 21:53:39.349741  2252 FileManagement.cpp:218] FileManagement.getFilesInDirectory -- END
+I20220501 21:53:39.349741  2252 FileManagement.cpp:228] FileManagement.readFile -- BEGIN
+I20220501 21:53:39.349741  2252 FileManagement.cpp:229] FileManagement.readFile -- Reading file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestInputFileDir\test1 - Copy.txt
+I20220501 21:53:39.349741  2252 FileManagement.cpp:278] FileManagement.readFile -- END
+I20220501 21:53:39.349741  2252 Map.cpp:68] Map.map -- BEGIN
+I20220501 21:53:39.349741  2252 Map.cpp:69] Map.map -- Received string: this is a test where a word like cat and catfish have similar letters this is a test where a word like cat and catfish have similar letters  ...from input file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestInputFileDir\test1 - Copy.txt
+I20220501 21:53:39.350239  2252 Map.cpp:170] Map.removeSpecialChars -- BEGIN
+I20220501 21:53:39.350239  2252 Map.cpp:171] Map.removeSpecialChars -- Removing special chars from string
+I20220501 21:53:39.350239  2252 Map.cpp:194] Map.removeSpecialChars -- Removed special chars from string
+I20220501 21:53:39.350239  2252 Map.cpp:140] Map.splitString -- BEGIN
+I20220501 21:53:39.350239  2252 Map.cpp:141] Map.splitString -- Splitting string
+I20220501 21:53:39.350239  2252 Map.cpp:160] Map.splitString -- END
+I20220501 21:53:39.350239  2252 Map.cpp:93] Map.map -- END
+I20220501 21:53:39.350735  2252 Map.cpp:103] Map.exportMap -- BEGIN
+I20220501 21:53:39.350735  2252 FileManagement.cpp:151] FileManagement.removeFile -- BEGIN
+I20220501 21:53:39.350735  2252 FileManagement.cpp:155] FileManagement.removeFile -- File does not exist. Nothing to remove. Filename: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1 - Copy-tempOutput.txt
+I20220501 21:53:39.350735  2252 FileManagement.cpp:156] FileManagement.removeFie -- END1
+I20220501 21:53:39.350735  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.350735  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: a, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1 - Copy-tempOutput.txt
+I20220501 21:53:39.351231  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.351231  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.351231  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: a, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1 - Copy-tempOutput.txt
+I20220501 21:53:39.351728  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.351728  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.351728  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: a, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1 - Copy-tempOutput.txt
+I20220501 21:53:39.351728  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.351728  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.352226  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: a, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1 - Copy-tempOutput.txt
+I20220501 21:53:39.352226  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.352226  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.352226  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: and, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1 - Copy-tempOutput.txt
+I20220501 21:53:39.352226  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.352721  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.352721  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: and, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1 - Copy-tempOutput.txt
+I20220501 21:53:39.352721  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.352721  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.352721  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: cat, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1 - Copy-tempOutput.txt
+I20220501 21:53:39.353219  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.353219  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.353219  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: cat, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1 - Copy-tempOutput.txt
+I20220501 21:53:39.353219  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.353219  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.353219  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: catfish, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1 - Copy-tempOutput.txt
+I20220501 21:53:39.353715  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.353715  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.353715  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: catfish, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1 - Copy-tempOutput.txt
+I20220501 21:53:39.353715  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.353715  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.353715  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: have, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1 - Copy-tempOutput.txt
+I20220501 21:53:39.354211  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.354211  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.354211  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: have, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1 - Copy-tempOutput.txt
+I20220501 21:53:39.354708  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.354708  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.354708  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: is, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1 - Copy-tempOutput.txt
+I20220501 21:53:39.354708  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.355216  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.355216  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: is, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1 - Copy-tempOutput.txt
+I20220501 21:53:39.355216  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.355216  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.355216  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: letters, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1 - Copy-tempOutput.txt
+I20220501 21:53:39.355701  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.356199  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.356199  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: letters, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1 - Copy-tempOutput.txt
+I20220501 21:53:39.356500  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.356695  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.356695  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: like, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1 - Copy-tempOutput.txt
+I20220501 21:53:39.356695  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.356695  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.356695  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: like, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1 - Copy-tempOutput.txt
+I20220501 21:53:39.356695  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.357192  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.357192  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: similar, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1 - Copy-tempOutput.txt
+I20220501 21:53:39.357192  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.357192  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.357192  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: similar, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1 - Copy-tempOutput.txt
+I20220501 21:53:39.357688  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.357688  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.357688  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: test, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1 - Copy-tempOutput.txt
+I20220501 21:53:39.357688  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.357688  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.357688  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: test, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1 - Copy-tempOutput.txt
+I20220501 21:53:39.358186  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.358186  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.358186  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: this, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1 - Copy-tempOutput.txt
+I20220501 21:53:39.358186  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.358186  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.358186  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: this, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1 - Copy-tempOutput.txt
+I20220501 21:53:39.358681  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.358681  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.358681  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: where, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1 - Copy-tempOutput.txt
+I20220501 21:53:39.358681  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.359179  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.359179  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: where, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1 - Copy-tempOutput.txt
+I20220501 21:53:39.359179  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.359179  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.359179  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: word, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1 - Copy-tempOutput.txt
+I20220501 21:53:39.359179  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.360756  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.360756  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: word, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1 - Copy-tempOutput.txt
+I20220501 21:53:39.361166  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.361166  2252 Map.cpp:132] Map.exportMap -- END
+I20220501 21:53:39.361166  2252 FileManagement.cpp:228] FileManagement.readFile -- BEGIN
+I20220501 21:53:39.361166  2252 FileManagement.cpp:229] FileManagement.readFile -- Reading file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestInputFileDir\test1.txt
+I20220501 21:53:39.361661  2252 FileManagement.cpp:278] FileManagement.readFile -- END
+I20220501 21:53:39.361661  2252 Map.cpp:68] Map.map -- BEGIN
+I20220501 21:53:39.361661  2252 Map.cpp:69] Map.map -- Received string: this is a test where a word like cat and catfish have similar letters this is a test where a word like cat and catfish have similar letters  ...from input file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestInputFileDir\test1.txt
+I20220501 21:53:39.361661  2252 Map.cpp:170] Map.removeSpecialChars -- BEGIN
+I20220501 21:53:39.361661  2252 Map.cpp:171] Map.removeSpecialChars -- Removing special chars from string
+I20220501 21:53:39.361661  2252 Map.cpp:194] Map.removeSpecialChars -- Removed special chars from string
+I20220501 21:53:39.361661  2252 Map.cpp:140] Map.splitString -- BEGIN
+I20220501 21:53:39.361661  2252 Map.cpp:141] Map.splitString -- Splitting string
+I20220501 21:53:39.361661  2252 Map.cpp:160] Map.splitString -- END
+I20220501 21:53:39.362159  2252 Map.cpp:93] Map.map -- END
+I20220501 21:53:39.362159  2252 Map.cpp:103] Map.exportMap -- BEGIN
+I20220501 21:53:39.362159  2252 FileManagement.cpp:151] FileManagement.removeFile -- BEGIN
+I20220501 21:53:39.362159  2252 FileManagement.cpp:155] FileManagement.removeFile -- File does not exist. Nothing to remove. Filename: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1-tempOutput.txt
+I20220501 21:53:39.362159  2252 FileManagement.cpp:156] FileManagement.removeFie -- END1
+I20220501 21:53:39.362159  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.362159  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: a, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1-tempOutput.txt
+I20220501 21:53:39.362655  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.362655  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.362655  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: a, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1-tempOutput.txt
+I20220501 21:53:39.363152  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.363152  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.363152  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: a, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1-tempOutput.txt
+I20220501 21:53:39.363152  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.363648  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.363648  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: a, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1-tempOutput.txt
+I20220501 21:53:39.363648  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.363648  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.363648  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: and, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1-tempOutput.txt
+I20220501 21:53:39.364145  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.364145  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.364145  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: and, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1-tempOutput.txt
+I20220501 21:53:39.364641  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.364641  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.364641  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: cat, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1-tempOutput.txt
+I20220501 21:53:39.364641  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.364641  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.364641  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: cat, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1-tempOutput.txt
+I20220501 21:53:39.365139  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.365139  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.365139  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: catfish, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1-tempOutput.txt
+I20220501 21:53:39.365139  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.365139  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.365635  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: catfish, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1-tempOutput.txt
+I20220501 21:53:39.365635  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.365635  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.365635  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: have, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1-tempOutput.txt
+I20220501 21:53:39.366132  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.366132  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.366132  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: have, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1-tempOutput.txt
+I20220501 21:53:39.366132  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.366132  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.366132  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: is, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1-tempOutput.txt
+I20220501 21:53:39.366638  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.366638  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.366638  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: is, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1-tempOutput.txt
+I20220501 21:53:39.367125  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.367125  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.367125  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: letters, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1-tempOutput.txt
+I20220501 21:53:39.367125  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.367621  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.367621  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: letters, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1-tempOutput.txt
+I20220501 21:53:39.367621  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.367621  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.367621  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: like, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1-tempOutput.txt
+I20220501 21:53:39.368177  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.368177  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.368177  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: like, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1-tempOutput.txt
+I20220501 21:53:39.368615  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.368615  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.368615  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: similar, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1-tempOutput.txt
+I20220501 21:53:39.369112  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.369112  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.369112  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: similar, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1-tempOutput.txt
+I20220501 21:53:39.369112  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.369112  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.369608  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: test, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1-tempOutput.txt
+I20220501 21:53:39.369608  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.369608  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.369608  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: test, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1-tempOutput.txt
+I20220501 21:53:39.370106  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.370106  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.370106  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: this, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1-tempOutput.txt
+I20220501 21:53:39.370106  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.370602  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.370602  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: this, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1-tempOutput.txt
+I20220501 21:53:39.370602  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.371099  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.371099  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: where, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1-tempOutput.txt
+I20220501 21:53:39.371099  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.371099  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.371099  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: where, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1-tempOutput.txt
+I20220501 21:53:39.371595  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.371595  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.371595  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: word, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1-tempOutput.txt
+I20220501 21:53:39.371595  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.371595  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.371595  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: word, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1-tempOutput.txt
+I20220501 21:53:39.372092  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.372092  2252 Map.cpp:132] Map.exportMap -- END
+I20220501 21:53:39.372092  2252 FileManagement.cpp:228] FileManagement.readFile -- BEGIN
+I20220501 21:53:39.372092  2252 FileManagement.cpp:229] FileManagement.readFile -- Reading file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestInputFileDir\test2.txt
+I20220501 21:53:39.372092  2252 FileManagement.cpp:278] FileManagement.readFile -- END
+I20220501 21:53:39.372092  2252 Map.cpp:68] Map.map -- BEGIN
+I20220501 21:53:39.372092  2252 Map.cpp:69] Map.map -- Received string: what is this thing here  ...from input file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestInputFileDir\test2.txt
+I20220501 21:53:39.372092  2252 Map.cpp:170] Map.removeSpecialChars -- BEGIN
+I20220501 21:53:39.372092  2252 Map.cpp:171] Map.removeSpecialChars -- Removing special chars from string
+I20220501 21:53:39.372092  2252 Map.cpp:194] Map.removeSpecialChars -- Removed special chars from string
+I20220501 21:53:39.372092  2252 Map.cpp:140] Map.splitString -- BEGIN
+I20220501 21:53:39.372092  2252 Map.cpp:141] Map.splitString -- Splitting string
+I20220501 21:53:39.372588  2252 Map.cpp:160] Map.splitString -- END
+I20220501 21:53:39.372588  2252 Map.cpp:93] Map.map -- END
+I20220501 21:53:39.372588  2252 Map.cpp:103] Map.exportMap -- BEGIN
+I20220501 21:53:39.372588  2252 FileManagement.cpp:151] FileManagement.removeFile -- BEGIN
+I20220501 21:53:39.372588  2252 FileManagement.cpp:155] FileManagement.removeFile -- File does not exist. Nothing to remove. Filename: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test2-tempOutput.txt
+I20220501 21:53:39.372588  2252 FileManagement.cpp:156] FileManagement.removeFie -- END1
+I20220501 21:53:39.372588  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.372588  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: here, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test2-tempOutput.txt
+I20220501 21:53:39.373085  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.373085  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.373085  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: is, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test2-tempOutput.txt
+I20220501 21:53:39.373085  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.373581  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.373581  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: thing, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test2-tempOutput.txt
+I20220501 21:53:39.373581  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.373581  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.373581  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: this, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test2-tempOutput.txt
+I20220501 21:53:39.374079  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.374079  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.374079  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: what, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test2-tempOutput.txt
+I20220501 21:53:39.374079  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.374079  2252 Map.cpp:132] Map.exportMap -- END
+I20220501 21:53:39.374079  2252 FileManagement.cpp:228] FileManagement.readFile -- BEGIN
+I20220501 21:53:39.374079  2252 FileManagement.cpp:229] FileManagement.readFile -- Reading file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestInputFileDir\test3.txt
+I20220501 21:53:39.374079  2252 FileManagement.cpp:278] FileManagement.readFile -- END
+I20220501 21:53:39.374575  2252 Map.cpp:68] Map.map -- BEGIN
+I20220501 21:53:39.374575  2252 Map.cpp:69] Map.map -- Received string: this is the last test of the night  ...from input file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestInputFileDir\test3.txt
+I20220501 21:53:39.374575  2252 Map.cpp:170] Map.removeSpecialChars -- BEGIN
+I20220501 21:53:39.374575  2252 Map.cpp:171] Map.removeSpecialChars -- Removing special chars from string
+I20220501 21:53:39.374575  2252 Map.cpp:194] Map.removeSpecialChars -- Removed special chars from string
+I20220501 21:53:39.374575  2252 Map.cpp:140] Map.splitString -- BEGIN
+I20220501 21:53:39.374575  2252 Map.cpp:141] Map.splitString -- Splitting string
+I20220501 21:53:39.374575  2252 Map.cpp:160] Map.splitString -- END
+I20220501 21:53:39.374575  2252 Map.cpp:93] Map.map -- END
+I20220501 21:53:39.374575  2252 Map.cpp:103] Map.exportMap -- BEGIN
+I20220501 21:53:39.374575  2252 FileManagement.cpp:151] FileManagement.removeFile -- BEGIN
+I20220501 21:53:39.374575  2252 FileManagement.cpp:155] FileManagement.removeFile -- File does not exist. Nothing to remove. Filename: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test3-tempOutput.txt
+I20220501 21:53:39.374575  2252 FileManagement.cpp:156] FileManagement.removeFie -- END1
+I20220501 21:53:39.375072  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.375072  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: is, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test3-tempOutput.txt
+I20220501 21:53:39.375072  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.377555  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.377555  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: last, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test3-tempOutput.txt
+I20220501 21:53:39.378051  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.378051  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.378051  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: night, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test3-tempOutput.txt
+I20220501 21:53:39.378051  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.378051  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.378548  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: of, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test3-tempOutput.txt
+I20220501 21:53:39.378548  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.378548  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.378548  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: test, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test3-tempOutput.txt
+I20220501 21:53:39.378548  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.379046  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.379046  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: the, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test3-tempOutput.txt
+I20220501 21:53:39.379046  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.379046  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.379046  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: the, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test3-tempOutput.txt
+I20220501 21:53:39.379542  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.379542  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.379542  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: this, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test3-tempOutput.txt
+I20220501 21:53:39.379542  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.379542  2252 Map.cpp:132] Map.exportMap -- END
+I20220501 21:53:39.379542  2252 FileManagement.cpp:228] FileManagement.readFile -- BEGIN
+I20220501 21:53:39.379542  2252 FileManagement.cpp:229] FileManagement.readFile -- Reading file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestInputFileDir\testinput.txt
+I20220501 21:53:39.380039  2252 FileManagement.cpp:278] FileManagement.readFile -- END
+I20220501 21:53:39.380039  2252 Map.cpp:68] Map.map -- BEGIN
+I20220501 21:53:39.380039  2252 Map.cpp:69] Map.map -- Received string: The quick brown fox jumps over the lazy dog  T'he quick brown fox jumps over the lazy dog  the quick brown fox jumps over the lazy  dog testing test test?ing random  ...from input file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestInputFileDir\testinput.txt
+I20220501 21:53:39.380039  2252 Map.cpp:170] Map.removeSpecialChars -- BEGIN
+I20220501 21:53:39.380039  2252 Map.cpp:171] Map.removeSpecialChars -- Removing special chars from string
+I20220501 21:53:39.380039  2252 Map.cpp:194] Map.removeSpecialChars -- Removed special chars from string
+I20220501 21:53:39.380039  2252 Map.cpp:140] Map.splitString -- BEGIN
+I20220501 21:53:39.380039  2252 Map.cpp:141] Map.splitString -- Splitting string
+I20220501 21:53:39.380535  2252 Map.cpp:160] Map.splitString -- END
+I20220501 21:53:39.380535  2252 Map.cpp:93] Map.map -- END
+I20220501 21:53:39.380535  2252 Map.cpp:103] Map.exportMap -- BEGIN
+I20220501 21:53:39.380535  2252 FileManagement.cpp:151] FileManagement.removeFile -- BEGIN
+I20220501 21:53:39.380535  2252 FileManagement.cpp:155] FileManagement.removeFile -- File does not exist. Nothing to remove. Filename: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testinput-tempOutput.txt
+I20220501 21:53:39.380535  2252 FileManagement.cpp:156] FileManagement.removeFie -- END1
+I20220501 21:53:39.380535  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.380535  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: brown, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testinput-tempOutput.txt
+I20220501 21:53:39.381031  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.381031  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.381031  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: brown, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testinput-tempOutput.txt
+I20220501 21:53:39.381528  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.381528  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.381528  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: brown, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testinput-tempOutput.txt
+I20220501 21:53:39.381528  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.381528  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.382025  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: dog, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testinput-tempOutput.txt
+I20220501 21:53:39.382025  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.382025  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.382025  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: dog, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testinput-tempOutput.txt
+I20220501 21:53:39.382025  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.382025  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.382025  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: dog, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testinput-tempOutput.txt
+I20220501 21:53:39.382521  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.382521  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.382521  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: fox, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testinput-tempOutput.txt
+I20220501 21:53:39.382521  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.382521  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.382521  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: fox, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testinput-tempOutput.txt
+I20220501 21:53:39.383018  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.383018  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.383018  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: fox, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testinput-tempOutput.txt
+I20220501 21:53:39.383018  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.383515  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.383515  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: jumps, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testinput-tempOutput.txt
+I20220501 21:53:39.383515  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.383515  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.383515  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: jumps, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testinput-tempOutput.txt
+I20220501 21:53:39.383515  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.384012  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.384012  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: jumps, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testinput-tempOutput.txt
+I20220501 21:53:39.384012  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.384012  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.384012  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: lazy, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testinput-tempOutput.txt
+I20220501 21:53:39.384012  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.384508  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.384508  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: lazy, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testinput-tempOutput.txt
+I20220501 21:53:39.384508  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.384508  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.384508  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: lazy, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testinput-tempOutput.txt
+I20220501 21:53:39.384508  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.385005  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.385005  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: over, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testinput-tempOutput.txt
+I20220501 21:53:39.385005  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.385005  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.385005  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: over, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testinput-tempOutput.txt
+I20220501 21:53:39.385005  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.385501  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.385501  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: over, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testinput-tempOutput.txt
+I20220501 21:53:39.385501  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.385501  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.385501  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: quick, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testinput-tempOutput.txt
+I20220501 21:53:39.385999  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.385999  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.385999  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: quick, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testinput-tempOutput.txt
+I20220501 21:53:39.386495  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.386495  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.386495  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: quick, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testinput-tempOutput.txt
+I20220501 21:53:39.386495  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.386991  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.386991  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: random, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testinput-tempOutput.txt
+I20220501 21:53:39.386991  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.386991  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.386991  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: test, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testinput-tempOutput.txt
+I20220501 21:53:39.387488  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.387488  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.387488  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: testing, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testinput-tempOutput.txt
+I20220501 21:53:39.387985  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.387985  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.387985  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: testing, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testinput-tempOutput.txt
+I20220501 21:53:39.387985  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.387985  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.387985  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: the, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testinput-tempOutput.txt
+I20220501 21:53:39.388482  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.388482  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.388482  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: the, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testinput-tempOutput.txt
+I20220501 21:53:39.388482  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.388482  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.388482  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: the, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testinput-tempOutput.txt
+I20220501 21:53:39.388978  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.388978  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.388978  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: the, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testinput-tempOutput.txt
+I20220501 21:53:39.388978  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.388978  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.388978  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: the, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testinput-tempOutput.txt
+I20220501 21:53:39.389475  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.389475  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.389475  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: the, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testinput-tempOutput.txt
+I20220501 21:53:39.389475  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.389475  2252 Map.cpp:132] Map.exportMap -- END
+I20220501 21:53:39.389475  2252 FileManagement.cpp:228] FileManagement.readFile -- BEGIN
+I20220501 21:53:39.389475  2252 FileManagement.cpp:229] FileManagement.readFile -- Reading file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestInputFileDir\testoutput.txt
+I20220501 21:53:39.389475  2252 FileManagement.cpp:278] FileManagement.readFile -- END
+I20220501 21:53:39.389475  2252 Map.cpp:68] Map.map -- BEGIN
+I20220501 21:53:39.389972  2252 Map.cpp:69] Map.map -- Received string: my text here!  ...from input file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestInputFileDir\testoutput.txt
+I20220501 21:53:39.389972  2252 Map.cpp:170] Map.removeSpecialChars -- BEGIN
+I20220501 21:53:39.389972  2252 Map.cpp:171] Map.removeSpecialChars -- Removing special chars from string
+I20220501 21:53:39.389972  2252 Map.cpp:194] Map.removeSpecialChars -- Removed special chars from string
+I20220501 21:53:39.389972  2252 Map.cpp:140] Map.splitString -- BEGIN
+I20220501 21:53:39.389972  2252 Map.cpp:141] Map.splitString -- Splitting string
+I20220501 21:53:39.389972  2252 Map.cpp:160] Map.splitString -- END
+I20220501 21:53:39.389972  2252 Map.cpp:93] Map.map -- END
+I20220501 21:53:39.389972  2252 Map.cpp:103] Map.exportMap -- BEGIN
+I20220501 21:53:39.389972  2252 FileManagement.cpp:151] FileManagement.removeFile -- BEGIN
+I20220501 21:53:39.389972  2252 FileManagement.cpp:155] FileManagement.removeFile -- File does not exist. Nothing to remove. Filename: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testoutput-tempOutput.txt
+I20220501 21:53:39.389972  2252 FileManagement.cpp:156] FileManagement.removeFie -- END1
+I20220501 21:53:39.389972  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.389972  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: here, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testoutput-tempOutput.txt
+I20220501 21:53:39.390468  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.393448  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.393448  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: my, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testoutput-tempOutput.txt
+I20220501 21:53:39.393945  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.393945  2252 FileManagement.cpp:343] FileManagement.writeKeyValueToFile -- BEGIN
+I20220501 21:53:39.393945  2252 FileManagement.cpp:344] FileManagement.writeKeyValueToFile -- key: text, value: 1, file: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testoutput-tempOutput.txt
+I20220501 21:53:39.393945  2252 FileManagement.cpp:372] FileManagement.writeKeyValueToFile -- END
+I20220501 21:53:39.394441  2252 Map.cpp:132] Map.exportMap -- END
+I20220501 21:53:39.394441  2252 Workflow.cpp:171] Workflow.map -- END
+I20220501 21:53:39.394441  2252 Workflow.cpp:181] Workflow.sort -- BEGIN
+I20220501 21:53:39.394441  2252 FileManagement.cpp:193] FileManagement.getFilesInDirectory -- BEGIN
+I20220501 21:53:39.394441  2252 FileManagement.cpp:194] FileManagement.getFilesInDirectory -- Getting files in directory C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir
+I20220501 21:53:39.394441  2252 FileManagement.cpp:218] FileManagement.getFilesInDirectory -- END
+I20220501 21:53:39.394441  2252 Sorter.cpp:52] Sorter.sort -- BEGIN
+I20220501 21:53:39.394939  2252 Sorter.cpp:56] Sorter.sort -- Sorting contents of file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1 - Copy-tempOutput.txt
+I20220501 21:53:39.394939  2252 FileManagement.cpp:228] FileManagement.readFile -- BEGIN
+I20220501 21:53:39.394939  2252 FileManagement.cpp:229] FileManagement.readFile -- Reading file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1 - Copy-tempOutput.txt
+I20220501 21:53:39.394939  2252 FileManagement.cpp:278] FileManagement.readFile -- END
+I20220501 21:53:39.394939  2252 FileManagement.cpp:288] FileManagement.writeToFile -- BEGIN
+I20220501 21:53:39.395435  2252 FileManagement.cpp:334] FileManagement.writeToFile -- END
+I20220501 21:53:39.395435  2252 Sorter.cpp:77] Sorter.sort -- END
+I20220501 21:53:39.395435  2252 Sorter.cpp:52] Sorter.sort -- BEGIN
+I20220501 21:53:39.395435  2252 Sorter.cpp:56] Sorter.sort -- Sorting contents of file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1-tempOutput.txt
+I20220501 21:53:39.395435  2252 FileManagement.cpp:228] FileManagement.readFile -- BEGIN
+I20220501 21:53:39.395435  2252 FileManagement.cpp:229] FileManagement.readFile -- Reading file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1-tempOutput.txt
+I20220501 21:53:39.395931  2252 FileManagement.cpp:278] FileManagement.readFile -- END
+I20220501 21:53:39.395931  2252 FileManagement.cpp:288] FileManagement.writeToFile -- BEGIN
+I20220501 21:53:39.396428  2252 FileManagement.cpp:334] FileManagement.writeToFile -- END
+I20220501 21:53:39.396428  2252 Sorter.cpp:77] Sorter.sort -- END
+I20220501 21:53:39.396428  2252 Sorter.cpp:52] Sorter.sort -- BEGIN
+I20220501 21:53:39.396428  2252 Sorter.cpp:56] Sorter.sort -- Sorting contents of file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test2-tempOutput.txt
+I20220501 21:53:39.396428  2252 FileManagement.cpp:228] FileManagement.readFile -- BEGIN
+I20220501 21:53:39.396428  2252 FileManagement.cpp:229] FileManagement.readFile -- Reading file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test2-tempOutput.txt
+I20220501 21:53:39.396428  2252 FileManagement.cpp:278] FileManagement.readFile -- END
+I20220501 21:53:39.396428  2252 FileManagement.cpp:288] FileManagement.writeToFile -- BEGIN
+I20220501 21:53:39.396925  2252 FileManagement.cpp:334] FileManagement.writeToFile -- END
+I20220501 21:53:39.396925  2252 Sorter.cpp:77] Sorter.sort -- END
+I20220501 21:53:39.396925  2252 Sorter.cpp:52] Sorter.sort -- BEGIN
+I20220501 21:53:39.396925  2252 Sorter.cpp:56] Sorter.sort -- Sorting contents of file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test3-tempOutput.txt
+I20220501 21:53:39.396925  2252 FileManagement.cpp:228] FileManagement.readFile -- BEGIN
+I20220501 21:53:39.396925  2252 FileManagement.cpp:229] FileManagement.readFile -- Reading file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test3-tempOutput.txt
+I20220501 21:53:39.396925  2252 FileManagement.cpp:278] FileManagement.readFile -- END
+I20220501 21:53:39.396925  2252 FileManagement.cpp:288] FileManagement.writeToFile -- BEGIN
+I20220501 21:53:39.397423  2252 FileManagement.cpp:334] FileManagement.writeToFile -- END
+I20220501 21:53:39.397423  2252 Sorter.cpp:77] Sorter.sort -- END
+I20220501 21:53:39.397423  2252 Sorter.cpp:52] Sorter.sort -- BEGIN
+I20220501 21:53:39.397423  2252 Sorter.cpp:56] Sorter.sort -- Sorting contents of file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testinput-tempOutput.txt
+I20220501 21:53:39.397423  2252 FileManagement.cpp:228] FileManagement.readFile -- BEGIN
+I20220501 21:53:39.397423  2252 FileManagement.cpp:229] FileManagement.readFile -- Reading file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testinput-tempOutput.txt
+I20220501 21:53:39.397423  2252 FileManagement.cpp:278] FileManagement.readFile -- END
+I20220501 21:53:39.397423  2252 FileManagement.cpp:288] FileManagement.writeToFile -- BEGIN
+I20220501 21:53:39.397918  2252 FileManagement.cpp:334] FileManagement.writeToFile -- END
+I20220501 21:53:39.397918  2252 Sorter.cpp:77] Sorter.sort -- END
+I20220501 21:53:39.397918  2252 Sorter.cpp:52] Sorter.sort -- BEGIN
+I20220501 21:53:39.397918  2252 Sorter.cpp:56] Sorter.sort -- Sorting contents of file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testoutput-tempOutput.txt
+I20220501 21:53:39.397918  2252 FileManagement.cpp:228] FileManagement.readFile -- BEGIN
+I20220501 21:53:39.397918  2252 FileManagement.cpp:229] FileManagement.readFile -- Reading file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testoutput-tempOutput.txt
+I20220501 21:53:39.397918  2252 FileManagement.cpp:278] FileManagement.readFile -- END
+I20220501 21:53:39.398416  2252 FileManagement.cpp:288] FileManagement.writeToFile -- BEGIN
+I20220501 21:53:39.398416  2252 FileManagement.cpp:334] FileManagement.writeToFile -- END
+I20220501 21:53:39.398416  2252 Sorter.cpp:77] Sorter.sort -- END
+I20220501 21:53:39.398416  2252 Workflow.cpp:199] Workflow.sort -- END
+I20220501 21:53:39.398416  2252 Workflow.cpp:210] Workflow.reduce -- BEGIN
+I20220501 21:53:39.398912  2252 FileManagement.cpp:193] FileManagement.getFilesInDirectory -- BEGIN
+I20220501 21:53:39.398912  2252 FileManagement.cpp:194] FileManagement.getFilesInDirectory -- Getting files in directory C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir
+I20220501 21:53:39.398912  2252 FileManagement.cpp:218] FileManagement.getFilesInDirectory -- END
+I20220501 21:53:39.399408  2252 FileManagement.cpp:228] FileManagement.readFile -- BEGIN
+I20220501 21:53:39.399408  2252 FileManagement.cpp:229] FileManagement.readFile -- Reading file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1 - Copy-tempOutput.txt
+I20220501 21:53:39.399408  2252 FileManagement.cpp:278] FileManagement.readFile -- END
+I20220501 21:53:39.399408  2252 FileManagement.cpp:228] FileManagement.readFile -- BEGIN
+I20220501 21:53:39.399408  2252 FileManagement.cpp:229] FileManagement.readFile -- Reading file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1-tempOutput.txt
+I20220501 21:53:39.399905  2252 FileManagement.cpp:278] FileManagement.readFile -- END
+I20220501 21:53:39.399905  2252 FileManagement.cpp:228] FileManagement.readFile -- BEGIN
+I20220501 21:53:39.399905  2252 FileManagement.cpp:229] FileManagement.readFile -- Reading file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test2-tempOutput.txt
+I20220501 21:53:39.399905  2252 FileManagement.cpp:278] FileManagement.readFile -- END
+I20220501 21:53:39.400403  2252 FileManagement.cpp:228] FileManagement.readFile -- BEGIN
+I20220501 21:53:39.400403  2252 FileManagement.cpp:229] FileManagement.readFile -- Reading file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test3-tempOutput.txt
+I20220501 21:53:39.400403  2252 FileManagement.cpp:278] FileManagement.readFile -- END
+I20220501 21:53:39.400403  2252 FileManagement.cpp:228] FileManagement.readFile -- BEGIN
+I20220501 21:53:39.400403  2252 FileManagement.cpp:229] FileManagement.readFile -- Reading file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testinput-tempOutput.txt
+I20220501 21:53:39.400898  2252 FileManagement.cpp:278] FileManagement.readFile -- END
+I20220501 21:53:39.400898  2252 FileManagement.cpp:228] FileManagement.readFile -- BEGIN
+I20220501 21:53:39.400898  2252 FileManagement.cpp:229] FileManagement.readFile -- Reading file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testoutput-tempOutput.txt
+I20220501 21:53:39.400898  2252 FileManagement.cpp:278] FileManagement.readFile -- END
+I20220501 21:53:39.401892  2252 Reduce.cpp:59] Reduce.reduceFunc -- BEGIN
+I20220501 21:53:39.402388  2252 Reduce.cpp:95] Reduce.reduceFunc -- END
+I20220501 21:53:39.402885  2252 Reduce.cpp:59] Reduce.reduceFunc -- BEGIN
+I20220501 21:53:39.402885  2252 Reduce.cpp:95] Reduce.reduceFunc -- END
+I20220501 21:53:39.403878  2252 Reduce.cpp:59] Reduce.reduceFunc -- BEGIN
+I20220501 21:53:39.404376  2252 Reduce.cpp:95] Reduce.reduceFunc -- END
+I20220501 21:53:39.404871  2252 Reduce.cpp:59] Reduce.reduceFunc -- BEGIN
+I20220501 21:53:39.404871  2252 Reduce.cpp:95] Reduce.reduceFunc -- END
+I20220501 21:53:39.405369  2252 Reduce.cpp:59] Reduce.reduceFunc -- BEGIN
+I20220501 21:53:39.405369  2252 Reduce.cpp:95] Reduce.reduceFunc -- END
+I20220501 21:53:39.405865  2252 Reduce.cpp:59] Reduce.reduceFunc -- BEGIN
+I20220501 21:53:39.406858  2252 Reduce.cpp:95] Reduce.reduceFunc -- END
+I20220501 21:53:39.407851  2252 Reduce.cpp:59] Reduce.reduceFunc -- BEGIN
+I20220501 21:53:39.407851  2252 Reduce.cpp:95] Reduce.reduceFunc -- END
+I20220501 21:53:39.408845  2252 Reduce.cpp:59] Reduce.reduceFunc -- BEGIN
+I20220501 21:53:39.408845  2252 Reduce.cpp:95] Reduce.reduceFunc -- END
+I20220501 21:53:39.410336  2252 Reduce.cpp:59] Reduce.reduceFunc -- BEGIN
+I20220501 21:53:39.410336  2252 Reduce.cpp:95] Reduce.reduceFunc -- END
+I20220501 21:53:39.410831  2252 Reduce.cpp:59] Reduce.reduceFunc -- BEGIN
+I20220501 21:53:39.411329  2252 Reduce.cpp:95] Reduce.reduceFunc -- END
+I20220501 21:53:39.411329  2252 Reduce.cpp:59] Reduce.reduceFunc -- BEGIN
+I20220501 21:53:39.411825  2252 Reduce.cpp:95] Reduce.reduceFunc -- END
+I20220501 21:53:39.412322  2252 Reduce.cpp:59] Reduce.reduceFunc -- BEGIN
+I20220501 21:53:39.412818  2252 Reduce.cpp:95] Reduce.reduceFunc -- END
+I20220501 21:53:39.413316  2252 Reduce.cpp:59] Reduce.reduceFunc -- BEGIN
+I20220501 21:53:39.413316  2252 Reduce.cpp:95] Reduce.reduceFunc -- END
+I20220501 21:53:39.413811  2252 Reduce.cpp:59] Reduce.reduceFunc -- BEGIN
+I20220501 21:53:39.413811  2252 Reduce.cpp:95] Reduce.reduceFunc -- END
+I20220501 21:53:39.414309  2252 Reduce.cpp:59] Reduce.reduceFunc -- BEGIN
+I20220501 21:53:39.414309  2252 Reduce.cpp:95] Reduce.reduceFunc -- END
+I20220501 21:53:39.414805  2252 Reduce.cpp:59] Reduce.reduceFunc -- BEGIN
+I20220501 21:53:39.414805  2252 Reduce.cpp:95] Reduce.reduceFunc -- END
+I20220501 21:53:39.415302  2252 Reduce.cpp:59] Reduce.reduceFunc -- BEGIN
+I20220501 21:53:39.415302  2252 Reduce.cpp:95] Reduce.reduceFunc -- END
+I20220501 21:53:39.415798  2252 Reduce.cpp:59] Reduce.reduceFunc -- BEGIN
+I20220501 21:53:39.415798  2252 Reduce.cpp:95] Reduce.reduceFunc -- END
+I20220501 21:53:39.416296  2252 Reduce.cpp:59] Reduce.reduceFunc -- BEGIN
+I20220501 21:53:39.416296  2252 Reduce.cpp:95] Reduce.reduceFunc -- END
+I20220501 21:53:39.416793  2252 Reduce.cpp:59] Reduce.reduceFunc -- BEGIN
+I20220501 21:53:39.417292  2252 Reduce.cpp:95] Reduce.reduceFunc -- END
+I20220501 21:53:39.417785  2252 Reduce.cpp:59] Reduce.reduceFunc -- BEGIN
+I20220501 21:53:39.417785  2252 Reduce.cpp:95] Reduce.reduceFunc -- END
+I20220501 21:53:39.418282  2252 Reduce.cpp:59] Reduce.reduceFunc -- BEGIN
+I20220501 21:53:39.418778  2252 Reduce.cpp:95] Reduce.reduceFunc -- END
+I20220501 21:53:39.418778  2252 Reduce.cpp:59] Reduce.reduceFunc -- BEGIN
+I20220501 21:53:39.419275  2252 Reduce.cpp:95] Reduce.reduceFunc -- END
+I20220501 21:53:39.419771  2252 Reduce.cpp:59] Reduce.reduceFunc -- BEGIN
+I20220501 21:53:39.419771  2252 Reduce.cpp:95] Reduce.reduceFunc -- END
+I20220501 21:53:39.420269  2252 Reduce.cpp:59] Reduce.reduceFunc -- BEGIN
+I20220501 21:53:39.420269  2252 Reduce.cpp:95] Reduce.reduceFunc -- END
+I20220501 21:53:39.420765  2252 Reduce.cpp:59] Reduce.reduceFunc -- BEGIN
+I20220501 21:53:39.420765  2252 Reduce.cpp:95] Reduce.reduceFunc -- END
+I20220501 21:53:39.421758  2252 Reduce.cpp:59] Reduce.reduceFunc -- BEGIN
+I20220501 21:53:39.423250  2252 Reduce.cpp:95] Reduce.reduceFunc -- END
+I20220501 21:53:39.423748  2252 Reduce.cpp:59] Reduce.reduceFunc -- BEGIN
+I20220501 21:53:39.423748  2252 Reduce.cpp:95] Reduce.reduceFunc -- END
+I20220501 21:53:39.423748  2252 Reduce.cpp:59] Reduce.reduceFunc -- BEGIN
+I20220501 21:53:39.423748  2252 Reduce.cpp:95] Reduce.reduceFunc -- END
+I20220501 21:53:39.424243  2252 Reduce.cpp:59] Reduce.reduceFunc -- BEGIN
+I20220501 21:53:39.424243  2252 Reduce.cpp:95] Reduce.reduceFunc -- END
+I20220501 21:53:39.424741  2252 Reduce.cpp:59] Reduce.reduceFunc -- BEGIN
+I20220501 21:53:39.424741  2252 Reduce.cpp:95] Reduce.reduceFunc -- END
+I20220501 21:53:39.424741  2252 Reduce.cpp:105] Reduce.exportFunc -- BEGIN
+I20220501 21:53:39.424741  2252 FileManagement.cpp:288] FileManagement.writeToFile -- BEGIN
+I20220501 21:53:39.425236  2252 FileManagement.cpp:334] FileManagement.writeToFile -- END
+I20220501 21:53:39.425732  2252 Reduce.cpp:131] Reduce.exportFunc -- END
+I20220501 21:53:39.425732  2252 FileManagement.cpp:380] FileManagement.createSuccessFile -- BEGIN
+I20220501 21:53:39.425732  2252 FileManagement.cpp:151] FileManagement.removeFile -- BEGIN
+I20220501 21:53:39.425732  2252 FileManagement.cpp:160] FileManagement.removeFile -- Removing file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestOutputFileDir\SUCCESS.txt
+I20220501 21:53:39.425732  2252 FileManagement.cpp:177] FileManagement.removeFie -- END
+I20220501 21:53:39.425732  2252 FileManagement.cpp:288] FileManagement.writeToFile -- BEGIN
+I20220501 21:53:39.426229  2252 FileManagement.cpp:334] FileManagement.writeToFile -- END
+I20220501 21:53:39.426229  2252 FileManagement.cpp:412] FileManagement.createSuccessFile -- END
+I20220501 21:53:39.426229  2252 Workflow.cpp:276] Workflow.reduce -- END
+I20220501 21:53:39.426229  2252 Executive.cpp:87] MapReduce program completed running.
+I20220501 21:53:39.426229  2252 Map.cpp:60] Map component destroyed
+I20220501 21:53:39.426229  2252 Sorter.cpp:44] Sorter component destroyed
+I20220501 21:53:39.426229  2252 Reduce.cpp:51] Reduce component destroyed
+I20220501 21:53:39.426726  2252 Workflow.cpp:76] Workflow component destroyed
