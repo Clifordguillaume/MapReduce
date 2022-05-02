@@ -44,3 +44,6 @@ and writing the results to an output file.
 		a. Right click the MapReduce project
 		b. Properties -> C++ -> General -> Additional Include Directories
 		c. Add the path to the downloaded boost folder (ex: C:\Users\example\Downloads\boost_1_78_0_rc1\boost_1_78_0)
+		
+# Notes
+- Test files used and generated while developing are located in the MapReduce/MapReduce/TestInputFileDir, TestTempOutputFileDir, and TestOutputFileDir's respectively
