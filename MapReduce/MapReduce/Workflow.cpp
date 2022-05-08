@@ -27,7 +27,7 @@
 // Local Headers
 #include "Workflow.h"
 #include "FileManagement.h"
-#include "Map.h"
+#include "MapLibrary.h"
 #include "Sorter.h"
 #include "Reduce.h"
 #include <boost/algorithm/string.hpp>
@@ -74,6 +74,11 @@ namespace MapReduce
         delete _pReduce;
         delete _pFileManagement;
         LOG(INFO) << "Workflow component destroyed";
+    }
+
+    void setupDLL()
+    {
+
     }
 
     // -------------------------------------------------------------------------------
@@ -146,7 +151,8 @@ namespace MapReduce
                     }
 
                     // count the frequencies of the words in input file
-                    std::multimap<string, int> wordFreqs = _pMap->map(inputFileName, fileContentsStr);
+                    //std::multimap<string, int> wordFreqs = _pMap->map(inputFileName, fileContentsStr);
+                    WordCount* wordFreqs = mapFunc(inputFileName, fileContentsStr);
 
                     // if the output dir does not end in backslash, add one and use to generate full path of temp output file
                     boost::trim_right(tempOutputFileDir);
@@ -157,7 +163,7 @@ namespace MapReduce
                     string outputFileName = tempOutputFileDir + _pFileManagement->getFileName(inputFileName) + "-tempOutput.txt";
 
                     // write the words and frequencies to output file in the temp directory
-                    _pMap->exportMap(outputFileName, wordFreqs);
+                    exportMap(outputFileName, wordFreqs);
                 }
             }
         }
@@ -238,7 +244,7 @@ namespace MapReduce
         for (string lstString : fileData)
         {
             // Get key from the list value
-            string sKey = _pMap->getKey(lstString);
+            string sKey = getKey(lstString);
 
             // if key already reduced, do not reduce again
             if (processedKeys.count(sKey) > 0) 
@@ -247,6 +253,7 @@ namespace MapReduce
             }
 
             // Get the key value
+            // TODO: replace with MapLibrary int* array
             list<int> itr = _pMap->getKeyValue(sKey, fileData, rowsToSkip);
 
             // reduce
