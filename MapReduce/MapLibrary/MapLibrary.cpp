@@ -14,7 +14,7 @@
 // 5/4/22 - Elizabeth - Remove std dependencies from methods
 // 5/6/22 - Elizabeth - Continue removing std dependencies
 // ===============================================================================
-
+#pragma once
 #include "FileManagement.h"
 #include "MapLibrary.h"
 #include <boost/algorithm/string/classification.hpp>
@@ -29,12 +29,19 @@ using namespace std;
 // -------------------------------------------------------------------------------
 // map
 // -------------------------------------------------------------------------------
-MAPLIBRARY_API WordCount* mapFunc(string inputFileName, string data)
+MAPLIBRARY_API WordCount* mapFunc(string inputFileName, string data, int* _pNumWords)
 {
 	//LOG(INFO) << "Map.map -- BEGIN";
 	//LOG(INFO) << "Map.map -- Received string: " + data + " ...from input file " + inputFileName;
 
 	try {
+
+		// initialize num words pointer if null
+		if (_pNumWords == NULL) 
+		{
+			_pNumWords = new int();
+		}
+
 		// tokenize the string represenation of the contents of the file
 		string loweredStr = lowerString(data);
 		string strippedLowerStr = removeSpecialChars(loweredStr);
@@ -43,6 +50,7 @@ MAPLIBRARY_API WordCount* mapFunc(string inputFileName, string data)
 		// get the number of words and the array of words
 		int numWords = splitWords.wordCount;
 		string* words = splitWords.words;
+		*_pNumWords = numWords;
 
 		// populate an array of WordCounts containing each word and freq = 1
 		WordCount* wordCounts = new WordCount[numWords];
@@ -67,7 +75,7 @@ MAPLIBRARY_API WordCount* mapFunc(string inputFileName, string data)
 // -------------------------------------------------------------------------------
 // exportMap
 // -------------------------------------------------------------------------------
-MAPLIBRARY_API void exportMap(string outputFileName, WordCount* wordCounts)
+MAPLIBRARY_API void exportMap(string outputFileName, WordCount* wordCounts, int numWords)
 {
 	//LOG(INFO) << "Map.exportMap -- BEGIN";
 
@@ -76,15 +84,11 @@ MAPLIBRARY_API void exportMap(string outputFileName, WordCount* wordCounts)
 	fileManagement.removeFile(outputFileName);
 
 	// write entries in map to file
-	for (int i = 0; i < 10000000; i++)
+	for (int i = 0; i < numWords; i++)
 	{
 		try
 		{
 			WordCount wc = wordCounts[i];
-			// if no more key-vals, finish export
-			if (wc.word.empty()) {
-				return;
-			}
 
 			// get key and value
 			string word = wc.word;
