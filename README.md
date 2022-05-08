@@ -13,7 +13,7 @@ alphabetical order, then reduces the data by summing up the frequencies
 and writing the results to an output file.
 
 # How to use the program:
-- The MapReduce.exe is located in MapReduce/x64/Release directory. If Release does not run, try using the exe in MapReduce/x64/Debug directory instead.
+- The MapReduce.exe is located in MapReduce/x64/Release directory.
 - Run MapReduce.exe [input file directory path] [output file directory path] [temp file drectory path]
 - (The above should not include the brackets)
 - The final result will be written to a text file in the output file directory as FinalReducedData-x.txt
