@@ -29,7 +29,7 @@ using namespace std;
 // -------------------------------------------------------------------------------
 // map
 // -------------------------------------------------------------------------------
-MAPLIBRARY_API WordCount* map(string inputFileName, string data)
+MAPLIBRARY_API WordCount* mapFunc(string inputFileName, string data)
 {
 	//LOG(INFO) << "Map.map -- BEGIN";
 	//LOG(INFO) << "Map.map -- Received string: " + data + " ...from input file " + inputFileName;

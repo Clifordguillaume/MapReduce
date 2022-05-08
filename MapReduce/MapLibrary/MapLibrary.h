@@ -74,7 +74,7 @@ struct SplitWords {
  * @param data - data to tokenize
  * @return map of words and counts
 */
-extern "C" MAPLIBRARY_API WordCount* map(string inputFileName, string data);
+extern "C" MAPLIBRARY_API WordCount* mapFunc(string inputFileName, string data);
 
 /**
  * Writes a map of words and counts to a specified output file

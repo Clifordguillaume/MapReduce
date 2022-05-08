@@ -3,7 +3,7 @@
 // 
 // FileManagement.cpp
 // 
-// Author: Elizabeth and Cliford
+// Author: Elizabeth
 // 
 // Description: The FileManagement class handles interaction with the file system,
 //				including reading and writing to files.
@@ -58,8 +58,8 @@ bool FileManagement::fileExists(string fullFilePath)
 	}
 	catch (exception e)
 	{
-		LOG(ERROR) << "FileManagement.fileExists -- Exception checking if file exists. File path: " + fullFilePath;
-		LOG(ERROR) << e.what();
+		//LOG(ERROR) << "FileManagement.fileExists -- Exception checking if file exists. File path: " + fullFilePath;
+		//LOG(ERROR) << e.what();
 	}
 	return exists;
 }
