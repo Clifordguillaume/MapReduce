@@ -47,7 +47,7 @@ namespace MapReduce
     // -----------------------------------------------
     Workflow::Workflow()
     {
-        //_pMap = new Map();
+        _pMap = new Map();
         _pSorter = new Sorter();
         _pReduce = new Reduce();
         _pFileManagement = new FileManagement();
@@ -59,7 +59,7 @@ namespace MapReduce
     Workflow::Workflow(FileManagement* _pFM, Map* _pM, Sorter* _pS, Reduce* _pR)
     {
         _pFileManagement = _pFM;
-        //_pMap = _pM;
+        _pMap = _pM;
         _pSorter = _pS;
         _pReduce = _pR;
     }
@@ -69,7 +69,7 @@ namespace MapReduce
     // -----------------------------------------------
     Workflow::~Workflow()
     {
-        //delete _pMap;
+        delete _pMap;
         delete _pSorter;
         delete _pReduce;
         delete _pFileManagement;
