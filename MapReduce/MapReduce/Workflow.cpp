@@ -22,7 +22,11 @@
 //                       clear temp output file dir before new export
 // 4/25/22 - Elizabeth - Add check for already processed words in reduce function.
 //                       Add cout logs to display progress to user
+// 5/7/22 - Elizabeth - Convert map() to use MapLibrary DLL
+// 5/8/22 - Elizabeth - Add MapLibrary DLL explicit call
 // ===============================================================================
+
+#undef _HAS_STD_BYTE
 
 // Local Headers
 #include "Workflow.h"
@@ -33,12 +37,19 @@
 #include <boost/algorithm/string.hpp>
 #include <glog/logging.h>
 #include <set>
+#include <windows.h>
 
 using namespace std;
 
 // for debugging purposes change to 0 to 
 // not show cout messages in the cmd line
 #define debug 0
+
+// dll map functions
+typedef WordCount* (*funcMap)(string, string, int*);
+typedef void (*funcExportMap)(string, WordCount*, int);
+funcMap dllMapFunc;
+funcExportMap dllExportMapFunc;
 
 namespace MapReduce
 {
@@ -47,6 +58,7 @@ namespace MapReduce
     // -----------------------------------------------
     Workflow::Workflow()
     {
+        setupMapDLL();
         _pMap = new Map();
         _pSorter = new Sorter();
         _pReduce = new Reduce();
@@ -76,9 +88,31 @@ namespace MapReduce
         LOG(INFO) << "Workflow component destroyed";
     }
 
-    void setupDLL()
+    // -------------------------------------------------------------------------------
+    // setupMapDLL
+    // -------------------------------------------------------------------------------
+    void Workflow::setupMapDLL()
     {
+        LOG(INFO) << "Workflow.setupMapDLL -- BEGIN";
+        try 
+        {
+            HINSTANCE hDLL;
 
+            const wchar_t* libName = L"MapLibrary";
+
+            hDLL = LoadLibraryEx(libName, NULL, NULL);   // Handle to DLL
+
+            if (hDLL != NULL) {
+                dllMapFunc = (funcMap)GetProcAddress(hDLL, "mapFunc");
+                dllExportMapFunc = (funcExportMap)GetProcAddress(hDLL, "exportMap");
+            }
+        }
+        catch (exception e)
+        {
+            LOG(ERROR) << "Workflow.setupMapDLL -- Exception setting up MapLibrary DLL";
+            LOG(ERROR) << e.what();
+        }
+        LOG(INFO) << "Workflow.setupMapDLL -- END";
     }
 
     // -------------------------------------------------------------------------------
@@ -152,7 +186,8 @@ namespace MapReduce
 
                     // count the frequencies of the words in input file
                     //std::multimap<string, int> wordFreqs = _pMap->map(inputFileName, fileContentsStr);
-                    WordCount* wordFreqs = mapFunc(inputFileName, fileContentsStr);
+                    int numWords = 0;
+                    WordCount* wordFreqs = dllMapFunc(inputFileName, fileContentsStr, &numWords);
 
                     // if the output dir does not end in backslash, add one and use to generate full path of temp output file
                     boost::trim_right(tempOutputFileDir);
@@ -163,7 +198,7 @@ namespace MapReduce
                     string outputFileName = tempOutputFileDir + _pFileManagement->getFileName(inputFileName) + "-tempOutput.txt";
 
                     // write the words and frequencies to output file in the temp directory
-                    exportMap(outputFileName, wordFreqs);
+                    dllExportMapFunc(outputFileName, wordFreqs, numWords);
                 }
             }
         }

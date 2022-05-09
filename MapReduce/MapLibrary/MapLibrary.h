@@ -72,16 +72,18 @@ struct SplitWords {
  * Reads an input file and writes words and frequencies to an output file
  * @param inputFileName - name of input file
  * @param data - data to tokenize
+ * @param _pNumWords - number of words in map
  * @return map of words and counts
 */
-extern "C" MAPLIBRARY_API WordCount* mapFunc(string inputFileName, string data);
+extern "C" MAPLIBRARY_API WordCount* mapFunc(string inputFileName, string data, int* _pNumWords);
 
 /**
  * Writes a map of words and counts to a specified output file
  * @param outputFileName - name of file to write to
  * @param wordCounts - array of WordCounts holding words and their counts
+ * @param numWords - number of words in map
  */
-extern "C" MAPLIBRARY_API void exportMap(string outputFileName, WordCount* wordCounts);
+extern "C" MAPLIBRARY_API void exportMap(string outputFileName, WordCount* wordCounts, int numWords);
 
 /**
  * Gets the key from a full string
