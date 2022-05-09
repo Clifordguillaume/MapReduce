@@ -12,6 +12,8 @@
 #ifndef WORKFLOW_H
 #define WORKFLOW_H
 
+#define _HAS_STD_BYTE 0
+
 #include "FileManagement.h"
 #include "Map.h"
 #include "Reduce.h"
@@ -42,9 +44,16 @@ namespace MapReduce
 			virtual void run(string inputFileDir, string outputFileDir, string tempOutputFileDir);
 
 			/**
-			 * Set up the MapLibrary dll functions
+			 * Set up the ReduceLibrary dll functions
 			 */
+
 			virtual void setupReduceDLL();
+
+			/**
+			 * Set up the MapLibrary dll functions
+			 */	
+			virtual void setupMapDLL();
+
 
 			/**
 			 * Maps input file contents to output file

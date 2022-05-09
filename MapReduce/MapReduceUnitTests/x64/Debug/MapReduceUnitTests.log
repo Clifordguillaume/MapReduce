@@ -5,6 +5,8 @@ C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\Ma
 C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\MapReduceUnitTests\MockReduce.h(16,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\MapReduceUnitTests\MockSorter.h(16,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\MapReduceUnitTests\tests.cc(20,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\MapReduce\Workflow.h(15,1): warning C4005: '_HAS_STD_BYTE': macro redefinition
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\yvals_core.h(647): message : see previous definition of '_HAS_STD_BYTE'
   Generating Code...
   gtest-all.cc
   gmock-all.cc

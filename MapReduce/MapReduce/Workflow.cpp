@@ -22,16 +22,24 @@
 //                       clear temp output file dir before new export
 // 4/25/22 - Elizabeth - Add check for already processed words in reduce function.
 //                       Add cout logs to display progress to user
+<<<<<<< HEAD
 // 5/07/22 - Cliford - Added the Dll library for the reduce capability.
 // ===============================================================================
 
 //#undef _HAS_STD_BYTE
 #define _HAS_STD_BYTE 0
+=======
+// 5/7/22 - Elizabeth - Convert map() to use MapLibrary DLL
+// 5/8/22 - Elizabeth - Add MapLibrary DLL explicit call
+// ===============================================================================
+
+#undef _HAS_STD_BYTE
+>>>>>>> main
 
 // Local Headers
 #include "Workflow.h"
 #include "FileManagement.h"
-#include "Map.h"
+#include "MapLibrary.h"
 #include "Sorter.h"
 #include "Reduce.h"
 #include "ReduceLibrary.h"
@@ -47,6 +55,7 @@ using namespace std;
 #define debug 0
 
 // dll map functions
+<<<<<<< HEAD
 typedef int (*reduceFunction)(string, list<int>);
 typedef int (*exportFunction)(list<string>, string);
 typedef list<string> (*GetDataFunction)();
@@ -54,6 +63,12 @@ typedef list<string> (*GetDataFunction)();
 reduceFunction dllReduceFunc;
 exportFunction dllExportReduceFunc;
 GetDataFunction dllGetData;
+=======
+typedef WordCount* (*funcMap)(string, string, int*);
+typedef void (*funcExportMap)(string, WordCount*, int);
+funcMap dllMapFunc;
+funcExportMap dllExportMapFunc;
+>>>>>>> main
 
 namespace MapReduce
 {
@@ -62,7 +77,11 @@ namespace MapReduce
     // -----------------------------------------------
     Workflow::Workflow()
     {
+<<<<<<< HEAD
         setupReduceDLL();
+=======
+        setupMapDLL();
+>>>>>>> main
         _pMap = new Map();
         _pSorter = new Sorter();
         _pReduce = new Reduce();
@@ -93,6 +112,7 @@ namespace MapReduce
     }
 
     // -------------------------------------------------------------------------------
+<<<<<<< HEAD
     // setupReduceDLL
     // -------------------------------------------------------------------------------
     void Workflow::setupReduceDLL()
@@ -103,18 +123,36 @@ namespace MapReduce
             HINSTANCE hDLL;
 
             const wchar_t* libName = L"ReduceLibrary";
+=======
+    // setupMapDLL
+    // -------------------------------------------------------------------------------
+    void Workflow::setupMapDLL()
+    {
+        LOG(INFO) << "Workflow.setupMapDLL -- BEGIN";
+        try 
+        {
+            HINSTANCE hDLL;
+
+            const wchar_t* libName = L"MapLibrary";
+>>>>>>> main
 
             hDLL = LoadLibraryEx(libName, NULL, NULL);   // Handle to DLL
 
             if (hDLL != NULL) {
+<<<<<<< HEAD
 
                 dllReduceFunc = (reduceFunction)GetProcAddress(hDLL, "reduceFunc");
                 dllExportReduceFunc = (exportFunction)GetProcAddress(hDLL, "exportFunc");
                 dllGetData = (GetDataFunction)GetProcAddress(hDLL, "GetData");
+=======
+                dllMapFunc = (funcMap)GetProcAddress(hDLL, "mapFunc");
+                dllExportMapFunc = (funcExportMap)GetProcAddress(hDLL, "exportMap");
+>>>>>>> main
             }
         }
         catch (exception e)
         {
+<<<<<<< HEAD
             LOG(ERROR) << "Workflow.setupReduceDLL -- Exception setting up ReduceLibrary DLL";
             LOG(ERROR) << e.what();
         }
@@ -122,6 +160,14 @@ namespace MapReduce
     }
 
 
+=======
+            LOG(ERROR) << "Workflow.setupMapDLL -- Exception setting up MapLibrary DLL";
+            LOG(ERROR) << e.what();
+        }
+        LOG(INFO) << "Workflow.setupMapDLL -- END";
+    }
+
+>>>>>>> main
     // -------------------------------------------------------------------------------
     // run
     // -------------------------------------------------------------------------------
@@ -192,7 +238,9 @@ namespace MapReduce
                     }
 
                     // count the frequencies of the words in input file
-                    std::multimap<string, int> wordFreqs = _pMap->map(inputFileName, fileContentsStr);
+                    //std::multimap<string, int> wordFreqs = _pMap->map(inputFileName, fileContentsStr);
+                    int numWords = 0;
+                    WordCount* wordFreqs = dllMapFunc(inputFileName, fileContentsStr, &numWords);
 
                     // if the output dir does not end in backslash, add one and use to generate full path of temp output file
                     boost::trim_right(tempOutputFileDir);
@@ -203,7 +251,7 @@ namespace MapReduce
                     string outputFileName = tempOutputFileDir + _pFileManagement->getFileName(inputFileName) + "-tempOutput.txt";
 
                     // write the words and frequencies to output file in the temp directory
-                    _pMap->exportMap(outputFileName, wordFreqs);
+                    dllExportMapFunc(outputFileName, wordFreqs, numWords);
                 }
             }
         }
@@ -284,7 +332,7 @@ namespace MapReduce
         for (string lstString : fileData)
         {
             // Get key from the list value
-            string sKey = _pMap->getKey(lstString);
+            string sKey = getKey(lstString);
 
             // if key already reduced, do not reduce again
             if (processedKeys.count(sKey) > 0) 
@@ -293,6 +341,7 @@ namespace MapReduce
             }
 
             // Get the key value
+            // TODO: replace with MapLibrary int* array
             list<int> itr = _pMap->getKeyValue(sKey, fileData, rowsToSkip);
 
             // reduce older code
