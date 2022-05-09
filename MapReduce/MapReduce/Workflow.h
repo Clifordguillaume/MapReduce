@@ -44,15 +44,14 @@ namespace MapReduce
 			virtual void run(string inputFileDir, string outputFileDir, string tempOutputFileDir);
 
 			/**
-			 * Set up the ReduceLibrary dll functions
-			 */
-
-			virtual void setupReduceDLL();
-
-			/**
 			 * Set up the MapLibrary dll functions
 			 */	
 			virtual void setupMapDLL();
+
+			/**
+			 * Set up the ReduceLibrary dll functions
+			 */
+			virtual void setupReduceDLL();
 
 
 			/**

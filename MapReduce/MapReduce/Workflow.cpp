@@ -22,19 +22,14 @@
 //                       clear temp output file dir before new export
 // 4/25/22 - Elizabeth - Add check for already processed words in reduce function.
 //                       Add cout logs to display progress to user
-<<<<<<< HEAD
+// 5/7/22 - Elizabeth - Convert map() to use MapLibrary DLL
 // 5/07/22 - Cliford - Added the Dll library for the reduce capability.
+// 5/8/22 - Elizabeth - Add MapLibrary DLL explicit call
 // ===============================================================================
 
 //#undef _HAS_STD_BYTE
 #define _HAS_STD_BYTE 0
-=======
-// 5/7/22 - Elizabeth - Convert map() to use MapLibrary DLL
-// 5/8/22 - Elizabeth - Add MapLibrary DLL explicit call
-// ===============================================================================
 
-#undef _HAS_STD_BYTE
->>>>>>> main
 
 // Local Headers
 #include "Workflow.h"
@@ -55,7 +50,12 @@ using namespace std;
 #define debug 0
 
 // dll map functions
-<<<<<<< HEAD
+typedef WordCount* (*funcMap)(string, string, int*);
+typedef void (*funcExportMap)(string, WordCount*, int);
+funcMap dllMapFunc;
+funcExportMap dllExportMapFunc;
+
+// dll Reduce functions
 typedef int (*reduceFunction)(string, list<int>);
 typedef int (*exportFunction)(list<string>, string);
 typedef list<string> (*GetDataFunction)();
@@ -63,12 +63,7 @@ typedef list<string> (*GetDataFunction)();
 reduceFunction dllReduceFunc;
 exportFunction dllExportReduceFunc;
 GetDataFunction dllGetData;
-=======
-typedef WordCount* (*funcMap)(string, string, int*);
-typedef void (*funcExportMap)(string, WordCount*, int);
-funcMap dllMapFunc;
-funcExportMap dllExportMapFunc;
->>>>>>> main
+
 
 namespace MapReduce
 {
@@ -77,11 +72,8 @@ namespace MapReduce
     // -----------------------------------------------
     Workflow::Workflow()
     {
-<<<<<<< HEAD
-        setupReduceDLL();
-=======
         setupMapDLL();
->>>>>>> main
+        setupReduceDLL();
         _pMap = new Map();
         _pSorter = new Sorter();
         _pReduce = new Reduce();
@@ -112,7 +104,34 @@ namespace MapReduce
     }
 
     // -------------------------------------------------------------------------------
-<<<<<<< HEAD
+    // setupMapDLL
+    // -------------------------------------------------------------------------------
+    void Workflow::setupMapDLL()
+    {
+        LOG(INFO) << "Workflow.setupMapDLL -- BEGIN";
+        try
+        {
+            HINSTANCE hDLL;
+
+            const wchar_t* libName = L"MapLibrary";
+
+            hDLL = LoadLibraryEx(libName, NULL, NULL);   // Handle to DLL
+
+            if (hDLL != NULL) {
+
+                dllMapFunc = (funcMap)GetProcAddress(hDLL, "mapFunc");
+                dllExportMapFunc = (funcExportMap)GetProcAddress(hDLL, "exportMap");
+            }
+        }
+        catch (exception e)
+        {
+            LOG(ERROR) << "Workflow.setupMapDLL -- Exception setting up MapLibrary DLL";
+            LOG(ERROR) << e.what();
+        }
+        LOG(INFO) << "Workflow.setupMapDLL -- END";
+    }
+
+    // -------------------------------------------------------------------------------
     // setupReduceDLL
     // -------------------------------------------------------------------------------
     void Workflow::setupReduceDLL()
@@ -123,51 +142,22 @@ namespace MapReduce
             HINSTANCE hDLL;
 
             const wchar_t* libName = L"ReduceLibrary";
-=======
-    // setupMapDLL
-    // -------------------------------------------------------------------------------
-    void Workflow::setupMapDLL()
-    {
-        LOG(INFO) << "Workflow.setupMapDLL -- BEGIN";
-        try 
-        {
-            HINSTANCE hDLL;
-
-            const wchar_t* libName = L"MapLibrary";
->>>>>>> main
-
             hDLL = LoadLibraryEx(libName, NULL, NULL);   // Handle to DLL
 
             if (hDLL != NULL) {
-<<<<<<< HEAD
-
                 dllReduceFunc = (reduceFunction)GetProcAddress(hDLL, "reduceFunc");
                 dllExportReduceFunc = (exportFunction)GetProcAddress(hDLL, "exportFunc");
                 dllGetData = (GetDataFunction)GetProcAddress(hDLL, "GetData");
-=======
-                dllMapFunc = (funcMap)GetProcAddress(hDLL, "mapFunc");
-                dllExportMapFunc = (funcExportMap)GetProcAddress(hDLL, "exportMap");
->>>>>>> main
             }
         }
         catch (exception e)
         {
-<<<<<<< HEAD
             LOG(ERROR) << "Workflow.setupReduceDLL -- Exception setting up ReduceLibrary DLL";
             LOG(ERROR) << e.what();
         }
         LOG(INFO) << "Workflow.setupReduceDLL -- END";
     }
 
-
-=======
-            LOG(ERROR) << "Workflow.setupMapDLL -- Exception setting up MapLibrary DLL";
-            LOG(ERROR) << e.what();
-        }
-        LOG(INFO) << "Workflow.setupMapDLL -- END";
-    }
-
->>>>>>> main
     // -------------------------------------------------------------------------------
     // run
     // -------------------------------------------------------------------------------

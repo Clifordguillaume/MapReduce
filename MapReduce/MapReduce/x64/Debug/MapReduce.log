@@ -1,5 +1,28 @@
-﻿  Workflow.cpp
+﻿  Executive.cpp
 C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1158,32): warning C4251: 'google::LogMessage::LogStream::streambuf_': class 'google::base_logging::LogStreamBuf' needs to have dll-interface to be used by clients of class 'google::LogMessage::LogStream'
 C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1088): message : see declaration of 'google::base_logging::LogStreamBuf'
-C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\MapReduce\Workflow.cpp(305,35): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
+  FileManagement.cpp
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1158,32): warning C4251: 'google::LogMessage::LogStream::streambuf_': class 'google::base_logging::LogStreamBuf' needs to have dll-interface to be used by clients of class 'google::LogMessage::LogStream'
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1088): message : see declaration of 'google::base_logging::LogStreamBuf'
+  Map.cpp
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1158,32): warning C4251: 'google::LogMessage::LogStream::streambuf_': class 'google::base_logging::LogStreamBuf' needs to have dll-interface to be used by clients of class 'google::LogMessage::LogStream'
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1088): message : see declaration of 'google::base_logging::LogStreamBuf'
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\MapReduce\Map.cpp(173,29): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\MapReduce\Map.cpp(176,31): warning C4018: '<': signed/unsigned mismatch
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\MapReduce\Map.cpp(291,41): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\MapReduce\Map.cpp(294,54): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Reduce.cpp
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1158,32): warning C4251: 'google::LogMessage::LogStream::streambuf_': class 'google::base_logging::LogStreamBuf' needs to have dll-interface to be used by clients of class 'google::LogMessage::LogStream'
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1088): message : see declaration of 'google::base_logging::LogStreamBuf'
+  Sorter.cpp
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1158,32): warning C4251: 'google::LogMessage::LogStream::streambuf_': class 'google::base_logging::LogStreamBuf' needs to have dll-interface to be used by clients of class 'google::LogMessage::LogStream'
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1088): message : see declaration of 'google::base_logging::LogStreamBuf'
+  Workflow.cpp
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\MapLibrary\MapLibrary.h(93,52): warning C4190: 'getKey' has C-linkage specified, but returns UDT 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' which is incompatible with C
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\xstring(4927): message : see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1158,32): warning C4251: 'google::LogMessage::LogStream::streambuf_': class 'google::base_logging::LogStreamBuf' needs to have dll-interface to be used by clients of class 'google::LogMessage::LogStream'
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1088): message : see declaration of 'google::base_logging::LogStreamBuf'
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\MapReduce\Workflow.cpp(344,35): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
+  Generating Code...
   MapReduce.vcxproj -> C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\x64\Debug\MapReduce.exe
+  0 File(s) copied
