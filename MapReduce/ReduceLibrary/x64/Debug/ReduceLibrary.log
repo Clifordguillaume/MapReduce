@@ -1,0 +1,7 @@
+﻿  pch.cpp
+  dllmain.cpp
+  FileManagement.cpp
+  ReduceLibrary.cpp
+  Generating Code...
+     Creating library C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\x64\Debug\ReduceLibrary.lib and object C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\x64\Debug\ReduceLibrary.exp
+  ReduceLibrary.vcxproj -> C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\x64\Debug\ReduceLibrary.dll

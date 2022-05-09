@@ -42,6 +42,11 @@ namespace MapReduce
 			virtual void run(string inputFileDir, string outputFileDir, string tempOutputFileDir);
 
 			/**
+			 * Set up the MapLibrary dll functions
+			 */
+			virtual void setupReduceDLL();
+
+			/**
 			 * Maps input file contents to output file
 			 * @param inputFileDir - name of directory to read input files from
 			 * @param outputFileName - name of output file

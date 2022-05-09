@@ -22,7 +22,11 @@
 //                       clear temp output file dir before new export
 // 4/25/22 - Elizabeth - Add check for already processed words in reduce function.
 //                       Add cout logs to display progress to user
+// 5/07/22 - Cliford - Added the Dll library for the reduce capability.
 // ===============================================================================
+
+//#undef _HAS_STD_BYTE
+#define _HAS_STD_BYTE 0
 
 // Local Headers
 #include "Workflow.h"
@@ -30,15 +34,26 @@
 #include "Map.h"
 #include "Sorter.h"
 #include "Reduce.h"
+#include "ReduceLibrary.h"
 #include <boost/algorithm/string.hpp>
 #include <glog/logging.h>
 #include <set>
+#include <windows.h>
 
 using namespace std;
 
 // for debugging purposes change to 0 to 
 // not show cout messages in the cmd line
 #define debug 0
+
+// dll map functions
+typedef int (*reduceFunction)(string, list<int>);
+typedef int (*exportFunction)(list<string>, string);
+typedef list<string> (*GetDataFunction)();
+
+reduceFunction dllReduceFunc;
+exportFunction dllExportReduceFunc;
+GetDataFunction dllGetData;
 
 namespace MapReduce
 {
@@ -47,6 +62,7 @@ namespace MapReduce
     // -----------------------------------------------
     Workflow::Workflow()
     {
+        setupReduceDLL();
         _pMap = new Map();
         _pSorter = new Sorter();
         _pReduce = new Reduce();
@@ -75,6 +91,36 @@ namespace MapReduce
         delete _pFileManagement;
         LOG(INFO) << "Workflow component destroyed";
     }
+
+    // -------------------------------------------------------------------------------
+    // setupReduceDLL
+    // -------------------------------------------------------------------------------
+    void Workflow::setupReduceDLL()
+    {
+        LOG(INFO) << "Workflow.setupReduceDLL -- BEGIN";
+        try
+        {
+            HINSTANCE hDLL;
+
+            const wchar_t* libName = L"ReduceLibrary";
+
+            hDLL = LoadLibraryEx(libName, NULL, NULL);   // Handle to DLL
+
+            if (hDLL != NULL) {
+
+                dllReduceFunc = (reduceFunction)GetProcAddress(hDLL, "reduceFunc");
+                dllExportReduceFunc = (exportFunction)GetProcAddress(hDLL, "exportFunc");
+                dllGetData = (GetDataFunction)GetProcAddress(hDLL, "GetData");
+            }
+        }
+        catch (exception e)
+        {
+            LOG(ERROR) << "Workflow.setupReduceDLL -- Exception setting up ReduceLibrary DLL";
+            LOG(ERROR) << e.what();
+        }
+        LOG(INFO) << "Workflow.setupReduceDLL -- END";
+    }
+
 
     // -------------------------------------------------------------------------------
     // run
@@ -249,22 +295,35 @@ namespace MapReduce
             // Get the key value
             list<int> itr = _pMap->getKeyValue(sKey, fileData, rowsToSkip);
 
-            // reduce
-            _pReduce->reduceFunc(sKey, itr);
+            // reduce older code
+            //_pReduce->reduceFunc(sKey, itr);
+            
+            // new code with DLL
+            dllReduceFunc(sKey, itr);
 
             processedKeys.insert(sKey);
             rowsToSkip += itr.size();
         }
 
         // get the data to write to a new file
-        DataToWriteToFile = _pReduce->GetData();
+        
+        // Older code
+        //DataToWriteToFile = _pReduce->GetData();        
+        
+        // new code with dll
+        DataToWriteToFile = dllGetData();
 
         // sort it
         DataToWriteToFile.sort();
 
         // passed into exportFunc for processing
         cout << "Exporting reduced data..." << endl;
-        _pReduce->exportFunc(DataToWriteToFile, outputFileDir);
+
+        // Older code
+        //_pReduce->exportFunc(DataToWriteToFile, outputFileDir);
+
+        // new code with DLL
+        dllExportReduceFunc(DataToWriteToFile, outputFileDir);
 
         // write the empty success file as per project requirements
         _pFileManagement->createSuccessFile(outputFileDir);

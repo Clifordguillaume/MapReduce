@@ -1,0 +1,5 @@
+﻿  Workflow.cpp
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1158,32): warning C4251: 'google::LogMessage::LogStream::streambuf_': class 'google::base_logging::LogStreamBuf' needs to have dll-interface to be used by clients of class 'google::LogMessage::LogStream'
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1088): message : see declaration of 'google::base_logging::LogStreamBuf'
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\MapReduce\Workflow.cpp(305,35): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
+  MapReduce.vcxproj -> C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\x64\Debug\MapReduce.exe

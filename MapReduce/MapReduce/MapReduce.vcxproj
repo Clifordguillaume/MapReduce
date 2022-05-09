@@ -164,7 +164,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\dwuli\Downloads\turtle-1.3.1\include;C:\Users\dwuli\Downloads\boost_1_78_0_rc1\boost_1_78_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\ReduceLibrary;C:\Users\dwuli\Downloads\turtle-1.3.1\include;C:\Users\dwuli\Downloads\boost_1_78_0_rc1\boost_1_78_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
