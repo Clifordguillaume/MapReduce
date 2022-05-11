@@ -35,7 +35,7 @@ using namespace std;
 */
 //TODO: To be removed later, does not like the virtual word
 //extern "C" REDUCELIBRARY_API virtual int reduceFunc(string & iKey, list<int> iLstOfData);
-extern "C" REDUCELIBRARY_API int reduceFunc(string & iKey, list<int> iLstOfData);
+extern "C" REDUCELIBRARY_API int reduceFunc(string & iKey, int* iLstOfData);
 
 
 /**

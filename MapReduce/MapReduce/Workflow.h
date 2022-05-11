@@ -26,8 +26,6 @@ namespace MapReduce
 	class Workflow
 	{
 		public:
-			Map* _pMap;
-			Reduce* _pReduce;
 			Sorter* _pSorter;
 			FileManagement* _pFileManagement;
 

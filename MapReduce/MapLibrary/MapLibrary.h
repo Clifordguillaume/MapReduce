@@ -68,6 +68,26 @@ struct SplitWords {
 		words = w;
 	}
 };
+
+struct KeyValue {
+
+	// Constructor
+	void addToList(int* inputArrary, list<int> oStrVal)
+	{
+		list<int> lstKeyVal;
+		// dereference the arry
+		int ArraySize = sizeof(inputArrary);
+		for (int i = 1; i <= ArraySize; i++)
+		{
+			int iKey = inputArrary[i];
+			lstKeyVal.push_back(iKey);
+		}
+
+		// Copy new list to the output list
+		std::copy(lstKeyVal.begin(), lstKeyVal.end(), std::back_inserter(oStrVal));
+	}
+};
+
 /**
  * Reads an input file and writes words and frequencies to an output file
  * @param inputFileName - name of input file

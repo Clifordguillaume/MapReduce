@@ -52,8 +52,10 @@ using namespace std;
 // dll map functions
 typedef WordCount* (*funcMap)(string, string, int*);
 typedef void (*funcExportMap)(string, WordCount*, int);
+typedef int* (*funGetKeyValue)(string, list<string>, int);
 funcMap dllMapFunc;
 funcExportMap dllExportMapFunc;
+funGetKeyValue dllGetKeyValueFunc;
 
 // dll Reduce functions
 typedef int (*reduceFunction)(string, list<int>);
@@ -74,9 +76,7 @@ namespace MapReduce
     {
         setupMapDLL();
         setupReduceDLL();
-        _pMap = new Map();
         _pSorter = new Sorter();
-        _pReduce = new Reduce();
         _pFileManagement = new FileManagement();
     }
 
@@ -86,9 +86,7 @@ namespace MapReduce
     Workflow::Workflow(FileManagement* _pFM, Map* _pM, Sorter* _pS, Reduce* _pR)
     {
         _pFileManagement = _pFM;
-        _pMap = _pM;
         _pSorter = _pS;
-        _pReduce = _pR;
     }
 
     // -----------------------------------------------
@@ -96,9 +94,7 @@ namespace MapReduce
     // -----------------------------------------------
     Workflow::~Workflow()
     {
-        delete _pMap;
         delete _pSorter;
-        delete _pReduce;
         delete _pFileManagement;
         LOG(INFO) << "Workflow component destroyed";
     }
@@ -121,6 +117,7 @@ namespace MapReduce
 
                 dllMapFunc = (funcMap)GetProcAddress(hDLL, "mapFunc");
                 dllExportMapFunc = (funcExportMap)GetProcAddress(hDLL, "exportMap");
+                dllGetKeyValueFunc = (funGetKeyValue)GetProcAddress(hDLL, "getKeyValue");
             }
         }
         catch (exception e)
@@ -332,24 +329,21 @@ namespace MapReduce
 
             // Get the key value
             // TODO: replace with MapLibrary int* array
-            list<int> itr = _pMap->getKeyValue(sKey, fileData, rowsToSkip);
+            //list<int> itr = _pMap->getKeyValue(sKey, fileData, rowsToSkip);
+            int* itr = dllGetKeyValueFunc(sKey, fileData, rowsToSkip);
 
-            // reduce older code
-            //_pReduce->reduceFunc(sKey, itr);
-            
+            list<int> oStrVal;
+            KeyValue KeyValStruct;
+            KeyValStruct.addToList(itr, oStrVal);
+
             // new code with DLL
-            dllReduceFunc(sKey, itr);
+            dllReduceFunc(sKey, oStrVal);
 
             processedKeys.insert(sKey);
-            rowsToSkip += itr.size();
+            rowsToSkip += oStrVal.size();
         }
 
         // get the data to write to a new file
-        
-        // Older code
-        //DataToWriteToFile = _pReduce->GetData();        
-        
-        // new code with dll
         DataToWriteToFile = dllGetData();
 
         // sort it
@@ -358,10 +352,7 @@ namespace MapReduce
         // passed into exportFunc for processing
         cout << "Exporting reduced data..." << endl;
 
-        // Older code
-        //_pReduce->exportFunc(DataToWriteToFile, outputFileDir);
-
-        // new code with DLL
+        // Reduce function
         dllExportReduceFunc(DataToWriteToFile, outputFileDir);
 
         // write the empty success file as per project requirements
