@@ -1,0 +1,149 @@
+Log file created at: 2022/05/11 20:58:19
+Running on machine: LAPTOP-HTUEDN9T
+Running duration (h:mm:ss): 0:00:00
+Log line format: [IWEF]yyyymmdd hh:mm:ss.uuuuuu threadid file:line] msg
+I20220511 20:58:19.624430  9716 Executive.cpp:60] Starting MapReduce program...
+I20220511 20:58:19.624430  9716 Executive.cpp:78] User provided input file dir: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestInputFileDir
+I20220511 20:58:19.624430  9716 Executive.cpp:79] User provided output file dir: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestOutputFileDir
+I20220511 20:58:19.624430  9716 Executive.cpp:80] User provided temp output file dir: C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir
+I20220511 20:58:19.624430  9716 Workflow.cpp:114] Workflow.setupMapDLL -- BEGIN
+I20220511 20:58:19.638144  9716 Workflow.cpp:136] Workflow.setupMapDLL -- END
+I20220511 20:58:19.638144  9716 Workflow.cpp:144] Workflow.setupReduceDLL -- BEGIN
+I20220511 20:58:19.648113  9716 Workflow.cpp:163] Workflow.setupReduceDLL -- END
+I20220511 20:58:19.648113  9716 Workflow.cpp:197] Workflow.map -- BEGIN
+I20220511 20:58:19.649112  9716 FileManagement.cpp:193] FileManagement.getFilesInDirectory -- BEGIN
+I20220511 20:58:19.649112  9716 FileManagement.cpp:194] FileManagement.getFilesInDirectory -- Getting files in directory C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir
+I20220511 20:58:19.649112  9716 FileManagement.cpp:215] FileManagement.getFilesInDirectory -- No text files found in directory C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir
+I20220511 20:58:19.649112  9716 FileManagement.cpp:218] FileManagement.getFilesInDirectory -- END
+I20220511 20:58:19.649112  9716 FileManagement.cpp:193] FileManagement.getFilesInDirectory -- BEGIN
+I20220511 20:58:19.649112  9716 FileManagement.cpp:194] FileManagement.getFilesInDirectory -- Getting files in directory C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestInputFileDir
+I20220511 20:58:19.649112  9716 FileManagement.cpp:218] FileManagement.getFilesInDirectory -- END
+I20220511 20:58:19.649112  9716 FileManagement.cpp:228] FileManagement.readFile -- BEGIN
+I20220511 20:58:19.649112  9716 FileManagement.cpp:229] FileManagement.readFile -- Reading file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestInputFileDir\test1 - Copy.txt
+I20220511 20:58:19.649112  9716 FileManagement.cpp:278] FileManagement.readFile -- END
+I20220511 20:58:19.658077  9716 FileManagement.cpp:228] FileManagement.readFile -- BEGIN
+I20220511 20:58:19.658077  9716 FileManagement.cpp:229] FileManagement.readFile -- Reading file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestInputFileDir\test1.txt
+I20220511 20:58:19.658077  9716 FileManagement.cpp:278] FileManagement.readFile -- END
+I20220511 20:58:19.665053  9716 FileManagement.cpp:228] FileManagement.readFile -- BEGIN
+I20220511 20:58:19.665053  9716 FileManagement.cpp:229] FileManagement.readFile -- Reading file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestInputFileDir\test2.txt
+I20220511 20:58:19.665053  9716 FileManagement.cpp:278] FileManagement.readFile -- END
+I20220511 20:58:19.666051  9716 FileManagement.cpp:228] FileManagement.readFile -- BEGIN
+I20220511 20:58:19.666051  9716 FileManagement.cpp:229] FileManagement.readFile -- Reading file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestInputFileDir\test3.txt
+I20220511 20:58:19.666051  9716 FileManagement.cpp:278] FileManagement.readFile -- END
+I20220511 20:58:19.668042  9716 FileManagement.cpp:228] FileManagement.readFile -- BEGIN
+I20220511 20:58:19.668042  9716 FileManagement.cpp:229] FileManagement.readFile -- Reading file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestInputFileDir\testinput.txt
+I20220511 20:58:19.668042  9716 FileManagement.cpp:278] FileManagement.readFile -- END
+I20220511 20:58:19.673025  9716 FileManagement.cpp:228] FileManagement.readFile -- BEGIN
+I20220511 20:58:19.673025  9716 FileManagement.cpp:229] FileManagement.readFile -- Reading file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestInputFileDir\testoutput.txt
+I20220511 20:58:19.674022  9716 FileManagement.cpp:278] FileManagement.readFile -- END
+I20220511 20:58:19.674022  9716 Workflow.cpp:260] Workflow.map -- END
+I20220511 20:58:19.674022  9716 Workflow.cpp:270] Workflow.sort -- BEGIN
+I20220511 20:58:19.674022  9716 FileManagement.cpp:193] FileManagement.getFilesInDirectory -- BEGIN
+I20220511 20:58:19.674022  9716 FileManagement.cpp:194] FileManagement.getFilesInDirectory -- Getting files in directory C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir
+I20220511 20:58:19.675020  9716 FileManagement.cpp:218] FileManagement.getFilesInDirectory -- END
+I20220511 20:58:19.675020  9716 Sorter.cpp:52] Sorter.sort -- BEGIN
+I20220511 20:58:19.675020  9716 Sorter.cpp:56] Sorter.sort -- Sorting contents of file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1 - Copy-tempOutput.txt
+I20220511 20:58:19.675020  9716 FileManagement.cpp:228] FileManagement.readFile -- BEGIN
+I20220511 20:58:19.675020  9716 FileManagement.cpp:229] FileManagement.readFile -- Reading file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1 - Copy-tempOutput.txt
+I20220511 20:58:19.675020  9716 FileManagement.cpp:278] FileManagement.readFile -- END
+I20220511 20:58:19.675020  9716 FileManagement.cpp:288] FileManagement.writeToFile -- BEGIN
+I20220511 20:58:19.675020  9716 FileManagement.cpp:334] FileManagement.writeToFile -- END
+I20220511 20:58:19.675020  9716 Sorter.cpp:77] Sorter.sort -- END
+I20220511 20:58:19.675020  9716 Sorter.cpp:52] Sorter.sort -- BEGIN
+I20220511 20:58:19.675020  9716 Sorter.cpp:56] Sorter.sort -- Sorting contents of file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1-tempOutput.txt
+I20220511 20:58:19.675020  9716 FileManagement.cpp:228] FileManagement.readFile -- BEGIN
+I20220511 20:58:19.675020  9716 FileManagement.cpp:229] FileManagement.readFile -- Reading file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1-tempOutput.txt
+I20220511 20:58:19.675020  9716 FileManagement.cpp:278] FileManagement.readFile -- END
+I20220511 20:58:19.675020  9716 FileManagement.cpp:288] FileManagement.writeToFile -- BEGIN
+I20220511 20:58:19.675020  9716 FileManagement.cpp:334] FileManagement.writeToFile -- END
+I20220511 20:58:19.675020  9716 Sorter.cpp:77] Sorter.sort -- END
+I20220511 20:58:19.675020  9716 Sorter.cpp:52] Sorter.sort -- BEGIN
+I20220511 20:58:19.675020  9716 Sorter.cpp:56] Sorter.sort -- Sorting contents of file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test2-tempOutput.txt
+I20220511 20:58:19.675020  9716 FileManagement.cpp:228] FileManagement.readFile -- BEGIN
+I20220511 20:58:19.675020  9716 FileManagement.cpp:229] FileManagement.readFile -- Reading file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test2-tempOutput.txt
+I20220511 20:58:19.675020  9716 FileManagement.cpp:278] FileManagement.readFile -- END
+I20220511 20:58:19.675020  9716 FileManagement.cpp:288] FileManagement.writeToFile -- BEGIN
+I20220511 20:58:19.676016  9716 FileManagement.cpp:334] FileManagement.writeToFile -- END
+I20220511 20:58:19.676016  9716 Sorter.cpp:77] Sorter.sort -- END
+I20220511 20:58:19.676016  9716 Sorter.cpp:52] Sorter.sort -- BEGIN
+I20220511 20:58:19.676016  9716 Sorter.cpp:56] Sorter.sort -- Sorting contents of file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test3-tempOutput.txt
+I20220511 20:58:19.676016  9716 FileManagement.cpp:228] FileManagement.readFile -- BEGIN
+I20220511 20:58:19.676016  9716 FileManagement.cpp:229] FileManagement.readFile -- Reading file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test3-tempOutput.txt
+I20220511 20:58:19.676016  9716 FileManagement.cpp:278] FileManagement.readFile -- END
+I20220511 20:58:19.676016  9716 FileManagement.cpp:288] FileManagement.writeToFile -- BEGIN
+I20220511 20:58:19.676016  9716 FileManagement.cpp:334] FileManagement.writeToFile -- END
+I20220511 20:58:19.676016  9716 Sorter.cpp:77] Sorter.sort -- END
+I20220511 20:58:19.676016  9716 Sorter.cpp:52] Sorter.sort -- BEGIN
+I20220511 20:58:19.676016  9716 Sorter.cpp:56] Sorter.sort -- Sorting contents of file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testinput-tempOutput.txt
+I20220511 20:58:19.676016  9716 FileManagement.cpp:228] FileManagement.readFile -- BEGIN
+I20220511 20:58:19.676016  9716 FileManagement.cpp:229] FileManagement.readFile -- Reading file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testinput-tempOutput.txt
+I20220511 20:58:19.676016  9716 FileManagement.cpp:278] FileManagement.readFile -- END
+I20220511 20:58:19.676016  9716 FileManagement.cpp:288] FileManagement.writeToFile -- BEGIN
+I20220511 20:58:19.676016  9716 FileManagement.cpp:334] FileManagement.writeToFile -- END
+I20220511 20:58:19.676016  9716 Sorter.cpp:77] Sorter.sort -- END
+I20220511 20:58:19.676016  9716 Sorter.cpp:52] Sorter.sort -- BEGIN
+I20220511 20:58:19.676016  9716 Sorter.cpp:56] Sorter.sort -- Sorting contents of file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testoutput-tempOutput.txt
+I20220511 20:58:19.676016  9716 FileManagement.cpp:228] FileManagement.readFile -- BEGIN
+I20220511 20:58:19.676016  9716 FileManagement.cpp:229] FileManagement.readFile -- Reading file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testoutput-tempOutput.txt
+I20220511 20:58:19.676016  9716 FileManagement.cpp:278] FileManagement.readFile -- END
+I20220511 20:58:19.676016  9716 FileManagement.cpp:288] FileManagement.writeToFile -- BEGIN
+I20220511 20:58:19.677013  9716 FileManagement.cpp:334] FileManagement.writeToFile -- END
+I20220511 20:58:19.677013  9716 Sorter.cpp:77] Sorter.sort -- END
+I20220511 20:58:19.677013  9716 Workflow.cpp:288] Workflow.sort -- END
+I20220511 20:58:19.677013  9716 Workflow.cpp:299] Workflow.reduce -- BEGIN
+I20220511 20:58:19.677013  9716 FileManagement.cpp:193] FileManagement.getFilesInDirectory -- BEGIN
+I20220511 20:58:19.677013  9716 FileManagement.cpp:194] FileManagement.getFilesInDirectory -- Getting files in directory C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir
+I20220511 20:58:19.677013  9716 FileManagement.cpp:218] FileManagement.getFilesInDirectory -- END
+I20220511 20:58:19.677013  9716 FileManagement.cpp:228] FileManagement.readFile -- BEGIN
+I20220511 20:58:19.677013  9716 FileManagement.cpp:229] FileManagement.readFile -- Reading file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1 - Copy-tempOutput.txt
+I20220511 20:58:19.677013  9716 FileManagement.cpp:278] FileManagement.readFile -- END
+I20220511 20:58:19.677013  9716 FileManagement.cpp:228] FileManagement.readFile -- BEGIN
+I20220511 20:58:19.677013  9716 FileManagement.cpp:229] FileManagement.readFile -- Reading file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1-tempOutput.txt
+I20220511 20:58:19.677013  9716 FileManagement.cpp:278] FileManagement.readFile -- END
+I20220511 20:58:19.677013  9716 FileManagement.cpp:228] FileManagement.readFile -- BEGIN
+I20220511 20:58:19.677013  9716 FileManagement.cpp:229] FileManagement.readFile -- Reading file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test2-tempOutput.txt
+I20220511 20:58:19.677013  9716 FileManagement.cpp:278] FileManagement.readFile -- END
+I20220511 20:58:19.677013  9716 FileManagement.cpp:228] FileManagement.readFile -- BEGIN
+I20220511 20:58:19.677013  9716 FileManagement.cpp:229] FileManagement.readFile -- Reading file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test3-tempOutput.txt
+I20220511 20:58:19.677013  9716 FileManagement.cpp:278] FileManagement.readFile -- END
+I20220511 20:58:19.677013  9716 FileManagement.cpp:228] FileManagement.readFile -- BEGIN
+I20220511 20:58:19.677013  9716 FileManagement.cpp:229] FileManagement.readFile -- Reading file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testinput-tempOutput.txt
+I20220511 20:58:19.677013  9716 FileManagement.cpp:278] FileManagement.readFile -- END
+I20220511 20:58:19.677013  9716 FileManagement.cpp:228] FileManagement.readFile -- BEGIN
+I20220511 20:58:19.677013  9716 FileManagement.cpp:229] FileManagement.readFile -- Reading file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testoutput-tempOutput.txt
+I20220511 20:58:19.679010  9716 FileManagement.cpp:278] FileManagement.readFile -- END
+I20220511 20:58:19.686980  9716 FileManagement.cpp:380] FileManagement.createSuccessFile -- BEGIN
+I20220511 20:58:19.686980  9716 FileManagement.cpp:151] FileManagement.removeFile -- BEGIN
+I20220511 20:58:19.686980  9716 FileManagement.cpp:160] FileManagement.removeFile -- Removing file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestOutputFileDir\SUCCESS.txt
+I20220511 20:58:19.686980  9716 FileManagement.cpp:177] FileManagement.removeFie -- END
+I20220511 20:58:19.686980  9716 FileManagement.cpp:288] FileManagement.writeToFile -- BEGIN
+I20220511 20:58:19.686980  9716 FileManagement.cpp:334] FileManagement.writeToFile -- END
+I20220511 20:58:19.686980  9716 FileManagement.cpp:412] FileManagement.createSuccessFile -- END
+I20220511 20:58:19.686980  9716 FileManagement.cpp:69] FileManagement.clearDirectory -- BEGIN
+I20220511 20:58:19.686980  9716 FileManagement.cpp:70] FileManagement.clearDirectory -- Clearing directory C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir
+I20220511 20:58:19.686980  9716 FileManagement.cpp:193] FileManagement.getFilesInDirectory -- BEGIN
+I20220511 20:58:19.686980  9716 FileManagement.cpp:194] FileManagement.getFilesInDirectory -- Getting files in directory C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir
+I20220511 20:58:19.686980  9716 FileManagement.cpp:218] FileManagement.getFilesInDirectory -- END
+I20220511 20:58:19.686980  9716 FileManagement.cpp:151] FileManagement.removeFile -- BEGIN
+I20220511 20:58:19.686980  9716 FileManagement.cpp:160] FileManagement.removeFile -- Removing file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1 - Copy-tempOutput.txt
+I20220511 20:58:19.686980  9716 FileManagement.cpp:177] FileManagement.removeFie -- END
+I20220511 20:58:19.686980  9716 FileManagement.cpp:151] FileManagement.removeFile -- BEGIN
+I20220511 20:58:19.686980  9716 FileManagement.cpp:160] FileManagement.removeFile -- Removing file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test1-tempOutput.txt
+I20220511 20:58:19.686980  9716 FileManagement.cpp:177] FileManagement.removeFie -- END
+I20220511 20:58:19.686980  9716 FileManagement.cpp:151] FileManagement.removeFile -- BEGIN
+I20220511 20:58:19.686980  9716 FileManagement.cpp:160] FileManagement.removeFile -- Removing file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test2-tempOutput.txt
+I20220511 20:58:19.686980  9716 FileManagement.cpp:177] FileManagement.removeFie -- END
+I20220511 20:58:19.686980  9716 FileManagement.cpp:151] FileManagement.removeFile -- BEGIN
+I20220511 20:58:19.686980  9716 FileManagement.cpp:160] FileManagement.removeFile -- Removing file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\test3-tempOutput.txt
+I20220511 20:58:19.686980  9716 FileManagement.cpp:177] FileManagement.removeFie -- END
+I20220511 20:58:19.686980  9716 FileManagement.cpp:151] FileManagement.removeFile -- BEGIN
+I20220511 20:58:19.687976  9716 FileManagement.cpp:160] FileManagement.removeFile -- Removing file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testinput-tempOutput.txt
+I20220511 20:58:19.687976  9716 FileManagement.cpp:177] FileManagement.removeFie -- END
+I20220511 20:58:19.687976  9716 FileManagement.cpp:151] FileManagement.removeFile -- BEGIN
+I20220511 20:58:19.687976  9716 FileManagement.cpp:160] FileManagement.removeFile -- Removing file C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\TestTempOutputFileDir\testoutput-tempOutput.txt
+I20220511 20:58:19.687976  9716 FileManagement.cpp:177] FileManagement.removeFie -- END
+I20220511 20:58:19.687976  9716 FileManagement.cpp:106] FileManagement.clearDirectory -- END
+I20220511 20:58:19.687976  9716 Workflow.cpp:378] Workflow.reduce -- END
+I20220511 20:58:19.687976  9716 Executive.cpp:87] MapReduce program completed running.
+I20220511 20:58:19.687976  9716 Sorter.cpp:44] Sorter component destroyed
+I20220511 20:58:19.687976  9716 Workflow.cpp:106] Workflow component destroyed
