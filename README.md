@@ -3,7 +3,7 @@ by Elizabeth Dwulit and Cliford Guillaume
 
 CSE 687 Object Oriented Design
 Project MapReduce
-Phase #1
+Phase #1, Phase #2
 
 Github: https://github.com/Clifordguillaume/MapReduce
 
