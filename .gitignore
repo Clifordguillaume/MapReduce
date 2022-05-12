@@ -13,10 +13,9 @@
 /MapReduce/MapReduce/packages
 /MapReduce/MapReduce/MapReduceUnitTests/x64
 /MapReduce/.vs/MapReduce/v17/.suo
-/MapReduce/MapReduce/x64/Debug
-/MapReduce/ReduceLibrary/x64/Debug
-/MapReduce/x64/Debug
-/MapReduce/MapReduce/x64
-*x64
+/MapReduce/MapLibrary/x64
+/MapReduce/ReduceLibrary/x64
+/MapReduce/MapReduceUnitTests/x64
+
 *Debug
 

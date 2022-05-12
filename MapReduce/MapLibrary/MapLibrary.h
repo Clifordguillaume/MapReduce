@@ -54,37 +54,49 @@ struct WordCount {
  * struct for holding words and how many of them there are
  */
 struct SplitWords {
-	// Number of words in the SplitWords words array
-	int wordCount;
-
 	// Array of words
 	string* words;
 
+	// Number of words in the SplitWords words array
+	int wordCount;
+
 	/**
+	 * Constructor
+	 * @param w - array of words
+	 * @param count - number of words in the words arr
 	 */
-	SplitWords(int count, string* w)
+	SplitWords(string* w, int count)
 	{
-		wordCount = count;
+		
 		words = w;
+		wordCount = count;
 	}
 };
 
-struct KeyValue {
+/**
+ * struct for holding a key and its combined values
+ */
+struct KeyValues {
+	// the key associated with the values
+	string key;
 
-	// Constructor
-	void addToList(int* inputArrary, list<int> oStrVal)
+	// array of values
+	int* valsArr;
+
+	// the number of values in the valsArr
+	int numVals = 0;
+
+	/**
+	 * Constructor
+	 * @param k - the key
+	 * @param vals - array of int values
+	 * @param n - number of values in the vals arr
+	 */
+	KeyValues(string k, int* vals, int n)
 	{
-		list<int> lstKeyVal;
-		// dereference the arry
-		int ArraySize = sizeof(inputArrary);
-		for (int i = 1; i <= ArraySize; i++)
-		{
-			int iKey = inputArrary[i];
-			lstKeyVal.push_back(iKey);
-		}
-
-		// Copy new list to the output list
-		std::copy(lstKeyVal.begin(), lstKeyVal.end(), std::back_inserter(oStrVal));
+		key = k;
+		valsArr = vals;
+		numVals = n;
 	}
 };
 
@@ -118,9 +130,10 @@ extern "C" MAPLIBRARY_API string getKey(string str);
  * @param iSKey - Key to find the values for
  * @param lstOfData - list of original data
  * @param rowsToSkip - number of entries in the lstOfData to skip over
- * @return array containing values found corresponding to the key
+ * @return KeyValues struct containing the key, an array of values found corresponding to the key
+ *		   and the number of values in the values array
  */
-extern "C" MAPLIBRARY_API int* getKeyValue(string iSKey, list<string> lstOfData, int rowsToSkip);
+extern "C" MAPLIBRARY_API KeyValues getKeyValue(string iSKey, list<string> lstOfData, int rowsToSkip);
 
 /**
  * Splits a string into a vector of strings, split by whitespace

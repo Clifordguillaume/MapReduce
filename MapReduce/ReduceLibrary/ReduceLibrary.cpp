@@ -5,7 +5,7 @@
 // 
 // ReduceLibrary.cpp
 // 
-// Author: Cliford
+// Author: Cliford and Elizabeth
 // 
 // Description: The reduce class is responsible for taking in a key and an
 //				iterator of integers, summing up the values of the iterator,
@@ -15,6 +15,9 @@
 // File History:
 // 5/02/22 - Cliford - Dll Initial creation
 // 5/04/22 - Cliford - Dll continuation with the creation process
+// 5/11/22 - Elizabeth - Modify reduceFunc to use int* data. Change getData
+//						 to use string pointer arr in order to use dll extern.
+//						 Add ReducedData struct and use it.
 // ===============================================================================
 #include "pch.h"
 #include <boost/algorithm/string.hpp>
@@ -33,7 +36,7 @@ list<string> _lstReducedData;
 // -------------------------------------------------------------------------------
 // reduceFunc
 // -------------------------------------------------------------------------------
-REDUCELIBRARY_API int reduceFunc(string& iKey, list<int> oLstOfData)
+REDUCELIBRARY_API int reduceFunc(string& iKey, int* data, int dataSize)
 {
 	//LOG(INFO) << "Reduce.reduceFunc -- BEGIN";
 	if (debug)
@@ -49,17 +52,13 @@ REDUCELIBRARY_API int reduceFunc(string& iKey, list<int> oLstOfData)
 		int ikeyVal = 0;
 
 		// get the key frequency
-		list<int>::iterator itr;
-		for (int lst : oLstOfData)
+		for (int i = 0; i < dataSize; i++)
 		{
-			ikeyVal = ikeyVal + 1;
+			ikeyVal += data[i];
 		}
 
-		string str1 = "(\"";
-		string s1 = "\",";
-		string str2 = str1 + sKeyVal + s1;
-		string s = to_string(ikeyVal);
-		string finalString = str2 + s + ")";
+		string freq = to_string(ikeyVal);
+		string finalString = "(\"" + sKeyVal + "\"," + freq + ")";
 
 		// Add data to the global lst
 		_lstReducedData.push_back(finalString);
@@ -112,9 +111,15 @@ REDUCELIBRARY_API int exportFunc(list<string> sDataToWrite, string outputFileDir
 }
 
 // -------------------------------------------------------------------------------
-// GetData
+// getData
 // -------------------------------------------------------------------------------
-REDUCELIBRARY_API list<string> GetData()
+REDUCELIBRARY_API ReducedData getData()
 {
-	return _lstReducedData;
+	int listSize = _lstReducedData.size();
+	string* dataArr = new string[listSize];
+	std::copy(_lstReducedData.begin(), _lstReducedData.end(), dataArr);
+
+	ReducedData reducedData = { dataArr, listSize };
+
+	return reducedData;
 }

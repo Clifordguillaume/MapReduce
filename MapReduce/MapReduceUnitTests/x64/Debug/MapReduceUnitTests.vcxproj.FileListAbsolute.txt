@@ -1,2 +1,3 @@
 C:\Users\dwuli\OneDrive\egrad\EDwulit Projects\MapReduce\MapReduceUnitTests\x64\Debug\MapReduceUnitTests.vcxproj.CopyComplete
 C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\MapReduceUnitTests\x64\Debug\MapReduceUnitTests.vcxproj.CopyComplete
+C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduceUnitTests\x64\Debug\MapReduceUnitTests.vcxproj.CopyComplete

@@ -23,8 +23,14 @@
 // 4/25/22 - Elizabeth - Add check for already processed words in reduce function.
 //                       Add cout logs to display progress to user
 // 5/7/22 - Elizabeth - Convert map() to use MapLibrary DLL
-// 5/07/22 - Cliford - Added the Dll library for the reduce capability.
+// 5/7/22 - Cliford - Added the Dll library for the reduce capability.
 // 5/8/22 - Elizabeth - Add MapLibrary DLL explicit call
+// 5/9/22 - Cliford - Add ReduceLibrary DLL explicit call. Add getKeyValue 
+//                    MapLibrary func
+// 5/11/22 - Elizabeth - Rework getKeyValue MapLibrary func to use new KeyValues
+//                      struct. Add getKey. Use ReducedData struct for reduced data 
+//                      return from ReduceLibrary. Modify reduce() accordingly.
+// 
 // ===============================================================================
 
 //#undef _HAS_STD_BYTE
@@ -52,19 +58,20 @@ using namespace std;
 // dll map functions
 typedef WordCount* (*funcMap)(string, string, int*);
 typedef void (*funcExportMap)(string, WordCount*, int);
-typedef int* (*funGetKeyValue)(string, list<string>, int);
+typedef string (*funcGetKey)(string);
+typedef KeyValues (*funGetKeyValue)(string, list<string>, int);
 funcMap dllMapFunc;
 funcExportMap dllExportMapFunc;
+funcGetKey dllGetKeyFunc;
 funGetKeyValue dllGetKeyValueFunc;
 
 // dll Reduce functions
-typedef int (*reduceFunction)(string, list<int>);
+typedef int (*reduceFunction)(string, int*, int);
 typedef int (*exportFunction)(list<string>, string);
-typedef list<string> (*GetDataFunction)();
-
+typedef  ReducedData (*getDataFunction)();
 reduceFunction dllReduceFunc;
 exportFunction dllExportReduceFunc;
-GetDataFunction dllGetData;
+getDataFunction dllGetData;
 
 
 namespace MapReduce
@@ -117,6 +124,7 @@ namespace MapReduce
 
                 dllMapFunc = (funcMap)GetProcAddress(hDLL, "mapFunc");
                 dllExportMapFunc = (funcExportMap)GetProcAddress(hDLL, "exportMap");
+                dllGetKeyFunc = (funcGetKey)GetProcAddress(hDLL, "getKey");
                 dllGetKeyValueFunc = (funGetKeyValue)GetProcAddress(hDLL, "getKeyValue");
             }
         }
@@ -144,7 +152,7 @@ namespace MapReduce
             if (hDLL != NULL) {
                 dllReduceFunc = (reduceFunction)GetProcAddress(hDLL, "reduceFunc");
                 dllExportReduceFunc = (exportFunction)GetProcAddress(hDLL, "exportFunc");
-                dllGetData = (GetDataFunction)GetProcAddress(hDLL, "GetData");
+                dllGetData = (getDataFunction)GetProcAddress(hDLL, "getData");
             }
         }
         catch (exception e)
@@ -293,7 +301,7 @@ namespace MapReduce
 
         // Local Varibles
         string fileName = "";
-        list<string> DataToWriteToFile;
+        list<string> dataToWriteToFile;
         list<string> fileData;
 
         // get list of all files in input file directory
@@ -310,6 +318,9 @@ namespace MapReduce
             if(debug)
                 cout << "File Data size: " << fileData.size() << endl;
         }
+
+        // sort the data in combined files
+        fileData.sort();
         
         // keep track of already processed data as to not process again
         set<string> processedKeys;
@@ -319,7 +330,7 @@ namespace MapReduce
         for (string lstString : fileData)
         {
             // Get key from the list value
-            string sKey = getKey(lstString);
+            string sKey = dllGetKeyFunc(lstString);
 
             // if key already reduced, do not reduce again
             if (processedKeys.count(sKey) > 0) 
@@ -328,32 +339,34 @@ namespace MapReduce
             }
 
             // Get the key value
-            // TODO: replace with MapLibrary int* array
-            //list<int> itr = _pMap->getKeyValue(sKey, fileData, rowsToSkip);
-            int* itr = dllGetKeyValueFunc(sKey, fileData, rowsToSkip);
-
-            list<int> oStrVal;
-            KeyValue KeyValStruct;
-            KeyValStruct.addToList(itr, oStrVal);
+            KeyValues keyValsArr = dllGetKeyValueFunc(sKey, fileData, rowsToSkip);
+            int* values = keyValsArr.valsArr;
+            int numVals = keyValsArr.numVals;
 
             // new code with DLL
-            dllReduceFunc(sKey, oStrVal);
+            dllReduceFunc(sKey, values, numVals);
 
             processedKeys.insert(sKey);
-            rowsToSkip += oStrVal.size();
+            rowsToSkip += numVals;
         }
 
         // get the data to write to a new file
-        DataToWriteToFile = dllGetData();
+        ReducedData reducedData = dllGetData();
+        string* dataArr = reducedData.reducedData;
+        int dataArrSize = reducedData.numRows;
+        for (int i = 0; i < dataArrSize; i++)
+        {
+            dataToWriteToFile.push_back(dataArr[i]);
+        }
 
         // sort it
-        DataToWriteToFile.sort();
+        dataToWriteToFile.sort();
 
         // passed into exportFunc for processing
         cout << "Exporting reduced data..." << endl;
 
         // Reduce function
-        dllExportReduceFunc(DataToWriteToFile, outputFileDir);
+        dllExportReduceFunc(dataToWriteToFile, outputFileDir);
 
         // write the empty success file as per project requirements
         _pFileManagement->createSuccessFile(outputFileDir);
