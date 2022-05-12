@@ -26,8 +26,6 @@ namespace MapReduce
 	class Workflow
 	{
 		public:
-			Map* _pMap;
-			Reduce* _pReduce;
 			Sorter* _pSorter;
 			FileManagement* _pFileManagement;
 
@@ -45,8 +43,14 @@ namespace MapReduce
 
 			/**
 			 * Set up the MapLibrary dll functions
-			 */
+			 */	
 			virtual void setupMapDLL();
+
+			/**
+			 * Set up the ReduceLibrary dll functions
+			 */
+			virtual void setupReduceDLL();
+
 
 			/**
 			 * Maps input file contents to output file

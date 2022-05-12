@@ -13,6 +13,7 @@
 // 5/4/22 - Elizabeth - Initial file creation with methods copied from MapReduce
 // 5/4/22 - Elizabeth - Remove std dependencies from methods
 // 5/6/22 - Elizabeth - Continue removing std dependencies
+// 5/11/22 - Elizabeth - Change getKeyVals to return KeyVals struct object
 // ===============================================================================
 #pragma once
 #include "FileManagement.h"
@@ -94,7 +95,7 @@ MAPLIBRARY_API void exportMap(string outputFileName, WordCount* wordCounts, int 
 			string word = wc.word;
 			int count = wc.count;
 
-			//cout << "Map exporting word: " + word << endl;
+			cout << "Map exporting word: " + word << endl;
 
 			// write key and value to file
 			fileManagement.writeKeyValueToFile(outputFileName, word, count);
@@ -135,7 +136,7 @@ MAPLIBRARY_API SplitWords splitString(string str)
 	int numWords = splitStrVector.size();
 	string* splitStrArr = new string[numWords];
 	std::copy(splitStrVector.begin(), splitStrVector.end(), splitStrArr);
-	SplitWords splitWords = { numWords, splitStrArr };
+	SplitWords splitWords = { splitStrArr, numWords };
 
 	return splitWords;
 }
@@ -241,7 +242,7 @@ MAPLIBRARY_API string getKey(string iStr)
 // -------------------------------------------------------------------------------
 // getKeyValue
 // -------------------------------------------------------------------------------
-MAPLIBRARY_API int* getKeyValue(string iSKey, list<string> lstOfData, int rowsToSkip)
+MAPLIBRARY_API KeyValues getKeyValue(string iSKey, list<string> lstOfData, int rowsToSkip)
 {
 	//LOG(INFO) << "Map.getKeyValue -- BEGIN"; // ONLY UNCOMMENT IF DEBUGGING
 
@@ -292,5 +293,7 @@ MAPLIBRARY_API int* getKeyValue(string iSKey, list<string> lstOfData, int rowsTo
 	int* keyValArr = new int[listSize];
 	std::copy(keyValList.begin(), keyValList.end(), keyValArr);
 
-	return keyValArr;
+	KeyValues keyVals = { iSKey, keyValArr, listSize };
+
+	return keyVals;
 }

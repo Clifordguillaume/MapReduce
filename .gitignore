@@ -12,3 +12,10 @@
 *.obj
 /MapReduce/MapReduce/packages
 /MapReduce/MapReduce/MapReduceUnitTests/x64
+/MapReduce/.vs/MapReduce/v17/.suo
+/MapReduce/MapLibrary/x64
+/MapReduce/ReduceLibrary/x64
+/MapReduce/MapReduceUnitTests/x64
+
+*Debug
+
