@@ -74,6 +74,18 @@ namespace MapReduce
 			 */
 			virtual void reduce(string tempDirectory, string outputFileDir);
 
+			/**
+			 * Reduces the contents of a file
+			 * @param file - the file to reduce
+			 */
+			virtual void reduceFile(string file);
+
+			/**
+			 * Save data that has been reduced to a text file in a given output dir
+			 * @param outputFileDir - directory to save results to
+			 */
+			virtual void saveReducedData(string outputFileDir);
+
 		private:
 	};
 }

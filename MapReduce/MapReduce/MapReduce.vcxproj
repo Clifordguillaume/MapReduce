@@ -221,6 +221,7 @@
     <ClCompile Include="Workflow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ConcurrentHashMap.h" />
     <ClInclude Include="Executive.h" />
     <ClInclude Include="FileManagement.h" />
     <ClInclude Include="KeyValUtils.h" />

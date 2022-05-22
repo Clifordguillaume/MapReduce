@@ -30,7 +30,8 @@
 // 5/11/22 - Elizabeth - Rework getKeyValue MapLibrary func to use new KeyValues
 //                      struct. Add getKey. Use ReducedData struct for reduced data 
 //                      return from ReduceLibrary. Modify reduce() accordingly.
-// 5/22/22 - Elizabeth - Use KeyValUtils. Use ConcurrentHashMap
+// 5/22/22 - Elizabeth - Use KeyValUtils. Use ConcurrentHashMap. 
+//                      Utilize threads in reduce()
 // ===============================================================================
 
 //#undef _HAS_STD_BYTE
@@ -66,6 +67,9 @@ typedef ReducedData(*reduceFunction)(string, list<int>);
 typedef int (*exportFunction)(list<string>, string);
 reduceFunction dllReduceFunc;
 exportFunction dllExportReduceFunc;
+
+// Vector to hold threads used to reduce
+std::vector<std::thread> ThreadVector;
 
 
 namespace MapReduce
@@ -294,40 +298,65 @@ namespace MapReduce
         // reduce all data in each temp file
         for (string file : tempFiles)
         {
-            // sort the contents of the temp file
-            _pSorter->sort(file);
-
-            // read the contents of the temp file
-            list<string> fileContents = _pFileManagement->readFile(file);
-
-            // keep track of already processed data as to not process again
-            set<string> processedKeys;
-            int rowsToSkip = 0;
-
-            // go through file data
-            for (string lstString : fileContents)
-            {
-                // Get key from the list value
-                string sKey = KeyValUtils::getKey(lstString);
-
-                // if key already reduced, do not reduce again
-                if (processedKeys.count(sKey) > 0)
-                {
-                    continue;
-                }
-
-                // Get the key value
-                list<int> keyValsList = KeyValUtils::getKeyValues(sKey, fileContents, rowsToSkip);
-
-                // new code with DLL
-                ReducedData reducedData = dllReduceFunc(sKey, keyValsList);
-                ConcurrentHashMap::addToMap(reducedData);
-
-                processedKeys.insert(sKey);
-                rowsToSkip += keyValsList.size();
-            }
+            //ThreadVector.emplace_back([&]() { reduceFile(file); }); // Pass by reference here, make sure the object lifetime is correct
+            std::thread t([this, file] { this->reduceFile(file); });
+            t.join();
         }
 
+        // export the reduced data
+        saveReducedData(outputFileDir);
+
+        // clear temp output directory now that we are done with the files
+        _pFileManagement->clearDirectory(tempDirectory);
+
+        cout << "Finished reducing" << endl;
+        LOG(INFO) << "Workflow.reduce -- END";
+    }
+
+    // -------------------------------------------------------------------------------
+    // reduceFile
+    // -------------------------------------------------------------------------------
+    void Workflow::reduceFile(string file)
+    {
+        // sort the contents of the temp file
+        _pSorter->sort(file);
+
+        // read the contents of the temp file
+        list<string> fileContents = _pFileManagement->readFile(file);
+
+        // keep track of already processed data as to not process again
+        set<string> processedKeys;
+        int rowsToSkip = 0;
+
+        // go through file data
+        for (string lstString : fileContents)
+        {
+            // Get key from the list value
+            string sKey = KeyValUtils::getKey(lstString);
+
+            // if key already reduced, do not reduce again
+            if (processedKeys.count(sKey) > 0)
+            {
+                continue;
+            }
+
+            // Get the key value
+            list<int> keyValsList = KeyValUtils::getKeyValues(sKey, fileContents, rowsToSkip);
+
+            // new code with DLL
+            ReducedData reducedData = dllReduceFunc(sKey, keyValsList);
+            ConcurrentHashMap::addToMap(reducedData);
+
+            processedKeys.insert(sKey);
+            rowsToSkip += keyValsList.size();
+        }
+    }
+
+    // -------------------------------------------------------------------------------
+    // saveReducedData
+    // -------------------------------------------------------------------------------
+    void Workflow::saveReducedData(string outputFileDir)
+    {
         // loop through hashmap and add data to file
         list<string> mapContents = ConcurrentHashMap::getMapContents();
 
@@ -342,11 +371,5 @@ namespace MapReduce
 
         // write the empty success file as per project requirements
         _pFileManagement->createSuccessFile(outputFileDir);
-
-        // clear temp output directory now that we are done with the files
-        _pFileManagement->clearDirectory(tempDirectory);
-
-        cout << "Finished reducing" << endl;
-        LOG(INFO) << "Workflow.reduce -- END";
     }
 }
