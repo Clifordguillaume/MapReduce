@@ -51,7 +51,6 @@ namespace MapReduce
 			 */
 			virtual void setupReduceDLL();
 
-
 			/**
 			 * Maps input file contents to output file
 			 * @param inputFileDir - name of directory to read input files from
@@ -59,13 +58,6 @@ namespace MapReduce
 			 * @returns list of read input files
 			 */
 			virtual list<string> map(string inputFileDir, string outputFileName);
-
-			/**
-			 * Sorts contents of a file
-			 * @param tempDirectory -directory that contains all the temp files to be sorted
-			 * @return int returns 0 to comple function task
-			 */
-			//virtual int sort(string tempDirectory);
 
 			/**
 			 * Reduces a list of data to a single output file

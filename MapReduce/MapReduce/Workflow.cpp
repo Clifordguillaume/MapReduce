@@ -68,10 +68,6 @@ typedef int (*exportFunction)(list<string>, string);
 reduceFunction dllReduceFunc;
 exportFunction dllExportReduceFunc;
 
-// Vector to hold threads used to reduce
-std::vector<std::thread> ThreadVector;
-
-
 namespace MapReduce
 {
     // -----------------------------------------------
@@ -173,15 +169,9 @@ namespace MapReduce
             return;
         }
 
-        //if (debug)
-        //    cout << "About to run sort function" << endl;
-        //sort(tempOutputFileDir);
-
         if (debug)
             cout << "About to run reduce function" << endl;
         reduce(tempOutputFileDir, outputFileDir);
-
-       // _pFileManagement->clearDirectory(tempOutputFileDir);
     }
 
     // -------------------------------------------------------------------------------
@@ -228,7 +218,6 @@ namespace MapReduce
                     }
 
                     // count the frequencies of the words in input file
-                    //std::multimap<string, int> wordFreqs = _pMap->map(inputFileName, fileContentsStr);
                     int numWords = 0;
                     WordCount* wordFreqs = dllMapFunc(inputFileName, fileContentsStr, &numWords);
 
@@ -258,33 +247,6 @@ namespace MapReduce
     }
 
     // -------------------------------------------------------------------------------
-    // sort
-    // -------------------------------------------------------------------------------
-    //int Workflow::sort(string tempDirectory)
-    //{
-    //    LOG(INFO) << "Workflow.sort -- BEGIN";
-    //    cout << "Sorting..." << endl;
-
-    //    // Local variables
-    //    list<string> lstOfData;
-
-    //    // get the list of all the files in the temp folder
-    //    list<string> tempFiles = _pFileManagement->getTextFilesInDirectory(tempDirectory);
-
-    //    // Loop through each files 
-    //    for (string file : tempFiles)
-    //    {
-    //        _pSorter->sort(file);
-    //    }
-
-    //    cout << "Finished sorting" << endl;
-    //    LOG(INFO) << "Workflow.sort -- END";
-
-    //    // return
-    //    return 0;
-    //}
-
-    // -------------------------------------------------------------------------------
     // reduce
     // -------------------------------------------------------------------------------
     void Workflow::reduce(string tempDirectory, string outputFileDir)
@@ -298,7 +260,6 @@ namespace MapReduce
         // reduce all data in each temp file
         for (string file : tempFiles)
         {
-            //ThreadVector.emplace_back([&]() { reduceFile(file); }); // Pass by reference here, make sure the object lifetime is correct
             std::thread t([this, file] { this->reduceFile(file); });
             t.join();
         }
@@ -345,6 +306,8 @@ namespace MapReduce
 
             // new code with DLL
             ReducedData reducedData = dllReduceFunc(sKey, keyValsList);
+
+            // add reduced data to static map
             ConcurrentHashMap::addToMap(reducedData);
 
             processedKeys.insert(sKey);
@@ -363,10 +326,9 @@ namespace MapReduce
         // sort it
         mapContents.sort();
 
-        // passed into exportFunc for processing
         cout << "Exporting reduced data..." << endl;
 
-        // Reduce function
+        // Export the map contents to the user-defined output file dir
         dllExportReduceFunc(mapContents, outputFileDir);
 
         // write the empty success file as per project requirements
