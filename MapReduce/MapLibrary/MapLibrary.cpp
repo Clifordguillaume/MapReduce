@@ -14,6 +14,7 @@
 // 5/4/22 - Elizabeth - Remove std dependencies from methods
 // 5/6/22 - Elizabeth - Continue removing std dependencies
 // 5/11/22 - Elizabeth - Change getKeyVals to return KeyVals struct object
+// 5/22/22 - Elizabeth - Remove getKey, getKeyVals
 // ===============================================================================
 #pragma once
 #include "FileManagement.h"
@@ -175,125 +176,10 @@ MAPLIBRARY_API string removeSpecialChars(string str)
 }
 
 // -------------------------------------------------------------------------------
-// removeSpecialChars
-// -------------------------------------------------------------------------------
-MAPLIBRARY_API vector<int> getQuoteIndexes(string str)
-{
-	vector<int> indexes;
-	for (int i = 0; i < str.size(); i++)
-	{
-		if (str[i] == '\"')
-		{
-			indexes.push_back(i);
-		}
-	}
-	return indexes;
-}
-
-// -------------------------------------------------------------------------------
 // lowerString
 // -------------------------------------------------------------------------------
 MAPLIBRARY_API string lowerString(string str)
 {
 	boost::algorithm::to_lower(str); // use boost to_lower
 	return str;
-}
-
-// -------------------------------------------------------------------------------
-// getKey
-// -------------------------------------------------------------------------------
-MAPLIBRARY_API string getKey(string iStr)
-{
-	// ONLY UNCOMMENT IF DEBUGGING
-	//LOG(INFO) << "Map.getKey -- BEGIN";
-	//LOG(INFO) << "Map.getKey -- Getting key from string " + iStr;
-
-	string key;
-	try {
-		vector<int> quoteIndexes = getQuoteIndexes(iStr);
-		int firstQuoteIndx = quoteIndexes.front();
-		int lastQuoteIndx = quoteIndexes.back();
-		int firstCharIndx = firstQuoteIndx + 1;
-		int lastCharIndx = lastQuoteIndx - 1;
-
-		// if key is only one letter long..
-		if (firstCharIndx == lastCharIndx)
-		{
-			key = iStr[firstCharIndx];
-		}
-		else // otherwise extract the key
-		{
-			key = iStr.substr(firstCharIndx, lastCharIndx - 1);
-		}
-	}
-	catch (exception e)
-	{
-		//LOG(ERROR) << "Map.getKey -- Exception getting key from string " + iStr;
-	}
-
-	// ONLY UNCOMMENT IF DEBUGGING
-	//LOG(INFO) << "Map.getKey -- Key " + key + " extracted from string " + iStr;
-	//LOG(INFO) << "Map.getKey -- END";
-
-	return key;
-}
-
-
-// -------------------------------------------------------------------------------
-// getKeyValue
-// -------------------------------------------------------------------------------
-MAPLIBRARY_API KeyValues getKeyValue(string iSKey, list<string> lstOfData, int rowsToSkip)
-{
-	//LOG(INFO) << "Map.getKeyValue -- BEGIN"; // ONLY UNCOMMENT IF DEBUGGING
-
-	list<int> keyValList;
-	list<string> trimmedListOfData;
-	list<string>::iterator it = lstOfData.begin();
-	advance(it, rowsToSkip);
-	trimmedListOfData.splice(trimmedListOfData.end(), lstOfData, it, lstOfData.end());
-
-	try
-	{
-		for (string dataEntry : trimmedListOfData)
-		{
-			// get the key value of the current row of data
-			string key = getKey(dataEntry);
-
-			// if the key of the current row of data matches key to find values for
-			if (key == iSKey)
-			{
-				// find index of the comma 
-				int commaIndx = dataEntry.find(',');
-
-				// find index of closing parenthesis
-				int closingParenthesisIndx = dataEntry.find(')');
-
-				// extract the string between the comma and the closing parentheis
-				string valueStr = dataEntry.substr(commaIndx + 1, closingParenthesisIndx - 2);
-
-				// trim the string
-				boost::trim(valueStr);
-
-				int sKeyValue = stoi(valueStr);
-				keyValList.push_back(sKeyValue);
-			}
-		}
-	}
-	catch (exception e)
-	{
-		//LOG(ERROR) << "Map.getKeyValue -- Exception getting value of key: " + iSKey;
-		//LOG(ERROR) << e.what();
-	}
-
-	// ONLY UNCOMMENT IF DEBUGGING
-	//LOG(INFO) << "Map.getKeyValue -- Extracted key value of size " + to_string(iKeyValue.size()) + " for key: " + iSKey;
-	//LOG(INFO) << "Map.getKeyValue -- END";
-
-	int listSize = keyValList.size();
-	int* keyValArr = new int[listSize];
-	std::copy(keyValList.begin(), keyValList.end(), keyValArr);
-
-	KeyValues keyVals = { iSKey, keyValArr, listSize };
-
-	return keyVals;
 }

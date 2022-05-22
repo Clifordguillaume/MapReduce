@@ -54,9 +54,10 @@ struct ReducedData
 * @param iKey - single key to retrieve the number of occurence for
 * @param data - pointer to int array of values corresponding to iKey
 * @param dataSize - the number of items in the data arr
-* @return returns 0 to complete function task
+* @return ReducedData struct containing a string pointer of string array containing data
+ *			and the number of strings in the data array
 */
-extern "C" REDUCELIBRARY_API int reduceFunc(string & iKey, int* data, int dataSize);
+extern "C" REDUCELIBRARY_API ReducedData reduceFunc(string & iKey, list<int> data);
 
 
 /**
@@ -65,12 +66,3 @@ extern "C" REDUCELIBRARY_API int reduceFunc(string & iKey, int* data, int dataSi
  * @return int
  */
 extern "C" REDUCELIBRARY_API int exportFunc(list<string> sDataToWrite, string outputFileDir);
-
-
-/**
- * getData is used to retrieve the data that needs to be passed to
- *			the next calling function (write data to final file)
- * @return ReducedData struct containing a string pointer of string array containing data
- *			and the number of strings in the data array
- */
-extern "C" REDUCELIBRARY_API ReducedData getData();

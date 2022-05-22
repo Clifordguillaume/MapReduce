@@ -211,16 +211,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ConcurrentHashMap.cpp" />
     <ClCompile Include="Executive.cpp" />
     <ClCompile Include="FileManagement.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Reduce.cpp" />
     <ClCompile Include="Sorter.cpp" />
+    <ClCompile Include="KeyValUtils.cpp" />
     <ClCompile Include="Workflow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Executive.h" />
     <ClInclude Include="FileManagement.h" />
+    <ClInclude Include="KeyValUtils.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Reduce.h" />
     <ClInclude Include="Sorter.h" />

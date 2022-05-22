@@ -30,7 +30,7 @@
 // 5/11/22 - Elizabeth - Rework getKeyValue MapLibrary func to use new KeyValues
 //                      struct. Add getKey. Use ReducedData struct for reduced data 
 //                      return from ReduceLibrary. Modify reduce() accordingly.
-// 
+// 5/22/22 - Elizabeth - Use KeyValUtils
 // ===============================================================================
 
 //#undef _HAS_STD_BYTE
@@ -41,9 +41,8 @@
 #include "Workflow.h"
 #include "FileManagement.h"
 #include "MapLibrary.h"
-#include "Sorter.h"
-#include "Reduce.h"
 #include "ReduceLibrary.h"
+#include "KeyValUtils.h"
 #include <boost/algorithm/string.hpp>
 #include <glog/logging.h>
 #include <set>
@@ -58,20 +57,14 @@ using namespace std;
 // dll map functions
 typedef WordCount* (*funcMap)(string, string, int*);
 typedef void (*funcExportMap)(string, WordCount*, int);
-typedef string (*funcGetKey)(string);
-typedef KeyValues (*funGetKeyValue)(string, list<string>, int);
 funcMap dllMapFunc;
 funcExportMap dllExportMapFunc;
-funcGetKey dllGetKeyFunc;
-funGetKeyValue dllGetKeyValueFunc;
 
 // dll Reduce functions
-typedef int (*reduceFunction)(string, int*, int);
+typedef ReducedData(*reduceFunction)(string, list<int>);
 typedef int (*exportFunction)(list<string>, string);
-typedef  ReducedData (*getDataFunction)();
 reduceFunction dllReduceFunc;
 exportFunction dllExportReduceFunc;
-getDataFunction dllGetData;
 
 
 namespace MapReduce
@@ -124,8 +117,6 @@ namespace MapReduce
 
                 dllMapFunc = (funcMap)GetProcAddress(hDLL, "mapFunc");
                 dllExportMapFunc = (funcExportMap)GetProcAddress(hDLL, "exportMap");
-                dllGetKeyFunc = (funcGetKey)GetProcAddress(hDLL, "getKey");
-                dllGetKeyValueFunc = (funGetKeyValue)GetProcAddress(hDLL, "getKeyValue");
             }
         }
         catch (exception e)
@@ -152,7 +143,6 @@ namespace MapReduce
             if (hDLL != NULL) {
                 dllReduceFunc = (reduceFunction)GetProcAddress(hDLL, "reduceFunc");
                 dllExportReduceFunc = (exportFunction)GetProcAddress(hDLL, "exportFunc");
-                dllGetData = (getDataFunction)GetProcAddress(hDLL, "getData");
             }
         }
         catch (exception e)
@@ -178,8 +168,8 @@ namespace MapReduce
             return;
         }
 
-        if (debug)
-            cout << "About to run sort function" << endl;
+        //if (debug)
+        //    cout << "About to run sort function" << endl;
         sort(tempOutputFileDir);
 
         if (debug)
@@ -271,7 +261,6 @@ namespace MapReduce
         cout << "Sorting..." << endl;
 
         // Local variables
-        string fileName = "";
         list<string> lstOfData;
 
         // get the list of all the files in the temp folder
@@ -280,8 +269,7 @@ namespace MapReduce
         // Loop through each files 
         for (string file : tempFiles)
         {
-            fileName = file;
-            _pSorter->sort(fileName);
+            _pSorter->sort(file);
         }
 
         cout << "Finished sorting" << endl;
@@ -315,13 +303,13 @@ namespace MapReduce
             sData = _pFileManagement->readFile(fileName);
             fileData.insert(fileData.end(), sData.begin(), sData.end());
 
-            if(debug)
+            if (debug)
                 cout << "File Data size: " << fileData.size() << endl;
         }
 
         // sort the data in combined files
         fileData.sort();
-        
+
         // keep track of already processed data as to not process again
         set<string> processedKeys;
         int rowsToSkip = 0;
@@ -330,33 +318,27 @@ namespace MapReduce
         for (string lstString : fileData)
         {
             // Get key from the list value
-            string sKey = dllGetKeyFunc(lstString);
+            string sKey = KeyValUtils::getKey(lstString);
 
             // if key already reduced, do not reduce again
-            if (processedKeys.count(sKey) > 0) 
+            if (processedKeys.count(sKey) > 0)
             {
                 continue;
             }
 
             // Get the key value
-            KeyValues keyValsArr = dllGetKeyValueFunc(sKey, fileData, rowsToSkip);
-            int* values = keyValsArr.valsArr;
-            int numVals = keyValsArr.numVals;
-
-            // new code with DLL
-            dllReduceFunc(sKey, values, numVals);
-
+            list<int> keyValsList = KeyValUtils::getKeyValues(sKey, fileData, rowsToSkip);
+            ReducedData reducedData = dllReduceFunc(sKey, keyValsList);
             processedKeys.insert(sKey);
-            rowsToSkip += numVals;
-        }
+            rowsToSkip += keyValsList.size();
 
-        // get the data to write to a new file
-        ReducedData reducedData = dllGetData();
-        string* dataArr = reducedData.reducedData;
-        int dataArrSize = reducedData.numRows;
-        for (int i = 0; i < dataArrSize; i++)
-        {
-            dataToWriteToFile.push_back(dataArr[i]);
+            // add reduced data to list
+            string* dataArr = reducedData.reducedData;
+            int dataArrSize = reducedData.numRows;
+            for (int i = 0; i < dataArrSize; i++)
+            {
+                dataToWriteToFile.push_back(dataArr[i]);
+            }
         }
 
         // sort it

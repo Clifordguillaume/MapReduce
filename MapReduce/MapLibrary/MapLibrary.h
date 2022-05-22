@@ -118,24 +118,6 @@ extern "C" MAPLIBRARY_API WordCount* mapFunc(string inputFileName, string data, 
 extern "C" MAPLIBRARY_API void exportMap(string outputFileName, WordCount* wordCounts, int numWords);
 
 /**
- * Gets the key from a full string
- * @param str - whole string to retrieve the key from
- * @return the key found
- */
-extern "C" MAPLIBRARY_API string getKey(string str);
-
-/**
- * Gets a list of values in a given list of data that correspond to the
- * same given key
- * @param iSKey - Key to find the values for
- * @param lstOfData - list of original data
- * @param rowsToSkip - number of entries in the lstOfData to skip over
- * @return KeyValues struct containing the key, an array of values found corresponding to the key
- *		   and the number of values in the values array
- */
-extern "C" MAPLIBRARY_API KeyValues getKeyValue(string iSKey, list<string> lstOfData, int rowsToSkip);
-
-/**
  * Splits a string into a vector of strings, split by whitespace
  * @input str - string to split
  * @return SplitWords containing array of words and count of how many
@@ -156,10 +138,3 @@ MAPLIBRARY_API string removeSpecialChars(string str);
  * @return string with all characters coverted to lowercase letters
  */
 MAPLIBRARY_API string lowerString(string str);
-
-/**
- * Get all indexes where a double quote character is found
- * @input str - input string
- * @return vector of indexes in the string where quote found
- */
-MAPLIBRARY_API vector<int> getQuoteIndexes(string str);
