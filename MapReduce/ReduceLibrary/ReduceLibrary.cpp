@@ -18,6 +18,8 @@
 // 5/11/22 - Elizabeth - Modify reduceFunc to use int* data. Change getData
 //						 to use string pointer arr in order to use dll extern.
 //						 Add ReducedData struct and use it.
+// 5/22/22 - Elizabeth - Get rid of getData and directly return reduced data from
+//						 reduceFunc. Revert reduceFunc to use list<int>
 // ===============================================================================
 #include "pch.h"
 #include <boost/algorithm/string.hpp>
@@ -30,19 +32,19 @@
 
 // Global Variables
 FileManagement* _pFileManagement = new FileManagement();
-list<string> _lstReducedData;
-
 
 // -------------------------------------------------------------------------------
 // reduceFunc
 // -------------------------------------------------------------------------------
-REDUCELIBRARY_API int reduceFunc(string& iKey, int* data, int dataSize)
+REDUCELIBRARY_API ReducedData reduceFunc(string& iKey, list<int> data)
 {
 	//LOG(INFO) << "Reduce.reduceFunc -- BEGIN";
 	if (debug)
 		cout << "Inside the reduceFunc function " << endl;
 
 	cout << "Reducing key: " + iKey << endl;
+
+	list<string> _lstReducedData;
 
 	try
 	{
@@ -52,9 +54,9 @@ REDUCELIBRARY_API int reduceFunc(string& iKey, int* data, int dataSize)
 		int ikeyVal = 0;
 
 		// get the key frequency
-		for (int i = 0; i < dataSize; i++)
+		for (int i : data)
 		{
-			ikeyVal += data[i];
+			ikeyVal += i;
 		}
 
 		string freq = to_string(ikeyVal);
@@ -69,9 +71,15 @@ REDUCELIBRARY_API int reduceFunc(string& iKey, int* data, int dataSize)
 		//LOG(ERROR) << e.what();
 	}
 
+	int listSize = _lstReducedData.size();
+	string* dataArr = new string[listSize];
+	std::copy(_lstReducedData.begin(), _lstReducedData.end(), dataArr);
+
+	ReducedData reducedData = { dataArr, listSize };
+
 	//LOG(INFO) << "Reduce.reduceFunc -- END";
 
-	return 0;
+	return reducedData;
 }
 
 // -------------------------------------------------------------------------------
@@ -108,18 +116,4 @@ REDUCELIBRARY_API int exportFunc(list<string> sDataToWrite, string outputFileDir
 	//LOG(INFO) << "Reduce.exportFunc -- END";
 
 	return 0;
-}
-
-// -------------------------------------------------------------------------------
-// getData
-// -------------------------------------------------------------------------------
-REDUCELIBRARY_API ReducedData getData()
-{
-	int listSize = _lstReducedData.size();
-	string* dataArr = new string[listSize];
-	std::copy(_lstReducedData.begin(), _lstReducedData.end(), dataArr);
-
-	ReducedData reducedData = { dataArr, listSize };
-
-	return reducedData;
 }

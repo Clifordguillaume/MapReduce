@@ -30,7 +30,8 @@
 // 5/11/22 - Elizabeth - Rework getKeyValue MapLibrary func to use new KeyValues
 //                      struct. Add getKey. Use ReducedData struct for reduced data 
 //                      return from ReduceLibrary. Modify reduce() accordingly.
-// 
+// 5/22/22 - Elizabeth - Use KeyValUtils. Use ConcurrentHashMap. 
+//                      Utilize threads in reduce()
 // ===============================================================================
 
 //#undef _HAS_STD_BYTE
@@ -41,9 +42,9 @@
 #include "Workflow.h"
 #include "FileManagement.h"
 #include "MapLibrary.h"
-#include "Sorter.h"
-#include "Reduce.h"
 #include "ReduceLibrary.h"
+#include "KeyValUtils.h"
+#include "ConcurrentHashMap.h"
 #include <boost/algorithm/string.hpp>
 #include <glog/logging.h>
 #include <set>
@@ -58,21 +59,14 @@ using namespace std;
 // dll map functions
 typedef WordCount* (*funcMap)(string, string, int*);
 typedef void (*funcExportMap)(string, WordCount*, int);
-typedef string (*funcGetKey)(string);
-typedef KeyValues (*funGetKeyValue)(string, list<string>, int);
 funcMap dllMapFunc;
 funcExportMap dllExportMapFunc;
-funcGetKey dllGetKeyFunc;
-funGetKeyValue dllGetKeyValueFunc;
 
 // dll Reduce functions
-typedef int (*reduceFunction)(string, int*, int);
+typedef ReducedData(*reduceFunction)(string, list<int>);
 typedef int (*exportFunction)(list<string>, string);
-typedef  ReducedData (*getDataFunction)();
 reduceFunction dllReduceFunc;
 exportFunction dllExportReduceFunc;
-getDataFunction dllGetData;
-
 
 namespace MapReduce
 {
@@ -124,8 +118,6 @@ namespace MapReduce
 
                 dllMapFunc = (funcMap)GetProcAddress(hDLL, "mapFunc");
                 dllExportMapFunc = (funcExportMap)GetProcAddress(hDLL, "exportMap");
-                dllGetKeyFunc = (funcGetKey)GetProcAddress(hDLL, "getKey");
-                dllGetKeyValueFunc = (funGetKeyValue)GetProcAddress(hDLL, "getKeyValue");
             }
         }
         catch (exception e)
@@ -152,7 +144,6 @@ namespace MapReduce
             if (hDLL != NULL) {
                 dllReduceFunc = (reduceFunction)GetProcAddress(hDLL, "reduceFunc");
                 dllExportReduceFunc = (exportFunction)GetProcAddress(hDLL, "exportFunc");
-                dllGetData = (getDataFunction)GetProcAddress(hDLL, "getData");
             }
         }
         catch (exception e)
@@ -179,14 +170,8 @@ namespace MapReduce
         }
 
         if (debug)
-            cout << "About to run sort function" << endl;
-        sort(tempOutputFileDir);
-
-        if (debug)
             cout << "About to run reduce function" << endl;
         reduce(tempOutputFileDir, outputFileDir);
-
-       // _pFileManagement->clearDirectory(tempOutputFileDir);
     }
 
     // -------------------------------------------------------------------------------
@@ -233,7 +218,6 @@ namespace MapReduce
                     }
 
                     // count the frequencies of the words in input file
-                    //std::multimap<string, int> wordFreqs = _pMap->map(inputFileName, fileContentsStr);
                     int numWords = 0;
                     WordCount* wordFreqs = dllMapFunc(inputFileName, fileContentsStr, &numWords);
 
@@ -263,35 +247,6 @@ namespace MapReduce
     }
 
     // -------------------------------------------------------------------------------
-    // sort
-    // -------------------------------------------------------------------------------
-    int Workflow::sort(string tempDirectory)
-    {
-        LOG(INFO) << "Workflow.sort -- BEGIN";
-        cout << "Sorting..." << endl;
-
-        // Local variables
-        string fileName = "";
-        list<string> lstOfData;
-
-        // get the list of all the files in the temp folder
-        list<string> tempFiles = _pFileManagement->getTextFilesInDirectory(tempDirectory);
-
-        // Loop through each files 
-        for (string file : tempFiles)
-        {
-            fileName = file;
-            _pSorter->sort(fileName);
-        }
-
-        cout << "Finished sorting" << endl;
-        LOG(INFO) << "Workflow.sort -- END";
-
-        // return
-        return 0;
-    }
-
-    // -------------------------------------------------------------------------------
     // reduce
     // -------------------------------------------------------------------------------
     void Workflow::reduce(string tempDirectory, string outputFileDir)
@@ -299,82 +254,84 @@ namespace MapReduce
         LOG(INFO) << "Workflow.reduce -- BEGIN";
         cout << "Reducing..." << endl;
 
-        // Local Varibles
-        string fileName = "";
-        list<string> dataToWriteToFile;
-        list<string> fileData;
-
         // get list of all files in input file directory
         list<string> tempFiles = _pFileManagement->getTextFilesInDirectory(tempDirectory);
 
+        // reduce all data in each temp file
         for (string file : tempFiles)
         {
-            // adding all the data from every single file into just one list
-            fileName = file;
-            list<string> sData;
-            sData = _pFileManagement->readFile(fileName);
-            fileData.insert(fileData.end(), sData.begin(), sData.end());
-
-            if(debug)
-                cout << "File Data size: " << fileData.size() << endl;
+            std::thread t([this, file] { this->reduceFile(file); });
+            t.join();
         }
 
-        // sort the data in combined files
-        fileData.sort();
-        
-        // keep track of already processed data as to not process again
-        set<string> processedKeys;
-        int rowsToSkip = 0;
-
-        // go through file data
-        for (string lstString : fileData)
-        {
-            // Get key from the list value
-            string sKey = dllGetKeyFunc(lstString);
-
-            // if key already reduced, do not reduce again
-            if (processedKeys.count(sKey) > 0) 
-            {
-                continue;
-            }
-
-            // Get the key value
-            KeyValues keyValsArr = dllGetKeyValueFunc(sKey, fileData, rowsToSkip);
-            int* values = keyValsArr.valsArr;
-            int numVals = keyValsArr.numVals;
-
-            // new code with DLL
-            dllReduceFunc(sKey, values, numVals);
-
-            processedKeys.insert(sKey);
-            rowsToSkip += numVals;
-        }
-
-        // get the data to write to a new file
-        ReducedData reducedData = dllGetData();
-        string* dataArr = reducedData.reducedData;
-        int dataArrSize = reducedData.numRows;
-        for (int i = 0; i < dataArrSize; i++)
-        {
-            dataToWriteToFile.push_back(dataArr[i]);
-        }
-
-        // sort it
-        dataToWriteToFile.sort();
-
-        // passed into exportFunc for processing
-        cout << "Exporting reduced data..." << endl;
-
-        // Reduce function
-        dllExportReduceFunc(dataToWriteToFile, outputFileDir);
-
-        // write the empty success file as per project requirements
-        _pFileManagement->createSuccessFile(outputFileDir);
+        // export the reduced data
+        saveReducedData(outputFileDir);
 
         // clear temp output directory now that we are done with the files
         _pFileManagement->clearDirectory(tempDirectory);
 
         cout << "Finished reducing" << endl;
         LOG(INFO) << "Workflow.reduce -- END";
+    }
+
+    // -------------------------------------------------------------------------------
+    // reduceFile
+    // -------------------------------------------------------------------------------
+    void Workflow::reduceFile(string file)
+    {
+        // sort the contents of the temp file
+        _pSorter->sort(file);
+
+        // read the contents of the temp file
+        list<string> fileContents = _pFileManagement->readFile(file);
+
+        // keep track of already processed data as to not process again
+        set<string> processedKeys;
+        int rowsToSkip = 0;
+
+        // go through file data
+        for (string lstString : fileContents)
+        {
+            // Get key from the list value
+            string sKey = KeyValUtils::getKey(lstString);
+
+            // if key already reduced, do not reduce again
+            if (processedKeys.count(sKey) > 0)
+            {
+                continue;
+            }
+
+            // Get the key value
+            list<int> keyValsList = KeyValUtils::getKeyValues(sKey, fileContents, rowsToSkip);
+
+            // new code with DLL
+            ReducedData reducedData = dllReduceFunc(sKey, keyValsList);
+
+            // add reduced data to static map
+            ConcurrentHashMap::addToMap(reducedData);
+
+            processedKeys.insert(sKey);
+            rowsToSkip += keyValsList.size();
+        }
+    }
+
+    // -------------------------------------------------------------------------------
+    // saveReducedData
+    // -------------------------------------------------------------------------------
+    void Workflow::saveReducedData(string outputFileDir)
+    {
+        // loop through hashmap and add data to file
+        list<string> mapContents = ConcurrentHashMap::getMapContents();
+
+        // sort it
+        mapContents.sort();
+
+        cout << "Exporting reduced data..." << endl;
+
+        // Export the map contents to the user-defined output file dir
+        dllExportReduceFunc(mapContents, outputFileDir);
+
+        // write the empty success file as per project requirements
+        _pFileManagement->createSuccessFile(outputFileDir);
     }
 }
