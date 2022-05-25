@@ -6,8 +6,7 @@ C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\Re
 C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\ReduceLibrary\ReduceLibrary.h(32): message : see declaration of 'ReducedData'
 C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1158,32): warning C4251: 'google::LogMessage::LogStream::streambuf_': class 'google::base_logging::LogStreamBuf' needs to have dll-interface to be used by clients of class 'google::LogMessage::LogStream'
 C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1088): message : see declaration of 'google::base_logging::LogStreamBuf'
-C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\MapReduce\Workflow.cpp(395,43): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\MapReduce\Workflow.cpp(397,43): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
   Generating Code...
-  LINK : C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\x64\Debug\MapReduce.exe not found or not built by the last incremental link; performing full link
   MapReduce.vcxproj -> C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\x64\Debug\MapReduce.exe
   0 File(s) copied

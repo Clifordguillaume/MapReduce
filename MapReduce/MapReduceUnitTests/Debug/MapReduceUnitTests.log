@@ -1,0 +1,5 @@
+﻿  main.cpp
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\MapReduceUnitTests\main.cpp(1,1): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?
+  tests.cc
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\MapReduceUnitTests\tests.cc(128,1): fatal error C1010: unexpected end of file while looking for precompiled header. Did you forget to add '#include "pch.h"' to your source?
+  Generating Code...
