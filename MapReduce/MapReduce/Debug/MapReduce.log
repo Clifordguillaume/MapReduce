@@ -1,6 +1,41 @@
-﻿  FileManagement.cpp
+﻿  ConcurrentHashMap.cpp
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\MapReduce\ConcurrentHashMap.h(16,10): fatal error C1083: Cannot open include file: 'ReduceLibrary.h': No such file or directory
+  Executive.cpp
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1158,32): warning C4251: 'google::LogMessage::LogStream::streambuf_': class 'google::base_logging::LogStreamBuf' needs to have dll-interface to be used by clients of class 'google::LogMessage::LogStream'
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1088): message : see declaration of 'google::base_logging::LogStreamBuf'
+  FileManagement.cpp
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1158,32): warning C4251: 'google::LogMessage::LogStream::streambuf_': class 'google::base_logging::LogStreamBuf' needs to have dll-interface to be used by clients of class 'google::LogMessage::LogStream'
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1088): message : see declaration of 'google::base_logging::LogStreamBuf'
+  The contents of <filesystem> are available only with C++17 or later.
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\MapReduce\FileManagement.cpp(117,18): error C3083: 'filesystem': the symbol to the left of a '::' must be a type
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\MapReduce\FileManagement.cpp(117,30): error C2039: 'exists': is not a member of 'std'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\iostream(19): message : see declaration of 'std'
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\MapReduce\FileManagement.cpp(117,36): error C2064: term does not evaluate to a function taking 1 arguments
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\MapReduce\FileManagement.cpp(135,20): error C3083: 'filesystem': the symbol to the left of a '::' must be a type
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\MapReduce\FileManagement.cpp(135,32): error C2039: 'path': is not a member of 'std'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\iostream(19): message : see declaration of 'std'
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\MapReduce\FileManagement.cpp(135,36): error C3861: 'path': identifier not found
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\MapReduce\FileManagement.cpp(198,34): error C3083: 'filesystem': the symbol to the left of a '::' must be a type
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\MapReduce\FileManagement.cpp(198,46): error C2039: 'directory_iterator': is not a member of 'std'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\iostream(19): message : see declaration of 'std'
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\MapReduce\FileManagement.cpp(198,4): error C2530: 'entry': references must be initialized
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\MapReduce\FileManagement.cpp(198,4): error C3531: 'entry': a symbol whose type contains 'auto' must have an initializer
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\MapReduce\FileManagement.cpp(198,27): error C2143: syntax error: missing ';' before ':'
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\MapReduce\FileManagement.cpp(198,4): error C3861: 'directory_iterator': identifier not found
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\MapReduce\FileManagement.cpp(198,77): error C2143: syntax error: missing ';' before ')'
   Map.cpp
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1158,32): warning C4251: 'google::LogMessage::LogStream::streambuf_': class 'google::base_logging::LogStreamBuf' needs to have dll-interface to be used by clients of class 'google::LogMessage::LogStream'
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1088): message : see declaration of 'google::base_logging::LogStreamBuf'
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\MapReduce\Map.cpp(176,31): warning C4018: '<': signed/unsigned mismatch
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\MapReduce\Map.cpp(204,21): warning C4018: '<': signed/unsigned mismatch
   Reduce.cpp
-  main.cpp
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1158,32): warning C4251: 'google::LogMessage::LogStream::streambuf_': class 'google::base_logging::LogStreamBuf' needs to have dll-interface to be used by clients of class 'google::LogMessage::LogStream'
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1088): message : see declaration of 'google::base_logging::LogStreamBuf'
+  Sorter.cpp
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1158,32): warning C4251: 'google::LogMessage::LogStream::streambuf_': class 'google::base_logging::LogStreamBuf' needs to have dll-interface to be used by clients of class 'google::LogMessage::LogStream'
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1088): message : see declaration of 'google::base_logging::LogStreamBuf'
+  KeyValUtils.cpp
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\MapReduce\KeyValUtils.cpp(135,21): warning C4018: '<': signed/unsigned mismatch
+  Workflow.cpp
+C:\Users\clifguillaume\Documents\Object Oriented Projects\MapReduce\MapReduce\MapReduce\Workflow.cpp(46,10): fatal error C1083: Cannot open include file: 'MapLibrary.h': No such file or directory
   Generating Code...
-  MapReduce.vcxproj -> \\Mac\iCloud\Github\MapReduce\MapReduce\Debug\MapReduce.exe

@@ -60,6 +60,14 @@ namespace MapReduce
 			virtual list<string> map(string inputFileDir, string outputFileName);
 
 			/**
+			 * Function to to feed to the thread to complete the map process
+			 * @param inputFileName - name of directory to read input files from
+			 * @param tempOutputFileDir - name of temp file directory to use
+			 * @returns none
+			 */
+			virtual void mapThreadData(string inputFileName, string tempOutputFileDir);
+
+			/**
 			 * Reduces a list of data to a single output file
 			 * @param lstOfData - list of data to reduce
 			 * @param outputFileDir - directory to put final output file

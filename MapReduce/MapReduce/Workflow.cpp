@@ -32,6 +32,8 @@
 //                      return from ReduceLibrary. Modify reduce() accordingly.
 // 5/22/22 - Elizabeth - Use KeyValUtils. Use ConcurrentHashMap. 
 //                      Utilize threads in reduce()
+// 5/23/22 - Cliford - I added the mapThreadData function to be called by the 
+//                     Thread to process the map functionality
 // ===============================================================================
 
 //#undef _HAS_STD_BYTE
@@ -185,7 +187,7 @@ namespace MapReduce
             cout << "inside the map function" << endl;
 
         list<string> inputFiles;
-        try 
+        try
         {
             // clear all files in the temp output directory before exporting new map files
             list<string> currTempOutputFiles = _pFileManagement->getTextFilesInDirectory(tempOutputFileDir);
@@ -201,36 +203,8 @@ namespace MapReduce
             {
                 for (string inputFileName : inputFiles)
                 {
-                    // read the input file contents
-                    list<string> fileContents = _pFileManagement->readFile(inputFileName);
-
-                    // if no contents in file, do not proceed with mapping
-                    if (fileContents.size() <= 0)
-                    {
-                        return inputFiles;
-                    }
-
-                    // get contents of file as one string
-                    string fileContentsStr;
-                    for (string s : fileContents)
-                    {
-                        fileContentsStr += s + " ";
-                    }
-
-                    // count the frequencies of the words in input file
-                    int numWords = 0;
-                    WordCount* wordFreqs = dllMapFunc(inputFileName, fileContentsStr, &numWords);
-
-                    // if the output dir does not end in backslash, add one and use to generate full path of temp output file
-                    boost::trim_right(tempOutputFileDir);
-                    if (tempOutputFileDir.back() != '\\')
-                    {
-                        tempOutputFileDir += "\\";
-                    }
-                    string outputFileName = tempOutputFileDir + _pFileManagement->getFileName(inputFileName) + "-tempOutput.txt";
-
-                    // write the words and frequencies to output file in the temp directory
-                    dllExportMapFunc(outputFileName, wordFreqs, numWords);
+                    std::thread t([this, inputFileName, tempOutputFileDir] { this->mapThreadData(inputFileName, tempOutputFileDir); });
+                    t.join();
                 }
             }
         }
@@ -239,11 +213,48 @@ namespace MapReduce
             LOG(ERROR) << "Workflow.map -- Exception mapping";
             LOG(ERROR) << e.what();
         }
-        
+
         cout << "Finished mapping" << endl;
         LOG(INFO) << "Workflow.map -- END";
 
         return inputFiles;
+    }
+
+    // -------------------------------------------------------------------------------
+    // mapThreadData
+    // -------------------------------------------------------------------------------
+    void Workflow::mapThreadData(string inputFileName, string tempOutputFileDir)
+    {
+        // read the input file contents
+        list<string> fileContents = _pFileManagement->readFile(inputFileName);
+
+        // if no contents in file, do not proceed with mapping
+        if (fileContents.size() <= 0)
+        {
+            return;
+        }
+
+        // get contents of file as one string
+        string fileContentsStr;
+        for (string s : fileContents)
+        {
+            fileContentsStr += s + " ";
+        }
+
+        // count the frequencies of the words in input file
+        int numWords = 0;
+        WordCount* wordFreqs = dllMapFunc(inputFileName, fileContentsStr, &numWords);
+
+        // if the output dir does not end in backslash, add one and use to generate full path of temp output file
+        boost::trim_right(tempOutputFileDir);
+        if (tempOutputFileDir.back() != '\\')
+        {
+            tempOutputFileDir += "\\";
+        }
+        string outputFileName = tempOutputFileDir + _pFileManagement->getFileName(inputFileName) + "-tempOutput.txt";
+
+        // write the words and frequencies to output file in the temp directory
+        dllExportMapFunc(outputFileName, wordFreqs, numWords);
     }
 
     // -------------------------------------------------------------------------------
