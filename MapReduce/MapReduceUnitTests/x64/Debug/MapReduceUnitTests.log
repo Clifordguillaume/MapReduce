@@ -1,1 +1,15 @@
-﻿  MapReduceUnitTests.vcxproj -> C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\x64\Debug\MapReduceUnitTests.exe
+﻿  main.cpp
+  tests.cc
+C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduceUnitTests\MockMap.h(18,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduceUnitTests\MockFileManagement.h(17,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduceUnitTests\MockReduce.h(16,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduceUnitTests\MockSorter.h(16,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduceUnitTests\tests.cc(20,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\Workflow.h(15,1): warning C4005: '_HAS_STD_BYTE': macro redefinition
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\yvals_core.h(647): message : see previous definition of '_HAS_STD_BYTE'
+  Generating Code...
+  gmock-all.cc
+  gtest-all.cc
+  Generating Code...
+  LINK : C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\x64\Debug\MapReduceUnitTests.exe not found or not built by the last incremental link; performing full link
+  MapReduceUnitTests.vcxproj -> C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\x64\Debug\MapReduceUnitTests.exe
