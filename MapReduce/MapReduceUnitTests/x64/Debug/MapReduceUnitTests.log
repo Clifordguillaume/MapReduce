@@ -1,1 +1,5 @@
-﻿  MapReduceUnitTests.vcxproj -> C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\x64\Debug\MapReduceUnitTests.exe
+﻿main.obj : warning LNK4099: PDB 'vc143.pdb' was not found with 'main.obj' or at 'C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\x64\Debug\vc143.pdb'; linking object as if no debug info
+tests.obj : warning LNK4099: PDB 'vc143.pdb' was not found with 'tests.obj' or at 'C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\x64\Debug\vc143.pdb'; linking object as if no debug info
+gtest-all.obj : warning LNK4099: PDB 'vc143.pdb' was not found with 'gtest-all.obj' or at 'C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\x64\Debug\vc143.pdb'; linking object as if no debug info
+gmock-all.obj : warning LNK4099: PDB 'vc143.pdb' was not found with 'gmock-all.obj' or at 'C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\x64\Debug\vc143.pdb'; linking object as if no debug info
+  MapReduceUnitTests.vcxproj -> C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\x64\Debug\MapReduceUnitTests.exe
