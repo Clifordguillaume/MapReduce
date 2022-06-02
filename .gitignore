@@ -8,6 +8,7 @@
 *.db
 *.opendb
 *.bin
+*.tlog
 /MapReduce/MapReduce/x64/Debug/MapReduce.tlog
 *.obj
 /MapReduce/MapReduce/packages
