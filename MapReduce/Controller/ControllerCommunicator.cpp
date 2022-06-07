@@ -1,3 +1,16 @@
+// ===============================================================================
+// CSE 687 MapReduce Project
+// 
+// ControllerCommunicator.cpp
+// 
+// Author: Elizabeth and Cliford
+// 
+// Description: The ControllerCommunicator handles the connection for the Controller
+// 
+// File History:
+// 6/5/22 - Elizabeth - Initial File with connectToStub(), disconnectStub(), 
+//                      receiveData(), sendMessage()
+// ===============================================================================
 #define WIN32_LEAN_AND_MEAN
 
 #include <ControllerCommunicator.h>
@@ -26,7 +39,10 @@ ControllerCommunicator::~ControllerCommunicator()
 
 }
 
-// https://docs.microsoft.com/en-us/windows/win32/winsock/complete-client-code
+// -------------------------------------------------------------------------------
+// connectToStub
+// Based on: https://docs.microsoft.com/en-us/windows/win32/winsock/complete-client-code
+// -------------------------------------------------------------------------------
 int ControllerCommunicator::connectToStub()
 {
     int iResult;
@@ -39,7 +55,7 @@ int ControllerCommunicator::connectToStub()
     // Initialize Winsock
     iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
     if (iResult != 0) {
-        printf("WSAStartup failed with error: %d\n", iResult);
+        cout << "WSAStartup failed with error: " << iResult << endl;
         return 1;
     }
 
@@ -51,7 +67,7 @@ int ControllerCommunicator::connectToStub()
     // Resolve the server address and port
     iResult = getaddrinfo(ip.c_str(), port.c_str(), &hints, &result); // pass in ip and port
     if (iResult != 0) {
-        printf("getaddrinfo failed with error: %d\n", iResult);
+        cout << "getaddrinfo failed with error: " << iResult << endl;
         WSACleanup();
         return 1;
     }
@@ -59,7 +75,7 @@ int ControllerCommunicator::connectToStub()
     // Create a SOCKET for connecting to server
     ConnectSocket = socket(result->ai_family, result->ai_socktype, result->ai_protocol);
     if (ConnectSocket == INVALID_SOCKET) {
-        printf("socket failed with error: %ld\n", WSAGetLastError());
+        cout << "socket failed with error: " << WSAGetLastError() << endl;
         WSACleanup();
         return 1;
     }
@@ -74,12 +90,16 @@ int ControllerCommunicator::connectToStub()
     return 0;
 }
 
+// -------------------------------------------------------------------------------
+// disconnectStub
+// Based on: https://docs.microsoft.com/en-us/windows/win32/winsock/complete-client-code
+// -------------------------------------------------------------------------------
 int ControllerCommunicator::disconnectStub()
 {
     // shutdown the connection since no more data will be sent
     int iResult = shutdown(ConnectSocket, SD_SEND);
     if (iResult == SOCKET_ERROR) {
-        printf("shutdown failed with error: %d\n", WSAGetLastError());
+        cout << "shutdown failed with error: " << WSAGetLastError() << endl;
         closesocket(ConnectSocket);
         WSACleanup();
         return 1;
@@ -92,6 +112,10 @@ int ControllerCommunicator::disconnectStub()
     return 0;
 }
 
+// -------------------------------------------------------------------------------
+// receiveData
+// Based on: https://docs.microsoft.com/en-us/windows/win32/winsock/complete-client-code
+// -------------------------------------------------------------------------------
 int ControllerCommunicator::receiveData()
 {
     int iResult;
@@ -103,25 +127,29 @@ int ControllerCommunicator::receiveData()
         iResult = recv(ConnectSocket, recvbuf, recvbuflen, 0);
         if (iResult > 0) {
             string msg = recvbuf;
-            printf("Bytes received: %d\n", iResult);
+            cout << "Bytes received: " << iResult << endl;
             cout << "Msg received: " << msg << endl;
         }
         else if (iResult == 0)
-            printf("Connection closed\n");
+            cout << "Connection closed" << endl;
         else
-            printf("recv failed with error: %d\n", WSAGetLastError());
+            cout << "recv failed with error: " << WSAGetLastError() << endl;
 
    // } while (iResult > 0);
 
     return 0;
 }
 
-int ControllerCommunicator::sendInstructions(string instruction)
+// -------------------------------------------------------------------------------
+// sendMessage
+// Based on: https://docs.microsoft.com/en-us/windows/win32/winsock/complete-client-code
+// -------------------------------------------------------------------------------
+int ControllerCommunicator::sendMessage(string msg)
 {
     // Send an initial buffer
-    int iResult = send(ConnectSocket, instruction.c_str(), instruction.length(), 0);
+    int iResult = send(ConnectSocket, msg.c_str(), msg.length(), 0);
     if (iResult == SOCKET_ERROR) {
-        printf("send failed with error: %d\n", WSAGetLastError());
+        cout << "send failed with error: " << WSAGetLastError() << endl;
         closesocket(ConnectSocket);
         WSACleanup();
         return 1;

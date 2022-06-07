@@ -1,5 +1,15 @@
-// Stub.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
+// ===============================================================================
+// CSE 687 MapReduce Project
+// 
+// Stub.cpp
+// 
+// Author: Elizabeth and Cliford
+// 
+// Description: The Stub contains the main file to execute for each stub
+// 
+// File History:
+// 6/5/22 - Elizabeth - Initial File
+// ===============================================================================
 //#undef _HAS_STD_BYTE
 #define _HAS_STD_BYTE 0
 

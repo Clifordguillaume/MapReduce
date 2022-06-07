@@ -1,3 +1,16 @@
+// ===============================================================================
+// CSE 687 MapReduce Project
+// 
+// StubCommunicator.cpp
+// 
+// Author: Elizabeth and Cliford
+// 
+// Description: The StubCommunicator handles the connection for the Stub
+// 
+// File History:
+// 6/5/22 - Elizabeth - Initial File with startListening(), startReceivingData(),
+//                      sendMessage(), closeListener()
+// ===============================================================================
 #include "StubCommunicator.h"
 #include <iostream>
 #include <winsock2.h>
@@ -26,25 +39,28 @@ StubCommunicator::~StubCommunicator()
 {
 }
 
-// https://gist.github.com/sunmeat/02b60c8a3eaef3b8a0fb3c249d8686fd
+// -------------------------------------------------------------------------------
+// startListening
+// Based on: https://gist.github.com/sunmeat/02b60c8a3eaef3b8a0fb3c249d8686fd
+// -------------------------------------------------------------------------------
 int StubCommunicator::startListening()
 {
     // initialise winsock
     WSADATA wsa;
-    printf("Initialising Winsock...");
+    cout << "Initialising Winsock..." << endl;
     if (WSAStartup(MAKEWORD(2, 2), &wsa) != 0)
     {
-        printf("Failed. Error Code: %d", WSAGetLastError());
+        cout << "Failed. Error Code: " << WSAGetLastError() << endl;
         exit(0);
     }
-    printf("Initialised.\n");
+    cout << "Initialised." << endl;
 
     // create a socket
     if ((server_socket = socket(AF_INET, SOCK_DGRAM, 0)) == INVALID_SOCKET)
     {
-        printf("Could not create socket: %d", WSAGetLastError());
+        cout << "Could not create socket: " << WSAGetLastError() << endl;
     }
-    printf("Socket created.\n");
+    cout << "Socket created." << endl;
 
     // prepare the sockaddr_in structure
     server.sin_family = AF_INET;
@@ -54,17 +70,22 @@ int StubCommunicator::startListening()
     // bind
     if (bind(server_socket, (sockaddr*)&server, sizeof(server)) == SOCKET_ERROR)
     {
-        printf("Bind failed with error code: %d", WSAGetLastError());
+        cout << "Bind failed with error code: " << WSAGetLastError() << endl;
         exit(EXIT_FAILURE);
     }
-    puts("Bind done.");
+    cout << "Bind done." << endl;
+    return 0;
 }
 
+// -------------------------------------------------------------------------------
+// startReceivingData
+// Based on: https://gist.github.com/sunmeat/02b60c8a3eaef3b8a0fb3c249d8686fd
+// -------------------------------------------------------------------------------
 int StubCommunicator::startReceivingData()
 {
     while (true)
     {
-        printf("Waiting for data...");
+        cout << "Waiting for data..." << endl;
         fflush(stdout);
         char message[BUFLEN] = {};
 
@@ -73,18 +94,22 @@ int StubCommunicator::startReceivingData()
         int slen = sizeof(sockaddr_in);
         if (message_len = recvfrom(server_socket, message, BUFLEN, 0, (sockaddr*)&client, &slen) == SOCKET_ERROR)
         {
-            printf("recvfrom() failed with error code: %d", WSAGetLastError());
+            cout << "recvfrom() failed with error code: " << WSAGetLastError() << endl;
             exit(0);
         }
 
         // print details of the client/peer and the data received
-        printf("Received packet from %s:%d\n", inet_ntoa(client.sin_addr), ntohs(client.sin_port));
-        printf("Data: %s\n", message);
+        cout << "Received packet from " << inet_ntoa(client.sin_addr) << ":" << ntohs(client.sin_port) << endl;
+        cout << "Data: " << message << endl;
 
         sendMessage("test2 sending reply");
     }
 }
 
+// -------------------------------------------------------------------------------
+// sendMessage
+// Based on: https://gist.github.com/sunmeat/02b60c8a3eaef3b8a0fb3c249d8686fd
+// -------------------------------------------------------------------------------
 int StubCommunicator::sendMessage(string msg)
 {
     //cout << "type message to send: ";
@@ -92,13 +117,16 @@ int StubCommunicator::sendMessage(string msg)
 
     if (sendto(server_socket, msg.c_str(), strlen(msg.c_str()), 0, (sockaddr*)&client, sizeof(sockaddr_in)) == SOCKET_ERROR)
     {
-        printf("sendto() failed with error code: %d", WSAGetLastError());
+        cout << "sendto() failed with error code: " << WSAGetLastError() << endl;
         return 1;
     }
 
     return 0;
 }
 
+// -------------------------------------------------------------------------------
+// closeListener
+// -------------------------------------------------------------------------------
 void StubCommunicator::closeListener()
 {
     closesocket(server_socket);

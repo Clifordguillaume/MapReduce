@@ -1,6 +1,5 @@
-﻿  StubCommunicator.cpp
-C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\Stub\StubCommunicator.cpp(93,8): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-  Stub.cpp
+﻿  Stub.cpp
+  StubCommunicator.cpp
+C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\Stub\StubCommunicator.cpp(118,8): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   Generating Code...
-C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\Stub\StubCommunicator.cpp(61): warning C4715: 'StubCommunicator::startListening': not all control paths return a value
   Stub.vcxproj -> C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\x64\Debug\Stub.exe
