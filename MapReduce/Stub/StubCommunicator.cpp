@@ -10,10 +10,14 @@
 // File History:
 // 6/5/22 - Elizabeth - Initial File with startListening(), startReceivingData(),
 //                      sendMessage(), closeListener()
+// 6/9/22 - Elizabeth - Add message handling
 // ===============================================================================
 #include "StubCommunicator.h"
-#include <iostream>
+#include "StringUtils.h"
+#include "StubWorker.h"
 #include <winsock2.h>
+#include <iostream>
+#include <sstream>
 
 #pragma comment(lib,"ws2_32.lib") // Winsock Library
 #pragma warning(disable:4996) 
@@ -23,6 +27,7 @@
 //#define _WINSOCK_DEPRECATED_NO_WARNINGS
 
 using namespace std;
+using namespace MapReduce;
 
 // -------------------------------------------------------------------------------
 // Constructor
@@ -30,6 +35,7 @@ using namespace std;
 StubCommunicator::StubCommunicator(int port)
 {
 	this->port = port;
+    _pStubWorker = new StubWorker();
 }
 
 // -------------------------------------------------------------------------------
@@ -37,6 +43,8 @@ StubCommunicator::StubCommunicator(int port)
 // -------------------------------------------------------------------------------
 StubCommunicator::~StubCommunicator()
 {
+    closeListener();
+    delete _pStubWorker;
 }
 
 // -------------------------------------------------------------------------------
@@ -68,7 +76,7 @@ int StubCommunicator::startListening()
     server.sin_port = htons(port);
 
     // bind
-    if (bind(server_socket, (sockaddr*)&server, sizeof(server)) == SOCKET_ERROR)
+    if (::bind(server_socket, (sockaddr*)&server, sizeof(server)) == SOCKET_ERROR)
     {
         cout << "Bind failed with error code: " << WSAGetLastError() << endl;
         exit(EXIT_FAILURE);
@@ -78,10 +86,10 @@ int StubCommunicator::startListening()
 }
 
 // -------------------------------------------------------------------------------
-// startReceivingData
+// receiveData
 // Based on: https://gist.github.com/sunmeat/02b60c8a3eaef3b8a0fb3c249d8686fd
 // -------------------------------------------------------------------------------
-int StubCommunicator::startReceivingData()
+int StubCommunicator::receiveData()
 {
     while (true)
     {
@@ -99,23 +107,29 @@ int StubCommunicator::startReceivingData()
         }
 
         // print details of the client/peer and the data received
-        cout << "Received packet from " << inet_ntoa(client.sin_addr) << ":" << ntohs(client.sin_port) << endl;
-        cout << "Data: " << message << endl;
+        //cout << "Received packet from " << inet_ntoa(client.sin_addr) << ":" << ntohs(client.sin_port) << endl;
+        //cout << "Data: " << message << endl;
 
-        sendMessage("test2 sending reply");
+        // test that receiving data
+        //sendMessage("test2 sending reply");
+
+        // check the received message
+        string msg = message;
+        if (!msg.empty()) 
+        {
+            _pStubWorker->handleMessage(msg);
+        }
     }
 }
+
 
 // -------------------------------------------------------------------------------
 // sendMessage
 // Based on: https://gist.github.com/sunmeat/02b60c8a3eaef3b8a0fb3c249d8686fd
 // -------------------------------------------------------------------------------
-int StubCommunicator::sendMessage(string msg)
+int StubCommunicator::sendStatus(char status[])
 {
-    //cout << "type message to send: ";
-    //cin.getline(message, BUFLEN);
-
-    if (sendto(server_socket, msg.c_str(), strlen(msg.c_str()), 0, (sockaddr*)&client, sizeof(sockaddr_in)) == SOCKET_ERROR)
+    if (sendto(server_socket, status, sizeof(int)*2, 0, (sockaddr*)&client, sizeof(sockaddr_in)) == SOCKET_ERROR) // sizeof(int)*2 = size of status
     {
         cout << "sendto() failed with error code: " << WSAGetLastError() << endl;
         return 1;
@@ -123,6 +137,15 @@ int StubCommunicator::sendMessage(string msg)
 
     return 0;
 }
+
+// -------------------------------------------------------------------------------
+// isDoneExecuting
+// -------------------------------------------------------------------------------
+bool StubCommunicator::isDoneExecuting()
+{
+    return _pStubWorker->isDoneExecuting();
+}
+
 
 // -------------------------------------------------------------------------------
 // closeListener

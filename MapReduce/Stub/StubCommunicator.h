@@ -10,13 +10,20 @@
 // ===============================================================================
 #pragma once
 #include <string>
+#include <vector>
 #include <winsock2.h>
+#include "../MapReduce/Workflow.h")
+#include "StubWorker.h"
 
 using namespace std;
+using namespace MapReduce;
 
 class StubCommunicator
 {
 	public:
+		// Pointer to StubWorker to handle mapping/reducing
+		StubWorker* _pStubWorker;
+
 		StubCommunicator(int port);
 		~StubCommunicator();
 
@@ -28,13 +35,18 @@ class StubCommunicator
 		/*
 		 * Continuously receive messages from the socket
 		 */
-		int startReceivingData();
+		int receiveData();
 
 		/*
 		 * Send a message to the Controller
 		 * @param msg - message to send
 		 */
-		int sendMessage(string msg);
+		int sendStatus(char status[]);
+
+		/*
+		 * Check if the stub job (map or reduce) has completed yet
+		 */
+		bool isDoneExecuting();
 
 		/*
 		 * Close the socket
@@ -50,4 +62,12 @@ class StubCommunicator
 
 		// socket addresses
 		sockaddr_in server, client;
+
+		// flag indicating if stub job (map or reduce) has completed yet
+		bool done;
+
+		string command;
+		string inputFileDir;
+		string outputFileDir;
+		string tempOutputFileDir;
 };

@@ -34,6 +34,7 @@
 //                      Utilize threads in reduce()
 // 5/23/22 - Cliford - I added the mapThreadData function to be called by the 
 //                     Thread to process the map functionality
+// 6/9/22 - Elizabeth - Added callback to map() for StubWorker
 // ===============================================================================
 
 //#undef _HAS_STD_BYTE
@@ -48,6 +49,7 @@
 #include "KeyValUtils.h"
 #include "ConcurrentHashMap.h"
 #include <boost/algorithm/string.hpp>
+#include <boost/function.hpp>
 #include <glog/logging.h>
 #include <set>
 #include <windows.h>
@@ -163,7 +165,7 @@ namespace MapReduce
     {
         if (debug)
             cout << "About to run map function" << endl;
-        list<string> mappedFiles = map(inputFileDir, tempOutputFileDir);
+        list<string> mappedFiles = map(inputFileDir, tempOutputFileDir, NULL, NULL);
 
         if (mappedFiles.size() <= 0) 
         {
@@ -179,7 +181,7 @@ namespace MapReduce
     // -------------------------------------------------------------------------------
     // map
     // -------------------------------------------------------------------------------
-    list<string> Workflow::map(string inputFileDir, string tempOutputFileDir)
+    list<string> Workflow::map(string inputFileDir, string tempOutputFileDir, boost::function<void(StubWorker*)> callback, StubWorker* worker)
     {
         LOG(INFO) << "Workflow.map -- BEGIN";
         cout << "Mapping..." << endl;
@@ -216,6 +218,12 @@ namespace MapReduce
 
         cout << "Finished mapping" << endl;
         LOG(INFO) << "Workflow.map -- END";
+
+        // signal map is done
+        if (callback != NULL && worker != NULL)
+        {
+            callback(worker);
+        }
 
         return inputFiles;
     }

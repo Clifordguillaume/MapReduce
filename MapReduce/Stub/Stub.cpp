@@ -9,12 +9,21 @@
 // 
 // File History:
 // 6/5/22 - Elizabeth - Initial File
+// 6/9/22 - Elizabeth - Add threads receiveData and heartbeat 
 // ===============================================================================
 //#undef _HAS_STD_BYTE
 #define _HAS_STD_BYTE 0
 
 #include "StubCommunicator.h"
 #include <iostream>
+#include <thread>
+#include <functional>
+
+// represents the status of the stub job
+union Status {
+    int running[2]{ 0 };
+    char status[8]; // done or not done
+};
 
 using namespace std;
 
@@ -22,9 +31,25 @@ int main(int argc, char** argv)
 {
     int port = atoi(argv[1]);
 
+    // create stub communicator with stub's port
     StubCommunicator communicator(port);
     int startResult = communicator.startListening();
-    cout << (startResult == 0 ? "started listening" : "failed to start listening") << endl;
-    communicator.startReceivingData(); // new thread
+    cout << (startResult == 0 ? "Stub started listening" : "Stub failed to start listening") << endl;
+
+    // create thread to continuously receive data from the controller
+    std::thread t1(communicator.receiveData(), std::ref(communicator));
+
     // thread for heartbeat
+    std::thread([&communicator]()
+        {
+            Status status;
+            while (!communicator.isDoneExecuting())
+            {
+                auto x = std::chrono::steady_clock::now() + std::chrono::milliseconds(1000); // send status every 1 second
+                status.running[0] = 1; // stub is now running
+                status.running[1] = communicator.isDoneExecuting(); // send current done flag value at this iteration of the loop
+                communicator.sendStatus(status.status); // send the status to the communicator
+                std::this_thread::sleep_until(x);
+            }
+        });
 }

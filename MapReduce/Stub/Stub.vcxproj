@@ -140,13 +140,32 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="StringUtils.cpp" />
     <ClCompile Include="StubCommunicator.cpp" />
     <ClCompile Include="Stub.cpp" />
+    <ClCompile Include="StubWorker.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="StringUtils.h" />
     <ClInclude Include="StubCommunicator.h" />
+    <ClInclude Include="StubWorker.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MapReduce\MapReduce.vcxproj">
+      <Project>{f0f73b9f-2bfa-4824-a958-c848135b6437}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\boost.1.79.0\build\boost.targets" Condition="Exists('..\packages\boost.1.79.0\build\boost.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\boost.1.79.0\build\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost.1.79.0\build\boost.targets'))" />
+  </Target>
 </Project>
