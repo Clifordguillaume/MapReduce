@@ -22,9 +22,6 @@
 #include <memory>
 #include <boost/function.hpp>
 
-// StubWorker class needed to be compatible with Stub project connection
-class StubWorker;
-
 namespace MapReduce
 {
 	class Workflow
@@ -59,11 +56,9 @@ namespace MapReduce
 			 * Maps input file contents to output file
 			 * @param inputFileDir - name of directory to read input files from
 			 * @param outputFileDirName - name of temp output file dir
-			 * @param callback function from StubWorker
-			 * @param StubWorker pointer needed for callback
 			 * @returns list of read input files
 			 */
-			virtual list<string> map(string inputFileDir, string outputFileDirName, boost::function<void(StubWorker*)>, StubWorker*);
+			virtual list<string> map(string inputFileDir, string outputFileDirName);
 
 			/**
 			 * Function to to feed to the thread to complete the map process

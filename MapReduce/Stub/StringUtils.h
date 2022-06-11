@@ -14,21 +14,24 @@
 
 using namespace std;
 
-class StringUtils
+namespace Stub
 {
-	public:
-		/*
-		 * Trims whitespace from beginning and end of string
-		 * @param str - string to trim
-		 */
-		static string trim_whitespace(string str);
+	class StringUtils
+	{
+		public:
+			/*
+			 * Trims whitespace from beginning and end of string
+			 * @param str - string to trim
+			 */
+			static string trim_whitespace(string str);
 
-		/*
-		 * Split a message separated by semi-colons into strings
-		 * @param message - message to split
-		 * @return vector of split strings
-		 */
-		static vector<string> parseMessage(string message);
+			/*
+			 * Split a message separated by semi-colons into strings
+			 * @param message - message to split
+			 * @return vector of split strings
+			 */
+			static vector<string> parseMessage(string message);
 
-	private:
-};
+		private:
+	};
+}

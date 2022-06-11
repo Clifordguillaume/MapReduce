@@ -165,7 +165,7 @@ namespace MapReduce
     {
         if (debug)
             cout << "About to run map function" << endl;
-        list<string> mappedFiles = map(inputFileDir, tempOutputFileDir, NULL, NULL);
+        list<string> mappedFiles = map(inputFileDir, tempOutputFileDir);
 
         if (mappedFiles.size() <= 0) 
         {
@@ -181,7 +181,7 @@ namespace MapReduce
     // -------------------------------------------------------------------------------
     // map
     // -------------------------------------------------------------------------------
-    list<string> Workflow::map(string inputFileDir, string tempOutputFileDir, boost::function<void(StubWorker*)> callback, StubWorker* worker)
+    list<string> Workflow::map(string inputFileDir, string tempOutputFileDir)
     {
         LOG(INFO) << "Workflow.map -- BEGIN";
         cout << "Mapping..." << endl;
@@ -218,12 +218,6 @@ namespace MapReduce
 
         cout << "Finished mapping" << endl;
         LOG(INFO) << "Workflow.map -- END";
-
-        // signal map is done
-        if (callback != NULL && worker != NULL)
-        {
-            callback(worker);
-        }
 
         return inputFiles;
     }

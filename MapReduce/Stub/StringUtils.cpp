@@ -8,7 +8,7 @@
 // Description: Provides utils to handle strings with boost
 // 
 // File History:
-// 6/9/22 - Elizabeth - Initial file with trim_whitespace() and parseMessage()
+// 6/10/22 - Copy from MapReduce to Stub
 // ===============================================================================
 #include "StringUtils.h"
 #include <vector>
@@ -18,34 +18,37 @@
 
 using namespace std;
 
-// -------------------------------------------------------------------------------
-// trim_whitespace
-// -------------------------------------------------------------------------------
-string StringUtils::trim_whitespace(string str)
+namespace Stub
 {
-	string s = str;
-	boost::trim_left(s);
-	boost::trim_right(s);
-	return s;
-}
-
-// -------------------------------------------------------------------------------
-// parseMessage
-// -------------------------------------------------------------------------------
-vector<string> StringUtils::parseMessage(string message)
-{
-    std::stringstream ss(message);
-
-    vector<string> result;
-
-    while (ss.good())
+    // -------------------------------------------------------------------------------
+    // trim_whitespace
+    // -------------------------------------------------------------------------------
+    string StringUtils::trim_whitespace(string str)
     {
-        string substr;
-        getline(ss, substr, ';');
-        boost::trim_left(substr); // trim whitespace
-        boost::trim_right(substr); // trim whitespace
-        result.push_back(substr);
+        string s = str;
+        boost::trim_left(s);
+        boost::trim_right(s);
+        return s;
     }
 
-    return result;
+    // -------------------------------------------------------------------------------
+    // parseMessage
+    // -------------------------------------------------------------------------------
+    vector<string> StringUtils::parseMessage(string message)
+    {
+        std::stringstream ss(message);
+
+        vector<string> result;
+
+        while (ss.good())
+        {
+            string substr;
+            getline(ss, substr, ';');
+            boost::trim_left(substr); // trim whitespace
+            boost::trim_right(substr); // trim whitespace
+            result.push_back(substr);
+        }
+
+        return result;
+    }
 }

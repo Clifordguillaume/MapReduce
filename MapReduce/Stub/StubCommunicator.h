@@ -16,58 +16,60 @@
 #include "StubWorker.h"
 
 using namespace std;
-using namespace MapReduce;
 
-class StubCommunicator
+namespace Stub
 {
-	public:
-		// Pointer to StubWorker to handle mapping/reducing
-		StubWorker* _pStubWorker;
+	class StubCommunicator
+	{
+		public:
+			// Pointer to StubWorker to handle mapping/reducing
+			StubWorker* _pStubWorker;
 
-		StubCommunicator(int port);
-		~StubCommunicator();
+			StubCommunicator(int port);
+			~StubCommunicator();
 
-		/* 
-		 * Create the socket and bind to it
-		 */
-		int startListening();
+			/*
+			 * Create the socket and bind to it
+			 */
+			int startListening();
 
-		/*
-		 * Continuously receive messages from the socket
-		 */
-		int receiveData();
+			/*
+			 * Continuously receive messages from the socket
+			 */
+			int receiveData();
 
-		/*
-		 * Send a message to the Controller
-		 * @param msg - message to send
-		 */
-		int sendStatus(char status[]);
+			/*
+			 * Send a message to the Controller
+			 * @param msg - message to send
+			 */
+			int sendStatus(char status[]);
 
-		/*
-		 * Check if the stub job (map or reduce) has completed yet
-		 */
-		bool isDoneExecuting();
+			/*
+			 * Check if the stub job (map or reduce) has completed yet
+			 */
+			bool isDoneExecuting();
 
-		/*
-		 * Close the socket
-		 */
-		void closeListener();
+			/*
+			 * Close the socket
+			 */
+			void closeListener();
 
-	private:
-		// port
-		int port;
+		private:
+			// port
+			int port;
 
-		// socket
-		SOCKET server_socket;
+			// socket
+			SOCKET server_socket;
 
-		// socket addresses
-		sockaddr_in server, client;
+			// socket addresses
+			sockaddr_in server, client;
 
-		// flag indicating if stub job (map or reduce) has completed yet
-		bool done;
+			// flag indicating if stub job (map or reduce) has completed yet
+			bool done;
 
-		string command;
-		string inputFileDir;
-		string outputFileDir;
-		string tempOutputFileDir;
-};
+			string command;
+			string inputFileDir;
+			string outputFileDir;
+			string tempOutputFileDir;
+	};
+}
