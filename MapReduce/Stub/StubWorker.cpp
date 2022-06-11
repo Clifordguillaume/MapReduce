@@ -73,6 +73,11 @@ namespace Stub
 
         // parse the message if it is not empty
         vector<string> msgContents = StringUtils::parseMessage(msg);
+        if (msgContents.size() < 4)
+        {
+            cout << "Message does not have enough information" << endl;
+            return;
+        }
         command = msgContents[0];
         inputFileDir = msgContents[1];
         outputFileDir = msgContents[2];

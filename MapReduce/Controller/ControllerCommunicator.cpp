@@ -16,19 +16,17 @@
 #include <ControllerCommunicator.h>
 #include <windows.h>
 #include <winsock2.h>
-#include <ws2tcpip.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <iostream>
 
 // Need to link with Ws2_32.lib, Mswsock.lib, and Advapi32.lib
-#pragma comment (lib, "Ws2_32.lib")
-#pragma comment (lib, "Mswsock.lib")
-#pragma comment (lib, "AdvApi32.lib")
+#pragma comment (lib, "ws2_32.lib")
+#pragma warning(disable:4996)
 
-#define DEFAULT_BUFLEN 1024
+#define BUFLEN 512
 
-ControllerCommunicator::ControllerCommunicator(string ip, string port)
+ControllerCommunicator::ControllerCommunicator(string ip, int port)
 {
 	this->ip = ip;
 	this->port = port;
@@ -36,77 +34,46 @@ ControllerCommunicator::ControllerCommunicator(string ip, string port)
 
 ControllerCommunicator::~ControllerCommunicator()
 {
-
 }
 
 // -------------------------------------------------------------------------------
 // connectToStub
-// Based on: https://docs.microsoft.com/en-us/windows/win32/winsock/complete-client-code
+// Based on: https://gist.github.com/sunmeat/02b60c8a3eaef3b8a0fb3c249d8686fd
 // -------------------------------------------------------------------------------
 int ControllerCommunicator::connectToStub()
 {
-    int iResult;
 
-    WSADATA wsaData;
-    ConnectSocket = INVALID_SOCKET;
-    struct addrinfo* result = NULL;
-    struct addrinfo addressInfo, hints;
+    WSADATA ws;
+    cout << "Initialising Winsock..." << endl;
+    if (WSAStartup(MAKEWORD(2, 2), &ws) != 0)
+    {
+        cout << "Failed to initialize Winsock. Error Code: " << WSAGetLastError() << endl;
+        return 1;
+    }
+    cout << "Initialised Winsock." << endl;
 
-    // Initialize Winsock
-    iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
-    if (iResult != 0) {
-        cout << "WSAStartup failed with error: " << iResult << endl;
+    // create socket
+    if ((client_socket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == SOCKET_ERROR) // <<< UDP socket
+    {
+        cout << "socket() failed with error code: " << WSAGetLastError() << endl;
         return 1;
     }
 
-    ZeroMemory(&hints, sizeof(hints));
-    hints.ai_family = AF_INET;
-    hints.ai_socktype = SOCK_DGRAM;
-    hints.ai_protocol = IPPROTO_UDP;
-
-    // Resolve the server address and port
-    iResult = getaddrinfo(ip.c_str(), port.c_str(), &hints, &result); // pass in ip and port
-    if (iResult != 0) {
-        cout << "getaddrinfo failed with error: " << iResult << endl;
-        WSACleanup();
-        return 1;
-    }
-
-    // Create a SOCKET for connecting to server
-    ConnectSocket = socket(result->ai_family, result->ai_socktype, result->ai_protocol);
-    if (ConnectSocket == INVALID_SOCKET) {
-        cout << "socket failed with error: " << WSAGetLastError() << endl;
-        WSACleanup();
-        return 1;
-    }
-
-    // Connect to server.
-    iResult = connect(ConnectSocket, result->ai_addr, (int)result->ai_addrlen);
-    if (iResult == SOCKET_ERROR) {
-        closesocket(ConnectSocket);
-        //ConnectSocket = INVALID_SOCKET;
-    }
+    // setup address structure
+    memset((char*)&server, 0, sizeof(server));
+    server.sin_family = AF_INET;
+    server.sin_port = htons(port); // port of stub
+    server.sin_addr.S_un.S_addr = inet_addr(ip.c_str()); // ip of stub
 
     return 0;
 }
 
 // -------------------------------------------------------------------------------
 // disconnectStub
-// Based on: https://docs.microsoft.com/en-us/windows/win32/winsock/complete-client-code
 // -------------------------------------------------------------------------------
 int ControllerCommunicator::disconnectStub()
 {
-    // shutdown the connection since no more data will be sent
-    int iResult = shutdown(ConnectSocket, SD_SEND);
-    if (iResult == SOCKET_ERROR) {
-        cout << "shutdown failed with error: " << WSAGetLastError() << endl;
-        closesocket(ConnectSocket);
-        WSACleanup();
-        return 1;
-    }
-
-    // cleanup
-    closesocket(ConnectSocket);
+    closesocket(client_socket);
     WSACleanup();
 
     return 0;
@@ -114,44 +81,41 @@ int ControllerCommunicator::disconnectStub()
 
 // -------------------------------------------------------------------------------
 // receiveData
-// Based on: https://docs.microsoft.com/en-us/windows/win32/winsock/complete-client-code
+// Based on: https://gist.github.com/sunmeat/02b60c8a3eaef3b8a0fb3c249d8686fd
 // -------------------------------------------------------------------------------
 int ControllerCommunicator::receiveData()
 {
-    int iResult;
-    char recvbuf[DEFAULT_BUFLEN];\
-    int recvbuflen = DEFAULT_BUFLEN;
-    memset(recvbuf, 0, recvbuflen);
-    // Receive until the peer closes the connection
-    //do {
-        iResult = recv(ConnectSocket, recvbuf, recvbuflen, 0);
-        if (iResult > 0) {
-            string msg = recvbuf;
-            cout << "Bytes received: " << iResult << endl;
-            cout << "Msg received: " << msg << endl;
-        }
-        else if (iResult == 0)
-            cout << "Connection closed" << endl;
-        else
-            cout << "recv failed with error: " << WSAGetLastError() << endl;
+    while (true)
+    {
+        // receive a reply and print it
+        // clear the answer by filling null, it might have previously received data
+        char message[BUFLEN] = {};
 
-   // } while (iResult > 0);
+        // try to receive some data, this is a blocking call
+        int slen = sizeof(sockaddr_in);
+        int message_len;
+        if (message_len = recvfrom(client_socket, message, BUFLEN, 0, (sockaddr*)&server, &slen) == SOCKET_ERROR)
+        {
+            cout << "recvfrom() failed with error code: " << WSAGetLastError() << endl;
+            return 1;
+        }
+
+        cout << message << "\n";
+    }
 
     return 0;
 }
 
 // -------------------------------------------------------------------------------
 // sendMessage
-// Based on: https://docs.microsoft.com/en-us/windows/win32/winsock/complete-client-code
+// Based on: https://gist.github.com/sunmeat/02b60c8a3eaef3b8a0fb3c249d8686fd
 // -------------------------------------------------------------------------------
-int ControllerCommunicator::sendMessage(string msg)
+int ControllerCommunicator::sendMessage(char message[])
 {
-    // Send an initial buffer
-    int iResult = send(ConnectSocket, msg.c_str(), msg.length(), 0);
-    if (iResult == SOCKET_ERROR) {
-        cout << "send failed with error: " << WSAGetLastError() << endl;
-        closesocket(ConnectSocket);
-        WSACleanup();
+    // send the message
+    if (sendto(client_socket, message, strlen(message), 0, (sockaddr*)&server, sizeof(sockaddr_in)) == SOCKET_ERROR)
+    {
+        cout << "sendto() failed with error code: " << WSAGetLastError() << endl;
         return 1;
     }
 

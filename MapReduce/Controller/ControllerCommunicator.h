@@ -17,7 +17,7 @@ using namespace std;
 class ControllerCommunicator
 {
 	public:
-		ControllerCommunicator(string ip, string port);
+		ControllerCommunicator(string ip, int port);
 		~ControllerCommunicator();
 
 		/*
@@ -38,10 +38,11 @@ class ControllerCommunicator
 		/*
 		 * Send a message to a stub
 		 */
-		int sendMessage(string msg);
+		int sendMessage(char message[]);
 
 	private:
 		string ip;
-		string port;
-		SOCKET ConnectSocket;
+		int port;
+		int client_socket;
+		sockaddr_in server;
 };

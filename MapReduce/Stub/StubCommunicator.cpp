@@ -37,6 +37,7 @@ namespace Stub
     {
         this->port = port;
         _pStubWorker = new StubWorker();
+        receivedData = false;
     }
 
     // -------------------------------------------------------------------------------
@@ -99,8 +100,8 @@ namespace Stub
             char message[BUFLEN] = {};
 
             // try to receive some data, this is a blocking call
-            int message_len;
             int slen = sizeof(sockaddr_in);
+            int message_len;
             if (message_len = recvfrom(server_socket, message, BUFLEN, 0, (sockaddr*)&client, &slen) == SOCKET_ERROR)
             {
                 cout << "recvfrom() failed with error code: " << WSAGetLastError() << endl;
@@ -114,10 +115,13 @@ namespace Stub
             // test that receiving data
             //sendMessage("test2 sending reply");
 
+            receivedData = true;
+
             // check the received message
             string msg = message;
             if (!msg.empty())
             {
+                cout << "Received message from Controller: " << msg << endl;
                 _pStubWorker->handleMessage(msg);
             }
         }
@@ -137,6 +141,14 @@ namespace Stub
         }
 
         return 0;
+    }
+
+    // -------------------------------------------------------------------------------
+    // hasReceivedData
+    // -------------------------------------------------------------------------------
+    bool StubCommunicator::hasReceivedData()
+    {
+        return receivedData;
     }
 
     // -------------------------------------------------------------------------------

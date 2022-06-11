@@ -45,6 +45,11 @@ namespace Stub
 			int sendStatus(char status[]);
 
 			/*
+			 * Check if the stub has received any data from the Controller yet
+			 */
+			bool hasReceivedData();
+
+			/*
 			 * Check if the stub job (map or reduce) has completed yet
 			 */
 			bool isDoneExecuting();
@@ -63,6 +68,9 @@ namespace Stub
 
 			// socket addresses
 			sockaddr_in server, client;
+
+			// flag indicating if received data
+			bool receivedData;
 
 			// flag indicating if stub job (map or reduce) has completed yet
 			bool done;

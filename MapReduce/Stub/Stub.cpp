@@ -31,6 +31,8 @@ union Status {
 
 int main(int argc, char** argv)
 {
+    FLAGS_logtostderr = true;
+    google::SetLogDestination(google::GLOG_INFO, "./logs/log");
     ::google::InitGoogleLogging(argv[0]);
 
     int port = atoi(argv[1]);
@@ -42,20 +44,36 @@ int main(int argc, char** argv)
 
     // create thread to continuously receive data from the controller
     std::thread t1([communicator] { communicator->receiveData(); });
+    t1.detach();
 
-    // thread for heartbeat
-    std::thread([communicator]
+    std::thread t2([communicator]
         {
+            int i = 0;
             Status status;
-            while (!communicator->isDoneExecuting())
+            while (true)
             {
                 auto x = std::chrono::steady_clock::now() + std::chrono::milliseconds(1000); // send status every 1 second
-                status.running[0] = 1; // stub is now running
-                status.running[1] = communicator->isDoneExecuting(); // send current done flag value at this iteration of the loop
-                communicator->sendStatus(status.status); // send the status to the communicator
+                
+                if (!communicator->hasReceivedData())
+                {
+                    cout << "Controller has not sent command yet" << endl;
+
+                }
+                else 
+                {
+                    cout << "\rCommunicator not done executing: " << i++;
+                    status.running[0] = 1; // stub is now running
+                    status.running[1] = communicator->isDoneExecuting() ? 1 : 0; // send current done flag value at this iteration of the loop
+                    communicator->sendStatus(status.status); // send the status to the communicator
+                }
+
                 std::this_thread::sleep_until(x);
             }
+            cout << "Stub done executing" << endl;
         });
+    t2.detach();
+
+    while (true);
 
     return 0;
 }
