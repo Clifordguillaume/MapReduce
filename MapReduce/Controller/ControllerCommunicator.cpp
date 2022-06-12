@@ -48,6 +48,7 @@ int ControllerCommunicator::connectToStub()
     if (WSAStartup(MAKEWORD(2, 2), &ws) != 0)
     {
         cout << "Failed to initialize Winsock. Error Code: " << WSAGetLastError() << endl;
+        cout << "failed to connect to stub" << ip << " port=" << port << endl;
         return 1;
     }
     cout << "Initialised Winsock." << endl;
@@ -56,6 +57,7 @@ int ControllerCommunicator::connectToStub()
     if ((client_socket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == SOCKET_ERROR) // <<< UDP socket
     {
         cout << "socket() failed with error code: " << WSAGetLastError() << endl;
+        cout << "failed to connect to stub" << ip << " port=" << port << endl;
         return 1;
     }
 
@@ -64,6 +66,8 @@ int ControllerCommunicator::connectToStub()
     server.sin_family = AF_INET;
     server.sin_port = htons(port); // port of stub
     server.sin_addr.S_un.S_addr = inet_addr(ip.c_str()); // ip of stub
+
+    cout << "connected to stub: ip=" << ip << " port=" << port << endl;
 
     return 0;
 }
@@ -110,7 +114,7 @@ int ControllerCommunicator::receiveData()
 // sendMessage
 // Based on: https://gist.github.com/sunmeat/02b60c8a3eaef3b8a0fb3c249d8686fd
 // -------------------------------------------------------------------------------
-int ControllerCommunicator::sendMessage(char message[])
+int ControllerCommunicator::sendMessage(char message[], int size)
 {
     // send the message
     if (sendto(client_socket, message, strlen(message), 0, (sockaddr*)&server, sizeof(sockaddr_in)) == SOCKET_ERROR)
@@ -118,6 +122,8 @@ int ControllerCommunicator::sendMessage(char message[])
         cout << "sendto() failed with error code: " << WSAGetLastError() << endl;
         return 1;
     }
+
+    cout << "sent message" << endl;
 
     return 0;
 }

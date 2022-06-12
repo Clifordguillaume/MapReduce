@@ -143,9 +143,11 @@
   <ItemGroup>
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="ControllerCommunicator.cpp" />
+    <ClCompile Include="MessageUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ControllerCommunicator.h" />
+    <ClInclude Include="MessageUtils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

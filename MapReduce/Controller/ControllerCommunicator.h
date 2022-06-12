@@ -38,7 +38,7 @@ class ControllerCommunicator
 		/*
 		 * Send a message to a stub
 		 */
-		int sendMessage(char message[]);
+		int sendMessage(char message[], int size);
 
 	private:
 		string ip;

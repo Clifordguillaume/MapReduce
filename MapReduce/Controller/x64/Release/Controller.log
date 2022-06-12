@@ -1,6 +1,8 @@
-﻿  Generating code
-  1 of 93 functions ( 1.1%) were compiled, the rest were copied from previous compilation.
+﻿  MessageUtils.cpp
+C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\Controller\MessageUtils.cpp(19,99): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  Generating code
+  1 of 102 functions ( 1.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    1 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Controller.vcxproj -> C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\x64\Release\Controller.exe

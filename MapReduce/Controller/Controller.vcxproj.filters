@@ -21,9 +21,15 @@
     <ClCompile Include="ControllerCommunicator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MessageUtils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ControllerCommunicator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MessageUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

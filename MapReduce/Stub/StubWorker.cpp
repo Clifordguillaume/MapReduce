@@ -87,18 +87,24 @@ namespace Stub
         int cmd = stoi(command);
         if (cmd == 0)  // map
         {
+            cout << "Received MAP command from controller. " << endl;
+            cout << "InputFileDir: " << inputFileDir << endl;
+            cout << "TempOutputFileDir: " << tempOutputFileDir << endl;
+            cout << "Mapping..." << endl;
+
             // create func pointer to callback and mark the done flag when map() in StubWorker has completed
             boost::function<void(StubWorker*)> fnc_ptr = boost::bind(&StubWorker::markDone, _1);
-
             map(inputFileDir, tempOutputFileDir, fnc_ptr, this);
         }
         else if (cmd == 1)  // reduce]
         {
+            cout << "Received REDUCE command from controller. Mapping..." << endl;
+
             // TODO: create reduce callback similar to map
             reduce(tempOutputFileDir, outputFileDir);
         }
         else { // unknown command
-            //cout << "Unknown command received: " << command << endl;
+            cout << "Unknown command received from controller. Command code: " << command << endl;
         }
     }
 
@@ -182,13 +188,6 @@ namespace Stub
         list<string> inputFiles;
         try
         {
-            // clear all files in the temp output directory before exporting new map files
-            list<string> currTempOutputFiles = _pFileManagement->getTextFilesInDirectory(tempOutputFileDir);
-            for (string tempOutputFileName : currTempOutputFiles)
-            {
-                _pFileManagement->removeFile(tempOutputFileName);
-            }
-
             // get list of all files in input file directory
             inputFiles = _pFileManagement->getTextFilesInDirectory(inputFileDir);
 

@@ -32,7 +32,7 @@ union Status {
 int main(int argc, char** argv)
 {
     FLAGS_logtostderr = true;
-    google::SetLogDestination(google::GLOG_INFO, "./logs/log");
+    google::SetLogDestination(google::GLOG_INFO, "C:\MapReduceLogs");
     ::google::InitGoogleLogging(argv[0]);
 
     int port = atoi(argv[1]);
@@ -61,18 +61,22 @@ int main(int argc, char** argv)
                 }
                 else 
                 {
-                    cout << "\rCommunicator not done executing: " << i++;
+                    cout << "\rStub job not done executing: " << i++;
                     status.running[0] = 1; // stub is now running
                     status.running[1] = communicator->isDoneExecuting() ? 1 : 0; // send current done flag value at this iteration of the loop
                     communicator->sendStatus(status.status); // send the status to the communicator
+                    if (communicator->isDoneExecuting()) {
+                        break;
+                    }
                 }
 
                 std::this_thread::sleep_until(x);
             }
-            cout << "Stub done executing" << endl;
+            cout << "Stub done working" << endl;
         });
     t2.detach();
 
+    // keep program alive
     while (true);
 
     return 0;
