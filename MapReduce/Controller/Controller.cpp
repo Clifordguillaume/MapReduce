@@ -10,6 +10,7 @@
 // File History:
 // 6/5/22 - Elizabeth - Initial File
 // 6/11/22 - Elizabeth - Add all controller communicators and their handling
+// 6/13/22 - Elizabeth - Add map threads
 // ===============================================================================
 #define GLOG_NO_ABBREVIATED_SEVERITIES
 #include <ControllerCommunicator.h>

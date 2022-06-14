@@ -9,7 +9,8 @@
 // 
 // File History:
 // 6/5/22 - Elizabeth - Initial File
-// 6/9/22 - Elizabeth - Add threads receiveData and heartbeat 
+// 6/9/22 - Elizabeth - Add threads receiveData and heartbeat
+// 6/13/22 - Elizabeth - Add periodic sending of status to Controller
 // ===============================================================================
 //#undef _HAS_STD_BYTE
 #define GLOG_NO_ABBREVIATED_SEVERITIES

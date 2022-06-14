@@ -8,11 +8,15 @@
 // Description: Provides utils to handle strings with boost
 // 
 // File History:
+// 6/11/13 - Elizabeth - Initial file with encodeMessage()
 // ===============================================================================
 #include "MessageUtils.h"
 
 using namespace std;
 
+// -------------------------------------------------------------------------------
+// encodeMessage
+// -------------------------------------------------------------------------------
 char* MessageUtils::encodeMessage(int command, string inputFileDir, string outputFileDir, string tempOutputFileDir, int &size)
 {
     // +4 for semicolons
