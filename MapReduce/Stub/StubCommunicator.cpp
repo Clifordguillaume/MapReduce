@@ -132,9 +132,15 @@ namespace Stub
     // sendMessage
     // Based on: https://gist.github.com/sunmeat/02b60c8a3eaef3b8a0fb3c249d8686fd
     // -------------------------------------------------------------------------------
-    int StubCommunicator::sendStatus(char status[])
+    int StubCommunicator::sendStatus(int isRunning, int isDone)
     {
-        if (sendto(server_socket, status, sizeof(int) * 2, 0, (sockaddr*)&client, sizeof(sockaddr_in)) == SOCKET_ERROR) // sizeof(int)*2 = size of status
+        // +1 for semicolon
+        char* status = new char[2];
+        status[0] = isRunning;
+        status[1] = isDone;
+        int size = 1 + (sizeof(int) * 2);
+
+        if (sendto(server_socket, status, size, 0, (sockaddr*)&client, sizeof(sockaddr_in)) == SOCKET_ERROR) // sizeof(int)*2 = size of status
         {
             cout << "sendto() failed with error code: " << WSAGetLastError() << endl;
             return 1;

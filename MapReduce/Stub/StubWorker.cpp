@@ -52,6 +52,8 @@ namespace Stub
     {
         _pSorter = new Sorter();
         _pFileManagement = new FileManagement();
+        setupMapDLL();
+        setupReduceDLL();
     }
 
     // -------------------------------------------------------------------------------
@@ -129,7 +131,7 @@ namespace Stub
     // -------------------------------------------------------------------------------
     void StubWorker::setupMapDLL()
     {
-        LOG(INFO) << "StubWorker.setupMapDLL -- BEGIN";
+        //LOG(INFO) << "StubWorker.setupMapDLL -- BEGIN";
         try
         {
             HINSTANCE hDLL;
@@ -149,7 +151,7 @@ namespace Stub
             LOG(ERROR) << "StubWorker.setupMapDLL -- Exception setting up MapLibrary DLL";
             LOG(ERROR) << e.what();
         }
-        LOG(INFO) << "StubWorker.setupMapDLL -- END";
+        //LOG(INFO) << "StubWorker.setupMapDLL -- END";
     }
 
     // -------------------------------------------------------------------------------
@@ -157,7 +159,7 @@ namespace Stub
     // -------------------------------------------------------------------------------
     void StubWorker::setupReduceDLL()
     {
-        LOG(INFO) << "StubWorker.setupReduceDLL -- BEGIN";
+        //LOG(INFO) << "StubWorker.setupReduceDLL -- BEGIN";
         try
         {
             HINSTANCE hDLL;
@@ -175,7 +177,7 @@ namespace Stub
             LOG(ERROR) << "StubWorker.setupReduceDLL -- Exception setting up ReduceLibrary DLL";
             LOG(ERROR) << e.what();
         }
-        LOG(INFO) << "StubWorker.setupReduceDLL -- END";
+        //LOG(INFO) << "StubWorker.setupReduceDLL -- END";
     }
 
     // -------------------------------------------------------------------------------
@@ -183,7 +185,7 @@ namespace Stub
     // -------------------------------------------------------------------------------
     list<string> StubWorker::map(string inputFileDir, string tempOutputFileDir, boost::function<void(StubWorker*)> callback, StubWorker* worker)
     {
-        LOG(INFO) << "StubWorker.map -- BEGIN";
+        //LOG(INFO) << "StubWorker.map -- BEGIN";
 
         list<string> inputFiles;
         try
@@ -206,7 +208,7 @@ namespace Stub
             LOG(ERROR) << e.what();
         }
 
-        LOG(INFO) << "StubWorker.map -- END";
+        //LOG(INFO) << "StubWorker.map -- END";
 
         // signal map is done
         if (callback != NULL && worker != NULL)
@@ -259,7 +261,7 @@ namespace Stub
     // -------------------------------------------------------------------------------
     void StubWorker::reduce(string tempDirectory, string outputFileDir)
     {
-        LOG(INFO) << "StubWorker.reduce -- BEGIN";
+        //LOG(INFO) << "StubWorker.reduce -- BEGIN";
 
         // get list of all files in input file directory
         list<string> tempFiles = _pFileManagement->getTextFilesInDirectory(tempDirectory);
@@ -277,7 +279,7 @@ namespace Stub
         // clear temp output directory now that we are done with the files
         _pFileManagement->clearDirectory(tempDirectory);
 
-        LOG(INFO) << "StubWorker.reduce -- END";
+        //LOG(INFO) << "StubWorker.reduce -- END";
     }
 
     // -------------------------------------------------------------------------------

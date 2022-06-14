@@ -87,7 +87,7 @@ int ControllerCommunicator::disconnectStub()
 // receiveData
 // Based on: https://gist.github.com/sunmeat/02b60c8a3eaef3b8a0fb3c249d8686fd
 // -------------------------------------------------------------------------------
-int ControllerCommunicator::receiveData()
+int ControllerCommunicator::receiveData(int stubId)
 {
     while (true)
     {
@@ -104,7 +104,8 @@ int ControllerCommunicator::receiveData()
             return 1;
         }
 
-        cout << message << "\n";
+        string msg = message;
+        cout << "Controller received data from " << stubId << ": " << msg << endl;
     }
 
     return 0;

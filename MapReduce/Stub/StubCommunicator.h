@@ -39,10 +39,11 @@ namespace Stub
 			int receiveData();
 
 			/*
-			 * Send a message to the Controller
-			 * @param msg - message to send
+			 * Send a status message to the Controller
+			 * @isRunning - flag indicating if stub has started processing
+			 * @isDone - flag indicating if stub job has completed
 			 */
-			int sendStatus(char status[]);
+			int sendStatus(int isRunning, int isDone);
 
 			/*
 			 * Check if the stub has received any data from the Controller yet

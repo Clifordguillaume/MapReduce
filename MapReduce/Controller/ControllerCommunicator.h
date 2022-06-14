@@ -33,7 +33,7 @@ class ControllerCommunicator
 		/*
 		 * Receive data from a stub
 		 */
-		int receiveData();
+		int receiveData(int stubId);
 
 		/*
 		 * Send a message to a stub

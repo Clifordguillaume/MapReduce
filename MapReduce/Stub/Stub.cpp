@@ -23,12 +23,6 @@
 
 using namespace Stub;
 
-// represents the status of the stub job
-union Status {
-    int running[2]{ 0 };
-    char status[8]; // done or not done
-};
-
 int main(int argc, char** argv)
 {
     FLAGS_logtostderr = true;
@@ -40,7 +34,15 @@ int main(int argc, char** argv)
     // create stub communicator with stub's port
     StubCommunicator* communicator = new StubCommunicator(port);
     int startResult = communicator->startListening();
-    cout << (startResult == 0 ? "Stub started listening" : "Stub failed to start listening") << endl;
+    if (startResult == 0) 
+    {
+        cout << "Stub started listening" << endl;
+    }
+    else {
+        cout << "Stub failed to start listening" << endl;
+        return 1;
+    }
+    
 
     // create thread to continuously receive data from the controller
     std::thread t1([communicator] { communicator->receiveData(); });
@@ -49,7 +51,6 @@ int main(int argc, char** argv)
     std::thread t2([communicator]
         {
             int i = 0;
-            Status status;
             while (true)
             {
                 auto x = std::chrono::steady_clock::now() + std::chrono::milliseconds(1000); // send status every 1 second
@@ -61,10 +62,10 @@ int main(int argc, char** argv)
                 }
                 else 
                 {
-                    cout << "\rStub job not done executing: " << i++;
-                    status.running[0] = 1; // stub is now running
-                    status.running[1] = communicator->isDoneExecuting() ? 1 : 0; // send current done flag value at this iteration of the loop
-                    communicator->sendStatus(status.status); // send the status to the communicator
+                    cout << "\rStub job not done executing: " << i++ << endl;
+                    int isRunning = 1;
+                    int isDone = communicator->isDoneExecuting() ? 1 : 0; // send current done flag value at this iteration of the loop
+                    communicator->sendStatus(isRunning, isDone); // send the status to the communicator
                     if (communicator->isDoneExecuting()) {
                         break;
                     }

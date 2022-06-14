@@ -1,6 +1,22 @@
 ﻿  Executive.cpp
 C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1158,32): warning C4251: 'google::LogMessage::LogStream::streambuf_': class 'google::base_logging::LogStreamBuf' needs to have dll-interface to be used by clients of class 'google::LogMessage::LogStream'
 C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1088): message : see declaration of 'google::base_logging::LogStreamBuf'
+  FileManagement.cpp
+C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1158,32): warning C4251: 'google::LogMessage::LogStream::streambuf_': class 'google::base_logging::LogStreamBuf' needs to have dll-interface to be used by clients of class 'google::LogMessage::LogStream'
+C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1088): message : see declaration of 'google::base_logging::LogStreamBuf'
+  Map.cpp
+C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1158,32): warning C4251: 'google::LogMessage::LogStream::streambuf_': class 'google::base_logging::LogStreamBuf' needs to have dll-interface to be used by clients of class 'google::LogMessage::LogStream'
+C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1088): message : see declaration of 'google::base_logging::LogStreamBuf'
+C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\Map.cpp(173,29): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\Map.cpp(176,31): warning C4018: '<': signed/unsigned mismatch
+C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\Map.cpp(291,41): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\Map.cpp(294,54): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Reduce.cpp
+C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1158,32): warning C4251: 'google::LogMessage::LogStream::streambuf_': class 'google::base_logging::LogStreamBuf' needs to have dll-interface to be used by clients of class 'google::LogMessage::LogStream'
+C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1088): message : see declaration of 'google::base_logging::LogStreamBuf'
+  Sorter.cpp
+C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1158,32): warning C4251: 'google::LogMessage::LogStream::streambuf_': class 'google::base_logging::LogStreamBuf' needs to have dll-interface to be used by clients of class 'google::LogMessage::LogStream'
+C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1088): message : see declaration of 'google::base_logging::LogStreamBuf'
   Workflow.cpp
 C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\ReduceLibrary\ReduceLibrary.h(60,83): warning C4190: 'reduceFunc' has C-linkage specified, but returns UDT 'ReducedData' which is incompatible with C
 C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\ReduceLibrary\ReduceLibrary.h(32): message : see declaration of 'ReducedData'

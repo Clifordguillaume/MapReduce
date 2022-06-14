@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\glog.0.3.3.0\build\native\glog.props" Condition="Exists('..\packages\glog.0.3.3.0\build\native\glog.props')" />
+  <Import Project="..\packages\gflags.2.0.1.0\build\native\gflags.props" Condition="Exists('..\packages\gflags.2.0.1.0\build\native\gflags.props')" />
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -117,6 +119,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\Controller;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -132,6 +135,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\Controller;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -143,13 +147,31 @@
   <ItemGroup>
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="ControllerCommunicator.cpp" />
+    <ClCompile Include="FileManagement.cpp" />
     <ClCompile Include="MessageUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ControllerCommunicator.h" />
+    <ClInclude Include="FileManagement.h" />
     <ClInclude Include="MessageUtils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\boost.1.79.0\build\boost.targets" Condition="Exists('..\packages\boost.1.79.0\build\boost.targets')" />
+    <Import Project="..\packages\gflags.2.0.1.0\build\native\gflags.targets" Condition="Exists('..\packages\gflags.2.0.1.0\build\native\gflags.targets')" />
+    <Import Project="..\packages\glog.0.3.3.0\build\native\glog.targets" Condition="Exists('..\packages\glog.0.3.3.0\build\native\glog.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\boost.1.79.0\build\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost.1.79.0\build\boost.targets'))" />
+    <Error Condition="!Exists('..\packages\gflags.2.0.1.0\build\native\gflags.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\gflags.2.0.1.0\build\native\gflags.props'))" />
+    <Error Condition="!Exists('..\packages\gflags.2.0.1.0\build\native\gflags.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\gflags.2.0.1.0\build\native\gflags.targets'))" />
+    <Error Condition="!Exists('..\packages\glog.0.3.3.0\build\native\glog.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\glog.0.3.3.0\build\native\glog.props'))" />
+    <Error Condition="!Exists('..\packages\glog.0.3.3.0\build\native\glog.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\glog.0.3.3.0\build\native\glog.targets'))" />
+  </Target>
 </Project>
