@@ -1,10 +1,9 @@
-﻿  pch.cpp
-  dllmain.cpp
-  FileManagement.cpp
+﻿  FileManagement.cpp
   ReduceLibrary.cpp
 C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\ReduceLibrary\ReduceLibrary.h(60,83): warning C4190: 'reduceFunc' has C-linkage specified, but returns UDT 'ReducedData' which is incompatible with C
 C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\ReduceLibrary\ReduceLibrary.h(32): message : see declaration of 'ReducedData'
 C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\ReduceLibrary\ReduceLibrary.cpp(74,39): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  dllmain.cpp
   Generating Code...
      Creating library C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\x64\Debug\ReduceLibrary.lib and object C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\x64\Debug\ReduceLibrary.exp
   ReduceLibrary.vcxproj -> C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\x64\Debug\ReduceLibrary.dll

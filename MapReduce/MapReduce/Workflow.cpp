@@ -34,6 +34,7 @@
 //                      Utilize threads in reduce()
 // 5/23/22 - Cliford - I added the mapThreadData function to be called by the 
 //                     Thread to process the map functionality
+// 6/9/22 - Elizabeth - Added callback to map() for StubWorker
 // ===============================================================================
 
 //#undef _HAS_STD_BYTE
@@ -48,6 +49,7 @@
 #include "KeyValUtils.h"
 #include "ConcurrentHashMap.h"
 #include <boost/algorithm/string.hpp>
+#include <boost/function.hpp>
 #include <glog/logging.h>
 #include <set>
 #include <windows.h>

@@ -20,6 +20,7 @@
 #include "Sorter.h"
 #include <map>
 #include <memory>
+#include <boost/function.hpp>
 
 namespace MapReduce
 {
@@ -54,10 +55,10 @@ namespace MapReduce
 			/**
 			 * Maps input file contents to output file
 			 * @param inputFileDir - name of directory to read input files from
-			 * @param outputFileName - name of output file
+			 * @param outputFileDirName - name of temp output file dir
 			 * @returns list of read input files
 			 */
-			virtual list<string> map(string inputFileDir, string outputFileName);
+			virtual list<string> map(string inputFileDir, string outputFileDirName);
 
 			/**
 			 * Function to to feed to the thread to complete the map process
