@@ -11,6 +11,7 @@
 // 6/9/22 - Elizabeth - Initial file. Created handleMessage() with map handling,
 //                      isDoneExecuting(), markDone()
 // 6/11/22 - Elizabeth - Moved methods from MapReduce Workflow to this file
+// 6/17/22 - Cliford - Added the handleMessage for the reduce capability
 // ===============================================================================
 #define GLOG_NO_ABBREVIATED_SEVERITIES
 #include <winsock2.h>
@@ -100,10 +101,15 @@ namespace Stub
         }
         else if (cmd == 1)  // reduce]
         {
-            cout << "Received REDUCE command from controller. Mapping..." << endl;
+            cout << "Received REDUCE command from controller. " << endl;
+            cout << "outputFileDir: " << outputFileDir << endl;
+            cout << "TempOutputFileDir: " << tempOutputFileDir << endl;
+            cout << "Reduce..." << endl;
 
-            // TODO: create reduce callback similar to map
+            // create func pointer to callback and mark the done flag when reduce() in stubworker has completed 
+            boost::function<void(StubWorker*)> fnc_ptr = boost::bind(&StubWorker::markDone, _1);
             reduce(tempOutputFileDir, outputFileDir);
+
         }
         else { // unknown command
             cout << "Unknown command received from controller. Command code: " << command << endl;

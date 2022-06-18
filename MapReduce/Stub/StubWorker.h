@@ -8,7 +8,8 @@
 // Description: The StubWorker handles the map and reduce done by the Stub
 // 
 // ===============================================================================
-#pragma once
+#ifndef STUB_WORKER_H
+#define STUB_WORKER_H
 
 #include "Sorter.h"
 #include "FileManagement.h"
@@ -107,4 +108,4 @@ namespace Stub
 			string tempOutputFileDir;
 	};
 }
-
+#endif /* STUB_WORKER_H */

@@ -8,7 +8,9 @@
 // Description: The StubCommunicator handles the connection for the Stub
 // 
 // ===============================================================================
-#pragma once
+#ifndef STUB_COMMUNICATOR_H
+#define STUB_COMMUNICATOR_H
+
 #include <string>
 #include <vector>
 #include <winsock2.h>
@@ -82,3 +84,4 @@ namespace Stub
 			string tempOutputFileDir;
 	};
 }
+#endif /* STUB_COMMUNICATOR_H */

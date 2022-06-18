@@ -11,6 +11,7 @@
 // 6/5/22 - Elizabeth - Initial File
 // 6/11/22 - Elizabeth - Add all controller communicators and their handling
 // 6/13/22 - Elizabeth - Add map threads
+// 6/18/22 - Cliford - Added the Reducer communicator
 // ===============================================================================
 #define GLOG_NO_ABBREVIATED_SEVERITIES
 #include <ControllerCommunicator.h>
@@ -60,6 +61,7 @@ int main(int argc, char** argv)
 
     std::thread t1;
     std::thread t2;
+    std::thread t3;
 
     // clear the temp output file dir before beginning the mapping and reducing
     FileManagement::clearDirectory(tempOutputFileDir);
@@ -90,14 +92,17 @@ int main(int argc, char** argv)
 
     cout << "both mappers done mapping" << endl;
 
-    // Reducer Stub - TODO: Add thread
-    /*int msgSize3;
+    // Reducer Stub 3 (port 1250)
+    int msgSize3;
     char* msg3 = MessageUtils::encodeMessage(1, inputFileDir1, outputFileDir, tempOutputFileDir, msgSize3);
     if (connResult3 == 0)
     {
         cout << "Sending message to stub 3" << endl;
-        int sendResult1 = cc1.sendMessage(msg3, msgSize3);
-        cc3.receiveData();
-    }*/
+        cc3->sendMessage(msg3, msgSize3);
+        t3 = std::thread([cc1, ports] { cc1->receiveData(ports[2]); });; // thread to continuously receive data from stub
+    }
+
+    // if reduce process is created, wait for reduce to return "done" before proceeding on
+    if (t3.joinable()) { t3.join(); }
 
 }
