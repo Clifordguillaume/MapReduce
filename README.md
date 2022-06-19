@@ -12,11 +12,22 @@ counts the words in each file and their frequencies, sorts the words in
 alphabetical order, then reduces the data by summing up the frequencies
 and writing the results to an output file.
 
-# How to use the program:
+
+# How to use the program (Phase 4):
+- The Controller.exe and Stub.exe are located in MapReduce/x64/Release directory.
+- The controller takes 4 arguments as outlined below and the Stub.exe takes 1 argument, the port it uses to connect to the Controller. For this project, the ports are hardcoded to be 1230, 1240, and 1250
+- Run [ Stub.exe 1230 ] (without brackets) to start up the first mapper stub that will map the contents of the 1st input filr dir
+- Run another [ Stub.exe 1240 ] (without brackets) to start up the 2nd mapper stub that will map the contents of the 2nd input file dir
+- Run another [ Stub.exe 1250 ] (without brackets) to start up the reducer stub that will reduce the results of both mapper stubs' work
+- After starging all three stubs, run Controller.exe [input file directory path] [2nd input file directory path] [output file directory path] [temp file drectory path]
+- (The above should not include the brackets)
+- The final result will be written to a text file in the output file directory as FinalReducedData-x.txt along with an empty SUCCESS.txt file
+
+# How to use the program (Phase 1-3):
 - The MapReduce.exe is located in MapReduce/x64/Release directory.
 - Run MapReduce.exe [input file directory path] [output file directory path] [temp file drectory path]
 - (The above should not include the brackets)
-- The final result will be written to a text file in the output file directory as FinalReducedData-x.txt
+- The final result will be written to a text file in the output file directory as FinalReducedData-x.txt along with an empty SUCCESS.txt file
 
 # Steps on how it works:
 - Reads all the text file from a given input diretory.
@@ -46,4 +57,4 @@ and writing the results to an output file.
 		c. Add the path to the downloaded boost folder (ex: C:\Users\example\Downloads\boost_1_78_0_rc1\boost_1_78_0)
 		
 # Notes
-- Test files used and generated while developing are located in the MapReduce/MapReduce/TestInputFileDir, TestTempOutputFileDir, and TestOutputFileDir's respectively
+- Test files used and generated while developing are located in the MapReduce/MapReduce/TestInputFileDir, TestInputFileDir2, TestTempOutputFileDir, and TestOutputFileDir's respectively
