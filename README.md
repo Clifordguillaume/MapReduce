@@ -19,8 +19,8 @@ and writing the results to an output file.
 - Run [ Stub.exe 1230 ] (without brackets) to start up the first mapper stub that will map the contents of the 1st input filr dir
 - Run another [ Stub.exe 1240 ] (without brackets) to start up the 2nd mapper stub that will map the contents of the 2nd input file dir
 - Run another [ Stub.exe 1250 ] (without brackets) to start up the reducer stub that will reduce the results of both mapper stubs' work
-- After starging all three stubs, run Controller.exe [input file directory path] [2nd input file directory path] [output file directory path] [temp file drectory path]
-- (The above should not include the brackets)
+- After starting all three stubs, run Controller.exe [input file directory path] [2nd input file directory path] [output file directory path] [temp file drectory path]
+- (The above should not include the brackets. NOTE: The files in the input directories cannot have overlapping names; all files to be mapped must be uniquely named)
 - The final result will be written to a text file in the output file directory as FinalReducedData-x.txt along with an empty SUCCESS.txt file
 
 # How to use the program (Phase 1-3):
