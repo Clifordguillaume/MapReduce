@@ -1,7 +1,4 @@
-﻿  ConcurrentHashMap.cpp
-C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\ReduceLibrary\ReduceLibrary.h(60,83): warning C4190: 'reduceFunc' has C-linkage specified, but returns UDT 'ReducedData' which is incompatible with C
-C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\ReduceLibrary\ReduceLibrary.h(32): message : see declaration of 'ReducedData'
-  FileManagement.cpp
+﻿  Sorter.cpp
 C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\packages\gflags.2.0.1.0\build\native\include\gflags\gflags.h(160,15): warning C4251: 'google::CommandLineFlagInfo::name': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of struct 'google::CommandLineFlagInfo'
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\xstring(4927): message : see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
 C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\packages\gflags.2.0.1.0\build\native\include\gflags\gflags.h(161,15): warning C4251: 'google::CommandLineFlagInfo::type': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of struct 'google::CommandLineFlagInfo'
@@ -16,26 +13,9 @@ C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\pa
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\xstring(4927): message : see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
 C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1158,32): warning C4251: 'google::LogMessage::LogStream::streambuf_': class 'google::base_logging::LogStreamBuf' needs to have dll-interface to be used by clients of class 'google::LogMessage::LogStream'
 C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1088): message : see declaration of 'google::base_logging::LogStreamBuf'
-  KeyValueUtils.cpp
-C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\Stub\KeyValueUtils.cpp(74,32): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\Stub\KeyValueUtils.cpp(77,45): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  Sorter.cpp
-C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\packages\gflags.2.0.1.0\build\native\include\gflags\gflags.h(160,15): warning C4251: 'google::CommandLineFlagInfo::name': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of struct 'google::CommandLineFlagInfo'
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\xstring(4927): message : see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
-C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\packages\gflags.2.0.1.0\build\native\include\gflags\gflags.h(161,15): warning C4251: 'google::CommandLineFlagInfo::type': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of struct 'google::CommandLineFlagInfo'
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\xstring(4927): message : see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
-C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\packages\gflags.2.0.1.0\build\native\include\gflags\gflags.h(162,15): warning C4251: 'google::CommandLineFlagInfo::description': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of struct 'google::CommandLineFlagInfo'
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\xstring(4927): message : see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
-C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\packages\gflags.2.0.1.0\build\native\include\gflags\gflags.h(163,15): warning C4251: 'google::CommandLineFlagInfo::current_value': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of struct 'google::CommandLineFlagInfo'
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\xstring(4927): message : see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
-C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\packages\gflags.2.0.1.0\build\native\include\gflags\gflags.h(164,15): warning C4251: 'google::CommandLineFlagInfo::default_value': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of struct 'google::CommandLineFlagInfo'
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\xstring(4927): message : see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
-C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\packages\gflags.2.0.1.0\build\native\include\gflags\gflags.h(165,15): warning C4251: 'google::CommandLineFlagInfo::filename': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of struct 'google::CommandLineFlagInfo'
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\xstring(4927): message : see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
-C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1158,32): warning C4251: 'google::LogMessage::LogStream::streambuf_': class 'google::base_logging::LogStreamBuf' needs to have dll-interface to be used by clients of class 'google::LogMessage::LogStream'
-C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1088): message : see declaration of 'google::base_logging::LogStreamBuf'
+  StringUtils.cpp
   Stub.cpp
-C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\Stub\StubCommunicator.h(15,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\Stub\StubCommunicator.h(18,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\packages\gflags.2.0.1.0\build\native\include\gflags\gflags.h(160,15): warning C4251: 'google::CommandLineFlagInfo::name': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of struct 'google::CommandLineFlagInfo'
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\xstring(4927): message : see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
 C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\packages\gflags.2.0.1.0\build\native\include\gflags\gflags.h(161,15): warning C4251: 'google::CommandLineFlagInfo::type': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of struct 'google::CommandLineFlagInfo'
@@ -50,7 +30,12 @@ C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\pa
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\xstring(4927): message : see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
 C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1158,32): warning C4251: 'google::LogMessage::LogStream::streambuf_': class 'google::base_logging::LogStreamBuf' needs to have dll-interface to be used by clients of class 'google::LogMessage::LogStream'
 C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1088): message : see declaration of 'google::base_logging::LogStreamBuf'
-C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\Stub\Stub.cpp(30,50): warning C4129: 'M': unrecognized character escape sequence
+C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\Stub\Stub.cpp(34,50): warning C4129: 'M': unrecognized character escape sequence
+  StubCommunicator.cpp
+C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\Stub\StubCommunicator.h(18,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\MapReduce\Workflow.h(15,1): warning C4005: '_HAS_STD_BYTE': macro redefinition
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\yvals_core.h(647): message : see previous definition of '_HAS_STD_BYTE'
+C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\Stub\StubCommunicator.cpp(139,12): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   StubWorker.cpp
 C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\ReduceLibrary\ReduceLibrary.h(60,83): warning C4190: 'reduceFunc' has C-linkage specified, but returns UDT 'ReducedData' which is incompatible with C
 C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\ReduceLibrary\ReduceLibrary.h(32): message : see declaration of 'ReducedData'
@@ -69,6 +54,6 @@ C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\pa
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\xstring(4927): message : see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
 C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1158,32): warning C4251: 'google::LogMessage::LogStream::streambuf_': class 'google::base_logging::LogStreamBuf' needs to have dll-interface to be used by clients of class 'google::LogMessage::LogStream'
 C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\packages\glog.0.3.3.0\build\native\include\glog\logging.h(1088): message : see declaration of 'google::base_logging::LogStreamBuf'
-C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\Stub\StubWorker.cpp(322,43): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\Stub\StubWorker.cpp(334,43): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
   Generating Code...
   Stub.vcxproj -> C:\Users\elizd\OneDrive\Documents\CSE 687 - OOP\MapReduce\MapReduce\MapReduce\x64\Debug\Stub.exe

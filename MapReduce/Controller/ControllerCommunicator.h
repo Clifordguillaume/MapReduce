@@ -8,7 +8,10 @@
 // Description: The ControllerCommunicator handles the connection for the Controller
 // 
 // ===============================================================================
-#pragma once
+
+#ifndef CONTROLLER_COMMUNICATOR_H
+#define CONTROLLER_COMMUNICATOR_H
+
 #include <string>
 #include <winsock2.h>
 
@@ -46,3 +49,4 @@ class ControllerCommunicator
 		int client_socket;
 		sockaddr_in server;
 };
+#endif /* CONTROLLER_COMMUNICATOR_H */

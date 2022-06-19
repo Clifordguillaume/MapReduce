@@ -8,7 +8,10 @@
 // Description: The StubCommunicator handles the connection for the Stub
 // 
 // ===============================================================================
-#pragma once
+
+#ifndef STUB_COMMUNICATOR_H
+#define STUB_COMMUNICATOR_H
+
 #include <string>
 #include <vector>
 #include <winsock2.h>
@@ -43,7 +46,7 @@ namespace Stub
 			 * @isRunning - flag indicating if stub has started processing
 			 * @isDone - flag indicating if stub job has completed
 			 */
-			int sendStatus(int isRunning, int isDone);
+			int sendStatus(int isDone);
 
 			/*
 			 * Check if the stub has received any data from the Controller yet
@@ -82,3 +85,4 @@ namespace Stub
 			string tempOutputFileDir;
 	};
 }
+#endif /* STUB_COMMUNICATOR_H */

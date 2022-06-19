@@ -26,6 +26,10 @@ using namespace Stub;
 
 int main(int argc, char** argv)
 {
+    if (argc < 2) {
+        cout << "Please provide a port number" << endl;
+    }
+
     FLAGS_logtostderr = true;
     google::SetLogDestination(google::GLOG_INFO, "C:\MapReduceLogs");
     ::google::InitGoogleLogging(argv[0]);
@@ -64,9 +68,8 @@ int main(int argc, char** argv)
                 else 
                 {
                     cout << "\rStub job not done executing: " << i++ << endl;
-                    int isRunning = 1;
                     int isDone = communicator->isDoneExecuting() ? 1 : 0; // send current done flag value at this iteration of the loop
-                    communicator->sendStatus(isRunning, isDone); // send the status to the communicator
+                    communicator->sendStatus(isDone); // send the status to the communicator
                     if (communicator->isDoneExecuting()) {
                         break;
                     }
@@ -74,12 +77,14 @@ int main(int argc, char** argv)
 
                 std::this_thread::sleep_until(x);
             }
-            cout << "Stub done working" << endl;
         });
     t2.detach();
 
     // keep program alive
-    while (true);
+    while (!communicator->isDoneExecuting());
+
+    cout << "Stub done working" << endl;
+    communicator->sendStatus(1);
 
     return 0;
 }

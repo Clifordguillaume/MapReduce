@@ -8,7 +8,9 @@
 // Description: The StubWorker handles the map and reduce done by the Stub
 // 
 // ===============================================================================
-#pragma once
+
+#ifndef STUB_WORKER_H
+#define STUB_WORKER_H
 
 #include "Sorter.h"
 #include "FileManagement.h"
@@ -72,8 +74,10 @@ namespace Stub
 				* Reduces a list of data to a single output file
 				* @param lstOfData - list of data to reduce
 				* @param outputFileDir - directory to put final output file
+				* @param callback function from StubWorker
+				* @param StubWorker pointer needed for callback
 				*/
-			virtual void reduce(string tempDirectory, string outputFileDir);
+			virtual void reduce(string tempDirectory, string outputFileDir, boost::function<void(StubWorker*)> callback, StubWorker* worker);
 
 			/**
 				* Reduces the contents of a file
@@ -107,4 +111,4 @@ namespace Stub
 			string tempOutputFileDir;
 	};
 }
-
+#endif /* STUB_WORKER_H */

@@ -8,7 +8,10 @@
 // Description: Provides utils to handle strings with boost
 // 
 // ===============================================================================
-#pragma once
+
+#ifndef STRING_UTILS_H
+#define STRING_UTILS_H
+
 #include <string>
 #include <vector>
 
@@ -35,3 +38,4 @@ namespace Stub
 		private:
 	};
 }
+#endif /* STRING_UTILS_H */

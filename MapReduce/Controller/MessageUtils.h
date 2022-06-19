@@ -8,7 +8,9 @@
 // Description: Provides utils to use for messages sent to Stub
 // 
 // ===============================================================================
-#pragma once
+#ifndef MESSAGE_UTILS_H
+#define MESSAGE_UTILS_H
+
 #include <string>
 
 using namespace std;
@@ -30,3 +32,4 @@ class MessageUtils
 
 	private:
 };
+#endif /* MESSAGE_UTILS_H */
