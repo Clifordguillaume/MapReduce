@@ -108,7 +108,7 @@ namespace Stub
 
             // create func pointer to callback and mark the done flag when reduce() in stubworker has completed 
             boost::function<void(StubWorker*)> fnc_ptr = boost::bind(&StubWorker::markDone, _1);
-            reduce(tempOutputFileDir, outputFileDir);
+            reduce(tempOutputFileDir, outputFileDir, fnc_ptr, this);
 
         }
         else { // unknown command
@@ -265,7 +265,7 @@ namespace Stub
     // -------------------------------------------------------------------------------
     // reduce
     // -------------------------------------------------------------------------------
-    void StubWorker::reduce(string tempDirectory, string outputFileDir)
+    void StubWorker::reduce(string tempDirectory, string outputFileDir, boost::function<void(StubWorker*)> callback, StubWorker* worker)
     {
         //LOG(INFO) << "StubWorker.reduce -- BEGIN";
 
@@ -284,6 +284,12 @@ namespace Stub
 
         // clear temp output directory now that we are done with the files
         _pFileManagement->clearDirectory(tempDirectory);
+
+        // signal reduce is done
+        if (callback != NULL && worker != NULL)
+        {
+            callback(worker);
+        }
 
         //LOG(INFO) << "StubWorker.reduce -- END";
     }

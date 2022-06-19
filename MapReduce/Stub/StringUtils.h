@@ -8,6 +8,7 @@
 // Description: Provides utils to handle strings with boost
 // 
 // ===============================================================================
+
 #ifndef STRING_UTILS_H
 #define STRING_UTILS_H
 

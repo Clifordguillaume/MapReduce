@@ -16,6 +16,8 @@
 #include <ControllerCommunicator.h>
 #include <windows.h>
 #include <winsock2.h>
+#include <string>
+#include <sstream>
 #include <stdlib.h>
 #include <stdio.h>
 #include <iostream>
@@ -89,7 +91,8 @@ int ControllerCommunicator::disconnectStub()
 // -------------------------------------------------------------------------------
 int ControllerCommunicator::receiveData(int stubId)
 {
-    while (true)
+    bool doneflag = false;
+    while (!doneflag)
     {
         // receive a reply and print it
         // clear the answer by filling null, it might have previously received data
@@ -104,9 +107,16 @@ int ControllerCommunicator::receiveData(int stubId)
             return 1;
         }
 
-        string msg = message;
-        cout << "Controller received data from " << stubId << ": " << msg << endl;
+        string msg(message);
+        if (!msg.compare("yes")) 
+        {
+            doneflag = true;
+        }
+
+        cout << "Controller received data from " << stubId << " Is Stub Done? " << msg << endl;
     }
+
+    cout << "Stub " << stubId << " done" << endl;
 
     return 0;
 }

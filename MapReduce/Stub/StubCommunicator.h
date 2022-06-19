@@ -8,6 +8,7 @@
 // Description: The StubCommunicator handles the connection for the Stub
 // 
 // ===============================================================================
+
 #ifndef STUB_COMMUNICATOR_H
 #define STUB_COMMUNICATOR_H
 
@@ -45,7 +46,7 @@ namespace Stub
 			 * @isRunning - flag indicating if stub has started processing
 			 * @isDone - flag indicating if stub job has completed
 			 */
-			int sendStatus(int isRunning, int isDone);
+			int sendStatus(int isDone);
 
 			/*
 			 * Check if the stub has received any data from the Controller yet

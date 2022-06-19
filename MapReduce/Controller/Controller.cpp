@@ -83,14 +83,14 @@ int main(int argc, char** argv)
     {
         cout << "Sending message to stub 2" << endl;
         cc2->sendMessage(msg2, msgSize2);
-        t2 = std::thread([cc1, ports] { cc1->receiveData(ports[1]); });; // thread to continuously receive data from stub
+        t2 = std::thread([cc2, ports] { cc2->receiveData(ports[1]); });; // thread to continuously receive data from stub
     }
 
     // if mappers created, wait for the mappers to return "done" before proceeding to reduce
     if (t1.joinable()) { t1.join(); }
     if (t2.joinable()) { t2.join(); }
 
-    cout << "both mappers done mapping" << endl;
+    cout << "Both mappers done mapping" << endl;
 
     // Reducer Stub 3 (port 1250)
     int msgSize3;
@@ -99,10 +99,13 @@ int main(int argc, char** argv)
     {
         cout << "Sending message to stub 3" << endl;
         cc3->sendMessage(msg3, msgSize3);
-        t3 = std::thread([cc1, ports] { cc1->receiveData(ports[2]); });; // thread to continuously receive data from stub
+        t3 = std::thread([cc3, ports] { cc3->receiveData(ports[2]); });; // thread to continuously receive data from stub
     }
 
     // if reduce process is created, wait for reduce to return "done" before proceeding on
     if (t3.joinable()) { t3.join(); }
+
+
+    cout << "MapReduce complete. Results can be found in: " << outputFileDir << endl;
 
 }
